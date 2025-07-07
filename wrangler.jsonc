@@ -1,0 +1,9 @@
+{
+  "$schema": "https://raw.githubusercontent.com/cloudflare/workerd/main/src/workerd/io/config.capnp.json",
+  "name": "super",
+  "compatibility_date": "2025-07-07",
+  "pages_build_output_dir": ".next",
+  "placement": {
+    "mode": "smart"
+  }
+}
