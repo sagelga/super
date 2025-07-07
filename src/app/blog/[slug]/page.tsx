@@ -7,7 +7,7 @@ interface BlogPostPageProps {
     params: { slug: string };
 }
 
-const BlogPostPage: React.FC<BlogPostPageProps> = ({ params }) => {
+const BlogPostPage = ({ params }: BlogPostPageProps) => {
     const { slug } = params;
 
     // Placeholder for fetching blog post data based on slug

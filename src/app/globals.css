@@ -1,4 +1,5 @@
-@import 'tailwindcss';
+@import 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css';
+@import 'tailwindcss/preflight';
 
 :root {
     --background: #ffffff;
@@ -11,8 +12,12 @@
         --foreground: #ededed;
     }
 }
-
 body {
     background: var(--background);
     color: var(--foreground);
+    font-family: var(--font-sans);
+}
+
+* {
+    font-family: var(--font-sans);
 }

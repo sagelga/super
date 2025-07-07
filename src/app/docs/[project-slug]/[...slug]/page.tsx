@@ -35,10 +35,10 @@ const DocDetailPage: React.FC<DocsPageProps> = ({ params }) => {
     ];
 
     return (
-        <DocsLayout>
-            <DocsSidebar items={sidebarItems} currentPath={docPath} />
-            <DocsContent content={docContent} />
-        </DocsLayout>
+        <DocsLayout
+            mainContent={<DocsContent content={docContent} />}
+            sidebar={<DocsSidebar items={sidebarItems} currentPath={docPath} />}
+        />
     );
 };
 

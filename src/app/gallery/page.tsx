@@ -15,12 +15,12 @@ interface ImageItem {
 const GalleryPage: React.FC = () => {
     const [selectedImage, setSelectedImage] = useState<ImageItem | null>(null);
 
-    const images: ImageItem[] = [
-        { src: "/images/gallery1.jpg", alt: "Gallery Image 1", width: 800, height: 600 },
-        { src: "/images/gallery2.jpg", alt: "Gallery Image 2", width: 1024, height: 768 },
-        { src: "/images/gallery3.jpg", alt: "Gallery Image 3", width: 1200, height: 800 },
-        { src: "/images/gallery4.jpg", alt: "Gallery Image 4", width: 900, height: 1200 },
-    ];
+    const images: ImageItem[] = Array.from({ length: 20 }, (_, i) => ({
+        src: `https://picsum.photos/seed/\${i}/1200/800`, // Landscape images
+        alt: `Gallery image`,
+        width: 1200,
+        height: 800,
+    }));
 
     const openLightbox = (image: ImageItem) => {
         setSelectedImage(image);

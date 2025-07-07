@@ -14,7 +14,7 @@ interface DocsSidebarProps {
 
 const DocsSidebar: React.FC<DocsSidebarProps> = ({ items, currentPath }) => {
     return (
-        <aside className="w-64 p-4 border-r bg-gray-50">
+        <aside className="w-64 bg-gray-100 p-4 rounded-lg shadow-md">
             <h3 className="text-xl font-semibold mb-4">Documentation</h3>
             <nav>
                 <ul>
