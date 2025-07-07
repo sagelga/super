@@ -1,22 +1,21 @@
 import type { Metadata } from "next";
-import { IBM_Plex_Sans_Thai } from "next/font/google";
+import { IBM_Plex_Sans_Thai, IBM_Plex_Mono } from "next/font/google";
 // import { GeistSans } from "geist/font/sans";
 // import { GeistMono } from "geist/font/mono";
 import "./globals.css";
 import Layout from "../components/Layout";
 
-// const geistSans = GeistSans({
-//   variable: "--font-geist-sans",
-// });
-
-// const geistMono = GeistMono({
-//   variable: "--font-geist-mono",
-// });
-
-const ibmPlexSansThai = IBM_Plex_Sans_Thai({
-  variable: "--font-ibm-plex-sans-thai",
+const sans = IBM_Plex_Sans_Thai({
+  variable: "--font-sans",
   weight: ["100", "200", "300", "400", "500", "600", "700"],
   subsets: ["thai", "latin"],
+  display: "swap",
+});
+
+const mono = IBM_Plex_Mono({
+  variable: "--font-mono",
+  weight: ["400", "500", "600", "700"],
+  subsets: ["latin"],
   display: "swap",
 });
 
@@ -32,9 +31,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${ibmPlexSansThai.variable} antialiased`}
-      >
+      <body className={`${sans.variable} ${mono.variable} antialiased`}>
         <Layout>{children}</Layout>
       </body>
     </html>
