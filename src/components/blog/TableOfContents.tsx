@@ -1,5 +1,6 @@
 "use client";
 import React, { useEffect, useState } from 'react';
+import styles from './TableOfContents.module.css';
 
 interface TableOfContentsProps {
     content: string; // HTML string
@@ -30,12 +31,12 @@ const TableOfContents: React.FC<TableOfContentsProps> = ({ content }) => {
     }, [content]);
 
     return (
-        <div className="p-4 border rounded-lg shadow-md sticky top-4">
-            <h3 className="text-xl font-semibold mb-4">Table of Contents</h3>
+        <div className={styles.tocContainer}>
+            <h3 className={styles.tocHeading}>Table of Contents</h3>
             <ul>
                 {headings.map((heading) => (
-                    <li key={heading.id} className={`mb-2 ml-${(heading.level - 2) * 4}`}>
-                        <a href={`#${heading.id}`} className="text-blue-600 hover:underline">
+                    <li key={heading.id} className={`${styles.tocItem} ml-${(heading.level - 2) * 4}`}>
+                        <a href={`#${heading.id}`} className={styles.tocLink}>
                             {heading.text}
                         </a>
                     </li>

@@ -1,4 +1,5 @@
 import React from 'react';
+import styles from './DocsProjectGrid.module.css';
 
 interface DocsProjectGridProps {
     children: React.ReactNode;
@@ -6,7 +7,7 @@ interface DocsProjectGridProps {
 
 const DocsProjectGrid: React.FC<DocsProjectGridProps> = ({ children }) => {
     return (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className={styles.gridContainer}>
             {children}
         </div>
     );

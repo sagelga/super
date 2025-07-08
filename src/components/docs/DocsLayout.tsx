@@ -1,4 +1,5 @@
 import React from 'react';
+import styles from './DocsLayout.module.css';
 
 interface DocsLayoutProps {
     mainContent: React.ReactNode;
@@ -7,11 +8,11 @@ interface DocsLayoutProps {
 
 const DocsLayout: React.FC<DocsLayoutProps> = ({ mainContent, sidebar }) => {
     return (
-        <div className="flex flex-col lg:flex-row min-h-screen pt-16">
-            <div className="flex-grow lg:w-3/4 p-8">
+        <div className={styles.layoutContainer}>
+            <div className={styles.mainContent}>
                 {mainContent}
             </div>
-            <aside className="lg:w-1/4 p-8 bg-gray-50 dark:bg-gray-800 lg:sticky lg:top-16 lg:h-screen overflow-y-auto">
+            <aside className={styles.sidebar}>
                 {sidebar}
             </aside>
         </div>

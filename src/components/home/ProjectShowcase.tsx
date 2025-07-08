@@ -9,6 +9,7 @@ import { Navigation, Pagination, A11y } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
+import styles from './ProjectShowcase.module.css';
 
 interface Project {
     title: string;
@@ -23,9 +24,9 @@ interface ProjectShowcaseProps {
 
 const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({ projects }) => {
     return (
-        <section className="py-16 bg-gray-50 dark:bg-gray-900">
-            <div className="container mx-auto px-4">
-                <h2 className="text-4xl font-extrabold text-center mb-12 text-gray-800 dark:text-white">Projects</h2>
+        <section className={styles.section}>
+            <div className={styles.container}>
+                <h2 className={styles.heading}>Projects</h2>
                 <Swiper
                     modules={[Navigation, Pagination, A11y]}
                     spaceBetween={30}

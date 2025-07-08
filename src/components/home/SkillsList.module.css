@@ -1,0 +1,31 @@
+.section {
+    @apply py-16 bg-gray-50 dark:bg-gray-900;
+}
+
+.container {
+    @apply container mx-auto px-4;
+}
+
+.heading {
+    @apply text-4xl font-extrabold text-center mb-12 text-gray-800 dark:text-white;
+}
+
+.skillCard {
+    @apply bg-white dark:bg-gray-800 p-4 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 ease-in-out transform hover:-translate-y-1 flex flex-row items-center space-x-2 w-full h-20;
+}
+
+.skillIcon {
+    @apply colored text-3xl flex-shrink-0;
+}
+
+.skillName {
+    @apply font-semibold text-gray-900 dark:text-white overflow-hidden whitespace-nowrap text-ellipsis;
+}
+
+.skillNameSmall {
+    @apply text-sm;
+}
+
+.skillNameLarge {
+    @apply text-lg;
+}

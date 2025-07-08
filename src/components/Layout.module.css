@@ -1,0 +1,7 @@
+.layoutContainer {
+    @apply flex flex-col min-h-screen;
+}
+
+.mainContent {
+    @apply flex-grow pt-16;
+}

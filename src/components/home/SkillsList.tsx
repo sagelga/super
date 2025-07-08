@@ -10,6 +10,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/grid';
+import styles from './SkillsList.module.css';
 
 interface SkillsListProps {
     skills: string[];
@@ -17,9 +18,9 @@ interface SkillsListProps {
 
 const SkillsList: React.FC<SkillsListProps> = ({ skills }) => {
     return (
-        <section className="py-16 bg-gray-50 dark:bg-gray-900">
-            <div className="container mx-auto px-4">
-                <h2 className="text-4xl font-extrabold text-center mb-12 text-gray-800 dark:text-white">Skills</h2>
+        <section className={styles.section}>
+            <div className={styles.container}>
+                <h2 className={styles.heading}>Skills</h2>
                 <Swiper
                     modules={[Navigation, Pagination, A11y, Grid]}
                     spaceBetween={20}
@@ -45,11 +46,11 @@ const SkillsList: React.FC<SkillsListProps> = ({ skills }) => {
                         const iconClass = getIconClass(skill);
                         return (
                             <SwiperSlide key={index}>
-                                <div className="bg-white dark:bg-gray-800 p-4 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 ease-in-out transform hover:-translate-y-1 flex flex-row items-center space-x-2 w-full h-20">
+                                <div className={styles.skillCard}>
                                     {iconClass && (
-                                        <i className={`${iconClass} colored text-3xl flex-shrink-0`}></i>
+                                        <i className={`${iconClass} ${styles.skillIcon}`}></i>
                                     )}
-                                    <span className={`font-semibold text-gray-900 dark:text-white overflow-hidden whitespace-nowrap text-ellipsis ${skill.length > 25 ? 'text-sm' : 'text-lg'}`}>{skill}</span>
+                                    <span className={`${styles.skillName} ${skill.length > 25 ? styles.skillNameSmall : styles.skillNameLarge}`}>{skill}</span>
                                 </div>
                             </SwiperSlide>
                         );

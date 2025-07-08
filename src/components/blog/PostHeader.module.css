@@ -1,0 +1,15 @@
+.header {
+    @apply mb-8 text-center;
+}
+
+.title {
+    @apply text-4xl font-bold mb-2;
+}
+
+.meta {
+    @apply text-gray-600 text-lg;
+}
+
+.separator {
+    @apply mx-2;
+}

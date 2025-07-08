@@ -1,0 +1,43 @@
+.section {
+    @apply py-16 bg-gray-50 dark:bg-gray-900;
+}
+
+.container {
+    @apply container mx-auto px-4;
+}
+
+.heading {
+    @apply text-4xl font-extrabold text-center mb-12 text-gray-800 dark:text-white;
+}
+
+.card {
+    @apply bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 ease-in-out transform hover:-translate-y-1 h-full flex flex-col;
+}
+
+.cardTitle {
+    @apply text-2xl font-bold text-gray-900 dark:text-white mb-2;
+}
+
+.cardYear {
+    @apply text-lg text-gray-700 dark:text-gray-300 mb-4;
+}
+
+.descriptionList {
+    @apply list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300 flex-grow;
+}
+
+.descriptionItem {
+    @apply leading-relaxed;
+}
+
+.linkContainer {
+    @apply mt-6;
+}
+
+.linkButton {
+    @apply inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 dark:bg-blue-500 dark:hover:bg-blue-600 dark:focus:ring-blue-400;
+}
+
+.linkIcon {
+    @apply ml-2 -mr-0.5 h-4 w-4;
+}

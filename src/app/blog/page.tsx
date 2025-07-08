@@ -6,7 +6,7 @@ import FilterBar from '@/components/blog/FilterBar';
 import PostGrid from '@/components/blog/PostGrid';
 
 const BlogPage: React.FC = () => {
-    const allBlogPosts = [
+    const allBlogPosts = React.useMemo(() => [
         {
             title: "My First Blog Post",
             excerpt: "This is a short excerpt from my first blog post.",
@@ -21,7 +21,7 @@ const BlogPage: React.FC = () => {
             date: "2023-02-20",
             category: "Web Development",
             slug: "learning-nextjs",
-            imageUrl: "https://images.unsplash.com/photo-1682686581413-519e8f479892?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", // Placeholder image
+            imageUrl: "https://images.unsplash.com/photo-1682686581413-519e8f479892?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG00by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", // Placeholder image
         },
         {
             title: "Design Principles",
@@ -31,7 +31,7 @@ const BlogPage: React.FC = () => {
             slug: "design-principles",
             imageUrl: "https://images.unsplash.com/photo-1682686581413-519e8f479892?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", // Placeholder image
         },
-    ];
+    ], []);
 
     const [searchTerm, setSearchTerm] = useState<string>('');
     const [selectedCategory, setSelectedCategory] = useState<string>('All');
@@ -54,7 +54,7 @@ const BlogPage: React.FC = () => {
         }
 
         setFilteredPosts(posts);
-    }, [searchTerm, selectedCategory]);
+    }, [searchTerm, selectedCategory, allBlogPosts]);
 
     const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setSearchTerm(event.target.value);

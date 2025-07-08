@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import styles from './DocsSidebar.module.css';
 
 interface SidebarItem {
     title: string;
@@ -14,26 +15,26 @@ interface DocsSidebarProps {
 
 const DocsSidebar: React.FC<DocsSidebarProps> = ({ items, currentPath }) => {
     return (
-        <aside className="w-64 bg-gray-100 p-4 rounded-lg shadow-md">
-            <h3 className="text-xl font-semibold mb-4">Documentation</h3>
+        <aside className={styles.sidebar}>
+            <h3 className={styles.heading}>Documentation</h3>
             <nav>
                 <ul>
                     {items.map((item) => (
-                        <li key={item.path} className="mb-2">
+                        <li key={item.path} className={styles.linkItem}>
                             <Link
                                 href={item.path}
-                                className={`block hover:text-blue-600 ${currentPath === item.path ? 'font-bold text-blue-600' : ''
+                                className={`${styles.link} ${currentPath === item.path ? styles.activeLink : ''
                                     }`}
                             >
                                 {item.title}
                             </Link>
                             {item.children && item.children.length > 0 && (
-                                <ul className="ml-4 mt-1">
+                                <ul className={styles.childList}>
                                     {item.children.map((child) => (
-                                        <li key={child.path} className="mb-1">
+                                        <li key={child.path} className={styles.childLinkItem}>
                                             <Link
                                                 href={child.path}
-                                                className={`block text-sm hover:text-blue-600 ${currentPath === child.path ? 'font-bold text-blue-600' : ''
+                                                className={`${styles.childLink} ${currentPath === child.path ? styles.activeLink : ''
                                                     }`}
                                             >
                                                 {child.title}

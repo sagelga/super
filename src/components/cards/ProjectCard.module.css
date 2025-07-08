@@ -1,0 +1,31 @@
+.card {
+    @apply bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 ease-in-out transform hover:-translate-y-1 flex flex-col h-full;
+}
+
+.title {
+    @apply text-2xl font-bold text-gray-900 dark:text-white mb-3;
+}
+
+.description {
+    @apply text-gray-700 dark:text-gray-300 mb-6 flex-grow leading-relaxed;
+}
+
+.linksContainer {
+    @apply flex flex-wrap gap-4 mt-auto;
+}
+
+.githubButton {
+    @apply inline-flex items-center px-5 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-gray-700 hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-400;
+}
+
+.demoButton {
+    @apply inline-flex items-center px-5 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 dark:bg-blue-500 dark:hover:bg-blue-600 dark:focus:ring-blue-400;
+}
+
+.buttonIcon {
+    @apply w-5 h-5 mr-2;
+}
+
+.demoButtonIcon {
+    @apply ml-2 -mr-0.5 h-4 w-4;
+}

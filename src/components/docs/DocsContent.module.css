@@ -1,0 +1,19 @@
+.mainContent {
+    @apply flex-grow p-8;
+}
+
+.proseContent {
+    @apply prose max-w-none;
+}
+
+.pagination {
+    @apply mt-8 flex justify-between;
+}
+
+.paginationLink {
+    @apply text-blue-600 hover:underline;
+}
+
+.nextPageLink {
+    @apply ml-auto;
+}

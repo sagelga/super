@@ -1,4 +1,5 @@
 import React from 'react';
+import styles from './PostContent.module.css';
 
 interface PostContentProps {
     content: string; // HTML string or Markdown converted to HTML
@@ -6,7 +7,7 @@ interface PostContentProps {
 
 const PostContent: React.FC<PostContentProps> = ({ content }) => {
     return (
-        <div className="prose max-w-none" dangerouslySetInnerHTML={{ __html: content }} />
+        <div className={styles.content} dangerouslySetInnerHTML={{ __html: content }} />
     );
 };
 
