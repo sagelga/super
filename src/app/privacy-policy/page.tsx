@@ -24,10 +24,10 @@ const PrivacyPolicyPage: React.FC = () => {
           <section id="introduction" className="mb-10">
             <h2 className="text-3xl font-bold mb-5 text-gray-800 dark:text-gray-200">{sections[0].title}</h2>
             <p className="mb-4 leading-relaxed text-gray-700 dark:text-gray-300">
-              Welcome to {websiteName} (the &quot;Website&quot;). This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website, including any other media form, media channel, mobile website, or mobile application related or connected thereto (collectively, the "Site"). Please read this privacy policy carefully. If you do not agree with the terms of this privacy policy, please do not access the Site.
+              Welcome to {websiteName} (the &quot;Website&quot;). This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website, including any other media form, media channel, mobile website, or mobile application related or connected thereto (collectively, the &quot;Site&quot;). Please read this privacy policy carefully. If you do not agree with the terms of this privacy policy, please do not access the Site.
             </p>
             <p className="mb-4 leading-relaxed text-gray-700 dark:text-gray-300">
-              We reserve the right to make changes to this Privacy Policy at any time and for any reason. We will alert you about any changes by updating the "Last updated" date of this Privacy Policy. You are encouraged to periodically review this Privacy Policy to stay informed of updates. You will be deemed to have been made aware of, will be subject to, and will be deemed to have accepted the changes in any revised Privacy Policy by your continued use of the Site after the date such revised Privacy Policy is posted.
+              We reserve the right to make changes to this Privacy Policy at any time and for any reason. We will alert you about any changes by updating the &quot;Last updated&quot; date of this Privacy Policy. You are encouraged to periodically review this Privacy Policy to stay informed of updates. You will be deemed to have been made aware of, will be subject to, and will be deemed to have accepted the changes in any revised Privacy Policy by your continued use of the Site after the date such revised Privacy Policy is posted.
             </p>
           </section>
 

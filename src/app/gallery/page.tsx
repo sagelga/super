@@ -15,9 +15,9 @@ interface ImageItem {
 const GalleryPage: React.FC = () => {
     const [selectedImage, setSelectedImage] = useState<ImageItem | null>(null);
 
-    const images: ImageItem[] = Array.from({ length: 20 }, (_, i) => ({
-        src: `https://picsum.photos/seed/\${i}/1200/800`, // Landscape images
-        alt: `Gallery image`,
+    const images: ImageItem[] = [...Array(20).keys()].map((index) => ({
+        src: `https://picsum.photos/seed/${index}/1200/800`, // Landscape images
+        alt: `Gallery image ${index + 1}`,
         width: 1200,
         height: 800,
     }));

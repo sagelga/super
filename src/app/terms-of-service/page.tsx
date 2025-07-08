@@ -28,7 +28,7 @@ const TermsOfServicePage: React.FC = () => {
           <section id="introduction" className="mb-10">
             <h2 className="text-3xl font-bold mb-5 text-gray-800 dark:text-gray-200">{sections[0].title}</h2>
             <p className="mb-4 leading-relaxed text-gray-700 dark:text-gray-300">
-              Welcome to {websiteName} (the &quot;Website&quot;). These Terms of Service (&quot;Terms&quot;) govern your access to and use of the Website and its content, features, and services (collectively, the "Service"). By accessing or using the Service, you agree to be bound by these Terms and our Privacy Policy. If you do not agree to these Terms, please do not use the Service.
+              Welcome to {websiteName} (the &quot;Website&quot;). These Terms of Service (&quot;Terms&quot;) govern your access to and use of the Website and its content, features, and services (collectively, the &quot;Service&quot;). By accessing or using the Service, you agree to be bound by these Terms and our Privacy Policy. If you do not agree to these Terms, please do not use the Service.
             </p>
           </section>
 
@@ -42,7 +42,7 @@ const TermsOfServicePage: React.FC = () => {
           <section id="changes-to-terms" className="mb-10">
             <h2 className="text-3xl font-bold mb-5 text-gray-800 dark:text-gray-200">{sections[2].title}</h2>
             <p className="mb-4 leading-relaxed text-gray-700 dark:text-gray-300">
-              We reserve the right to modify or update these Terms at any time, at our sole discretion. We will notify you of any changes by posting the new Terms on this page and updating the "Last updated" date. Your continued use of the Service after any such changes constitutes your acceptance of the new Terms. It is your responsibility to review these Terms periodically for changes.
+              We reserve the right to modify or update these Terms at any time, at our sole discretion. We will notify you of any changes by posting the new Terms on this page and updating the &quot;Last updated&quot; date. Your continued use of the Service after any such changes constitutes your acceptance of the new Terms. It is your responsibility to review these Terms periodically for changes.
             </p>
           </section>
 
@@ -86,7 +86,7 @@ const TermsOfServicePage: React.FC = () => {
           <section id="indemnification" className="mb-10">
             <h2 className="text-3xl font-bold mb-5 text-gray-800 dark:text-gray-200">{sections[7].title}</h2>
             <p className="mb-4 leading-relaxed text-gray-700 dark:text-gray-300">
-              You agree to defend, indemnify, and hold harmless [Your Website Name] and its affiliates, licensors, and service providers, and its and their respective officers, directors, employees, contractors, agents, licensors, suppliers, successors, and assigns from and against any claims, liabilities, damages, judgments, awards, losses, costs, expenses, or fees (including reasonable attorneys' fees) arising out of or relating to your violation of these Terms or your use of the Service.
+              You agree to defend, indemnify, and hold harmless [Your Website Name] and its affiliates, licensors, and service providers, and its and their respective officers, directors, employees, contractors, agents, licensors, suppliers, successors, and assigns from and against any claims, liabilities, damages, judgments, awards, losses, costs, expenses, or fees (including reasonable attorneys&apos; fees) arising out of or relating to your violation of these Terms or your use of the Service.
             </p>
           </section>
 
