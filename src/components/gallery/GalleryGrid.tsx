@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './GalleryGrid.module.css';
+
 
 interface GalleryGridProps {
     children: React.ReactNode;
@@ -7,7 +7,7 @@ interface GalleryGridProps {
 
 const GalleryGrid: React.FC<GalleryGridProps> = ({ children }) => {
     return (
-        <div className={styles.gridContainer}>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             {children}
         </div>
     );

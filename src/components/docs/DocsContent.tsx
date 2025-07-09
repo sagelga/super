@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import styles from './DocsContent.module.css';
+
 
 interface DocsContentProps {
     content: string; // HTML string
@@ -10,16 +10,16 @@ interface DocsContentProps {
 
 const DocsContent: React.FC<DocsContentProps> = ({ content, prevPage, nextPage }) => {
     return (
-        <main className={styles.mainContent}>
-            <div className={styles.proseContent} dangerouslySetInnerHTML={{ __html: content }} />
-            <div className={styles.pagination}>
+        <main className="flex-grow p-8">
+            <div className="prose max-w-none" dangerouslySetInnerHTML={{ __html: content }} />
+            <div className="mt-8 flex justify-between">
                 {prevPage && (
-                    <Link href={prevPage.path} className={styles.paginationLink}>
+                    <Link href={prevPage.path} className="text-blue-600 hover:underline">
                         &larr; {prevPage.title}
                     </Link>
                 )}
                 {nextPage && (
-                    <Link href={nextPage.path} className={`${styles.paginationLink} ${styles.nextPageLink}`}>
+                    <Link href={nextPage.path} className="text-blue-600 hover:underline ml-auto">
                         {nextPage.title} &rarr;
                     </Link>
                 )}

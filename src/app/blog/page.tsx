@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import BlogPostCard from '@/components/cards/BlogPostCard';
+
 import FilterBar from '@/components/blog/FilterBar';
 import PostGrid from '@/components/blog/PostGrid';
 
@@ -66,14 +66,7 @@ const BlogPage: React.FC = () => {
 
     return (
         <div className="bg-gray-50 dark:bg-gray-900 min-h-screen">
-            <section className="py-20 text-center bg-linear-to-r from-pink-500 to-red-600 text-white shadow-md">
-                <div className="container mx-auto px-4">
-                    <h1 className="text-5xl font-extrabold mb-4">The Blog</h1>
-                    <p className="text-xl opacity-90 max-w-2xl mx-auto">
-                        Dive into articles, tutorials, and insights on technology, design, and more.
-                    </p>
-                </div>
-            </section>
+            
 
             <div className="container mx-auto px-4 py-12 max-w-4xl">
                 <div className="mb-8 relative">
@@ -87,11 +80,7 @@ const BlogPage: React.FC = () => {
                     <svg className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400 dark:text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
                 </div>
                 <FilterBar categories={categories} onSelectCategory={handleCategorySelect} selectedCategory={selectedCategory} />
-                <PostGrid>
-                    {filteredPosts.map((post, index) => (
-                        <BlogPostCard key={index} {...post} />
-                    ))}
-                </PostGrid>
+                <PostGrid posts={filteredPosts} />
             </div>
         </div>
     );

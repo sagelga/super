@@ -8,7 +8,7 @@ import ExperienceSection from "../components/home/ExperienceSection";
 import CertificationsSection from "../components/home/CertificationsSection";
 import VolunteeringSection from "../components/home/VolunteeringSection";
 import LanguagesSection from "../components/home/LanguagesSection";
-import OnlineProfilesSection from "../components/home/OnlineProfilesSection";
+
 
 import {
   skills,
@@ -17,7 +17,6 @@ import {
   certifications,
   volunteering,
   languages,
-  onlineProfiles,
 } from "../data/homePageData";
 
 export default function Home() {
@@ -30,7 +29,7 @@ export default function Home() {
       <CertificationsSection certifications={certifications} />
       <VolunteeringSection volunteering={volunteering} />
       <LanguagesSection languages={languages} />
-      <OnlineProfilesSection profiles={onlineProfiles} />
+      
       <ProjectShowcase projects={projects} />
     </div>
   );

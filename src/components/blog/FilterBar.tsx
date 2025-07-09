@@ -1,7 +1,8 @@
 'use client';
 
 import React from 'react';
-import styles from './FilterBar.module.css';
+
+
 
 interface FilterBarProps {
     categories?: string[];
@@ -11,9 +12,9 @@ interface FilterBarProps {
 
 const FilterBar: React.FC<FilterBarProps> = ({ categories = [], onSelectCategory, selectedCategory }) => {
     return (
-        <div className={styles.filterBarContainer}>
+        <div className="flex flex-wrap justify-center gap-2 mb-8">
             <button
-                className={`${styles.baseButton} ${selectedCategory === 'All' ? styles.activeButton : styles.defaultButton}`}
+                className={`px-4 py-2 rounded-lg transition-colors duration-200 ${selectedCategory === 'All' ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-800 hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600'}`}
                 onClick={() => onSelectCategory && onSelectCategory('All')}
             >
                 All
@@ -21,7 +22,7 @@ const FilterBar: React.FC<FilterBarProps> = ({ categories = [], onSelectCategory
             {categories.map((category) => (
                 <button
                     key={category}
-                    className={`${styles.baseButton} ${selectedCategory === category ? styles.activeButton : styles.defaultButton}`}
+                    className={`px-4 py-2 rounded-lg transition-colors duration-200 ${selectedCategory === category ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-800 hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600'}`}
                     onClick={() => onSelectCategory && onSelectCategory(category)}
                 >
                     {category}

@@ -1,6 +1,4 @@
-'use client';
 import React from 'react';
-import styles from './LanguagesSection.module.css';
 
 interface LanguageItem {
     name: string;
@@ -14,18 +12,18 @@ interface LanguagesSectionProps {
 
 const LanguagesSection: React.FC<LanguagesSectionProps> = ({ languages }) => {
     return (
-        <section className={styles.section}>
-            <div className={styles.container}>
-                <h2 className={styles.heading}>Languages</h2>
-                <div className={styles.grid}>
+        <section className="py-16 bg-gray-50 dark:bg-gray-900">
+            <div className="container mx-auto px-4">
+                <h2 className="text-4xl font-extrabold text-center mb-12 text-gray-800 dark:text-white">Languages</h2>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                     {languages.map((lang, index) => (
-                        <div key={index} className={styles.languageCard}>
+                        <div key={index} className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 ease-in-out transform hover:-translate-y-1 flex items-center space-x-4">
                             {lang.iconClass && (
-                                <i className={`${lang.iconClass} ${styles.languageIcon}`}></i>
+                                <i className={`${lang.iconClass} text-5xl text-blue-500 dark:text-blue-400`}></i>
                             )}
                             <div>
-                                <h3 className={styles.languageName}>{lang.name}</h3>
-                                <p className={styles.languageProficiency}>{lang.proficiency}</p>
+                                <h3 className="text-xl font-bold text-gray-900 dark:text-white">{lang.name}</h3>
+                                <p className="text-gray-600 dark:text-gray-400 text-sm">{lang.proficiency}</p>
                             </div>
                         </div>
                     ))}

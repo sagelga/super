@@ -1,6 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
-import styles from './Lightbox.module.css';
+
 
 interface LightboxProps {
     src: string;
@@ -11,13 +11,13 @@ interface LightboxProps {
 const Lightbox: React.FC<LightboxProps> = ({ src, alt, onClose }) => {
     return (
         <div
-            className={styles.lightboxOverlay}
+            className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50"
             onClick={onClose}
         >
-            <div className={styles.lightboxContent}>
+            <div className="relative max-w-3xl max-h-full">
                 <Image src={src} alt={alt} layout="intrinsic" width={1200} height={800} objectFit="contain" />
                 <button
-                    className={styles.closeButton}
+                    className="absolute top-4 right-4 text-white text-2xl font-bold"
                     onClick={onClose}
                 >
                     &times;
