@@ -2,8 +2,19 @@
     "$schema": "https://raw.githubusercontent.com/cloudflare/workerd/main/src/workerd/io/config.capnp.json",
     "name": "super",
     "compatibility_date": "2025-07-07",
-    "pages_build_output_dir": ".next",
+    "account_id": "9124272a5c3e327f2e943bf27c0910c4",
+    "compatibility_flags": ["nodejs_compat"],
+    "main": ".vercel/output/static/_worker.js/index.js",
+
     "placement": {
         "mode": "smart"
+    },
+    "observability": {
+        "enabled": true,
+        "head_sampling_rate": 1
+    },
+    "assets": {
+        "directory": ".vercel/output/static",
+        "binding": "ASSETS"
     }
 }

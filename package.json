@@ -5,10 +5,12 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
+    "deploy-worker": "npm run build && npx @cloudflare/next-on-pages",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
+    "@opennextjs/cloudflare": "^1.4.0",
     "devicon": "^2.16.0",
     "geist": "^1.4.2",
     "next": "^15.3.5",
@@ -17,6 +19,7 @@
     "swiper": "^11.2.10"
   },
   "devDependencies": {
+    "@cloudflare/next-on-pages": "^1.13.12",
     "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
@@ -27,6 +30,6 @@
     "eslint-config-next": "15.3.5",
     "tailwindcss": "^4",
     "typescript": "^5.8.3",
-    "wrangler": "^4.23.0"
+    "wrangler": "^4.24.0"
   }
 }

@@ -1,4 +1,8 @@
 const nextConfig = {
+  output: 'standalone',
+  experimental: {
+    optimizePackageImports: ['@cloudflare/next-on-pages'],
+  },
   images: {
     remotePatterns: [
       {
