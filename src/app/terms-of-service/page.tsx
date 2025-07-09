@@ -24,7 +24,7 @@ const TermsOfServicePage: React.FC = () => {
 
       <div className="flex flex-col lg:flex-row gap-8">
         {/* Main Content Area */}
-        <div className="flex-grow lg:w-3/4">
+        <div className="grow lg:w-3/4">
           <section id="introduction" className="mb-10">
             <h2 className="text-3xl font-bold mb-5 text-gray-800 dark:text-gray-200">{sections[0].title}</h2>
             <p className="mb-4 leading-relaxed text-gray-700 dark:text-gray-300">

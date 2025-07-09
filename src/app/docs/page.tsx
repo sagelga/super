@@ -98,7 +98,7 @@ const DocsPage: React.FC = () => {
 
     return (
         <div className="bg-gray-50 dark:bg-gray-900 min-h-screen">
-            <section className="py-20 text-center bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-md">
+            <section className="py-20 text-center bg-linear-to-r from-blue-500 to-purple-600 text-white shadow-md">
                 <div className="container mx-auto px-4">
                     <h1 className="text-5xl font-extrabold mb-4">Comprehensive Documentation</h1>
                     <p className="text-xl opacity-90 max-w-2xl mx-auto">
