@@ -1,12 +1,13 @@
 import React from 'react';
 import Link from 'next/link';
-
+import Image from 'next/image';
 
 const Navbar: React.FC = () => {
     return (
         <nav className="bg-gray-800 dark:bg-gray-900 p-4 text-white fixed w-full top-0 z-50 shadow-md">
             <div className="container mx-auto flex justify-between items-center">
-                <Link href="/" className="text-xl font-bold">
+                <Link href="/" className="text-xl font-bold flex items-center">
+                    <Image src="/globe.svg" alt="Website Icon" width={24} height={24} className="mr-2" />
                     Kunanon Srisuntiroj
                 </Link>
                 <div>

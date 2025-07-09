@@ -13,7 +13,7 @@ interface LinkItem {
 
 const Footer: React.FC = () => {
     const sitemapLinks: { [key: string]: LinkItem[] } = {
-        "Quick Links": [
+        "Kunanon Srisuntiroj": [
             { name: "Home", href: "/" },
             { name: "About", href: "/#about" },
             { name: "Skills", href: "/#skills" },

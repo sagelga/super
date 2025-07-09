@@ -37,15 +37,15 @@ const SkillsList: React.FC<SkillsListProps> = ({ skills }) => {
                         1024: { slidesPerView: 4, spaceBetween: 40, grid: { rows: 2, fill: 'row' }, slidesPerGroup: 4 },
                         1280: { slidesPerView: 5, spaceBetween: 50, grid: { rows: 2, fill: 'row' }, slidesPerGroup: 5 },
                     }}
-                    className="mySwiper"
+                    className="mySwiper pb-12"
                 >
                     {skills.map((skill, index) => {
                         const iconClass = getIconClass(skill);
                         return (
                             <SwiperSlide key={index}>
-                                <div className="bg-white dark:bg-gray-800 p-4 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 ease-in-out transform hover:-translate-y-1 flex flex-row items-center space-x-2 w-full h-20">
+                                <div className="bg-white dark:bg-gray-800 p-4 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 ease-in-out transform hover:-translate-y-1 flex flex-row items-center space-x-2 w-full h-16">
                                     {iconClass && (
-                                        <i className={`${iconClass} text-5xl text-blue-500 dark:text-blue-400`}></i>
+                                        <i className={`${iconClass} text-4xl text-gray-900 dark:text-white`}></i>
                                     )}
                                     <span className={`${skill.length > 25 ? 'text-sm' : 'text-base'}`}>{skill}</span>
                                 </div>

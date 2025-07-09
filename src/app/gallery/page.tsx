@@ -31,7 +31,7 @@ const GalleryPage: React.FC = () => {
     };
 
     return (
-        <div className="container mx-auto py-8">
+        <div className="px-4 py-4">
             <h1 className="text-4xl font-bold text-center mb-8">Gallery</h1>
             <GalleryGrid>
                 {images.map((image, index) => (
