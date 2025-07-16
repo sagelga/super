@@ -1,5 +1,6 @@
 // src/utils/iconMapping.ts
 
+// Function to get the appropriate Devicon class for a given skill or online profile name
 export const getIconClass = (name: string): string => {
     switch (name) {
         // Skills

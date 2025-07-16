@@ -1,20 +1,25 @@
 import React from 'react';
 import Link from 'next/link';
 
-
+// Define the props interface for the ProjectCard component
 interface ProjectCardProps {
-    title: string;
-    description: string;
-    githubLink: string;
-    demoLink?: string;
+    title: string; // The title of the project
+    description: string; // A brief description of the project
+    githubLink: string; // The URL to the project's GitHub repository
+    demoLink?: string; // Optional URL to a live demo of the project
 }
 
+// ProjectCard functional component
 const ProjectCard: React.FC<ProjectCardProps> = ({ title, description, githubLink, demoLink }) => {
     return (
         <div className="flex h-full transform flex-col rounded-xl bg-white p-8 shadow-lg transition-shadow duration-300 ease-in-out hover:-translate-y-1 hover:shadow-xl dark:bg-gray-800">
+            {/* Project Title */}
             <h3 className="mb-3 text-2xl font-bold text-gray-900 dark:text-white">{title}</h3>
+            {/* Project Description */}
             <p className="mb-6 flex-grow leading-relaxed text-gray-700 dark:text-gray-300">{description}</p>
+            {/* Action Buttons (GitHub and Demo) */}
             <div className="mt-auto flex flex-wrap gap-4">
+                {/* GitHub Link Button */}
                 {githubLink && (
                     <Link
                         href={githubLink}
@@ -28,6 +33,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ title, description, githubLin
                         GitHub
                     </Link>
                 )}
+                {/* Demo Link Button (conditionally rendered) */}
                 {demoLink && (
                     <Link
                         href={demoLink}

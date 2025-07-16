@@ -1,42 +1,56 @@
 "use client";
 import React, { useEffect, useState } from 'react';
 
-
+// Define the props interface for the TableOfContents component
 interface TableOfContentsProps {
-    content: string; // HTML string
+    content: string; // The HTML string content from which to extract headings
 }
 
+// Define the structure for a heading object
 interface Heading {
-    id: string;
-    text: string;
-    level: number;
+    id: string; // The ID of the heading element
+    text: string; // The text content of the heading
+    level: number; // The heading level (e.g., 2 for <h2>, 3 for <h3>)
 }
 
+// TableOfContents functional component
 const TableOfContents: React.FC<TableOfContentsProps> = ({ content }) => {
+    // State to store the extracted headings
     const [headings, setHeadings] = useState<Heading[]>([]);
 
+    // useEffect hook to parse the content and extract headings when the content changes
     useEffect(() => {
         const parser = new DOMParser();
+        // Parse the HTML content string into a DOM document
         const doc = parser.parseFromString(content, 'text/html');
+        // Query all heading elements (h2 to h6) from the parsed document
         const extractedHeadings: Heading[] = Array.from(doc.querySelectorAll('h2, h3, h4, h5, h6')).map((heading) => {
+            // Generate a slug-like ID from the heading text if it doesn't already have one
             const id = heading.id || heading.textContent!.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-*|-*$/g, '');
-            heading.id = id; // Ensure the heading has an ID
+            // Assign the generated/existing ID back to the heading element in the DOM (for linking)
+            heading.id = id; 
             return {
                 id,
                 text: heading.textContent || '',
-                level: parseInt(heading.tagName.substring(1)),
+                level: parseInt(heading.tagName.substring(1)), // Extract heading level (e.g., H2 -> 2)
             };
         });
+        // Update the state with the extracted headings
         setHeadings(extractedHeadings);
-    }, [content]);
+    }, [content]); // Re-run effect when content prop changes
 
     return (
-        <div className="p-4 border rounded-lg shadow-md sticky top-4">
-            <h3 className="text-xl font-semibold mb-4">Table of Contents</h3>
+        <div className="py-4 sticky top-4">
+            <h3 className="text-lg font-semibold mb-4 text-gray-800 dark:text-gray-200">Table of Contents</h3>
             <ul>
+                {/* Map through the headings and render a list item for each */}
                 {headings.map((heading) => (
                     <li key={heading.id} className="mb-2">
-                        <a href={`#${heading.id}`} className="text-blue-600 hover:underline">
+                        {/* Link to the corresponding section on the page, with indentation based on heading level */}
+                        <a
+                            href={`#${heading.id}`}
+                            className={`block text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 ${heading.level === 2 ? 'ml-0 font-medium' : `ml-${(heading.level - 1) * 4}`}`}
+                        >
                             {heading.text}
                         </a>
                     </li>

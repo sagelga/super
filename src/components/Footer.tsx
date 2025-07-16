@@ -3,15 +3,17 @@
 import React from 'react';
 import Link from 'next/link';
 
-
+// Define the interface for a link item, including optional icon properties
 interface LinkItem {
     name: string;
     href: string;
-    iconClass?: string;
-    icon?: string;
+    iconClass?: string; // Class for icon libraries (e.g., Devicon)
+    icon?: string; // SVG path for custom icons
 }
 
+// Footer functional component
 const Footer: React.FC = () => {
+    // Define sitemap links categorized for display in the footer
     const sitemapLinks: { [key: string]: LinkItem[] } = {
         "Kunanon Srisuntiroj": [
             { name: "Home", href: "/" },
@@ -34,12 +36,14 @@ const Footer: React.FC = () => {
         ],
     };
 
+    // Define legal links for the footer
     const legalLinks = [
         { name: "Privacy Policy", href: "/privacy-policy" },
         { name: "Terms of Service", href: "/terms-of-service" },
 
     ];
 
+    // Function to scroll to the top of the page
     const scrollToTop = () => {
         window.scrollTo({
             top: 0,
@@ -50,6 +54,7 @@ const Footer: React.FC = () => {
     return (
         <footer className="bg-gray-100 dark:bg-gray-900 p-8 text-gray-900 dark:text-gray-100 text-sm">
             <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+                {/* Render sitemap link categories and their links */}
                 {Object.entries(sitemapLinks).map(([category, links]) => (
                     <div key={category}>
                         <h3 className="text-lg font-semibold mb-4">{category}</h3>
@@ -57,6 +62,7 @@ const Footer: React.FC = () => {
                             {links.map((link, index) => (
                                 <li key={index} className="mb-2">
                                     <Link href={link.href} className="hover:text-gray-700 dark:hover:text-gray-300" target={link.href.startsWith('/') ? '_self' : '_blank'} rel={link.href.startsWith('/') ? '' : 'noopener noreferrer'}>
+                                        {/* Conditionally render icon based on iconClass or icon prop */}
                                         {link.iconClass ? (
                                             <i className={`${link.iconClass} colored text-lg mr-2`}></i>
                                         ) : link.icon ? (
@@ -72,9 +78,11 @@ const Footer: React.FC = () => {
                     </div>
                 ))}
             </div>
+            {/* Copyright and legal links section */}
             <div className="text-center mt-8 pt-4 border-t border-gray-200 dark:border-gray-700 text-xs">
                 <p className="mb-2">สงวนลิขสิทธิ์ © 2019-{new Date().getFullYear()} สร้างด้วย ❤️ โดย <Link href="https://github.com/sagelga" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">Kunanon Srisuntiroj</Link></p>
                 <div className="flex flex-wrap justify-center space-x-2 md:space-x-4">
+                    {/* Render legal links with separators */}
                     {legalLinks.map((link, index) => (
                         <React.Fragment key={index}>
                             <Link href={link.href} className="text-gray-600 dark:text-gray-400 hover:underline whitespace-nowrap">
@@ -86,6 +94,7 @@ const Footer: React.FC = () => {
                         </React.Fragment>
                     ))}
                 </div>
+                {/* Back to Top button */}
                 <button onClick={scrollToTop} className="mt-4 text-blue-600 dark:text-blue-400 hover:underline">
                     Back to Top
                 </button>

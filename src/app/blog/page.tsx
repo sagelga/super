@@ -1,74 +1,90 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 
 import FilterBar from '@/components/blog/FilterBar';
 import PostGrid from '@/components/blog/PostGrid';
 
-const BlogPage: React.FC = () => {
-    const allBlogPosts = React.useMemo(() => [
-        {
-            title: "My First Blog Post",
-            excerpt: "This is a short excerpt from my first blog post.",
-            date: "2023-01-15",
-            category: "Technology",
-            slug: "my-first-blog-post",
-            imageUrl: "https://images.unsplash.com/photo-1682686581413-519e8f479892?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", // Placeholder image
-        },
-        {
-            title: "Learning Next.js",
-            excerpt: "A journey into the world of Next.js development.",
-            date: "2023-02-20",
-            category: "Web Development",
-            slug: "learning-nextjs",
-            imageUrl: "https://images.unsplash.com/photo-1682686581413-519e8f479892?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG00by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", // Placeholder image
-        },
-        {
-            title: "Design Principles",
-            excerpt: "Exploring fundamental design principles for better UIs.",
-            date: "2023-03-10",
-            category: "Design",
-            slug: "design-principles",
-            imageUrl: "https://images.unsplash.com/photo-1682686581413-519e8f479892?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", // Placeholder image
-        },
-    ], []);
+import { BlogPost } from '@/types/blog';
 
+const BlogPage: React.FC = () => {
+    // State variables for managing blog posts, filters, and UI status
+    const [allBlogPosts, setAllBlogPosts] = useState<BlogPost[]>([]);
     const [searchTerm, setSearchTerm] = useState<string>('');
     const [selectedCategory, setSelectedCategory] = useState<string>('All');
-    const [filteredPosts, setFilteredPosts] = useState(allBlogPosts);
+    const [loading, setLoading] = useState<boolean>(true);
+    const [error, setError] = useState<string | null>(null);
 
-    const categories = Array.from(new Set(allBlogPosts.map(post => post.category)));
-
+    // useEffect hook to fetch blog posts from the API when the component mounts
     useEffect(() => {
-        let posts = allBlogPosts;
+        const fetchBlogPosts = async () => {
+            try {
+                // Fetch data from the API
+                const response = await fetch('https://superbrain.sagelga.workers.dev/api/posts');
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const data = await response.json();
 
-        if (selectedCategory !== 'All') {
-            posts = posts.filter(post => post.category === selectedCategory);
-        }
+                // Log the fetched data for debugging
+                console.log(data);
 
-        if (searchTerm) {
-            posts = posts.filter(post =>
-                post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                post.excerpt.toLowerCase().includes(searchTerm.toLowerCase())
-            );
-        }
+                // Update the state with the fetched posts, ensuring data.posts is an array
+                setAllBlogPosts(data.posts || []);
 
-        setFilteredPosts(posts);
-    }, [searchTerm, selectedCategory, allBlogPosts]);
+            } catch (e: unknown) {
+                // Handle any errors that occur during the fetch
+                if (e instanceof Error) {
+                    setError(e.message);
+                } else {
+                    setError('An unknown error occurred');
+                }
+            } finally {
+                // Set loading to false once the fetch is complete
+                setLoading(false);
+            }
+        };
 
+        fetchBlogPosts();
+    }, []); // Empty dependency array ensures this effect runs only once on mount
+
+    // useMemo hook to calculate the list of unique categories from the blog posts
+    const categories = useMemo(() => {
+        // Create a Set of unique categories from all blog posts
+        const uniqueCategories = new Set((allBlogPosts || []).map(post => post.category));
+        // Return an array with 'All' followed by the unique categories
+        return ['All', ...Array.from(uniqueCategories)];
+    }, [allBlogPosts]); // Recalculate only when allBlogPosts changes
+
+    // useMemo hook to filter the blog posts based on the search term and selected category
+    const filteredPosts = useMemo(() => {
+        return (allBlogPosts || [])
+            .filter(post => {
+                // Filter by category
+                return selectedCategory === 'All' || post.category === selectedCategory;
+            })
+            .filter(post => {
+                // Filter by search term (case-insensitive)
+                const term = searchTerm.toLowerCase();
+                return post.title.toLowerCase().includes(term) || post.excerpt.toLowerCase().includes(term);
+            });
+    }, [searchTerm, selectedCategory, allBlogPosts]); // Recalculate when filters or posts change
+
+    // Event handler for the search input field
     const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setSearchTerm(event.target.value);
     };
 
+    // Event handler for selecting a category
     const handleCategorySelect = (category: string) => {
         setSelectedCategory(category);
     };
 
+    // Render the component's UI
     return (
         <div className="bg-gray-50 dark:bg-gray-900 min-h-screen">
-            
-
-            <div className="container mx-auto px-4 py-12 max-w-4xl">
+            <div className="container mx-auto px-4 py-12 max-w-3xl">
+                {/* Search input field */}
                 <div className="mb-8 relative">
                     <input
                         type="text"
@@ -79,8 +95,17 @@ const BlogPage: React.FC = () => {
                     />
                     <svg className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400 dark:text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
                 </div>
-                <FilterBar categories={categories} onSelectCategory={handleCategorySelect} selectedCategory={selectedCategory} />
-                <PostGrid posts={filteredPosts} />
+                {/* Conditional rendering based on loading and error states */}
+                {loading && <p>Loading blog posts...</p>}
+                {error && <p className="text-red-500">Error: {error}</p>}
+                {!loading && !error && (
+                    <>
+                        {/* Filter bar for categories */}
+                        <FilterBar categories={categories} onSelectCategory={handleCategorySelect} selectedCategory={selectedCategory} />
+                        {/* Grid of filtered blog posts */}
+                        <PostGrid posts={filteredPosts} />
+                    </>
+                )}
             </div>
         </div>
     );

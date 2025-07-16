@@ -1,8 +1,11 @@
+// Import necessary React components and types
 import React from 'react';
 import DocsProjectCard from '@/components/cards/DocsProjectCard';
 import DocsProjectGrid from '@/components/docs/DocsProjectGrid';
 
+// Define the DocsPage component
 const DocsPage: React.FC = () => {
+    // Array of documentation projects with their details
     const docProjects = [
         {
             title: "Todoist Notion Sync",
@@ -96,8 +99,10 @@ const DocsPage: React.FC = () => {
         },
     ];
 
+    // Render the DocsPage component
     return (
         <div className="bg-gray-50 dark:bg-gray-900 min-h-screen">
+            {/* Hero section with a title and description */}
             <section className="py-20 text-center bg-linear-to-r from-blue-500 to-purple-600 text-white shadow-md">
                 <div className="container mx-auto px-4">
                     <h1 className="text-5xl font-extrabold mb-4">Comprehensive Documentation</h1>
@@ -107,10 +112,13 @@ const DocsPage: React.FC = () => {
                 </div>
             </section>
 
+            {/* Section to display the documentation projects */}
             <section className="py-16">
                 <div className="container mx-auto px-4">
                     <h2 className="text-4xl font-extrabold text-center mb-12 text-gray-800 dark:text-white">Projects Documentation</h2>
+                    {/* Grid layout for the documentation project cards */}
                     <DocsProjectGrid>
+                        {/* Map through the docProjects array and render a card for each project */}
                         {docProjects.map((project, index) => (
                             <DocsProjectCard key={index} {...project} />
                         ))}
@@ -121,4 +129,5 @@ const DocsPage: React.FC = () => {
     );
 };
 
+// Export the DocsPage component
 export default DocsPage;

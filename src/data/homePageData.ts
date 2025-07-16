@@ -1,3 +1,4 @@
+// Array of skills with their names
 export const skills = [
     "JavaScript",
     "TypeScript",
@@ -72,6 +73,7 @@ export const skills = [
     "C (Programming Language)",
 ];
 
+// Array of projects with their details
 export const projects = [
     {
         title: "Super",
@@ -174,6 +176,7 @@ export const projects = [
     },
 ];
 
+// Array of professional experiences with their details
 export const experiences = [
     {
         title: "Salesforce Marketing Cloud Developer",
@@ -217,6 +220,7 @@ export const experiences = [
     },
 ];
 
+// Array of certifications with their details
 export const certifications = [
     {
         title: "Badge 1: Data Warehousing Workshop",
@@ -372,6 +376,7 @@ export const certifications = [
     },
 ];
 
+// Array of volunteering experiences with their details
 export const volunteering = [
     {
         title: "Senior advisor and referee",
@@ -401,6 +406,7 @@ export const volunteering = [
     },
 ];
 
+// Array of languages with proficiency and optional icon class
 export const languages = [
     {
         name: "English",
@@ -414,6 +420,7 @@ export const languages = [
     }, // Placeholder, Devicon doesn't have a Thai icon
 ];
 
+// Array of online profiles with their names, URLs, and icon classes
 export const onlineProfiles = [
     {
         name: "LinkedIn",

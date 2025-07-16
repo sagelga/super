@@ -1,5 +1,7 @@
+// Import the MetadataRoute type from Next.js
 import { MetadataRoute } from 'next'
 
+// Define the sitemap function
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // Fetch blog posts from your API here
   // For now, using dummy data similar to src/app/blog/page.tsx
@@ -18,6 +20,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
   ];
 
+  // Create sitemap entries for each blog post
   const blogPostEntries: MetadataRoute.Sitemap = blogPosts.map((post) => ({
     url: `https://super.sagelga.workers.dev/blog/${post.slug}`,
     lastModified: post.lastModified,
@@ -25,6 +28,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.7,
   }));
 
+  // Return the complete sitemap with static and dynamic routes
   return [
     {
       url: 'https://super.sagelga.workers.dev/',
