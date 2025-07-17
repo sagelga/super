@@ -5,18 +5,19 @@
     "scripts": {
         "dev": "next dev --turbopack",
         "build": "next build",
-        "deploy-worker": "npm run build && npx @cloudflare/next-on-pages && cp .assetsignore .vercel/output/static/",
+        "deploy-worker": "npm run build && npx @cloudflare/next-on-pages --experimental-output-dir .vercel/output && cp .assetsignore .vercel/output/static/",
         "deploy": "npm run deploy-worker && wrangler deploy",
         "start": "next start",
         "lint": "next lint"
     },
     "dependencies": {
-        "@opennextjs/cloudflare": "^1.4.0",
         "devicon": "^2.16.0",
         "geist": "^1.4.2",
+        "i18next": "^25.3.2",
         "next": "^15.3.5",
         "react": "^19.0.0",
         "react-dom": "^19.0.0",
+        "react-i18next": "^15.6.0",
         "swiper": "^11.2.10"
     },
     "devDependencies": {
