@@ -1,4 +1,3 @@
-
 // Import necessary React components and site configuration
 import React from 'react';
 import { siteConfig } from '@/config/site';

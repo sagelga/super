@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 
 // Define the interface for a link item, including optional icon properties
@@ -13,6 +13,14 @@ interface LinkItem {
 
 // Footer functional component
 const Footer: React.FC = () => {
+    const [selectedLanguage, setSelectedLanguage] = useState('en'); // Default to English
+
+    const handleLanguageChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+        setSelectedLanguage(event.target.value);
+        // In a real application, you would also change the site's language here
+        // For example, by updating a context, Redux store, or using a library like next-i18n
+        console.log('Language changed to:', event.target.value);
+    };
     // Define sitemap links categorized for display in the footer
     const sitemapLinks: { [key: string]: LinkItem[] } = {
         "Kunanon Srisuntiroj": [
@@ -79,9 +87,9 @@ const Footer: React.FC = () => {
                 ))}
             </div>
             {/* Copyright and legal links section */}
-            <div className="text-center mt-8 pt-4 border-t border-gray-200 dark:border-gray-700 text-xs">
-                <p className="mb-2">สงวนลิขสิทธิ์ © 2019-{new Date().getFullYear()} สร้างด้วย ❤️ โดย <Link href="https://github.com/sagelga" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">Kunanon Srisuntiroj</Link></p>
-                <div className="flex flex-wrap justify-center space-x-2 md:space-x-4">
+            <div className="text-center mt-8 pt-4 border-t border-gray-200 dark:border-gray-700 text-xs flex flex-col md:flex-row justify-between items-center">
+                <p className="mb-2 md:mb-0">สงวนลิขสิทธิ์ © 2019-{new Date().getFullYear()} สร้างด้วย ❤️ โดย <Link href="https://github.com/sagelga" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">Kunanon Srisuntiroj</Link></p>
+                <div className="flex flex-wrap justify-center space-x-2 md:space-x-4 mb-2 md:mb-0">
                     {/* Render legal links with separators */}
                     {legalLinks.map((link, index) => (
                         <React.Fragment key={index}>
@@ -94,10 +102,21 @@ const Footer: React.FC = () => {
                         </React.Fragment>
                     ))}
                 </div>
-                {/* Back to Top button */}
-                <button onClick={scrollToTop} className="mt-4 text-blue-600 dark:text-blue-400 hover:underline">
-                    Back to Top
-                </button>
+                <div className="flex items-center space-x-4">
+                    {/* Language Switcher */}
+                    <select
+                        value={selectedLanguage}
+                        onChange={handleLanguageChange}
+                        className="bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-white rounded-md px-2 py-1 text-xs focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    >
+                        <option value="en">English</option>
+                        <option value="th">ภาษาไทย</option>
+                    </select>
+                    {/* Back to Top button */}
+                    <button onClick={scrollToTop} className="text-blue-600 dark:text-blue-400 hover:underline">
+                        Back to Top
+                    </button>
+                </div>
             </div>
         </footer>
     );
