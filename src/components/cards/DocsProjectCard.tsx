@@ -13,7 +13,7 @@ interface DocsProjectCardProps {
 }
 
 // DocsProjectCard functional component
-const DocsProjectCard: React.FC<DocsProjectCardCardProps> = ({ title, description, docsLink, imageUrl }) => {
+const DocsProjectCard: React.FC<DocsProjectCardProps> = ({ title, description, docsLink, imageUrl }) => {
     // State to handle image loading errors
     const [imageError, setImageError] = useState(false);
 

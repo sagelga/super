@@ -3,18 +3,19 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { BlogPost } from '@/types/blog';
+import { Post } from '@/types/blog';
 
 // Define the props interface for the BlogPostCard component
-interface BlogPostCardProps extends BlogPost {
+interface BlogPostCardProps extends Post {
     date: string;
     imageUrl: string;
     isLarge?: boolean; // Optional prop to render a larger card layout
     isCompact?: boolean; // Optional prop to render a compact card layout
+    isFeatured?: boolean; // Optional prop to indicate if the post is featured
 }
 
 // BlogPostCard functional component
-const BlogPostCard: React.FC<BlogPostCardProps> = ({ title, excerpt, date, category, slug, imageUrl, isLarge = false, isCompact = false }) => {
+const BlogPostCard: React.FC<BlogPostCardProps> = ({ title, excerpt, date, primary_tag, slug, imageUrl, isLarge = false, isCompact = false, isFeatured = false }) => {
     // State to handle image loading errors
     const [imageError, setImageError] = useState(false);
 
@@ -34,7 +35,7 @@ const BlogPostCard: React.FC<BlogPostCardProps> = ({ title, excerpt, date, categ
                 </div>
                 <div className="flex-grow">
                     {/* Display date and category */}
-                    <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">{date} &bull; {category}</p>
+                    <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">{date} &bull; {primary_tag?.name}</p>
                     {/* Display post title */}
                     <h3 className="text-base font-bold text-gray-900 group-hover:text-blue-600 dark:text-white dark:group-hover:text-blue-400 line-clamp-2">{title}</h3>
                     {/* Display post excerpt */}
@@ -50,7 +51,7 @@ const BlogPostCard: React.FC<BlogPostCardProps> = ({ title, excerpt, date, categ
     const excerptLineClampClass = isLarge ? 'line-clamp-5' : 'line-clamp-3';
 
     return (
-        <Link href={`/blog/${slug}`} className="group block transform overflow-hidden rounded-xl bg-white shadow-lg transition-shadow duration-300 ease-in-out hover:-translate-y-1 hover:shadow-xl dark:bg-gray-800">
+        <Link href={`/blog/${slug}`} className={`group block transform overflow-hidden rounded-xl shadow-lg transition-shadow duration-300 ease-in-out hover:-translate-y-1 hover:shadow-xl ${isFeatured ? 'bg-blue-50 dark:bg-blue-950' : 'bg-white dark:bg-gray-800'}`}>
             <div className={`relative w-full overflow-hidden ${imageHeightClass}`}>
                 {/* Render image or a placeholder if image fails to load */}
                 {(imageUrl && !imageError) ? (
@@ -63,7 +64,7 @@ const BlogPostCard: React.FC<BlogPostCardProps> = ({ title, excerpt, date, categ
             </div>
             <div className="p-6">
                 {/* Display date and category */}
-                <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">{date} &bull; {category}</p>
+                <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">{date} &bull; {primary_tag?.name}</p>
                 {/* Display post title */}
                 <h2 className={`mb-3 leading-tight font-bold text-gray-900 transition-colors duration-300 group-hover:text-blue-600 dark:text-white dark:group-hover:text-blue-400 ${titleSizeClass}`}>{title}</h2>
                 {/* Display post excerpt */}

@@ -5,80 +5,92 @@ import React, { useState, useEffect, useMemo } from 'react';
 import FilterBar from '@/components/blog/FilterBar';
 import PostGrid from '@/components/blog/PostGrid';
 
-import { BlogPost } from '@/types/blog';
+import { Post } from '@/types/blog';
 
 const BlogPage: React.FC = () => {
     // State variables for managing blog posts, filters, and UI status
-    const [allBlogPosts, setAllBlogPosts] = useState<BlogPost[]>([]);
+    const [featuredPosts, setFeaturedPosts] = useState<Post[]>([]);
+    const [otherBlogPosts, setOtherBlogPosts] = useState<Post[]>([]);
     const [searchTerm, setSearchTerm] = useState<string>('');
     const [selectedCategory, setSelectedCategory] = useState<string>('All');
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
+    const [currentPage, setCurrentPage] = useState<number>(1);
+    const [totalPages, setTotalPages] = useState<number>(1);
+    const postsPerPage = 10; // Number of posts per page for 'other' posts
 
-    // useEffect hook to fetch blog posts from the API when the component mounts
     useEffect(() => {
-        const fetchBlogPosts = async () => {
+        const fetchPosts = async () => {
+            setLoading(true);
+            setError(null);
             try {
-                // Fetch data from the API
-                const response = await fetch('https://superbrain.sagelga.workers.dev/api/posts');
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
+                // Fetch featured posts (first 3)
+                const featuredResponse = await fetch('https://superbrain.sagelga.workers.dev/api/posts?limit=3');
+                if (!featuredResponse.ok) {
+                    throw new Error(`HTTP error! status: ${featuredResponse.status}`);
                 }
-                const data = await response.json();
+                const featuredData = await featuredResponse.json();
+                setFeaturedPosts(featuredData.posts || []);
 
-                // Log the fetched data for debugging
-                console.log(data);
-
-                // Update the state with the fetched posts, ensuring data.posts is an array
-                setAllBlogPosts(data.posts || []);
+                // Fetch paginated 'other' posts
+                const otherResponse = await fetch(`https://superbrain.sagelga.workers.dev/api/posts?page=${currentPage}&limit=${postsPerPage}`);
+                if (!otherResponse.ok) {
+                    throw new Error(`HTTP error! status: ${otherResponse.status}`);
+                }
+                const otherData = await otherResponse.json();
+                setOtherBlogPosts(otherData.posts || []);
+                setTotalPages(otherData.totalPages || 1);
 
             } catch (e: unknown) {
-                // Handle any errors that occur during the fetch
                 if (e instanceof Error) {
                     setError(e.message);
                 } else {
                     setError('An unknown error occurred');
                 }
             } finally {
-                // Set loading to false once the fetch is complete
                 setLoading(false);
             }
         };
 
-        fetchBlogPosts();
-    }, []); // Empty dependency array ensures this effect runs only once on mount
+        fetchPosts();
+    }, [currentPage]);
 
-    // useMemo hook to calculate the list of unique categories from the blog posts
     const categories = useMemo(() => {
-        // Create a Set of unique categories from all blog posts
-        const uniqueCategories = new Set((allBlogPosts || []).map(post => post.category));
-        // Return an array with 'All' followed by the unique categories
+        const allPosts = [...featuredPosts, ...otherBlogPosts];
+        const uniqueCategories = new Set((allPosts || []).map(post => post.primary_tag?.name));
         return ['All', ...Array.from(uniqueCategories)];
-    }, [allBlogPosts]); // Recalculate only when allBlogPosts changes
+    }, [featuredPosts, otherBlogPosts]);
 
-    // useMemo hook to filter the blog posts based on the search term and selected category
-    const filteredPosts = useMemo(() => {
-        return (allBlogPosts || [])
-            .filter(post => {
-                // Filter by category
-                return selectedCategory === 'All' || post.category === selectedCategory;
-            })
-            .filter(post => {
-                // Filter by search term (case-insensitive)
-                const term = searchTerm.toLowerCase();
-                return post.title.toLowerCase().includes(term) || post.excerpt.toLowerCase().includes(term);
-            });
-    }, [searchTerm, selectedCategory, allBlogPosts]); // Recalculate when filters or posts change
-
-    // Event handler for the search input field
     const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setSearchTerm(event.target.value);
     };
 
-    // Event handler for selecting a category
     const handleCategorySelect = (category: string) => {
         setSelectedCategory(category);
+        setCurrentPage(1); // Reset to first page on category change
     };
+
+    const handlePageChange = (page: number) => {
+        if (page >= 1 && page <= totalPages) {
+            setCurrentPage(page);
+        }
+    };
+
+    const filteredFeaturedPosts = useMemo(() => {
+        return featuredPosts.filter(post => {
+            const matchesCategory = selectedCategory === 'All' || post.primary_tag?.name === selectedCategory;
+            const matchesSearch = post.title.toLowerCase().includes(searchTerm.toLowerCase()) || post.excerpt.toLowerCase().includes(searchTerm.toLowerCase());
+            return matchesCategory && matchesSearch;
+        });
+    }, [featuredPosts, searchTerm, selectedCategory]);
+
+    const filteredOtherBlogPosts = useMemo(() => {
+        return otherBlogPosts.filter(post => {
+            const matchesCategory = selectedCategory === 'All' || post.primary_tag?.name === selectedCategory;
+            const matchesSearch = post.title.toLowerCase().includes(searchTerm.toLowerCase()) || post.excerpt.toLowerCase().includes(searchTerm.toLowerCase());
+            return matchesCategory && matchesSearch;
+        });
+    }, [otherBlogPosts, searchTerm, selectedCategory]);
 
     // Render the component's UI
     return (
@@ -102,8 +114,44 @@ const BlogPage: React.FC = () => {
                     <>
                         {/* Filter bar for categories */}
                         <FilterBar categories={categories} onSelectCategory={handleCategorySelect} selectedCategory={selectedCategory} />
-                        {/* Grid of filtered blog posts */}
-                        <PostGrid posts={filteredPosts} />
+                        {/* Featured Posts */}
+                        {filteredFeaturedPosts.length > 0 && (
+                            <div className="mb-8">
+                                <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Featured Posts</h2>
+                                <PostGrid posts={filteredFeaturedPosts} isFeatured={true} />
+                            </div>
+                        )}
+
+                        {/* Other Blog Posts */}
+                        {filteredOtherBlogPosts.length > 0 && (
+                            <div className="mb-8">
+                                <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Other Posts</h2>
+                                <PostGrid posts={filteredOtherBlogPosts} />
+                            </div>
+                        )}
+
+                        {/* Pagination Controls */}
+                        {totalPages > 1 && (
+                            <div className="flex justify-center items-center space-x-4 mt-8">
+                                <button
+                                    onClick={() => handlePageChange(currentPage - 1)}
+                                    disabled={currentPage === 1}
+                                    className="px-4 py-2 bg-gray-200 dark:bg-gray-700 rounded-lg disabled:opacity-50"
+                                >
+                                    Previous
+                                </button>
+                                <span>
+                                    Page {currentPage} of {totalPages}
+                                </span>
+                                <button
+                                    onClick={() => handlePageChange(currentPage + 1)}
+                                    disabled={currentPage === totalPages}
+                                    className="px-4 py-2 bg-gray-200 dark:bg-gray-700 rounded-lg disabled:opacity-50"
+                                >
+                                    Next
+                                </button>
+                            </div>
+                        )}
                     </>
                 )}
             </div>
