@@ -179,17 +179,6 @@ export const projects = [
 // Array of professional experiences with their details
 export const experiences = [
     {
-        title: "Business Analyst",
-        company: "B3 Technology",
-        duration: "August 2024 - Present",
-        description: [
-            "Collaborated with a leading insurance company to design and implement comprehensive Salesforce dashboards for Financial Advisors and their managers.",
-            "Developed key performance indicators (KPIs) and reporting mechanisms within Salesforce to enable real-time tracking of revenue, customer acquisition, and client engagement metrics.",
-            "Streamlined data visualization processes, empowering financial teams with actionable insights to optimize sales strategies and enhance client relationships.",
-            "Provided ongoing support and training to users, ensuring effective adoption and utilization of the new Salesforce functionalities.",
-        ],
-    },
-    {
         title: "Freelance Teacher",
         company: "Freelance",
         duration: "August 2024 - Present",
@@ -198,6 +187,17 @@ export const experiences = [
             "Develop customized curriculum and teaching materials tailored to diverse learning styles and skill levels.",
             "Provide hands-on training and project-based learning experiences to reinforce understanding and build practical skills in database management and scripting.",
             "Instruct on advanced usage of Notion for personal organization, project management, and collaborative workspaces, demonstrating its versatility as a productivity tool.",
+        ],
+    },
+    {
+        title: "Salesforce Business Analyst",
+        company: "B3 Technology Co., Ltd.",
+        duration: "September 2024 - April 2025",
+        description: [
+            "Collaborated with a leading insurance company to design and implement comprehensive Salesforce dashboards for Financial Advisors and their managers.",
+            "Developed key performance indicators (KPIs) and reporting mechanisms within Salesforce to enable real-time tracking of revenue, customer acquisition, and client engagement metrics.",
+            "Streamlined data visualization processes, empowering financial teams with actionable insights to optimize sales strategies and enhance client relationships.",
+            "Provided ongoing support and training to users, ensuring effective adoption and utilization of the new Salesforce functionalities.",
         ],
     },
     {
