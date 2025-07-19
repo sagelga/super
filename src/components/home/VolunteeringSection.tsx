@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
+import { useTranslation } from 'react-i18next';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, A11y } from 'swiper/modules';
 
@@ -25,11 +26,12 @@ interface VolunteeringSectionProps {
 
 // VolunteeringSection functional component
 const VolunteeringSection: React.FC<VolunteeringSectionProps> = ({ volunteering }) => {
+    const { t } = useTranslation('home');
     return (
         <section className="py-16 bg-gray-50 dark:bg-gray-900">
             <div className="container mx-auto px-4">
                 {/* Section Title */}
-                <h2 className="text-4xl font-extrabold text-center mb-12 text-gray-800 dark:text-white">Volunteering</h2>
+                <h2 className="text-4xl font-extrabold text-center mb-12 text-gray-800 dark:text-white">{t('volunteering_section_title')}</h2>
                 {/* Swiper component for displaying volunteering experiences in a carousel */}
                 <Swiper
                     // Configure Swiper modules

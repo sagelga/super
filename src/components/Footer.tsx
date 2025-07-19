@@ -1,7 +1,9 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import Link from 'next/link';
+import { useTranslation } from 'react-i18next';
+import { useRouter, usePathname } from 'next/navigation';
 
 // Define the interface for a link item, including optional icon properties
 interface LinkItem {
@@ -13,13 +15,14 @@ interface LinkItem {
 
 // Footer functional component
 const Footer: React.FC = () => {
-    const [selectedLanguage, setSelectedLanguage] = useState('en'); // Default to English
+    const { i18n } = useTranslation();
+    const router = useRouter();
+    const pathname = usePathname();
 
     const handleLanguageChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-        setSelectedLanguage(event.target.value);
-        // In a real application, you would also change the site's language here
-        // For example, by updating a context, Redux store, or using a library like next-i18n
-        console.log('Language changed to:', event.target.value);
+        const newLang = event.target.value;
+        i18n.changeLanguage(newLang);
+        router.push(`/${newLang}${pathname}`);
     };
     // Define sitemap links categorized for display in the footer
     const sitemapLinks: { [key: string]: LinkItem[] } = {
@@ -105,7 +108,7 @@ const Footer: React.FC = () => {
                 <div className="flex items-center space-x-4">
                     {/* Language Switcher */}
                     <select
-                        value={selectedLanguage}
+                        value={i18n.language}
                         onChange={handleLanguageChange}
                         className="bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-white rounded-md px-2 py-1 text-xs focus:outline-none focus:ring-2 focus:ring-blue-500"
                     >

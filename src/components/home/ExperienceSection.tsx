@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
 // Import Swiper modules
@@ -26,11 +27,12 @@ interface ExperienceSectionProps {
 
 // ExperienceSection functional component
 const ExperienceSection: React.FC<ExperienceSectionProps> = ({ experiences }) => {
+    const { t } = useTranslation('home');
     return (
         <section className="py-16 bg-gray-50 dark:bg-gray-900">
             <div className="container mx-auto px-4">
                 {/* Section Title */}
-                <h2 className="text-4xl font-extrabold text-center mb-12 text-gray-800 dark:text-white">Experience</h2>
+                <h2 className="text-4xl font-extrabold text-center mb-12 text-gray-800 dark:text-white">{t('experience_section_title')}</h2>
                 {/* Swiper component for displaying experiences in a carousel */}
                 <Swiper
                     // Configure Swiper modules

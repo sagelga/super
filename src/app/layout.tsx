@@ -7,6 +7,7 @@ import "./globals.css";
 
 // Import the main layout component
 import Layout from "../components/Layout";
+import I18nProvider from "../components/I18nProvider";
 
 // Configure the sans-serif font
 const sans = IBM_Plex_Sans_Thai({
@@ -26,22 +27,22 @@ const mono = IBM_Plex_Mono({
 
 // Define the metadata for the website
 export const metadata: Metadata = {
-  title: "Kunanon S. | Full-Stack Developer & Cloud Enthusiast",
-  description: "Explore the portfolio and blog of Kunanon S., a full-stack developer with expertise in cloud technologies, web development, and open-source contributions.",
+  title: "คุณานนต์ ศรีสันติโรจน์ | Full-Stack Developer & Cloud Enthusiast",
+  description: "คุณานนต์ ศรีสันติโรจน์ นักพัฒนา Full-Stack ที่เชี่ยวชาญด้านเทคโนโลยีคลาวด์, การพัฒนาเว็บ และการมีส่วนร่วมในโอเพนซอร์ส",
   openGraph: {
-    title: "Kunanon S. | Full-Stack Developer & Cloud Enthusiast",
-    description: "Explore the portfolio and blog of Kunanon S., a full-stack developer with expertise in cloud technologies, web development, and open-source contributions.",
+    title: "คุณานนต์ ศรีสันติโรจน์ | Full-Stack Developer & Cloud Enthusiast",
+    description: "คุณานนต์ ศรีสันติโรจน์ นักพัฒนา Full-Stack ที่เชี่ยวชาญด้านเทคโนโลยีคลาวด์, การพัฒนาเว็บ และการมีส่วนร่วมในโอเพนซอร์ส",
     url: "https://super.sagelga.workers.dev/",
-    siteName: "Kunanon S. Portfolio",
+    siteName: "พอร์ตโฟลิโอคุณานนต์ ศรีสันติโรจน์",
     images: [
       {
         url: "https://super.sagelga.workers.dev/next.svg", // Replace with a relevant image for your site preview
         width: 1200,
         height: 630,
-        alt: "Kunanon S. Portfolio Banner",
+        alt: "แบนเนอร์พอร์ตโฟลิโอคุณานนต์ ศรีสันติโรจน์",
       },
     ],
-    locale: "en_US",
+    locale: "th_TH",
     type: "website",
   },
 };
@@ -49,11 +50,13 @@ export const metadata: Metadata = {
 // Define the RootLayout component
 export default function RootLayout({
   children,
+  params: { lang },
 }: Readonly<{
   children: React.ReactNode;
+  params: { lang: string };
 }>) {
   return (
-    <html lang="en">
+    <html lang={lang}>
       <head>
         {/* Link to the devicon stylesheet for icons */}
         <link
@@ -63,7 +66,9 @@ export default function RootLayout({
       {/* Apply the configured fonts to the body */}
       <body className={`${sans.variable} ${mono.variable} antialiased`}>
         {/* Use the Layout component to wrap the content */}
-        <Layout>{children}</Layout>
+        <I18nProvider>
+          <Layout>{children}</Layout>
+        </I18nProvider>
       </body>
     </html>
   );

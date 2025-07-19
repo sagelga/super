@@ -5,8 +5,7 @@
     "scripts": {
         "dev": "next dev --turbopack",
         "build": "next build",
-        "deploy-worker": "npm run build && npx @cloudflare/next-on-pages --experimental-output-dir .vercel/output && cp .assetsignore .vercel/output/static/",
-        "deploy": "npm run deploy-worker && wrangler deploy",
+        "deploy": "npm run build && npx @opennextjs/cloudflare build && wrangler deploy",
         "start": "next start",
         "lint": "next lint"
     },
@@ -14,6 +13,7 @@
         "devicon": "^2.16.0",
         "geist": "^1.4.2",
         "i18next": "^25.3.2",
+        "i18next-http-backend": "^3.0.2",
         "next": "^15.3.5",
         "react": "^19.0.0",
         "react-dom": "^19.0.0",
@@ -21,8 +21,8 @@
         "swiper": "^11.2.10"
     },
     "devDependencies": {
-        "@cloudflare/next-on-pages": "^1.13.12",
         "@eslint/eslintrc": "^3",
+        "@opennextjs/cloudflare": "^1.5.1",
         "@tailwindcss/postcss": "^4.1.11",
         "@types/node": "^20",
         "@types/react": "^19",

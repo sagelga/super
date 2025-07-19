@@ -1,0 +1,13 @@
+{
+    "greeting": "สวัสดี",
+    "blog": {
+        "search_placeholder": "ค้นหาบทความ...",
+        "loading_posts": "กำลังโหลดบทความ...",
+        "error_loading_posts": "ข้อผิดพลาด: {{message}}",
+        "featured_posts_title": "บทความแนะนำ",
+        "other_posts_title": "บทความอื่นๆ",
+        "previous_button": "ก่อนหน้า",
+        "next_button": "ถัดไป",
+        "page_of": "หน้า {{currentPage}} จาก {{totalPages}}"
+    }
+}

@@ -1,0 +1,458 @@
+{
+    "hero": {
+        "name": "คุณานนต์ ศรีสันติโรจน์",
+        "title": "ผู้เชี่ยวชาญด้านไอที",
+        "alt_image": "คุณานนต์ ศรีสันติโรจน์"
+    },
+    "about": {
+        "title": "เกี่ยวกับฉัน",
+        "introduction": "นอกเหนือจากชีวิตการทำงาน คุณานนต์ชื่นชอบการเดินทางไปคุมาโมโตะ ประเทศญี่ปุ่น บุคลิกภาพของเขาขับเคลื่อนความคิดสร้างสรรค์ ความตรงไปตรงมา และการตระหนักรู้ในตนเอง สะท้อนถึงคุณค่าของความถ่อมตนอย่างมั่นใจและนวัตกรรม",
+        "education_title": "การศึกษา",
+        "university_name": "สถาบันเทคโนโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบัง",
+        "school_years": "คณะเทคโนโลยีสารสนเทศ, 2559 - 2563",
+        "grade": "เกรดเฉลี่ย: 3.07"
+    },
+    "experience_section_title": "ประสบการณ์",
+    "skills_section_title": "ทักษะ",
+    "projects_section_title": "โครงการ",
+    "certifications_section_title": "ใบอนุญาตและการรับรอง",
+    "issued_label": "ออกเมื่อ:",
+    "skills_label": "ทักษะ:",
+    "volunteering_section_title": "การเป็นอาสาสมัคร",
+    "languages_section_title": "ภาษา",
+    "skills": [
+        "JavaScript",
+        "TypeScript",
+        "Salesforce Apex",
+        "Salesforce SOQL",
+        "Python",
+        "MySQL",
+        "PostgreSQL",
+        "Oracle SQL",
+        "Microsoft T-SQL",
+        "Oracle PL/SQL",
+        "HTML",
+        "CSS",
+        "Vue",
+        "React",
+        "MongoDB",
+        "Salesforce CRM (SFDC)",
+        "Salesforce Marketing Cloud (SFMC)",
+        "Amazon Web Services (AWS)",
+        "Git",
+        "Google Analytics",
+        "Microsoft Office",
+        "Figma",
+        "Jira",
+        "GitHub",
+        "Postman",
+        "Bing Webmaster Tools",
+        "Google Search Console",
+        "Meta Business Suite",
+        "WordPress",
+        "Visual Studio Code",
+        "Jupyter Notebook",
+        "DataGrip",
+        "Cloudinary",
+        "Notion",
+        "Netlify",
+        "Docker",
+        "Algolia",
+        "Hotjar",
+        "Canva",
+        "Ahrefs",
+        "ChatGPT",
+        "DALL·E",
+        "Perplexity",
+        "Cloudflare Worker",
+        "Webhook",
+        "Next.js",
+        "Cloudflare Pages",
+        "API Integration",
+        "Google AI Studio",
+        "Cloudflare D2",
+        "Docusaurus",
+        "SEO",
+        "Content Monetization",
+        "Content Creation",
+        "Google Apps Script",
+        "Google Forms",
+        "Workflow Automation",
+        "Oracle ERP",
+        "Data Quality",
+        "Data Normalization",
+        "IBM SPSS Statistics",
+        "Regression Analysis",
+        "Statistical Modeling",
+        "Parse Platform",
+        "Node.js",
+        "Express.js",
+        "Digital Ocean Spaces",
+        "Data Analysis",
+        "Java",
+        "Game Development",
+        "C (Programming Language)"
+    ],
+    "projects": [
+        {
+            "title": "Super",
+            "description": "เว็บไซต์พอร์ตโฟลิโอส่วนตัวที่สร้างด้วย Next.js และ Cloudflare Pages ซึ่งผสานรวมกับ Superbrain API และใช้โมเดล Gemini 2.5 Flash/Pro ในการสร้างโค้ดและดำเนินงาน",
+            "githubLink": "https://github.com/sagelga/super",
+            "demoLink": "https://super.sagelga.workers.dev"
+        },
+        {
+            "title": "Superbrain",
+            "description": "API สำหรับเนื้อหาบล็อก ดึงข้อมูลการเปลี่ยนแปลงจาก Notion และจัดเก็บใน Cloudflare D2 เพื่อการดึงข้อมูลที่รวดเร็ว ทำงานบน Cloudflare Workers ทั้งหมดและใช้โมเดล Gemini ในการพัฒนา",
+            "githubLink": "https://github.com/sagelga/superbrain",
+            "demoLink": ""
+        },
+        {
+            "title": "Todoist Notion Sync",
+            "description": "ใช้ Cloudflare Worker เพื่อรอรับ Webhook จาก Todoist และสร้างงานใหม่ใน Notion",
+            "githubLink": "https://github.com/sagelga/todoist-tagging",
+            "demoLink": "",
+            "imageUrl": "/images/placeholder-project.png"
+        },
+        {
+            "title": "Learn with sagelga",
+            "description": "สร้างเว็บไซต์ learn.sagelga.com ขึ้นมาใหม่ด้วย Docusaurus, React และ TypeScript เพื่อเพิ่มประสิทธิภาพการค้นหาและความเร็วสำหรับผู้เรียน Python และ SQL",
+            "githubLink": "https://github.com/sagelga/learn-with-sagelga",
+            "demoLink": "https://learn.sagelga.com"
+        },
+        {
+            "title": "Byteside.one",
+            "description": "ก่อตั้ง Byteside.one สื่อข่าวเทคโนโลยี แกดเจ็ต และเกม ซึ่งมีการแสดงผลบน Google Search ถึง 2.79 ล้านครั้ง และบน Facebook มากกว่า 200,000 ครั้งต่อเดือนภายในเดือนมกราคม 2023",
+            "githubLink": "",
+            "demoLink": "https://byteside.one/"
+        },
+        {
+            "title": "The Sunny Side Publication",
+            "description": "บุกเบิกสื่อ 'The Sunny Side' บน Medium ซึ่งเป็นจุดเริ่มต้นของ ByteSide.one และแสดงให้เห็นถึงความเชี่ยวชาญในการสร้างและเผยแพร่เนื้อหาในช่วงแรก",
+            "githubLink": "",
+            "demoLink": "https://medium.com/the-sunny-side"
+        },
+        {
+            "title": "Approval Workflow on Google Apps Script",
+            "description": "พัฒนาระบบเวิร์กโฟลว์การอนุมัติอัตโนมัติสำหรับ IMST โดยใช้ Google Apps Script ซึ่งช่วยเพิ่มประสิทธิภาพกระบวนการด้านไอที การขอเบิก และการจัดซื้อด้วยการแจ้งเตือนทางอีเมลอัตโนมัติและการผสานรวมกับ Google Forms",
+            "githubLink": "https://github.com/sagelga/approval-workflow",
+            "demoLink": "https://docs.sagelga.com/approval-workflow/"
+        },
+        {
+            "title": "Essilor Asia Supplier Deduplication Report",
+            "description": "พัฒนาสคริปต์ Oracle SQL และ PL/SQL สำหรับ Essilor Asia และ Europe เพื่อสร้างรายงานการขจัดข้อมูลซ้ำซ้อนของซัพพลายเออร์ ซึ่งช่วยเพิ่มคุณภาพข้อมูลในระบบ Oracle ERP รวมถึงการให้คะแนนความคล้ายคลึงและการทำให้เป็นมาตรฐาน",
+            "githubLink": "",
+            "demoLink": ""
+        },
+        {
+            "title": "Data Analytics on Body Fat",
+            "description": "วิเคราะห์การถดถอยพหุคูณเกี่ยวกับความสัมพันธ์ระหว่างไขมันในร่างกายและขนาดของส่วนต่างๆ ของร่างกายโดยใช้ IBM SPSS Statistics เพื่อสร้างแบบจำลองทางสถิติ",
+            "githubLink": "https://github.com/sagelga/bodyfat-regression",
+            "demoLink": ""
+        },
+        {
+            "title": "Lecture sharing System (Oh Sheet!)",
+            "description": "พัฒนา 'Oh Sheet!' ระบบแบ่งปันเอกสารการบรรยายโดยใช้ Vue, Parse, NodeJS, ExpressJS และ Digital Ocean Spaces ซึ่งออกแบบมาเพื่อให้ง่ายต่อการแบ่งปันและค้นหาเนื้อหาทางการศึกษา",
+            "githubLink": "https://github.com/sagelga/oh-sheet",
+            "demoLink": "https://docs.sagelga.com/oh-sheet/"
+        },
+        {
+            "title": "Online Space Reservation System",
+            "description": "ออกแบบและติดตั้งระบบจองพื้นที่ออนไลน์ด้วย PostgreSQL, Scala, GraphQL และ NodeJS เพื่อจัดการความต้องการของผู้ใช้และการอนุมัติสำหรับผู้ดูแลอาคาร",
+            "githubLink": "https://github.com/itforge-eros/panda-website",
+            "demoLink": "https://docs.sagelga.com/project-panda/"
+        },
+        {
+            "title": "Thai restaurant analysis",
+            "description": "วิเคราะห์ความชุกของร้านอาหารไทยในสหรัฐอเมริกา เพื่อสำรวจสาเหตุและแนวโน้มที่ซ่อนอยู่",
+            "githubLink": "https://github.com/sagelga/data-journal",
+            "demoLink": ""
+        },
+        {
+            "title": "Trash Melody",
+            "description": "พัฒนา 'Trash Melody' เกม Java ที่ได้รับแรงบันดาลใจจาก OSU! ซึ่งผสมผสานความบันเทิงเข้ากับการให้ความรู้เรื่องการคัดแยกขยะ",
+            "githubLink": "https://github.com/sagelga/trashmelody",
+            "demoLink": "https://docs.sagelga.com/trash-melody/"
+        },
+        {
+            "title": "Point of Sales (POS) System",
+            "description": "ออกแบบระบบ Point-of-Sale (POS) ที่ครอบคลุมในภาษา C ซึ่งมีทั้งการวิเคราะห์ การจัดการสต็อก/กำไร การพยากรณ์ยอดขาย (Linear Regression) การสร้างความภักดีของลูกค้า และการรองรับเครื่องสแกนบาร์โค้ด โดยจัดเก็บข้อมูลในรูปแบบ CSV",
+            "githubLink": "https://github.com/sagelga/ComPro_Project",
+            "demoLink": "https://docs.sagelga.com/compro-project/"
+        }
+    ],
+    "experiences": [
+        {
+            "title": "ครูสอนพิเศษอิสระ",
+            "company": "ฟรีแลนซ์",
+            "duration": "สิงหาคม 2567 - ปัจจุบัน",
+            "description": [
+                "สอนบุคคลและกลุ่มเล็กเกี่ยวกับแนวคิดการเขียนโปรแกรมพื้นฐานและการประยุกต์ใช้ Python และ SQL สำหรับการจัดการและวิเคราะห์ข้อมูล",
+                "พัฒนาหลักสูตรและสื่อการสอนที่ปรับให้เหมาะกับรูปแบบการเรียนรู้และระดับทักษะที่หลากหลาย",
+                "จัดการฝึกอบรมเชิงปฏิบัติและประสบการณ์การเรียนรู้ตามโครงงานเพื่อเสริมสร้างความเข้าใจและสร้างทักษะการปฏิบัติในการจัดการฐานข้อมูลและการเขียนสคริปต์",
+                "สอนการใช้ Notion ขั้นสูงสำหรับการจัดระเบียบส่วนบุคคล การจัดการโครงการ และพื้นที่ทำงานร่วมกัน โดยสาธิตความสามารถรอบด้านในฐานะเครื่องมือเพิ่มประสิทธิภาพการทำงาน"
+            ]
+        },
+        {
+            "title": "นักวิเคราะห์ธุรกิจ Salesforce",
+            "company": "บริษัท บีทรี เทคโนโลยี จำกัด",
+            "duration": "กันยายน 2567 - เมษายน 2568",
+            "description": [
+                "ร่วมมือกับบริษัทประกันภัยชั้นนำในการออกแบบและติดตั้งแดชบอร์ด Salesforce ที่ครอบคลุมสำหรับที่ปรึกษาทางการเงินและผู้จัดการ",
+                "พัฒนาตัวชี้วัดประสิทธิภาพหลัก (KPIs) และกลไกการรายงานภายใน Salesforce เพื่อให้สามารถติดตามรายได้ การได้มาซึ่งลูกค้า และตัวชี้วัดการมีส่วนร่วมของลูกค้าได้แบบเรียลไทม์",
+                "ปรับปรุงกระบวนการแสดงข้อมูลให้มีประสิทธิภาพ ทำให้ทีมการเงินได้รับข้อมูลเชิงลึกที่นำไปปฏิบัติได้เพื่อเพิ่มประสิทธิภาพกลยุทธ์การขายและเสริมสร้างความสัมพันธ์กับลูกค้า",
+                "ให้การสนับสนุนและฝึกอบรมผู้ใช้อย่างต่อเนื่อง เพื่อให้แน่ใจว่ามีการนำฟังก์ชันการทำงานใหม่ของ Salesforce ไปใช้อย่างมีประสิทธิภาพ"
+            ]
+        },
+        {
+            "title": "นักพัฒนา Salesforce Marketing Cloud",
+            "company": "บริษัท ดิจิทัล แวนการ์ด จำกัด",
+            "duration": "กันยายน 2566 - พฤษภาคม 2567",
+            "description": [
+                "ร่วมมือกับบริษัทน้ำมันและค้าปลีกชั้นนำของประเทศไทยในการบำรุงรักษาและพัฒนา Salesforce Marketing Cloud ด้วยโซลูชัน Knowesis (Sift และ Opolo) เพื่ออำนวยความสะดวกในการทำแคมเปญการตลาดแบบหลายช่องทางที่ขับเคลื่อนด้วยข้อมูล",
+                "พัฒนาระบบอัตโนมัติสำหรับเส้นทางแคมเปญลูกค้าส่วนบุคคลโดยใช้ Journey Builder และ Automation Studio ของ Salesforce โดยนำเข้าและส่งออกข้อมูลระหว่างแพลตฟอร์มการมีส่วนร่วมของลูกค้าและแพลตฟอร์มการวิเคราะห์ เช่น Informatica, Cloudera และ Knowesis Sift",
+                "ปรับปรุงคำสั่ง SQL เพื่อดึงข้อมูลลูกค้าเป้าหมายของแคมเปญจากแพลตฟอร์มการวิเคราะห์อย่างมีประสิทธิภาพ เพื่อลดเวลาในการดึงข้อมูลและทำให้การดำเนินแคมเปญรวดเร็วยิ่งขึ้น",
+                "พัฒนาสรุปรายงานแคมเปญ เช่น อัตราการเปิดอีเมล อัตราการคลิกผ่าน ข้อเสนอแคมเปญ และสถานะระบบอัตโนมัติ",
+                "ปรับปรุงเทมเพลตอีเมลและหน้าแลนดิ้งเพจโดยใช้ HTML, CSS, JavaScript และ Salesforce AMPScript เพื่อเพิ่มการตอบสนองและความเข้ากันได้บนอุปกรณ์และโปรแกรมอีเมลที่ทันสมัย",
+                "ริเริ่มแผนฉุกเฉินเชิงรุกเพื่อรับมือกับช่วงเวลาการบำรุงรักษาของ Marketing Cloud เพื่อให้แน่ใจว่าแคมเปญการตลาดที่สำคัญและระบบอัตโนมัติของการไหลของข้อมูลจะไม่หยุดชะงัก"
+            ]
+        },
+        {
+            "title": "นักพัฒนาเว็บ ผู้ดูแลระบบ และผู้สร้างเนื้อหา",
+            "company": "ByteSide.one",
+            "duration": "กันยายน 2564 - กันยายน 2566",
+            "description": [
+                "ก่อตั้งสื่อข่าวเทคโนโลยี แกดเจ็ต และเกม ซึ่งมีผู้เข้าชมเว็บไซต์ 125,000 ครั้ง และมีการแสดงผลโพสต์บน Facebook 400,000 ครั้งต่อเดือน",
+                "ออกแบบและติดตั้งโครงสร้างพื้นฐานเว็บไซต์ที่ปรับขนาดได้โดยใช้ WordPress, Cloudflare, AWS Lightsail และ AWS CloudFront เพื่อให้แน่ใจว่าการส่งมอบเนื้อหาและความปลอดภัยเป็นไปอย่างเหมาะสมที่สุด",
+                "ดำเนินกลยุทธ์การสร้างรายได้จากเนื้อหาหลายช่องทาง รวมถึง Google AdSense และการตลาดแบบพันธมิตรผ่านสื่อและเครือข่ายพันธมิตรหลายแห่ง เพื่อให้แน่ใจว่ารูปแบบธุรกิจของสื่อมีความยั่งยืน"
+            ]
+        },
+        {
+            "title": "นักศึกษาสหกิจศึกษา",
+            "company": "EssilorLuxottica",
+            "duration": "พฤษภาคม 2562 - พฤศจิกายน 2562",
+            "description": [
+                "พัฒนาเวิร์กโฟลว์การอนุมัติ ซึ่งสร้างขึ้นใน Google Sheets โดยใช้ Google Apps Script (ภาษาที่ใช้ JavaScript) ซึ่งช่วยลดต้นทุนและปรับปรุงเวิร์กโฟลว์การขออนุมัติของ Essilor Shared Service",
+                "รวบรวมความต้องการทางธุรกิจจากผู้ใช้และผู้ดูแล",
+                "ประสานงานกับทีม Master Data Management (MDM) เพื่อบำรุงรักษาบริการ",
+                "ปัจจุบันเวิร์กโฟลว์การอนุมัติถูกใช้ในแผนกขอเบิกและทีมจัดซื้อไอทีของ Essilor Shared Service",
+                "แบ่งปันความรู้และสร้างเอกสารสำหรับเวิร์กโฟลว์การอนุมัติ",
+                "นอกจากนี้ยังพัฒนารายงานการขจัดข้อมูลซ้ำซ้อนและการทำความสะอาดข้อมูลโดยใช้ OracleSQL และ PL/SQL ซึ่งช่วยปรับปรุงคุณภาพข้อมูลซัพพลายเออร์ทั่วโลกของ Essilor",
+                "พัฒนาเวิร์กโฟลว์การอนุมัติโดยใช้ Google Apps Script (ภาษาที่ใช้ JavaScript), Google Sheets, Google Forms และ Gmail",
+                "พัฒนารายงานการซ้ำซ้อนโดยใช้ OracleSQL และ PL/SQL และนำไปใช้กับ Oracle ERP",
+                "สอน OracleSQL และ Git ให้กับทีม",
+                "สร้างเอกสารสำหรับรายงานการซ้ำซ้อน"
+            ]
+        }
+    ],
+    "certifications": [
+        {
+            "title": "Badge 1: Data Warehousing Workshop",
+            "skills": [
+                "Snowflake",
+                "Data Engineering",
+                "SQL",
+                "Data Modeling",
+                "ETL Processes"
+            ]
+        },
+        {
+            "title": "Building Language Models on AWS",
+            "skills": [
+                "Large Language Models (LLM)",
+                "Amazon Web Services (AWS)",
+                "Deep Learning",
+                "AWS SageMaker",
+                "Retrieval-Augmented Generation"
+            ]
+        },
+        {
+            "title": "Foundations of Prompt Engineering",
+            "skills": [
+                "Prompt Engineering",
+                "Amazon Web Services (AWS)",
+                "AWS SageMaker",
+                "Generative AI",
+                "Large Language Models (LLM)"
+            ]
+        },
+        {
+            "title": "Introduction to Generative AI",
+            "skills": [
+                "Generative AI",
+                "Google Cloud Platform (GCP)",
+                "Vector Databases",
+                "Machine Learning",
+                "AI Ethics"
+            ]
+        },
+        {
+            "title": "Lightning Experience Reports & Dashboards Specialist Superbadge",
+            "skills": [
+                "Salesforce.com",
+                "Report Building",
+                "Dashboard Design",
+                "Data Visualization",
+                "Salesforce Analytics"
+            ]
+        },
+        {
+            "title": "Business Administration Specialist Superbadge",
+            "skills": [
+                "Salesforce.com",
+                "Business Administration",
+                "Process Automation",
+                "CRM Management",
+                "Data Security"
+            ]
+        },
+        {
+            "title": "Flow Data Collections Specialist Superbadge",
+            "date": "June 2023",
+            "skills": [
+                "Salesforce Flow",
+                "Data Collection",
+                "Automation",
+                "Salesforce Integration",
+                "Data Management"
+            ]
+        },
+        {
+            "title": "Flow Elements and Resources Specialist Superbadge",
+            "skills": [
+                "Salesforce Flow",
+                "Resource Management",
+                "Process Builder",
+                "Workflow Automation",
+                "Salesforce Configuration"
+            ]
+        },
+        {
+            "title": "Flow Management Specialist Superbadge",
+            "skills": [
+                "Salesforce Flow",
+                "Process Automation",
+                "CRM Optimization",
+                "Data Handling",
+                "Salesforce Maintenance"
+            ]
+        },
+        {
+            "title": "React - The Complete Guide 2023 (incl. React Router & Redux)",
+            "skills": [
+                "React.js",
+                "Redux.js",
+                "JavaScript",
+                "Web Development",
+                "Front-End Architecture"
+            ]
+        },
+        {
+            "title": "MERN Stack Front To Back: Full Stack React, Redux & Node.js",
+            "skills": [
+                "MERN Stack",
+                "React.js",
+                "TypeScript",
+                "JavaScript",
+                "Node.js",
+                "Redux Thunk"
+            ]
+        },
+        {
+            "title": "Salesforce Marketing Cloud Administrator Certification",
+            "skills": [
+                "Salesforce Marketing Cloud",
+                "Email Marketing",
+                "Automation Studio",
+                "Journey Builder",
+                "Data Management"
+            ]
+        },
+        {
+            "title": "The Complete Salesforce Certified Administrator Course",
+            "skills": [
+                "Salesforce.com",
+                "Salesforce Administration",
+                "Data Management",
+                "User Management",
+                "Process Automation"
+            ]
+        },
+        {
+            "title": "Databases for Developers: Next Level",
+            "skills": [
+                "OracleSQL",
+                "SQL",
+                "PL/SQL",
+                "Database Optimization",
+                "Advanced Querying"
+            ]
+        },
+        {
+            "title": "Databases for Developers: Foundations",
+            "skills": [
+                "OracleSQL",
+                "SQL",
+                "Database Design",
+                "Querying",
+                "Data Management"
+            ]
+        }
+    ],
+    "volunteering": [
+        {
+            "title": "ที่ปรึกษาและกรรมการอาวุโส",
+            "year": "2561",
+            "description": [
+                "ที่ปรึกษาและกรรมการในการแข่งขัน 'PHP and JavaScript' ในงาน IT Open House 2018"
+            ]
+        },
+        {
+            "title": "สมาชิกทีมการศึกษา",
+            "year": "2560",
+            "description": [
+                "ฝึกสอนนักศึกษาใหม่ให้เรียนรู้วิธีการเขียนโค้ดด้วย Python3 และฝึกฝนทักษะการแก้ปัญหา",
+                "ริเริ่มหลักสูตร Python Pre-programming ของ IT KMITL บน YouTube ซึ่งเป็นหลักสูตร Python ออนไลน์ตามความต้องการ เพื่อมอบโอกาสในการเรียนรู้ที่ไม่สิ้นสุด"
+            ],
+            "link": {
+                "text": "หลักสูตร IT KMITL Python Pre-programming บน YouTube",
+                "href": "https://www.youtube.com/c/PreProgrammingITKMITL"
+            }
+        },
+        {
+            "title": "ผู้อำนวยการสอน",
+            "year": "2560",
+            "description": [
+                "สอนนักศึกษาใหม่เกี่ยวกับบริการคลาวด์โดยใช้ Amazon Web Service"
+            ]
+        }
+    ],
+    "languages": [
+        {
+            "name": "อังกฤษ",
+            "proficiency": "ความสามารถระดับมืออาชีพ",
+            "iconClass": "devicon-english-plain"
+        },
+        {
+            "name": "ไทย",
+            "proficiency": "ความสามารถระดับเจ้าของภาษา",
+            "iconClass": "devicon-thai-plain"
+        }
+    ],
+    "onlineProfiles": [
+        {
+            "name": "LinkedIn",
+            "url": "https://www.linkedin.com/in/kunanon/",
+            "iconClass": "devicon-linkedin-plain"
+        },
+        {
+            "name": "GitHub",
+            "url": "https://github.com/sagelga",
+            "iconClass": "devicon-github-plain"
+        },
+        {
+            "name": "Salesforce Trailblazer",
+            "url": "https://www.salesforce.com/trailblazer/sagelga",
+            "iconClass": "devicon-salesforce-plain"
+        }
+    ]
+}

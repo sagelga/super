@@ -11,17 +11,11 @@ import VolunteeringSection from "../components/home/VolunteeringSection";
 import LanguagesSection from "../components/home/LanguagesSection";
 
 // Import data for the home page sections
-import {
-  skills,
-  projects,
-  experiences,
-  certifications,
-  volunteering,
-  languages,
-} from "../data/homePageData";
+import { getHomePageData } from "../data/homePageData";
 
 // Define the Home page component
 export default function Home() {
+  const { skills, projects, experiences, certifications, volunteering, languages } = getHomePageData();
   return (
     <div className="container mx-auto">
       {/* Render the different sections of the home page */}

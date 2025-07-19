@@ -32,6 +32,9 @@ const Navbar: React.FC = () => {
                     <Link href="/gallery" className="mr-4 hover:text-gray-300">
                         Gallery
                     </Link>
+                    <Link href="/learn" className="mr-4 hover:text-gray-300">
+                        Learn
+                    </Link>
                     <Link href="/docs" className="mr-4 hover:text-gray-300">
                         Docs
                     </Link>

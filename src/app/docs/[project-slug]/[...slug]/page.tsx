@@ -1,6 +1,3 @@
-// Set the runtime to 'edge' for server-side rendering
-export const runtime = 'edge';
-
 // DocDetailPage component to display a single documentation page
 export default function DocDetailPage() {
   return (
