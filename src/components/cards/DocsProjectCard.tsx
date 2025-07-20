@@ -3,9 +3,10 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { useTranslations } from 'next-intl';
 
 // Define the props interface for the DocsProjectCard component
-interface DocsProjectCardProps {
+export interface DocsProjectCardProps {
     title: string; // The title of the documentation project
     description: string; // A brief description of the project
     docsLink: string; // The link to the project's documentation page
@@ -14,6 +15,7 @@ interface DocsProjectCardProps {
 
 // DocsProjectCard functional component
 const DocsProjectCard: React.FC<DocsProjectCardProps> = ({ title, description, docsLink, imageUrl }) => {
+    const t = useTranslations('common');
     // State to handle image loading errors
     const [imageError, setImageError] = useState(false);
 
@@ -33,7 +35,7 @@ const DocsProjectCard: React.FC<DocsProjectCardProps> = ({ title, description, d
                     />
                 ) : (
                     <div className="w-full h-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center text-gray-500 dark:text-gray-400">
-                        No Image
+                        {t('no_image_available')}
                     </div>
                 )}
             </div>
@@ -44,7 +46,7 @@ const DocsProjectCard: React.FC<DocsProjectCardProps> = ({ title, description, d
             </div>
             {/* Call to action section */}
             <div className="mt-4 flex items-center p-6 pt-0 font-semibold text-blue-600 group-hover:underline dark:text-blue-400">
-                Read Documentation
+                {t('read_documentation')}
                 <svg className="ml-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
             </div>
         </Link>

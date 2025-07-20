@@ -1,10 +1,10 @@
 import React from 'react';
 import Image from 'next/image';
-import { useTranslation } from 'react-i18next';
+import { useTranslations } from 'next-intl';
 
 // HeroSection functional component
 const HeroSection: React.FC = () => {
-    const { t } = useTranslation('home');
+    const t = useTranslations('home');
     return (
         <section
             className="relative min-h-screen flex items-center justify-center bg-cover bg-center text-white"

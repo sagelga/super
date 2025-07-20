@@ -1,6 +1,6 @@
 import React from 'react';
 import BlogPostCard from '@/components/cards/BlogPostCard'; // Import BlogPostCard component
-
+import { useTranslations } from 'next-intl';
 import { Post } from '@/types/blog'; // Import Post type definition
 
 // Define the props interface for the PostGrid component
@@ -11,9 +11,11 @@ interface PostGridProps {
 
 // PostGrid functional component responsible for displaying a grid of blog posts
 const PostGrid: React.FC<PostGridProps> = ({ posts, isFeatured }) => {
-    // If there are no posts, display a message
+    const t = useTranslations('common');
+
+    // If there are no posts, display a message that says the blog post not found.
     if (!posts || posts.length === 0) {
-        return <p>No blog posts found.</p>;
+        return <p>{t('blog.no_posts_found')}</p>;
     }
 
     if (isFeatured) {

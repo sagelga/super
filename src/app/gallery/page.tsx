@@ -5,6 +5,7 @@ import React, { useState } from 'react';
 import ImageCard from '@/components/cards/ImageCard';
 import GalleryGrid from '@/components/gallery/GalleryGrid';
 import Lightbox from '@/components/gallery/Lightbox';
+import { useTranslations } from 'next-intl';
 
 // Define the structure of an image item
 interface ImageItem {
@@ -16,13 +17,14 @@ interface ImageItem {
 
 // Define the GalleryPage component
 const GalleryPage: React.FC = () => {
+    const t = useTranslations('common');
     // State to keep track of the currently selected image for the lightbox
     const [selectedImage, setSelectedImage] = useState<ImageItem | null>(null);
 
     // Generate an array of 20 placeholder images
     const images: ImageItem[] = [...Array(20).keys()].map((index) => ({
         src: `https://picsum.photos/seed/${index}/1200/800`, // Landscape images
-        alt: `Gallery image ${index + 1}`,
+        alt: t('gallery.image_alt', { index: index + 1 }),
         width: 1200,
         height: 800,
     }));
@@ -40,7 +42,7 @@ const GalleryPage: React.FC = () => {
     // Render the GalleryPage component
     return (
         <div className="px-4 py-4">
-            <h1 className="text-4xl font-bold text-center mb-8">Gallery</h1>
+            <h1 className="text-4xl font-bold text-center mb-8">{t('gallery.title')}</h1>
             {/* Grid layout for the gallery images */}
             <GalleryGrid>
                 {/* Map through the images array and render an ImageCard for each */}

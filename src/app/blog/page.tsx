@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, useMemo } from 'react';
-import { useTranslation } from 'react-i18next';
+import { useTranslations } from 'next-intl';
 
 import FilterBar from '@/components/blog/FilterBar';
 import PostGrid from '@/components/blog/PostGrid';
@@ -9,7 +9,7 @@ import PostGrid from '@/components/blog/PostGrid';
 import { Post } from '@/types/blog';
 
 const BlogPage: React.FC = () => {
-    const { t } = useTranslation('common');
+    const t = useTranslations('common');
     // State variables for managing blog posts, filters, and UI status
     const [featuredPosts, setFeaturedPosts] = useState<Post[]>([]);
     const [otherBlogPosts, setOtherBlogPosts] = useState<Post[]>([]);

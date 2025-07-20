@@ -1,0 +1,91 @@
+{
+    "greeting": "你好",
+    "blog": {
+        "search_placeholder": "搜索文章...",
+        "loading_posts": "正在加载博客文章...",
+        "error_loading_posts": "错误: {{message}}",
+        "featured_posts_title": "特色文章",
+        "other_posts_title": "其他文章",
+        "previous_button": "上一页",
+        "next_button": "下一页",
+        "page_of": "第 {{currentPage}} 页，共 {{totalPages}} 页",
+        "no_posts_found": "未找到博客文章。",
+        "all_categories": "全部",
+        "table_of_contents": "目录"
+    },
+    "footer": {
+        "copyright": "© 2019-{{year}} 由 {{author}} 用 ❤️ 建造",
+        "back_to_top": "回到顶部",
+        "english": "英语",
+        "thai": "泰语",
+        "chinese": "中文",
+        "japanese": "日语",
+        "sitemap": {
+            "kunanon_srisuntiroj": "Kunanon Srisuntiroj",
+            "home": "主页",
+            "about": "关于",
+            "skills": "技能",
+            "experience": "经验",
+            "certifications": "认证",
+            "projects": "项目",
+            "todoist_notion_sync": "Todoist Notion 同步",
+            "learn_with_sagelga": "与 Sagelga 一起学习",
+            "documentation_website": "文档网站",
+            "byteside_one": "Byteside One",
+            "the_sunny_side_publication": "The Sunny Side 出版物",
+            "connect": "联系",
+            "linkedin": "领英",
+            "github": "GitHub",
+            "salesforce_trailblazer": "Salesforce 开拓者"
+        }
+    },
+    "github_label": "GitHub",
+    "demo_label": "演示",
+    "metadata": {
+        "title": "Kunanon Srisuntiroj | 全栈开发者与云爱好者",
+        "description": "Kunanon Srisuntiroj，一位专注于云技术、Web 开发和开源贡献的全栈开发者。",
+        "site_name": "Kunanon Srisuntiroj 个人作品集",
+        "image_alt": "Kunanon Srisuntiroj 个人作品集横幅"
+    },
+    "docs": {
+        "sidebar_title": "文档"
+    },
+    "navbar": {
+        "name": "Kunanon Srisuntiroj",
+        "home": "主页",
+        "blog": "博客",
+        "gallery": "画廊",
+        "learn": "学习",
+        "docs": "文档",
+        "experience": "经验",
+        "certifications": "认证",
+        "projects": "项目",
+        "volunteering": "志愿服务"
+    },
+    "breadcrumb": {
+        "home": "主页",
+        "blog": "博客",
+        "gallery": "画廊",
+        "docs": "文档",
+        "experience": "经验",
+        "certifications": "认证",
+        "volunteering": "志愿服务",
+        "projects": "项目",
+        "privacy_policy": "隐私政策",
+        "terms_of_service": "服务条款"
+    },
+    "not_found": {
+        "title": "页面未找到",
+        "description": "您要查找的页面可能已被删除、更改名称或暂时不可用。",
+        "go_home": "返回主页"
+    },
+    "gallery": {
+        "title": "画廊",
+        "image_alt": "画廊图片 {{index}}"
+    },
+    "no_image_available": "无图片",
+    "read_documentation": "阅读文档",
+    "site": {
+        "name": "Kunanon Srisuntiroj 个人作品集"
+    }
+}

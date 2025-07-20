@@ -1,5 +1,5 @@
 import React from 'react';
-import { useTranslation } from 'react-i18next';
+import { useTranslations } from 'next-intl';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, A11y, Grid } from 'swiper/modules';
 import { getIconClass } from '@/utils/iconMapping';
@@ -17,7 +17,7 @@ interface SkillsListProps {
 
 // SkillsList functional component
 const SkillsList: React.FC<SkillsListProps> = ({ skills }) => {
-    const { t } = useTranslation('home');
+    const t = useTranslations('home');
     return (
         <section className="py-16 bg-gray-50 dark:bg-gray-900">
             <div className="container mx-auto px-4">

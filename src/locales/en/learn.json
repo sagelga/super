@@ -1,0 +1,95 @@
+{
+    "hero": {
+        "title": "Personalized Tech Education: Your Path to Mastery Starts Here.",
+        "description": "Discover tailored 1-on-1 teaching in Python, SQL, TypeScript, Notion, and more. I guide curious minds of all ages to unlock their full potential.",
+        "explore_paths": "Explore Learning Paths",
+        "connect_with_me": "Connect with Me"
+    },
+    "why_choose_path": {
+        "title": "Why Choose This Path?",
+        "introduction": "My approach to teaching is centered on your unique learning style. I provide hands-on, project-based guidance, making complex topics accessible and enjoyable for every learner, from young beginners to seasoned professionals.",
+        "young_learners_title": "For Young Learners: Ignite Passion",
+        "young_learners_description": "Engaging and interactive sessions designed to build foundational tech skills and foster a love for learning.",
+        "adult_learners_title": "For Adult Learners: Accelerate Growth",
+        "adult_learners_description": "Practical, in-depth mentorship to enhance your skills, solve real-world problems, and advance your career."
+    },
+    "discovery_paths": {
+        "title": "Our Discovery Paths",
+        "skills": [
+            {
+                "title": "Python Fundamentals Path",
+                "description": "A guided journey through the core concepts of Python, with practical exercises and real-world applications.",
+                "benefits": ["Master Python basics", "Build simple scripts", "Understand data structures"],
+                "audience": "Young Learners & Adults"
+            },
+            {
+                "title": "SQL Database Essentials",
+                "description": "Learn to design, query, and manage relational databases effectively.",
+                "benefits": ["Write complex SQL queries", "Database design principles", "Data manipulation"],
+                "audience": "Adult Learners"
+            },
+            {
+                "title": "TypeScript Web Development",
+                "description": "Build robust and scalable web applications using TypeScript and modern frameworks.",
+                "benefits": ["Strongly-typed JavaScript", "Frontend framework integration", "Scalable code architecture"],
+                "audience": "Adult Learners"
+            },
+            {
+                "title": "Notion Productivity & Organization",
+                "description": "Unlock Notion's full potential for personal organization, project management, and team collaboration.",
+                "benefits": ["Customizable workspaces", "Database management in Notion", "Workflow automation"],
+                "audience": "All Learners"
+            },
+            {
+                "title": "HTML & CSS: Building Blocks Path",
+                "description": "Start your web development journey by mastering the foundational languages of the internet.",
+                "benefits": ["Structure web content", "Style web pages", "Responsive design basics"],
+                "audience": "Young Learners & Adults"
+            },
+            {
+                "title": "React.js: Component Design Showcase",
+                "description": "Dive into React to build interactive and dynamic user interfaces.",
+                "benefits": ["Component-based architecture", "State management", "Hooks and functional components"],
+                "audience": "Adult Learners"
+            },
+            {
+                "title": "Git & GitHub: The Developer's Blueprint",
+                "description": "Learn essential version control for collaborative coding and project management.",
+                "benefits": ["Track code changes", "Collaborate with teams", "Manage project versions"],
+                "audience": "All Learners"
+            }
+        ],
+        "learn_more": "Learn More"
+    },
+    "how_journey_works": {
+        "title": "How the Journey Works",
+        "step1_title": "Identify Your Path",
+        "step1_description": "Explore the diverse learning paths available and pinpoint the skills you want to master.",
+        "step2_title": "Connect with Me",
+        "step2_description": "Reach out via our contact form to discuss your goals and schedule an introductory chat.",
+        "step3_title": "Begin Your Learning",
+        "step3_description": "Start your personalized 1-on-1 sessions and embark on your journey to expertise!"
+    },
+    "success_stories": {
+        "title": "Success Stories from the Path",
+        "testimonial1_text": "Learning Python with [Your Name] was incredible! The lessons were so clear and fun, and I built my first game. Highly recommend for kids!",
+        "testimonial1_author": "- Alex (Age 12)",
+        "testimonial2_text": "I needed to pick up TypeScript for a new role, and [Your Name]'s guidance was invaluable. The personalized approach helped me grasp complex concepts quickly. A true expert!",
+        "testimonial2_author": "- Sarah L. (Software Engineer)"
+    },
+    "common_questions": {
+        "title": "Common Questions on the Path",
+        "q1_title": "What is the typical session format?",
+        "q1_description": "Sessions are typically 1-on-1, conducted online via video call, and are highly interactive with a focus on hands-on coding and problem-solving.",
+        "q2_title": "Can I customize my learning path?",
+        "q2_description": "Absolutely! While we have suggested paths, I work with each student to tailor the curriculum to their specific goals and interests.",
+        "q3_title": "What age groups do you teach?",
+        "q3_description": "I teach both young learners (typically 8+) and adults. My teaching style adapts to suit the age and experience level of the student."
+    },
+    "call_to_action": {
+        "title": "Ready to Start Your Journey?",
+        "description1": "Take the first step towards mastering new skills. I'm here to guide you.",
+        "description2": "Leave your contact details in the form below, and I'll get back to you to discuss your learning goals.",
+        "button_text": "Connect with Me Now"
+    }
+}

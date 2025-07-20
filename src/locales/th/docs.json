@@ -1,0 +1,68 @@
+{
+    "docs_page_title": "เอกสารประกอบที่ครอบคลุม",
+    "docs_page_description": "สำรวจคู่มือโดยละเอียด, การอ้างอิง API และข้อมูลเชิงลึกของโครงการสำหรับงานทั้งหมดของฉัน",
+    "projects_documentation_title": "เอกสารประกอบโครงการ",
+    "projects": [
+        {
+            "title": "Todoist Notion Sync",
+            "description": "เอกสารสำหรับโครงการ Todoist Notion Sync ซึ่งให้รายละเอียดการตั้งค่าและการใช้งาน"
+        },
+        {
+            "title": "Super",
+            "description": "เอกสารสำหรับเว็บไซต์พอร์ตโฟลิโอส่วนตัว Super ซึ่งครอบคลุมคุณสมบัติและการพัฒนา"
+        },
+        {
+            "title": "Superbrain",
+            "description": "เอกสาร API สำหรับ Superbrain ซึ่งให้รายละเอียดปลายทางและโครงสร้างข้อมูล"
+        },
+        {
+            "title": "Learn with sagelga",
+            "description": "คู่มือและแหล่งข้อมูลสำหรับการเรียนรู้ Python และ SQL บนแพลตฟอร์ม Learn with sagelga"
+        },
+        {
+            "title": "Documentation Website",
+            "description": "เอกสารสำหรับเว็บไซต์เอกสารประกอบเอง ซึ่งอธิบายโครงสร้างและวิธีการมีส่วนร่วม"
+        },
+        {
+            "title": "Byteside.one",
+            "description": "ข้อมูลเกี่ยวกับ Byteside.one สิ่งพิมพ์ด้านเทคโนโลยี เกม และข่าวสาร"
+        },
+        {
+            "title": "The Sunny Side Publication",
+            "description": "รายละเอียดเกี่ยวกับสิ่งพิมพ์ The Sunny Side บน Medium เนื้อหาและประวัติ"
+        },
+        {
+            "title": "Approval Workflow on Google Apps Script",
+            "description": "เอกสารสำหรับเวิร์กโฟลว์การอนุมัติอัตโนมัติที่สร้างด้วย Google Apps Script"
+        },
+        {
+            "title": "Essilor Asia Supplier Deduplication Report",
+            "description": "เอกสารสำหรับสคริปต์ Oracle SQL และ PL/SQL ที่ใช้สำหรับการลบข้อมูลซ้ำของซัพพลายเออร์"
+        },
+        {
+            "title": "Data Analytics on Body Fat",
+            "description": "เอกสารสำหรับโครงการวิเคราะห์ข้อมูลไขมันในร่างกายโดยใช้ IBM SPSS Statistics"
+        },
+        {
+            "title": "Lecture sharing System (Oh Sheet!)",
+            "description": "เอกสารสำหรับระบบแบ่งปันการบรรยาย 'Oh Sheet!'"
+        },
+        {
+            "title": "Online Space Reservation System",
+            "description": "เอกสารสำหรับระบบจองพื้นที่ออนไลน์"
+        },
+        {
+            "title": "Thai restaurant analysis",
+            "description": "เอกสารสำหรับการวิเคราะห์ร้านอาหารไทยในสหรัฐอเมริกา"
+        },
+        {
+            "title": "Trash Melody",
+            "description": "เอกสารสำหรับเกม Java ที่ได้รับแรงบันดาลใจจาก OSU! 'Trash Melody'"
+        },
+        {
+            "title": "Point of Sales (POS) System",
+            "description": "เอกสารสำหรับระบบ Point-of-Sale (POS) ที่ครอบคลุมซึ่งสร้างด้วย C"
+        }
+    ],
+    "doc_detail_page_title": "หน้ารายละเอียดเอกสาร"
+}

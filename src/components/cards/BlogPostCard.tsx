@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { useTranslations } from 'next-intl';
 import { Post } from '@/types/blog';
 
 // Define the props interface for the BlogPostCard component
@@ -16,6 +17,7 @@ interface BlogPostCardProps extends Post {
 
 // BlogPostCard functional component
 const BlogPostCard: React.FC<BlogPostCardProps> = ({ title, excerpt, date, primary_tag, slug, imageUrl, isLarge = false, isCompact = false, isFeatured = false }) => {
+    const t = useTranslations('common');
     // State to handle image loading errors
     const [imageError, setImageError] = useState(false);
 
@@ -29,7 +31,7 @@ const BlogPostCard: React.FC<BlogPostCardProps> = ({ title, excerpt, date, prima
                         <Image src={imageUrl} alt={title} layout="fill" objectFit="cover" className="transition-transform duration-300 group-hover:scale-105" onError={() => setImageError(true)} />
                     ) : (
                         <div className="w-full h-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center text-gray-500 dark:text-gray-400 text-xs">
-                            No Image
+                            {t('no_image_available')}
                         </div>
                     )}
                 </div>
@@ -58,7 +60,7 @@ const BlogPostCard: React.FC<BlogPostCardProps> = ({ title, excerpt, date, prima
                     <Image src={imageUrl} alt={title} layout="fill" objectFit="cover" className="transition-transform duration-300 group-hover:scale-105" onError={() => setImageError(true)} />
                 ) : (
                     <div className="w-full h-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center text-gray-500 dark:text-gray-400">
-                        No Image
+                        {t('no_image_available')}
                     </div>
                 )}
             </div>

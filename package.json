@@ -12,12 +12,10 @@
     "dependencies": {
         "devicon": "^2.16.0",
         "geist": "^1.4.2",
-        "i18next": "^25.3.2",
-        "i18next-http-backend": "^3.0.2",
         "next": "^15.3.5",
+        "next-intl": "^4.3.4",
         "react": "^19.0.0",
         "react-dom": "^19.0.0",
-        "react-i18next": "^15.6.0",
         "swiper": "^11.2.10"
     },
     "devDependencies": {

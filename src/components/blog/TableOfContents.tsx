@@ -1,5 +1,6 @@
 "use client";
 import React, { useEffect, useState } from 'react';
+import { useTranslations } from 'next-intl';
 
 // Define the props interface for the TableOfContents component
 interface TableOfContentsProps {
@@ -15,6 +16,7 @@ interface Heading {
 
 // TableOfContents functional component
 const TableOfContents: React.FC<TableOfContentsProps> = ({ content }) => {
+    const t = useTranslations('common');
     // State to store the extracted headings
     const [headings, setHeadings] = useState<Heading[]>([]);
 
@@ -28,7 +30,7 @@ const TableOfContents: React.FC<TableOfContentsProps> = ({ content }) => {
             // Generate a slug-like ID from the heading text if it doesn't already have one
             const id = heading.id || heading.textContent!.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-*|-*$/g, '');
             // Assign the generated/existing ID back to the heading element in the DOM (for linking)
-            heading.id = id; 
+            heading.id = id;
             return {
                 id,
                 text: heading.textContent || '',
@@ -41,7 +43,7 @@ const TableOfContents: React.FC<TableOfContentsProps> = ({ content }) => {
 
     return (
         <div className="py-4 sticky top-4">
-            <h3 className="text-lg font-semibold mb-4 text-gray-800 dark:text-gray-200">Table of Contents</h3>
+            <h3 className="text-lg font-semibold mb-4 text-gray-800 dark:text-gray-200">{t('blog.table_of_contents')}</h3>
             <ul>
                 {/* Map through the headings and render a list item for each */}
                 {headings.map((heading) => (

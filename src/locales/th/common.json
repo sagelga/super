@@ -1,0 +1,88 @@
+{
+    "greeting": "สวัสดี",
+    "blog": {
+        "search_placeholder": "ค้นหาบทความ...",
+        "loading_posts": "กำลังโหลดบทความ...",
+        "error_loading_posts": "ข้อผิดพลาด: {{message}}",
+        "featured_posts_title": "บทความแนะนำ",
+        "other_posts_title": "บทความอื่นๆ",
+        "previous_button": "ก่อนหน้า",
+        "next_button": "ถัดไป",
+        "page_of": "หน้า {{currentPage}} จาก {{totalPages}}",
+        "no_posts_found": "ไม่พบบทความ",
+        "all_categories": "ทั้งหมด",
+        "table_of_contents": "สารบัญ"
+    },
+    "footer": {
+        "copyright": "สงวนลิขสิทธิ์ © 2019-{{year}} สร้างด้วย ❤️ โดย {{author}}",
+        "back_to_top": "กลับไปด้านบน",
+        "english": "อังกฤษ",
+        "thai": "ไทย",
+        "chinese": "จีน",
+        "japanese": "ญี่ปุ่น",
+        "sitemap": {
+            "kunanon_srisuntiroj": "คุณานนต์ ศรีสันติโรจน์",
+            "home": "หน้าหลัก",
+            "about": "เกี่ยวกับ",
+            "skills": "ทักษะ",
+            "experience": "ประสบการณ์",
+            "certifications": "ใบรับรอง",
+            "projects": "โครงการ",
+            "todoist_notion_sync": "Todoist Notion Sync",
+            "learn_with_sagelga": "เรียนรู้กับ Sagelga",
+            "documentation_website": "เว็บไซต์เอกสาร",
+            "byteside_one": "Byteside One",
+            "the_sunny_side_publication": "สิ่งพิมพ์ The Sunny Side",
+            "connect": "เชื่อมต่อ",
+            "linkedin": "LinkedIn",
+            "github": "GitHub",
+            "salesforce_trailblazer": "Salesforce Trailblazer"
+        }
+    },
+    "github_label": "GitHub",
+    "demo_label": "Demo",
+    "metadata": {
+        "title": "คุณานนต์ ศรีสันติโรจน์ | Full-Stack Developer & Cloud Enthusiast",
+        "description": "คุณานนต์ ศรีสันติโรจน์ นักพัฒนา Full-Stack ที่เชี่ยวชาญด้านเทคโนโลยีคลาวด์, การพัฒนาเว็บ และการมีส่วนร่วมในโอเพนซอร์ส",
+        "site_name": "พอร์ตโฟลิโอคุณานนต์ ศรีสันติโรจน์",
+        "image_alt": "แบนเนอร์พอร์ตโฟลิโอคุณานนต์ ศรีสันติโรจน์"
+    },
+    "docs": {
+        "sidebar_title": "เอกสารประกอบ"
+    },
+    "navbar": {
+        "name": "คุณานนต์ ศรีสันติโรจน์",
+        "home": "หน้าหลัก",
+        "blog": "บล็อก",
+        "gallery": "แกลเลอรี",
+        "learn": "เรียนรู้",
+        "docs": "เอกสาร",
+        "experience": "ประสบการณ์",
+        "certifications": "ใบรับรอง",
+        "projects": "โครงการ",
+        "volunteering": "งานอาสา"
+    },
+    "breadcrumb": {
+        "home": "หน้าหลัก",
+        "blog": "บล็อก",
+        "gallery": "แกลเลอรี",
+        "docs": "เอกสาร",
+        "experience": "ประสบการณ์",
+        "certifications": "ใบรับรอง",
+        "volunteering": "งานอาสา",
+        "projects": "โครงการ",
+        "privacy_policy": "นโยบายความเป็นส่วนตัว",
+        "terms_of_service": "ข้อกำหนดในการให้บริการ"
+    },
+    "not_found": {
+        "title": "ไม่พบหน้า",
+        "description": "หน้าที่คุณกำลังมองหาอาจถูกลบ เปลี่ยนชื่อ หรือไม่พร้อมใช้งานชั่วคราว",
+        "go_home": "กลับสู่หน้าหลัก"
+    },
+    "gallery": {
+        "title": "แกลเลอรี",
+        "image_alt": "รูปภาพแกลเลอรี {{index}}"
+    },
+    "no_image_available": "ไม่มีรูปภาพ",
+    "read_documentation": "อ่านเอกสารประกอบ"
+}

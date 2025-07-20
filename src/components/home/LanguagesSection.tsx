@@ -1,5 +1,5 @@
 import React from 'react';
-import { useTranslation } from 'react-i18next';
+import { useTranslations } from 'next-intl';
 
 // Define the interface for a single language item
 interface LanguageItem {
@@ -15,7 +15,7 @@ interface LanguagesSectionProps {
 
 // LanguagesSection functional component
 const LanguagesSection: React.FC<LanguagesSectionProps> = ({ languages }) => {
-    const { t } = useTranslation('home');
+    const t = useTranslations('home');
     return (
         <section className="py-16 bg-gray-50 dark:bg-gray-900">
             <div className="container mx-auto px-4">

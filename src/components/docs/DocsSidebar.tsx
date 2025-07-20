@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import { useTranslations } from 'next-intl';
 
 
 // Define the interface for a single sidebar item
@@ -17,9 +18,11 @@ interface DocsSidebarProps {
 
 // DocsSidebar functional component responsible for rendering the documentation sidebar
 const DocsSidebar: React.FC<DocsSidebarProps> = ({ items, currentPath }) => {
+    const t = useTranslations('common');
+
     return (
         <aside className="w-64 bg-gray-100 p-4 rounded-lg shadow-md">
-            <h3 className="text-xl font-semibold mb-4">Documentation</h3>
+            <h3 className="text-xl font-semibold mb-4">{t('docs.sidebar_title')}</h3>
             <nav>
                 <ul>
                     {/* Map through the main sidebar items */}

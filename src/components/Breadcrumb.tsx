@@ -3,24 +3,26 @@
 import React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 
 
 const Breadcrumb: React.FC = () => {
   const pathname = usePathname();
+  const t = useTranslations('common');
   const pathSegments = pathname.split('/').filter(segment => segment !== '');
 
   // Define a mapping for display names (e.g., 'home' -> 'Home', 'blog' -> 'Blog')
   const displayNameMap: { [key: string]: string } = {
-    'home': 'Home',
-    'blog': 'Blog',
-    'gallery': 'Gallery',
-    'docs': 'Docs',
-    'experience': 'Experience',
-    'certifications': 'Certifications',
-    'volunteering': 'Volunteering',
-    'projects': 'Projects',
-    'privacy-policy': 'Privacy Policy',
-    'terms-of-service': 'Terms of Service',
+    'home': t('breadcrumb.home'),
+    'blog': t('breadcrumb.blog'),
+    'gallery': t('breadcrumb.gallery'),
+    'docs': t('breadcrumb.docs'),
+    'experience': t('breadcrumb.experience'),
+    'certifications': t('breadcrumb.certifications'),
+    'volunteering': t('breadcrumb.volunteering'),
+    'projects': t('breadcrumb.projects'),
+    'privacy-policy': t('breadcrumb.privacy_policy'),
+    'terms-of-service': t('breadcrumb.terms_of_service'),
     // Add more mappings as needed
   };
 
@@ -29,7 +31,7 @@ const Breadcrumb: React.FC = () => {
       <ol className="inline-flex items-center space-x-1 md:space-x-3">
         <li className="inline-flex items-center">
           <Link href="/" className="text-sm text-gray-700 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white">
-            Home
+            {t('breadcrumb.home')}
           </Link>
         </li>
         {pathSegments.map((segment, index) => {

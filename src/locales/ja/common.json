@@ -1,0 +1,91 @@
+{
+    "greeting": "こんにちは",
+    "blog": {
+        "search_placeholder": "記事を検索...",
+        "loading_posts": "ブログ記事を読み込み中...",
+        "error_loading_posts": "エラー: {{message}}",
+        "featured_posts_title": "おすすめ記事",
+        "other_posts_title": "その他の記事",
+        "previous_button": "前へ",
+        "next_button": "次へ",
+        "page_of": "{{currentPage}} / {{totalPages}} ページ",
+        "no_posts_found": "ブログ記事が見つかりませんでした。",
+        "all_categories": "すべて",
+        "table_of_contents": "目次"
+    },
+    "footer": {
+        "copyright": "© 2019-{{year}} {{author}} が ❤️ を込めて作成",
+        "back_to_top": "トップに戻る",
+        "english": "英語",
+        "thai": "タイ語",
+        "chinese": "中国語",
+        "japanese": "日本語",
+        "sitemap": {
+            "kunanon_srisuntiroj": "Kunanon Srisuntiroj",
+            "home": "ホーム",
+            "about": "について",
+            "skills": "スキル",
+            "experience": "経験",
+            "certifications": "認定",
+            "projects": "プロジェクト",
+            "todoist_notion_sync": "Todoist Notion 同期",
+            "learn_with_sagelga": "Sagelga と学ぶ",
+            "documentation_website": "ドキュメントウェブサイト",
+            "byteside_one": "Byteside One",
+            "the_sunny_side_publication": "The Sunny Side 出版物",
+            "connect": "接続",
+            "linkedin": "LinkedIn",
+            "github": "GitHub",
+            "salesforce_trailblazer": "Salesforce Trailblazer"
+        }
+    },
+    "github_label": "GitHub",
+    "demo_label": "デモ",
+    "metadata": {
+        "title": "Kunanon Srisuntiroj | フルスタック開発者＆クラウド愛好家",
+        "description": "Kunanon Srisuntirojは、クラウド技術、ウェブ開発、オープンソース貢献を専門とするフルスタック開発者です。",
+        "site_name": "Kunanon Srisuntiroj ポートフォリオ",
+        "image_alt": "Kunanon Srisuntiroj ポートフォリオバナー"
+    },
+    "docs": {
+        "sidebar_title": "ドキュメント"
+    },
+    "navbar": {
+        "name": "Kunanon Srisuntiroj",
+        "home": "ホーム",
+        "blog": "ブログ",
+        "gallery": "ギャラリー",
+        "learn": "学ぶ",
+        "docs": "ドキュメント",
+        "experience": "経験",
+        "certifications": "認定",
+        "projects": "プロジェクト",
+        "volunteering": "ボランティア"
+    },
+    "breadcrumb": {
+        "home": "ホーム",
+        "blog": "ブログ",
+        "gallery": "ギャラリー",
+        "docs": "ドキュメント",
+        "experience": "経験",
+        "certifications": "認定",
+        "volunteering": "ボランティア",
+        "projects": "プロジェクト",
+        "privacy_policy": "プライバシーポリシー",
+        "terms_of_service": "利用規約"
+    },
+    "not_found": {
+        "title": "ページが見つかりません",
+        "description": "お探しのページは、削除されたか、名前が変更されたか、一時的に利用できません。",
+        "go_home": "ホームに戻る"
+    },
+    "gallery": {
+        "title": "ギャラリー",
+        "image_alt": "ギャラリー画像 {{index}}"
+    },
+    "no_image_available": "画像なし",
+    "read_documentation": "ドキュメントを読む",
+    "site": {
+        "name": "Kunanon Srisuntiroj ポートフォリオ"
+    }
+}
