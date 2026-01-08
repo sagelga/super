@@ -1,19 +1,25 @@
 {
-    "$schema": "https://raw.githubusercontent.com/cloudflare/workerd/main/src/workerd/io/config.capnp.json",
+    "$schema": "./node_modules/wrangler/config-schema.json",
     "name": "super",
     "compatibility_date": "2025-07-07",
     "account_id": "9124272a5c3e327f2e943bf27c0910c4",
     "compatibility_flags": ["nodejs_compat"],
     "main": ".open-next/worker.js",
     "placement": {
-        "mode": "smart",
+        "mode": "smart"
     },
     "observability": {
         "enabled": true,
-        "head_sampling_rate": 1,
+        "head_sampling_rate": 1
     },
     "assets": {
         "directory": ".open-next/assets",
-        "binding": "ASSETS",
+        "binding": "ASSETS"
     },
+    "routes": [
+    {
+      "pattern": "sagelga.com",
+      "custom_domain": true
+    }
+  ]
 }
