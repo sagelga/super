@@ -19,7 +19,7 @@ const ImageCard: React.FC<ImageCardProps> = ({ src, alt, width, height, onClick 
         <div className="group relative cursor-pointer overflow-hidden rounded-xl" onClick={onClick}>
             {/* Show a loading pulse effect while the image is loading */}
             {isLoading && (
-                <div className="absolute inset-0 animate-pulse bg-gray-200 dark:bg-gray-700"></div>
+                <div className="absolute inset-0 animate-pulse bg-surface"></div>
             )}
             {/* Next.js Image component for optimized image display */}
             <Image
@@ -31,8 +31,8 @@ const ImageCard: React.FC<ImageCardProps> = ({ src, alt, width, height, onClick 
                 onLoad={() => setIsLoading(false)} // Set loading to false once image is loaded
             />
             {/* Overlay with alt text that appears on hover */}
-            <div className="bg-opacity-50 absolute inset-0 flex items-end bg-black p-4 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                <p className="text-lg font-semibold text-white">{alt}</p>
+            <div className="absolute inset-0 flex items-end bg-canvas/80 p-4 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                <p className="text-lg font-semibold text-cream">{alt}</p>
             </div>
         </div>
     );

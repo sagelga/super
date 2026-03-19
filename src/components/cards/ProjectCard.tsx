@@ -17,9 +17,9 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ title, description, githubLin
     const t = useTranslations('common');
 
     return (
-        <div className="flex h-full transform flex-col rounded-xl bg-white p-8 shadow-lg transition-shadow duration-300 ease-in-out hover:-translate-y-1 hover:shadow-xl dark:bg-gray-800">
+        <div className="flex h-full transform flex-col rounded-xl bg-white p-8 shadow-lg transition-shadow duration-300 ease-in-out hover:-translate-y-1 hover:shadow-xl dark:bg-surface">
             {/* Project Title */}
-            <h3 className="mb-3 text-2xl font-bold text-gray-900 dark:text-white">{title}</h3>
+            <h3 className="mb-3 text-2xl font-bold text-canvas dark:text-cream">{title}</h3>
             {/* Project Description */}
             <p className="mb-6 flex-grow leading-relaxed text-gray-700 dark:text-gray-300">{description}</p>
             {/* Action Buttons (GitHub and Demo) */}
@@ -28,7 +28,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ title, description, githubLin
                 {githubLink && (
                     <Link
                         href={githubLink}
-                        className="inline-flex items-center rounded-md border border-transparent bg-gray-700 px-5 py-2 text-base font-medium text-white shadow-sm hover:bg-gray-800 focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 focus:outline-none dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-400"
+                        className="inline-flex items-center rounded-md border border-transparent bg-surface px-5 py-2 text-base font-medium text-cream shadow-sm hover:bg-rim focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:outline-none dark:bg-rim dark:hover:bg-surface"
                         target="_blank"
                         rel="noopener noreferrer"
                     >
@@ -42,7 +42,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ title, description, githubLin
                 {demoLink && (
                     <Link
                         href={demoLink}
-                        className="inline-flex items-center rounded-md border border-transparent bg-blue-600 px-5 py-2 text-base font-medium text-white shadow-sm hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none dark:bg-blue-500 dark:hover:bg-blue-600 dark:focus:ring-blue-400"
+                        className="inline-flex items-center rounded-md border border-transparent bg-brand px-5 py-2 text-base font-medium text-cream shadow-sm hover:bg-brand-600 focus:ring-2 focus:ring-brand focus:ring-offset-2 focus:outline-none dark:bg-brand-400 dark:hover:bg-brand-500"
                         target="_blank"
                         rel="noopener noreferrer"
                     >

@@ -18,16 +18,16 @@ const FilterBar: React.FC<FilterBarProps> = ({ categories = [], onSelectCategory
             <div className="flex gap-2 justify-start whitespace-nowrap">
             {/* Button for 'All' category */}
             <button
-                className={`px-4 py-2 rounded-lg transition-colors duration-200 ${selectedCategory === 'All' ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-800 hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600'}`}
+                className={`px-4 py-2 rounded-lg border font-mono text-xs transition-colors duration-200 ${selectedCategory === 'All' ? 'bg-accent text-canvas border-accent' : 'bg-surface text-muted border-rim hover:border-accent hover:text-cream'}`}
                 onClick={() => onSelectCategory && onSelectCategory('All')}
             >
                 {t('blog.all_categories')}
             </button>
-            {/* Map through the categories and render a button for each */}
+            {/* Map through the categories and Render a button for each */}
             {categories.map((category) => (
                 <button
                     key={category}
-                    className={`px-4 py-2 rounded-lg transition-colors duration-200 ${selectedCategory === category ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-800 hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600'}`}
+                    className={`px-4 py-2 rounded-lg border font-mono text-xs transition-colors duration-200 ${selectedCategory === category ? 'bg-accent text-canvas border-accent' : 'bg-surface text-muted border-rim hover:border-accent hover:text-cream'}`}
                     onClick={() => onSelectCategory && onSelectCategory(category)}
                 >
                     {category}

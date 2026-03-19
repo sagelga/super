@@ -11,12 +11,12 @@ const DocsPage: React.FC = () => {
 
     // Render the DocsPage component
     return (
-        <div className="bg-gray-50 dark:bg-gray-900 min-h-screen">
+        <div className="bg-canvas min-h-screen">
             {/* Hero section with a title and description */}
-            <section className="py-20 text-center bg-linear-to-r from-blue-500 to-purple-600 text-white shadow-md">
+            <section className="py-20 text-center bg-surface shadow-md">
                 <div className="container mx-auto px-4">
-                    <h1 className="text-5xl font-extrabold mb-4">{t('docs_page_title')}</h1>
-                    <p className="text-xl opacity-90 max-w-2xl mx-auto">
+                    <h1 className="font-display text-5xl font-extrabold mb-4 text-cream">{t('docs_page_title')}</h1>
+                    <p className="text-xl max-w-2xl mx-auto text-muted">
                         {t('docs_page_description')}
                     </p>
                 </div>
@@ -25,7 +25,7 @@ const DocsPage: React.FC = () => {
             {/* Section to display the documentation projects */}
             <section className="py-16">
                 <div className="container mx-auto px-4">
-                    <h2 className="text-4xl font-extrabold text-center mb-12 text-gray-800 dark:text-white">{t('projects_documentation_title')}</h2>
+                    <h2 className="font-display text-4xl font-extrabold text-center mb-12 text-cream">{t('projects_documentation_title')}</h2>
                     {/* Grid layout for the documentation project cards */}
                     <DocsProjectGrid>
                         {/* Map through the docProjects array and render a card for each project */}

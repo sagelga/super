@@ -23,6 +23,7 @@ export default getRequestConfig(async ({ requestLocale }) => {
     const termsOfService = (
         await import(`./locales/${locale}/terms-of-service.json`)
     ).default;
+    const cookies = (await import(`./locales/${locale}/cookies.json`)).default;
 
     return {
         locale,
@@ -34,6 +35,7 @@ export default getRequestConfig(async ({ requestLocale }) => {
             metadata,
             "privacy-policy": privacyPolicy,
             "terms-of-service": termsOfService,
+            cookies,
         } as AbstractIntlMessages,
     };
 });

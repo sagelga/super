@@ -1,0 +1,36 @@
+{
+  "banner": {
+    "title": "我们重视您的隐私",
+    "description": "我们使用cookies来提升您的浏览体验、提供个性化内容并分析我们的流量。点击\"全部接受\"即表示您同意我们使用cookies。"
+  },
+  "buttons": {
+    "accept_all": "全部接受",
+    "reject_all": "全部拒绝",
+    "settings": "Cookie设置",
+    "save_preferences": "保存设置",
+    "cancel": "取消"
+  },
+  "settings": {
+    "title": "Cookie设置",
+    "description": "请在下方管理您的Cookie设置。必要的Cookie无法禁用，因为它们是网站正常运行所必需的。",
+    "close": "关闭设置",
+    "learn_more": "了解更多关于我们如何使用Cookie的信息，请参阅我们的"
+  },
+  "categories": {
+    "required": "必需",
+    "functional": {
+      "name": "功能性Cookies",
+      "description": "这些cookies对于网站的正常运行至关重要。它们启用核心功能，如安全、网络管理和可访问性。这些cookies无法禁用。"
+    },
+    "analytics": {
+      "name": "分析Cookies",
+      "description": "这些cookies帮助我们了解访问者如何与我们的网站互动，通过匿名收集和报告信息来帮助我们改善网站和您的体验。"
+    }
+  },
+  "links": {
+    "privacy_policy": "隐私政策"
+  },
+  "footer": {
+    "cookie_settings": "Cookie设置"
+  }
+}

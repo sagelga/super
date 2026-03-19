@@ -41,8 +41,8 @@ const GalleryPage: React.FC = () => {
 
     // Render the GalleryPage component
     return (
-        <div className="px-4 py-4">
-            <h1 className="text-4xl font-bold text-center mb-8">{t('gallery.title')}</h1>
+        <div className="min-h-screen px-4 py-4 bg-canvas">
+            <h1 className="text-4xl font-bold text-center mb-8 text-cream">{t('gallery.title')}</h1>
             {/* Grid layout for the gallery images */}
             <GalleryGrid>
                 {/* Map through the images array and render an ImageCard for each */}

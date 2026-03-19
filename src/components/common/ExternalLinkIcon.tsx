@@ -1,5 +1,5 @@
 import React from 'react';
-import type { ExternalLinkIconProps } from '@/types/common';
+import type { ExternalLinkIconProps } from '@/types';
 
 /**
  * External link icon component

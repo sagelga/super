@@ -17,13 +17,13 @@ const DocsContent: React.FC<DocsContentProps> = ({ content, prevPage, nextPage }
             <div className="mt-8 flex justify-between">
                 {/* Previous page link (conditionally rendered) */}
                 {prevPage && (
-                    <Link href={prevPage.path} className="text-blue-600 hover:underline">
+                    <Link href={prevPage.path} className="text-accent hover:underline">
                         &larr; {prevPage.title}
                     </Link>
                 )}
                 {/* Next page link (conditionally rendered) */}
                 {nextPage && (
-                    <Link href={nextPage.path} className="text-blue-600 hover:underline ml-auto">
+                    <Link href={nextPage.path} className="text-accent hover:underline ml-auto">
                         {nextPage.title} &rarr;
                     </Link>
                 )}

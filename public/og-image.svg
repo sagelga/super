@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1a1a;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2d2d2d;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="accentGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#f59e0b;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#fbbf24;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bgGradient)"/>
+  
+  <!-- Decorative elements -->
+  <circle cx="100" cy="100" r="200" fill="#f59e0b" opacity="0.05"/>
+  <circle cx="1100" cy="530" r="250" fill="#f59e0b" opacity="0.05"/>
+  
+  <!-- Grid pattern -->
+  <g stroke="#f59e0b" stroke-width="0.5" opacity="0.1">
+    <line x1="0" y1="100" x2="1200" y2="100"/>
+    <line x1="0" y1="200" x2="1200" y2="200"/>
+    <line x1="0" y1="300" x2="1200" y2="300"/>
+    <line x1="0" y1="400" x2="1200" y2="400"/>
+    <line x1="0" y1="500" x2="1200" y2="500"/>
+    <line x1="200" y1="0" x2="200" y2="630"/>
+    <line x1="400" y1="0" x2="400" y2="630"/>
+    <line x1="600" y1="0" x2="600" y2="630"/>
+    <line x1="800" y1="0" x2="800" y2="630"/>
+    <line x1="1000" y1="0" x2="1000" y2="630"/>
+  </g>
+  
+  <!-- Accent line -->
+  <rect x="100" y="240" width="80" height="6" rx="3" fill="url(#accentGradient)"/>
+  
+  <!-- Title -->
+  <text x="100" y="300" font-family="system-ui, -apple-system, sans-serif" font-size="56" font-weight="700" fill="#fafafa">
+    Kunanon Srisuntiroj
+  </text>
+  
+  <!-- Subtitle -->
+  <text x="100" y="360" font-family="system-ui, -apple-system, sans-serif" font-size="32" font-weight="400" fill="#a1a1aa">
+    Full-Stack Developer &amp; Cloud Enthusiast
+  </text>
+  
+  <!-- Divider -->
+  <line x1="100" y1="400" x2="400" y2="400" stroke="#f59e0b" stroke-width="2"/>
+  
+  <!-- Tagline -->
+  <text x="100" y="450" font-family="system-ui, -apple-system, sans-serif" font-size="20" font-weight="400" fill="#71717a">
+    Portfolio • Blog • Documentation
+  </text>
+  
+  <!-- Code bracket decoration -->
+  <text x="1050" y="520" font-family="monospace" font-size="120" font-weight="700" fill="#f59e0b" opacity="0.15">
+    {'}'}
+  </text>
+</svg>

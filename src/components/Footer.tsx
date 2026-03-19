@@ -1,11 +1,12 @@
 "use client";
 
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import Link from "next/link";
 import { useLocale, useTranslations } from "next-intl";
 import { usePathname } from "next/navigation";
 import Breadcrumb from "./Breadcrumb";
 import { useScrollToTop } from "@/hooks/useScrollToTop";
+import CookieSettingsModal from "./cookies/CookieSettingsModal";
 
 const CURRENT_YEAR = new Date().getFullYear();
 
@@ -18,9 +19,11 @@ interface LinkItem {
 
 const Footer: React.FC = () => {
     const t = useTranslations("common");
+    const tCookies = useTranslations("cookies");
     const pathname = usePathname();
     const lang = useLocale();
     const scrollToTop = useScrollToTop();
+    const [showCookieSettings, setShowCookieSettings] = useState(false);
 
     const handleLanguageChange = (
         event: React.ChangeEvent<HTMLSelectElement>,
@@ -172,7 +175,7 @@ const Footer: React.FC = () => {
                             <select
                                 value={lang}
                                 onChange={handleLanguageChange}
-                                className="cursor-pointer border border-rim bg-canvas px-3 py-1.5 text-xs text-muted transition-colors duration-200 focus:border-accent focus:outline-none"
+                                className="cursor-pointer border border-rim bg-canvas px-3 py-1.5 text-xs text-muted transition-all duration-200 focus:border-accent focus:text-accent focus:outline-none focus:ring-1 focus:ring-accent/30"
                             >
                                 <option value="en">
                                     {t("footer.english")}
@@ -189,10 +192,25 @@ const Footer: React.FC = () => {
                             >
                                 ↑ {t("footer.back_to_top")}
                             </button>
+
+                            <button
+                                onClick={() => setShowCookieSettings(true)}
+                                className="font-mono text-xs text-muted transition-colors duration-200 hover:text-accent"
+                            >
+                                ⚙ {tCookies("footer.cookie_settings")}
+                            </button>
                         </div>
                     </div>
                 </div>
             </footer>
+
+            {/* Cookie Settings Modal */}
+            {showCookieSettings && (
+                <CookieSettingsModal
+                    onClose={() => setShowCookieSettings(false)}
+                    onSave={() => setShowCookieSettings(false)}
+                />
+            )}
         </div>
     );
 };

@@ -6,7 +6,7 @@ import { useTranslations } from 'next-intl';
 import FilterBar from '@/components/blog/FilterBar';
 import PostGrid from '@/components/blog/PostGrid';
 
-import { Post } from '@/types/blog';
+import { Post } from '@/types';
 
 const BlogPage: React.FC = () => {
     const t = useTranslations('common');
@@ -96,21 +96,21 @@ const BlogPage: React.FC = () => {
 
     // Render the component's UI
     return (
-        <div className="bg-gray-50 dark:bg-gray-900 min-h-screen">
+        <div className="bg-canvas min-h-screen">
             <div className="container mx-auto px-4">
                 {/* Search input field */}
                 <div className="mb-8 relative">
                     <input
                         type="text"
                         placeholder={t('blog.search_placeholder')}
-                        className="w-full px-4 py-3 pl-10 border border-gray-300 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400"
+                        className="w-full px-4 py-3 pl-10 border border-rim rounded-lg focus:outline-none focus:ring-2 focus:ring-brand bg-surface text-cream placeholder-muted"
                         value={searchTerm}
                         onChange={handleSearchChange}
                     />
-                    <svg className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400 dark:text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                    <svg className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
                 </div>
                 {/* Conditional rendering based on loading and error states */}
-                {loading && <p>{t('blog.loading_posts')}</p>}
+                {loading && <p className="text-cream">{t('blog.loading_posts')}</p>}
                 {error && <p className="text-red-500">{t('blog.error_loading_posts', { message: error })}</p>}
                 {!loading && !error && (
                     <>
@@ -119,7 +119,7 @@ const BlogPage: React.FC = () => {
                         {/* Featured Posts */}
                         {filteredFeaturedPosts.length > 0 && (
                             <div className="mb-8">
-                                <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">{t('blog.featured_posts_title')}</h2>
+                                <h2 className="text-2xl font-bold text-cream mb-4">{t('blog.featured_posts_title')}</h2>
                                 <PostGrid posts={filteredFeaturedPosts} isFeatured={true} />
                             </div>
                         )}
@@ -127,7 +127,7 @@ const BlogPage: React.FC = () => {
                         {/* Other Blog Posts */}
                         {filteredOtherBlogPosts.length > 0 && (
                             <div className="mb-8">
-                                <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">{t('blog.other_posts_title')}</h2>
+                                <h2 className="text-2xl font-bold text-cream mb-4">{t('blog.other_posts_title')}</h2>
                                 <PostGrid posts={filteredOtherBlogPosts} />
                             </div>
                         )}
@@ -138,17 +138,17 @@ const BlogPage: React.FC = () => {
                                 <button
                                     onClick={() => handlePageChange(currentPage - 1)}
                                     disabled={currentPage === 1}
-                                    className="px-4 py-2 bg-gray-200 dark:bg-gray-700 rounded-lg disabled:opacity-50"
+                                    className="px-4 py-2 bg-surface text-cream rounded-lg disabled:opacity-50 hover:bg-rim transition-colors"
                                 >
                                     {t('blog.previous_button')}
                                 </button>
-                                <span>
+                                <span className="text-muted">
                                     {t('blog.page_of', { currentPage, totalPages })}
                                 </span>
                                 <button
                                     onClick={() => handlePageChange(currentPage + 1)}
                                     disabled={currentPage === totalPages}
-                                    className="px-4 py-2 bg-gray-200 dark:bg-gray-700 rounded-lg disabled:opacity-50"
+                                    className="px-4 py-2 bg-surface text-cream rounded-lg disabled:opacity-50 hover:bg-rim transition-colors"
                                 >
                                     {t('blog.next_button')}
                                 </button>

@@ -4,9 +4,39 @@
     "projects_documentation_title": "Projects Documentation",
     "projects": [
         {
+            "title": "Statuspage Pulse",
+            "description": "A real-time status page monitoring tool that displays system health and incident updates.",
+            "docsLink": "/docs/statuspage-pulse",
+            "imageUrl": ""
+        },
+        {
+            "title": "Mahjong Hands",
+            "description": "A mahjong hand calculator and validator for analyzing and scoring mahjong hands.",
+            "docsLink": "/docs/mahjong-hands",
+            "imageUrl": ""
+        },
+        {
             "title": "Todoist Notion Sync",
             "description": "Documentation for the Todoist Notion Sync project, detailing setup and usage.",
             "docsLink": "/docs/todoist-notion-sync",
+            "imageUrl": ""
+        },
+        {
+            "title": "Todoist to Cloudflare KV",
+            "description": "A workflow that syncs Todoist tasks to Cloudflare KV for fast, globally distributed access.",
+            "docsLink": "/docs/todoist-to-cloudflarekv",
+            "imageUrl": ""
+        },
+        {
+            "title": "Cloudflare KV to Notion",
+            "description": "A connector that transfers data from Cloudflare KV to Notion databases seamlessly.",
+            "docsLink": "/docs/cloudflarekv-to-notion",
+            "imageUrl": ""
+        },
+        {
+            "title": "Byteside Fetcher",
+            "description": "A fetcher service that retrieves blog posts from Notion and displays them on Byteside.one.",
+            "docsLink": "/docs/byteside-fetcher",
             "imageUrl": ""
         },
         {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useImageLoader } from '@/hooks/useImageLoader';
-import type { ImageWithFallbackProps } from '@/types/common';
+import type { ImageWithFallbackProps } from '@/types';
 
 /**
  * Image component with automatic fallback handling

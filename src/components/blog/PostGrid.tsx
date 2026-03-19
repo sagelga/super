@@ -1,7 +1,7 @@
 import React from 'react';
 import BlogPostCard from '@/components/cards/BlogPostCard'; // Import BlogPostCard component
 import { useTranslations } from 'next-intl';
-import { Post } from '@/types/blog'; // Import Post type definition
+import type { Post } from '@/types';
 
 // Define the props interface for the PostGrid component
 interface PostGridProps {

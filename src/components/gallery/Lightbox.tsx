@@ -13,7 +13,7 @@ const Lightbox: React.FC<LightboxProps> = ({ src, alt, onClose }) => {
     return (
         // Overlay that covers the entire screen, acting as the lightbox background
         <div
-            className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50"
+            className="fixed inset-0 bg-canvas/90 flex items-center justify-center z-50"
             onClick={onClose} // Close lightbox when clicking on the overlay
         >
             {/* Container for the image within the lightbox */}
@@ -22,7 +22,7 @@ const Lightbox: React.FC<LightboxProps> = ({ src, alt, onClose }) => {
                 <Image src={src} alt={alt} layout="intrinsic" width={1200} height={800} objectFit="contain" />
                 {/* Close button for the lightbox */}
                 <button
-                    className="absolute top-4 right-4 text-white text-2xl font-bold"
+                    className="absolute top-4 right-4 text-cream text-2xl font-bold hover:text-accent transition-colors"
                     onClick={onClose} // Close lightbox when clicking the button
                 >
                     &times; {/* Multiplication sign for close icon */}

@@ -21,8 +21,8 @@ const DocsSidebar: React.FC<DocsSidebarProps> = ({ items, currentPath }) => {
     const t = useTranslations('common');
 
     return (
-        <aside className="w-64 bg-gray-100 p-4 rounded-lg shadow-md">
-            <h3 className="text-xl font-semibold mb-4">{t('docs.sidebar_title')}</h3>
+        <aside className="w-64 bg-surface p-4 rounded-lg shadow-md">
+            <h3 className="font-display text-xl font-semibold mb-4 text-cream">{t('docs.sidebar_title')}</h3>
             <nav>
                 <ul>
                     {/* Map through the main sidebar items */}
@@ -30,7 +30,7 @@ const DocsSidebar: React.FC<DocsSidebarProps> = ({ items, currentPath }) => {
                         <li key={item.path} className="mb-2">
                             <Link
                                 href={item.path}
-                                className={`block hover:text-blue-600 ${currentPath === item.path ? 'font-bold text-blue-600' : ''
+                                className={`block hover:text-accent ${currentPath === item.path ? 'font-bold text-accent' : 'text-muted'
                                     }`}
                             >
                                 {item.title}
@@ -42,7 +42,7 @@ const DocsSidebar: React.FC<DocsSidebarProps> = ({ items, currentPath }) => {
                                         <li key={child.path} className="mb-1">
                                             <Link
                                                 href={child.path}
-                                                className={`block text-sm hover:text-blue-600 ${currentPath === child.path ? 'font-bold text-blue-600' : ''
+                                                className={`block text-sm hover:text-accent ${currentPath === child.path ? 'font-bold text-accent' : 'text-muted'
                                                     }`}
                                             >
                                                 {child.title}

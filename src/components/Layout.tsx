@@ -3,6 +3,7 @@
 import React from 'react';
 import Navbar from './Navbar';
 import Footer from './Footer';
+import CookieConsentBanner from './cookies/CookieConsentBanner';
 
 // Define the props interface for the Layout component
 interface LayoutProps {
@@ -16,6 +17,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             <Navbar />
             <main className="flex-grow pt-16">{children}</main>
             <Footer />
+            <CookieConsentBanner />
         </div>
     );
 };

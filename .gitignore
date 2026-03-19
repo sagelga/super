@@ -41,3 +41,32 @@ yarn-error.log*
 next-env.d.ts
 
 /.open-next/
+
+# Cloudflare Pages
+_functions/
+public/_headers
+public/_redirects
+
+# wrangler
+.wrangler/
+
+# build output
+build-output.txt
+.turbo/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# macOS
+.AppleDouble
+.LSOverride
+._*
+
+# OS
+Thumbs.db
+ehthumbs.db
+Desktop.ini

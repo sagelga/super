@@ -4,9 +4,39 @@
     "projects_documentation_title": "เอกสารประกอบโครงการ",
     "projects": [
         {
+            "title": "Statuspage Pulse",
+            "description": "เครื่องมือตรวจสอบสถานะแบบเรียลไทม์ที่แสดงสุขภาพของระบบและการอัปเดตเหตุการณ์",
+            "docsLink": "/docs/statuspage-pulse",
+            "imageUrl": ""
+        },
+        {
+            "title": "Mahjong Hands",
+            "description": "เครื่องมือคำนวณและตรวจสอบมือมาจองสำหรับการวิเคราะห์และให้คะแนนมือมาจอง",
+            "docsLink": "/docs/mahjong-hands",
+            "imageUrl": ""
+        },
+        {
             "title": "Todoist Notion Sync",
             "description": "เอกสารสำหรับโครงการ Todoist Notion Sync ซึ่งให้รายละเอียดการตั้งค่าและการใช้งาน",
             "docsLink": "/docs/todoist-notion-sync",
+            "imageUrl": ""
+        },
+        {
+            "title": "Todoist to Cloudflare KV",
+            "description": "เวิร์กโฟลว์ที่ซิงค์งานจาก Todoist ไปยัง Cloudflare KV เพื่อการเข้าถึงที่รวดเร็วและกระจายทั่วโลก",
+            "docsLink": "/docs/todoist-to-cloudflarekv",
+            "imageUrl": ""
+        },
+        {
+            "title": "Cloudflare KV to Notion",
+            "description": "ตัวเชื่อมต่อที่ถ่ายโอนข้อมูลจาก Cloudflare KV ไปยังฐานข้อมูล Notion อย่างราบรื่น",
+            "docsLink": "/docs/cloudflarekv-to-notion",
+            "imageUrl": ""
+        },
+        {
+            "title": "Byteside Fetcher",
+            "description": "บริการดึงข้อมูลที่ดึงโพสต์บล็อกจาก Notion และแสดงบน Byteside.one",
+            "docsLink": "/docs/byteside-fetcher",
             "imageUrl": ""
         },
         {

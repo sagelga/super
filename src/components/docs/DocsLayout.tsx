@@ -9,7 +9,7 @@ interface DocsLayoutProps {
 // DocsLayout functional component responsible for structuring documentation pages
 const DocsLayout: React.FC<DocsLayoutProps> = ({ mainContent, sidebar }) => {
     return (
-        <div className="flex flex-col lg:flex-row">
+        <div className="flex flex-col lg:flex-row bg-canvas min-h-screen">
             {/* Main content area */}
             <div className="flex-grow lg:w-3/4 p-8">
                 {mainContent}
