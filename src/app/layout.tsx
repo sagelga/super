@@ -1,13 +1,16 @@
 // Import necessary types and fonts from Next.js
 import type { Metadata } from "next";
-import { IBM_Plex_Sans_Thai, IBM_Plex_Mono } from "next/font/google";
+import {
+    IBM_Plex_Sans_Thai,
+    IBM_Plex_Mono,
+    IBM_Plex_Serif,
+} from "next/font/google";
 import "./globals.css";
 
 // Import the main layout component
 import Layout from "../components/Layout";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages, getTranslations } from "next-intl/server";
-
 
 // Configure the sans-serif font
 const sans = IBM_Plex_Sans_Thai({
@@ -25,28 +28,40 @@ const mono = IBM_Plex_Mono({
     display: "swap",
 });
 
+// Configure the serif font for display
+const serif = IBM_Plex_Serif({
+    variable: "--font-serif",
+    weight: ["400", "500", "600", "700"],
+    subsets: ["latin"],
+    display: "swap",
+});
 
 // Define the metadata for the website
-export async function generateMetadata({ params }: { params: { lang: string } }): Promise<Metadata> {
-    const t = await getTranslations({ locale: params.lang, namespace: 'metadata' });
+export async function generateMetadata({
+    params,
+}: {
+    params: Promise<{ lang?: string }>;
+}): Promise<Metadata> {
+    const { lang = "en" } = await params;
+    const t = await getTranslations({ locale: lang, namespace: "metadata" });
 
     return {
-        title: t('title'),
-        description: t('description'),
+        title: t("title"),
+        description: t("description"),
         openGraph: {
-            title: t('title'),
-            description: t('description'),
+            title: t("title"),
+            description: t("description"),
             url: "https://super.sagelga.workers.dev/",
-            siteName: t('site_name'),
+            siteName: t("site_name"),
             images: [
                 {
                     url: "https://super.sagelga.workers.dev/next.svg", // Replace with a relevant image for your site preview
                     width: 1200,
                     height: 630,
-                    alt: t('image_alt'),
+                    alt: t("image_alt"),
                 },
             ],
-            locale: params.lang === 'th' ? 'th_TH' : 'en_US',
+            locale: lang === "th" ? "th_TH" : "en_US",
             type: "website",
         },
     };
@@ -58,10 +73,9 @@ export default async function RootLayout({
     params,
 }: {
     children: React.ReactNode;
-    // You tell TypeScript that 'params' IS a Promise
-    params: Promise<{ lang: string }>;
+    params: Promise<{ lang?: string }>;
 }) {
-    const { lang } = await params;
+    const { lang = "en" } = await params;
 
     const messages = await getMessages();
 
@@ -73,7 +87,9 @@ export default async function RootLayout({
                     href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css"
                 />
             </head>
-            <body className={`${sans.variable} ${mono.variable} antialiased`}>
+            <body
+                className={`${sans.variable} ${mono.variable} ${serif.variable} antialiased`}
+            >
                 <NextIntlClientProvider messages={messages}>
                     <Layout>{children}</Layout>
                 </NextIntlClientProvider>

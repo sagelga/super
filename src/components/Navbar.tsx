@@ -1,69 +1,105 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
-import Link from 'next/link';
-import Image from 'next/image';
-import { useLocale, useTranslations } from 'next-intl';
+import React, { useState, useEffect } from "react";
+import Link from "next/link";
+import { useLocale, useTranslations } from "next-intl";
 
-
-
-// Navbar functional component
 const Navbar: React.FC = () => {
-    const t = useTranslations('common');
+    const t = useTranslations("common");
     const lang = useLocale();
     const [isHomeHovered, setIsHomeHovered] = useState(false);
+    const [scrolled, setScrolled] = useState(false);
+
+    useEffect(() => {
+        const handleScroll = () => setScrolled(window.scrollY > 40);
+        handleScroll(); // seed initial state
+        window.addEventListener("scroll", handleScroll, { passive: true });
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
 
     return (
-        <nav className="bg-gray-800 dark:bg-gray-900 p-4 text-white fixed w-full top-0 z-50 shadow-md">
-            <div className="container mx-auto flex justify-between items-center">
-                {/* Logo and Site Title */}
-                <Link href={`/${lang}`} className="text-xl font-bold flex items-center">
-                    <Image src="/globe.svg" alt="Website Icon" width={24} height={24} className="mr-2" />
-                    {t('navbar.name')}
-                </Link>
-                {/* Navigation Links */}
-                <div
-                    className="relative"
-                    onMouseEnter={() => setIsHomeHovered(true)}
-                    onMouseLeave={() => setIsHomeHovered(false)}
+        <nav
+            className={`fixed top-0 z-50 w-full transition-all duration-300 ${
+                scrolled ? "border-b border-rim bg-canvas" : "bg-transparent"
+            }`}
+        >
+            <div className="container mx-auto flex h-16 items-center justify-between px-8 lg:px-16">
+                {/* Logo */}
+                <Link
+                    href={`/${lang}`}
+                    className="font-mono text-sm tracking-[0.15em] text-cream uppercase transition-colors duration-200 hover:text-accent"
                 >
-                    <Link href={`/${lang}`} className="mr-4 hover:text-gray-300">
-                        {t('navbar.home')}
+                    {t("navbar.name")}
+                </Link>
+
+                {/* Nav links */}
+                <div className="flex items-center gap-8">
+                    <div
+                        className="relative"
+                        onMouseEnter={() => setIsHomeHovered(true)}
+                        onMouseLeave={() => setIsHomeHovered(false)}
+                    >
+                        <Link
+                            href={`/${lang}`}
+                            className="text-sm tracking-wide text-muted transition-colors duration-200 hover:text-cream"
+                        >
+                            {t("navbar.home")}
+                        </Link>
+                        {isHomeHovered && (
+                            <div className="absolute top-full left-1/2 mt-2 min-w-[180px] -translate-x-1/2 border border-rim bg-surface py-2 shadow-xl">
+                                <Link
+                                    href={`/${lang}/home/experience`}
+                                    className="block px-5 py-2 text-xs tracking-wide text-muted transition-colors duration-150 hover:bg-canvas hover:text-accent"
+                                >
+                                    {t("navbar.experience")}
+                                </Link>
+                                <Link
+                                    href={`/${lang}/home/certifications`}
+                                    className="block px-5 py-2 text-xs tracking-wide text-muted transition-colors duration-150 hover:bg-canvas hover:text-accent"
+                                >
+                                    {t("navbar.certifications")}
+                                </Link>
+                                <Link
+                                    href={`/${lang}/home/projects`}
+                                    className="block px-5 py-2 text-xs tracking-wide text-muted transition-colors duration-150 hover:bg-canvas hover:text-accent"
+                                >
+                                    {t("navbar.projects")}
+                                </Link>
+                                <Link
+                                    href={`/${lang}/home/volunteering`}
+                                    className="block px-5 py-2 text-xs tracking-wide text-muted transition-colors duration-150 hover:bg-canvas hover:text-accent"
+                                >
+                                    {t("navbar.volunteering")}
+                                </Link>
+                            </div>
+                        )}
+                    </div>
+                    <Link
+                        href={`/${lang}/blog`}
+                        className="text-sm tracking-wide text-muted transition-colors duration-200 hover:text-cream"
+                    >
+                        {t("navbar.blog")}
                     </Link>
-                </div>
-                <div>
-                    <Link href={`/${lang}/blog`} className="mr-4 hover:text-gray-300">
-                        {t('navbar.blog')}
+                    <Link
+                        href={`/${lang}/gallery`}
+                        className="text-sm tracking-wide text-muted transition-colors duration-200 hover:text-cream"
+                    >
+                        {t("navbar.gallery")}
                     </Link>
-                    <Link href={`/${lang}/gallery`} className="mr-4 hover:text-gray-300">
-                        {t('navbar.gallery')}
+                    <Link
+                        href={`/${lang}/learn`}
+                        className="text-sm tracking-wide text-muted transition-colors duration-200 hover:text-cream"
+                    >
+                        {t("navbar.learn")}
                     </Link>
-                    <Link href={`/${lang}/learn`} className="mr-4 hover:text-gray-300">
-                        {t('navbar.learn')}
-                    </Link>
-                    <Link href={`/${lang}/docs`} className="mr-4 hover:text-gray-300">
-                        {t('navbar.docs')}
+                    <Link
+                        href={`/${lang}/docs`}
+                        className="text-sm tracking-wide text-muted transition-colors duration-200 hover:text-cream"
+                    >
+                        {t("navbar.docs")}
                     </Link>
                 </div>
             </div>
-            {isHomeHovered && (
-                <div className="absolute top-full left-0 w-full bg-gray-700 dark:bg-gray-800 shadow-lg py-1 z-40"> {/* z-40 to be below main nav's z-50 */}
-                    <div className="container mx-auto flex justify-center space-x-8">
-                        <Link href={`/${lang}/home/experience`} className="px-4 py-2 text-sm text-white hover:bg-gray-600 dark:hover:bg-gray-700">
-                            {t('navbar.experience')}
-                        </Link>
-                        <Link href={`/${lang}/home/certifications`} className="px-4 py-2 text-sm text-white hover:bg-gray-600 dark:hover:bg-gray-700">
-                            {t('navbar.certifications')}
-                        </Link>
-                        <Link href={`/${lang}/home/projects`} className="px-4 py-2 text-sm text-white hover:bg-gray-600 dark:hover:bg-gray-700">
-                            {t('navbar.projects')}
-                        </Link>
-                        <Link href={`/${lang}/home/volunteering`} className="px-4 py-2 text-sm text-white hover:bg-gray-600 dark:hover:bg-gray-700">
-                            {t('navbar.volunteering')}
-                        </Link>
-                    </div>
-                </div>
-            )}
         </nav>
     );
 };

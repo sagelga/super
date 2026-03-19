@@ -1,133 +1,195 @@
-'use client';
+"use client";
 
-import React from 'react';
-import Link from 'next/link';
-import { useLocale, useTranslations } from 'next-intl';
-import { useRouter, usePathname } from 'next/navigation';
-import Breadcrumb from './Breadcrumb';
+import React, { useMemo } from "react";
+import Link from "next/link";
+import { useLocale, useTranslations } from "next-intl";
+import { usePathname } from "next/navigation";
+import Breadcrumb from "./Breadcrumb";
+import { useScrollToTop } from "@/hooks/useScrollToTop";
 
-// Define the interface for a link item, including optional icon properties
+const CURRENT_YEAR = new Date().getFullYear();
+
 interface LinkItem {
     name: string;
     href: string;
-    iconClass?: string; // Class for icon libraries (e.g., Devicon)
-    icon?: string; // SVG path for custom icons
+    iconClass?: string;
+    icon?: string;
 }
 
-
-// Footer functional component
 const Footer: React.FC = () => {
-    const t = useTranslations('common'); // Keep t for translations
-    const router = useRouter();
+    const t = useTranslations("common");
     const pathname = usePathname();
     const lang = useLocale();
+    const scrollToTop = useScrollToTop();
 
-    const handleLanguageChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const handleLanguageChange = (
+        event: React.ChangeEvent<HTMLSelectElement>,
+    ) => {
         const newLang = event.target.value;
-        const segments = pathname.split('/');
-        segments[1] = newLang; // Replace current locale segment with new one
-        const newPath = segments.join('/');
-        router.push(newPath);
-    };
-    // Define sitemap links categorized for display in the footer
-    const sitemapLinks: { [key: string]: LinkItem[] } = {
-        [t('footer.sitemap.kunanon_srisuntiroj')]: [
-            { name: t('footer.sitemap.home'), href: `/${lang}` },
-            { name: t('footer.sitemap.about'), href: `/${lang}/#about` },
-            { name: t('footer.sitemap.skills'), href: `/${lang}/#skills` },
-            { name: t('footer.sitemap.experience'), href: `/${lang}/#experience` },
-            { name: t('footer.sitemap.certifications'), href: `/${lang}/#certifications` },
-        ],
-        [t('footer.sitemap.projects')]: [
-            { name: t('footer.sitemap.todoist_notion_sync'), href: "#" }, // Placeholder for new project
-            { name: t('footer.sitemap.learn_with_sagelga'), href: "https://learn.sagelga.com" },
-            { name: t('footer.sitemap.documentation_website'), href: "https://docs.sagelga.com/" },
-            { name: t('footer.sitemap.byteside_one'), href: "https://byteside.one/" },
-            { name: t('footer.sitemap.the_sunny_side_publication'), href: "https://medium.com/the-sunny-side" },
-        ],
-        [t('footer.sitemap.connect')]: [
-            { name: t('footer.sitemap.linkedin'), href: "https://www.linkedin.com/in/kunanon/", iconClass: "devicon-linkedin-plain" },
-            { name: t('footer.sitemap.github'), href: "https://github.com/sagelga", iconClass: "devicon-github-plain" },
-            { name: t('footer.sitemap.salesforce_trailblazer'), href: "https://www.salesforce.com/trailblazer/sagelga", iconClass: "devicon-salesforce-plain" },
-        ],
+        // Strip current locale prefix to get the locale-free path
+        const localeFree = pathname.startsWith(`/${lang}`)
+            ? pathname.slice(`/${lang}`.length) || ""
+            : pathname;
+        // Hard navigate so the middleware re-initializes the locale context
+        window.location.href = `/${newLang}${localeFree}`;
     };
 
-    // Define legal links for the footer
+    const sitemapLinks: { [key: string]: LinkItem[] } = useMemo(
+        () => ({
+            [t("footer.sitemap.kunanon_srisuntiroj")]: [
+                { name: t("footer.sitemap.home"), href: `/${lang}` },
+                { name: t("footer.sitemap.about"), href: `/${lang}/#about` },
+                { name: t("footer.sitemap.skills"), href: `/${lang}/#skills` },
+                {
+                    name: t("footer.sitemap.experience"),
+                    href: `/${lang}/#experience`,
+                },
+                {
+                    name: t("footer.sitemap.certifications"),
+                    href: `/${lang}/#certifications`,
+                },
+            ],
+            [t("footer.sitemap.projects")]: [
+                { name: t("footer.sitemap.todoist_notion_sync"), href: "#" },
+                {
+                    name: t("footer.sitemap.learn_with_sagelga"),
+                    href: "https://learn.sagelga.com",
+                },
+                {
+                    name: t("footer.sitemap.documentation_website"),
+                    href: "https://docs.sagelga.com/",
+                },
+                {
+                    name: t("footer.sitemap.byteside_one"),
+                    href: "https://byteside.one/",
+                },
+                {
+                    name: t("footer.sitemap.the_sunny_side_publication"),
+                    href: "https://medium.com/the-sunny-side",
+                },
+            ],
+            [t("footer.sitemap.connect")]: [
+                {
+                    name: t("footer.sitemap.linkedin"),
+                    href: "https://www.linkedin.com/in/kunanon/",
+                    iconClass: "devicon-linkedin-plain",
+                },
+                {
+                    name: t("footer.sitemap.github"),
+                    href: "https://github.com/sagelga",
+                    iconClass: "devicon-github-plain",
+                },
+                {
+                    name: t("footer.sitemap.salesforce_trailblazer"),
+                    href: "https://www.salesforce.com/trailblazer/sagelga",
+                    iconClass: "devicon-salesforce-plain",
+                },
+            ],
+        }),
+        [t, lang],
+    );
+
     const legalLinks = [
-        { name: t('footer.legal.privacy_policy'), href: `/${lang}/privacy-policy` },
-        { name: t('footer.legal.terms_of_service'), href: `/${lang}/terms-of-service` },
-
+        {
+            name: t("footer.legal.privacy_policy"),
+            href: `/${lang}/privacy-policy`,
+        },
+        {
+            name: t("footer.legal.terms_of_service"),
+            href: `/${lang}/terms-of-service`,
+        },
     ];
 
-    // Function to scroll to the top of the page
-    const scrollToTop = () => {
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth"
-        });
-    };
-
     return (
-        <div className="flex flex-col min-h-screen">
+        <div>
             <Breadcrumb />
-            <footer className="bg-gray-100 dark:bg-gray-900 p-8 text-gray-900 dark:text-gray-100 text-sm">
-                <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
-                    {/* Render sitemap link categories and their links */}
-                    {Object.entries(sitemapLinks).map(([category, links]) => (
-                        <div key={category}>
-                            <h3 className="text-lg font-semibold mb-4">{category}</h3>
-                            <ul>
-                                {links.map((link, index) => (
-                                    <li key={index} className="mb-2">
-                                        <Link href={link.href} className="hover:text-gray-700 dark:hover:text-gray-300" target={link.href.startsWith('/') ? '_self' : '_blank'} rel={link.href.startsWith('/') ? '' : 'noopener noreferrer'}>
-                                            {/* Conditionally render icon based on iconClass or icon prop */}
-                                            {link.iconClass ? (
-                                                <i className={`${link.iconClass} colored text-lg mr-2`}></i>
-                                            ) : link.icon ? (
-                                                <svg className="inline-block w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                                                    <path d={link.icon} />
-                                                </svg>
-                                            ) : null}
-                                            {link.name}
-                                        </Link>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-                    ))}
-                </div>
-                {/* Copyright and legal links section */}
-                <div className="text-center mt-8 pt-4 border-t border-gray-200 dark:border-gray-700 text-xs flex flex-col md:flex-row justify-between items-center">
-                    <p className="mb-2 md:mb-0">{t('footer.copyright', { year: new Date().getFullYear(), author: 'Kunanon Srisuntiroj' })} <Link href="https://github.com/sagelga" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline"></Link></p>
-                    <div className="flex flex-wrap justify-center space-x-2 md:space-x-4 mb-2 md:mb-0">
-                        {/* Render legal links with separators */}
-                        {legalLinks.map((link, index) => (
-                            <React.Fragment key={index}>
-                                <Link href={link.href} className="text-gray-600 dark:text-gray-400 hover:underline whitespace-nowrap">
+            <footer className="border-t border-rim bg-surface">
+                <div className="container mx-auto px-8 py-16 lg:px-16">
+                    {/* Top: sitemap columns */}
+                    <div className="mb-16 grid grid-cols-1 gap-12 md:grid-cols-3">
+                        {Object.entries(sitemapLinks).map(
+                            ([category, links]) => (
+                                <div key={category}>
+                                    <p className="mb-5 font-mono text-xs tracking-[0.25em] text-accent uppercase">
+                                        {category}
+                                    </p>
+                                    <ul className="space-y-3">
+                                        {links.map((link, index) => (
+                                            <li key={index}>
+                                                <Link
+                                                    href={link.href}
+                                                    className="flex items-center gap-2 text-sm text-muted transition-colors duration-200 hover:text-cream"
+                                                    target={
+                                                        link.href.startsWith(
+                                                            "/",
+                                                        )
+                                                            ? "_self"
+                                                            : "_blank"
+                                                    }
+                                                    rel={
+                                                        link.href.startsWith(
+                                                            "/",
+                                                        )
+                                                            ? ""
+                                                            : "noopener noreferrer"
+                                                    }
+                                                >
+                                                    {link.iconClass && (
+                                                        <i
+                                                            className={`${link.iconClass} text-sm`}
+                                                        />
+                                                    )}
+                                                    {link.name}
+                                                </Link>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            ),
+                        )}
+                    </div>
+
+                    {/* Bottom bar */}
+                    <div className="flex flex-col items-start justify-between gap-4 border-t border-rim pt-6 sm:flex-row sm:items-center">
+                        <p className="font-mono text-xs text-muted">
+                            {t("footer.copyright", {
+                                year: CURRENT_YEAR,
+                                author: "Kunanon Srisuntiroj",
+                            })}
+                        </p>
+
+                        <div className="flex flex-wrap items-center gap-6">
+                            {legalLinks.map((link, index) => (
+                                <Link
+                                    key={index}
+                                    href={link.href}
+                                    className="text-xs text-muted transition-colors duration-200 hover:text-cream"
+                                >
                                     {link.name}
                                 </Link>
-                                {index < legalLinks.length - 1 && (
-                                    <span className="text-gray-600 dark:text-gray-400">|</span>
-                                )}
-                            </React.Fragment>
-                        ))}
-                    </div>
-                    <div className="flex items-center space-x-4">
-                        {/* Language Switcher */}
-                        <select
-                            value={lang}
-                            onChange={handleLanguageChange}
-                            className="bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-white rounded-md px-2 py-1 text-xs focus:outline-none focus:ring-2 focus:ring-blue-500"
-                        >
-                            <option value="en">{t('footer.english')}</option>
-                            <option value="th">{t('footer.thai')}</option>
-                            <option value="zh">{t('footer.chinese')}</option>
-                            <option value="ja">{t('footer.japanese')}</option>
-                        </select>
-                        {/* Back to Top button */}
-                        <button onClick={scrollToTop} className="text-blue-600 dark:text-blue-400 hover:underline">
-                            {t('footer.back_to_top')}
-                        </button>
+                            ))}
+
+                            <select
+                                value={lang}
+                                onChange={handleLanguageChange}
+                                className="cursor-pointer border border-rim bg-canvas px-3 py-1.5 text-xs text-muted transition-colors duration-200 focus:border-accent focus:outline-none"
+                            >
+                                <option value="en">
+                                    {t("footer.english")}
+                                </option>
+                                <option value="th">{t("footer.thai")}</option>
+                                <option value="zh">
+                                    {t("footer.chinese")}
+                                </option>
+                            </select>
+
+                            <button
+                                onClick={scrollToTop}
+                                className="font-mono text-xs text-muted transition-colors duration-200 hover:text-accent"
+                            >
+                                ↑ {t("footer.back_to_top")}
+                            </button>
+                        </div>
                     </div>
                 </div>
             </footer>

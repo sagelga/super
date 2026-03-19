@@ -1,0 +1,99 @@
+{
+    "title": "Privacy Policy",
+    "last_updated": "Last updated: {{date}}",
+    "sections": [
+        {
+            "id": "introduction",
+            "title": "1. Introduction",
+            "paragraphs": [
+                "Welcome to {{websiteName}} (the \"Website\"). This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website, including any other media form, media channel, mobile website, or mobile application related or connected thereto (collectively, the \"Site\"). Please read this privacy policy carefully. If you do not agree with the terms of this privacy policy, please do not access the Site.",
+                "We reserve the right to make changes to this Privacy Policy at any time and for any reason. We will alert you about any changes by updating the \"Last updated\" date of this Privacy Policy. You are encouraged to periodically review this Privacy Policy to stay informed of updates. You will be deemed to have been made aware of, will be subject to, and will be deemed to have accepted the changes in any revised Privacy Policy by your continued use of the Site after the date such revised Privacy Policy is posted."
+            ]
+        },
+        {
+            "id": "data-we-collect",
+            "title": "2. Data We Collect",
+            "paragraphs": [
+                "We may collect information about you in a variety of ways. The information we may collect on the Site includes:"
+            ],
+            "subsections": [
+                {
+                    "title": "Analytics Data (Cloudflare Metrics)",
+                    "paragraph": "We use Cloudflare Web Analytics to collect anonymous usage data about your visit to our website. This helps us understand how visitors interact with our site, which pages are popular, and how we can improve the user experience. Cloudflare Web Analytics does not use cookies or track individual users. It collects data such as the pages you visit, the time spent on those pages, and the general geographic location of your IP address (without storing the full IP address)."
+                },
+                {
+                    "title": "Cookies and Tracking Technologies",
+                    "paragraph": "We use essential cookies to ensure the proper functioning of our website. These cookies are strictly necessary for the website to operate and cannot be switched off in our systems. They are usually only set in response to actions made by you which amount to a request for services, such as setting your privacy preferences, logging in, or filling in forms. You can set your browser to block or alert you about these cookies, but some parts of the site will not then work.",
+                    "additional_paragraph": "We do not currently use non-essential cookies for advertising or extensive tracking purposes. If this changes in the future, we will update this policy and provide appropriate consent mechanisms."
+                },
+                {
+                    "title": "Personal Data (if applicable)",
+                    "paragraph": "As a portfolio, blog, and art gallery website, we generally do not collect personal data unless you voluntarily provide it to us, for example, by contacting us via an email form or subscribing to a newsletter (if available). If you choose to provide personal data, it may include your name, email address, and any other information you choose to provide. We will only use this data for the purpose for which it was provided."
+                }
+            ]
+        },
+        {
+            "id": "how-we-use-your-information",
+            "title": "3. How We Use Your Information",
+            "paragraphs": [
+                "Having accurate information about you permits us to provide you with a smooth, efficient, and customized experience. Specifically, we may use information collected about you via the Site to:"
+            ],
+            "list_items": [
+                "Monitor and analyze usage and trends to improve your experience with the Site.",
+                "Improve the efficiency and operation of the Site.",
+                "Respond to your inquiries or requests if you contact us.",
+                "Perform other business activities as needed."
+            ]
+        },
+        {
+            "id": "disclosure-of-your-information",
+            "title": "4. Disclosure of Your Information",
+            "paragraphs": [
+                "We do not sell, trade, rent, or otherwise share your personal information with third parties without your consent, except as described in this Privacy Policy.",
+                "We may disclose information we have collected about you in certain situations:"
+            ],
+            "subsections": [
+                {
+                    "title": "By Law or to Protect Rights",
+                    "paragraph": "If we believe the release of information about you is necessary to respond to legal process, to investigate or remedy potential violations of our policies, or to protect the rights, property, and safety of others, we may share your information as permitted or required by any applicable law, rule, or regulation."
+                },
+                {
+                    "title": "Third-Party Service Providers",
+                    "paragraph": "We may share your information with third parties that perform services for us or on our behalf, including data analysis, email delivery, hosting services, and marketing assistance. For example, Cloudflare processes analytics data on our behalf as described above."
+                }
+            ]
+        },
+        {
+            "id": "security-of-your-information",
+            "title": "5. Security of Your Information",
+            "paragraphs": [
+                "We use administrative, technical, and physical security measures to help protect your personal information. While we have taken reasonable steps to secure the personal information you provide to us, please be aware that despite our efforts, no security measures are perfect or impenetrable, and no method of data transmission can be guaranteed against any interception or other type of misuse."
+            ]
+        },
+        {
+            "id": "your-rights",
+            "title": "6. Your Rights (e.g., GDPR, CCPA)",
+            "paragraphs": [
+                "Depending on your location, you may have certain rights regarding your personal data, including:"
+            ],
+            "list_items": [
+                "The right to access your personal data.",
+                "The right to request correction of inaccurate personal data.",
+                "The right to request erasure of your personal data.",
+                "The right to object to the processing of your personal data.",
+                "The right to request restriction of processing your personal data.",
+                "The right to data portability.",
+                "The right to withdraw consent (where applicable)."
+            ],
+            "additional_paragraph": "To exercise any of these rights, please contact us using the contact information provided below."
+        },
+        {
+            "id": "contact-us",
+            "title": "7. Contact Us",
+            "paragraphs": [
+                "If you have questions or comments about this Privacy Policy, please contact us at:"
+            ]
+        }
+    ],
+    "table_of_contents_title": "Table of Contents"
+}

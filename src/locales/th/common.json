@@ -14,7 +14,7 @@
         "table_of_contents": "สารบัญ"
     },
     "footer": {
-        "copyright": "สงวนลิขสิทธิ์ © 2019-{{year}} สร้างด้วย ❤️ โดย {{author}}",
+        "copyright": "สงวนลิขสิทธิ์ © 2019-{year} สร้างด้วย ❤️ โดย {author}",
         "back_to_top": "กลับไปด้านบน",
         "english": "อังกฤษ",
         "thai": "ไทย",
@@ -37,6 +37,10 @@
             "linkedin": "LinkedIn",
             "github": "GitHub",
             "salesforce_trailblazer": "Salesforce Trailblazer"
+        },
+        "legal": {
+            "privacy_policy": "นโยบายความเป็นส่วนตัว",
+            "terms_of_service": "ข้อกำหนดการให้บริการ"
         }
     },
     "github_label": "GitHub",

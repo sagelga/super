@@ -14,7 +14,7 @@
         "table_of_contents": "Table of Contents"
     },
     "footer": {
-        "copyright": "© 2019-{{year}} Built with ❤️ by {{author}}",
+        "copyright": "© 2019-{year} Built with ❤️ by {author}",
         "back_to_top": "Back to Top",
         "english": "English",
         "thai": "Thai",
@@ -37,6 +37,10 @@
             "linkedin": "LinkedIn",
             "github": "GitHub",
             "salesforce_trailblazer": "Salesforce Trailblazer"
+        },
+        "legal": {
+            "privacy_policy": "Privacy Policy",
+            "terms_of_service": "Terms of Service"
         }
     },
     "github_label": "GitHub",

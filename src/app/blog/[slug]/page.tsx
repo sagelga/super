@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 import PostContent from '@/components/blog/PostContent';
 import PostHeader from '@/components/blog/PostHeader';
 import { Post } from '@/types/blog';
+import { formatDate } from '@/utils/formatDate';
 
 async function getPost(slug: string): Promise<Post | null> {
   try {
@@ -27,7 +28,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
 
   return (
     <article className="container mx-auto px-4 py-8">
-      <PostHeader title={post.title} date={new Date(post.published_at).toLocaleDateString()} category={post.primary_tag?.name || 'General'} />
+      <PostHeader title={post.title} date={formatDate(post.published_at)} category={post.primary_tag?.name || 'General'} />
       <PostContent content={post.content} />
     </article>
   );

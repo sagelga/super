@@ -14,7 +14,7 @@
         "table_of_contents": "目录"
     },
     "footer": {
-        "copyright": "© 2019-{{year}} 由 {{author}} 用 ❤️ 建造",
+        "copyright": "© 2019-{year} 由 {author} 用 ❤️ 建造",
         "back_to_top": "回到顶部",
         "english": "英语",
         "thai": "泰语",
@@ -37,6 +37,10 @@
             "linkedin": "领英",
             "github": "GitHub",
             "salesforce_trailblazer": "Salesforce 开拓者"
+        },
+        "legal": {
+            "privacy_policy": "隐私政策",
+            "terms_of_service": "服务条款"
         }
     },
     "github_label": "GitHub",

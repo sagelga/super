@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ls -la /Users/kumamon/Developer/super/tailwind.*)",
+      "Bash(npm run:*)",
+      "Bash(/tmp/implementation_checklist.md:*)",
+      "Read(//tmp/**)"
+    ]
+  }
+}

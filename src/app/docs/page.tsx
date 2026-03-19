@@ -7,7 +7,7 @@ import { useTranslations } from 'next-intl';
 const DocsPage: React.FC = () => {
     const t = useTranslations('docs');
     // Array of documentation projects with their details
-    const docProjects = JSON.parse(t.raw('projects')) as DocsProjectCardProps[];
+    const docProjects = t.raw('projects') as unknown as DocsProjectCardProps[];
 
     // Render the DocsPage component
     return (

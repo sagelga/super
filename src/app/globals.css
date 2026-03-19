@@ -1,22 +1,125 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --color-canvas: #1A1814;
+  --color-surface: #252219;
+  --color-brand: #3B4A8C;
+  --color-accent: #C9943A;
+  --color-cream: #F0EAD6;
+  --color-muted: #9A9485;
+  --color-rim: #302C24;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
 body {
-  background: var(--background);
-  color: var(--foreground);
+  background-color: #1A1814;
+  color: #F0EAD6;
   font-family: var(--font-sans);
 }
 
 * {
   font-family: var(--font-sans);
+}
+
+.font-display {
+  font-family: var(--font-serif), "Georgia", serif;
+}
+
+/* === Easing variables === */
+:root {
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* === Keyframes === */
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes grow-x {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+
+/* === Hero entrance animation classes === */
+.enter {
+  animation: fade-up 0.65s cubic-bezier(0.25, 1, 0.5, 1) backwards;
+}
+
+.enter-fade {
+  animation: fade-in 0.5s cubic-bezier(0.25, 1, 0.5, 1) backwards;
+}
+
+.enter-d1 { animation-delay: 0.05s; }
+.enter-d2 { animation-delay: 0.18s; }
+.enter-d3 { animation-delay: 0.32s; }
+.enter-d4 { animation-delay: 0.46s; }
+.enter-d5 { animation-delay: 0.58s; }
+.enter-d6 { animation-delay: 0.72s; }
+
+/* Amber rule that grows left → right after parent fades in */
+.grow-rule {
+  transform-origin: left center;
+  animation: grow-x 0.45s cubic-bezier(0.16, 1, 0.3, 1) 0.44s backwards;
+}
+
+/* === Scroll reveal === */
+.reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition:
+    opacity 0.65s cubic-bezier(0.25, 1, 0.5, 1),
+    transform 0.65s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.reveal.is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Staggered reveal for child elements */
+.reveal-stagger > * {
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 0.5s cubic-bezier(0.25, 1, 0.5, 1),
+    transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.reveal-stagger.is-revealed > *:nth-child(1) { opacity: 1; transform: none; transition-delay: 0ms; }
+.reveal-stagger.is-revealed > *:nth-child(2) { opacity: 1; transform: none; transition-delay: 70ms; }
+.reveal-stagger.is-revealed > *:nth-child(3) { opacity: 1; transform: none; transition-delay: 140ms; }
+.reveal-stagger.is-revealed > *:nth-child(4) { opacity: 1; transform: none; transition-delay: 210ms; }
+.reveal-stagger.is-revealed > *:nth-child(5) { opacity: 1; transform: none; transition-delay: 280ms; }
+
+/* === Reduced motion: disable all animations === */
+@media (prefers-reduced-motion: reduce) {
+  .enter,
+  .enter-fade,
+  .grow-rule {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .reveal,
+  .reveal-stagger > * {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+/* Swiper overrides for pages that still use it */
+.swiper-button-next,
+.swiper-button-prev {
+  color: #C9943A !important;
+}
+.swiper-pagination-bullet-active {
+  background: #C9943A !important;
 }

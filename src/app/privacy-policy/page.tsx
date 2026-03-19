@@ -1,6 +1,7 @@
 import React from 'react';
 import { siteConfig } from '@/config/site';
 import { useTranslations } from 'next-intl';
+import { formatDate } from '@/utils/formatDate';
 
 // Define the PrivacyPolicyPage component
 const PrivacyPolicyPage: React.FC = () => {
@@ -126,7 +127,7 @@ const PrivacyPolicyPage: React.FC = () => {
 
           {/* Last Updated Section */}
           <section className="text-center mt-12">
-            <p className="text-sm text-gray-500">{t('last_updated', { date: new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) })}</p>
+            <p className="text-sm text-gray-500">{t('last_updated', { date: formatDate(new Date()) })}</p>
           </section>
         </div>
 
