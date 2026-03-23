@@ -2,11 +2,10 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { useLocale, useTranslations } from "next-intl";
+import { useTranslations } from "next-intl";
 
 const Navbar: React.FC = () => {
     const t = useTranslations("common");
-    const lang = useLocale();
     const [isHomeHovered, setIsHomeHovered] = useState(false);
     const [scrolled, setScrolled] = useState(false);
 
@@ -26,7 +25,7 @@ const Navbar: React.FC = () => {
             <div className="container mx-auto flex h-16 items-center justify-between px-8 lg:px-16">
                 {/* Logo */}
                 <Link
-                    href={`/${lang}`}
+                    href="/"
                     className="font-mono text-sm tracking-[0.15em] text-cream uppercase transition-colors duration-200 hover:text-accent"
                 >
                     {t("navbar.name")}
@@ -40,7 +39,7 @@ const Navbar: React.FC = () => {
                         onMouseLeave={() => setIsHomeHovered(false)}
                     >
                         <Link
-                            href={`/${lang}`}
+                            href="/"
                             className="text-sm tracking-wide text-muted transition-colors duration-200 hover:text-cream"
                         >
                             {t("navbar.home")}
@@ -48,25 +47,25 @@ const Navbar: React.FC = () => {
                         {isHomeHovered && (
                             <div className="absolute top-full left-1/2 mt-2 min-w-[180px] -translate-x-1/2 border border-rim bg-surface py-2 shadow-xl">
                                 <Link
-                                    href={`/${lang}/home/experience`}
+                                    href="/home/experience"
                                     className="block px-5 py-2 text-xs tracking-wide text-muted transition-colors duration-150 hover:bg-canvas hover:text-accent"
                                 >
                                     {t("navbar.experience")}
                                 </Link>
                                 <Link
-                                    href={`/${lang}/home/certifications`}
+                                    href="/home/certifications"
                                     className="block px-5 py-2 text-xs tracking-wide text-muted transition-colors duration-150 hover:bg-canvas hover:text-accent"
                                 >
                                     {t("navbar.certifications")}
                                 </Link>
                                 <Link
-                                    href={`/${lang}/home/projects`}
+                                    href="/home/projects"
                                     className="block px-5 py-2 text-xs tracking-wide text-muted transition-colors duration-150 hover:bg-canvas hover:text-accent"
                                 >
                                     {t("navbar.projects")}
                                 </Link>
                                 <Link
-                                    href={`/${lang}/home/volunteering`}
+                                    href="/home/volunteering"
                                     className="block px-5 py-2 text-xs tracking-wide text-muted transition-colors duration-150 hover:bg-canvas hover:text-accent"
                                 >
                                     {t("navbar.volunteering")}
@@ -75,25 +74,22 @@ const Navbar: React.FC = () => {
                         )}
                     </div>
                     <Link
-                        href={`/${lang}/blog`}
+                        href="/blog"
                         className="text-sm tracking-wide text-muted transition-colors duration-200 hover:text-cream"
                     >
                         {t("navbar.blog")}
                     </Link>
-                    <Link
-                        href={`/${lang}/gallery`}
-                        className="text-sm tracking-wide text-muted transition-colors duration-200 hover:text-cream"
-                    >
+                    <span className="cursor-not-allowed text-sm tracking-wide text-muted/40">
                         {t("navbar.gallery")}
-                    </Link>
+                    </span>
                     <Link
-                        href={`/${lang}/learn`}
+                        href="/learn"
                         className="text-sm tracking-wide text-muted transition-colors duration-200 hover:text-cream"
                     >
                         {t("navbar.learn")}
                     </Link>
                     <Link
-                        href={`/${lang}/docs`}
+                        href="/docs"
                         className="text-sm tracking-wide text-muted transition-colors duration-200 hover:text-cream"
                     >
                         {t("navbar.docs")}

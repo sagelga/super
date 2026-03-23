@@ -1,14 +1,34 @@
 import createMiddleware from "next-intl/middleware";
+import { NextRequest, NextResponse } from "next/server";
 
-export default createMiddleware({
-    // A list of all locales that are supported in this application
+const EXTERNAL_REDIRECTS: Record<string, string> = {
+    "/blog": "https://blog.sagelga.com",
+    "/docs": "https://docs.sagelga.com",
+    "/learn": "https://learn.sagelga.com",
+};
+
+const intlMiddleware = createMiddleware({
     locales: ["en", "th", "zh"],
-
-    // Used when no locale matches
-    defaultLocale: "en",
+    defaultLocale: "th",
+    localePrefix: "as-needed",
 });
 
+export default function middleware(request: NextRequest) {
+    const { pathname } = request.nextUrl;
+
+    // Strip locale prefix (e.g. /en/blog → /blog)
+    const strippedPath = pathname.replace(/^\/(en|th|zh)/, "");
+
+    for (const [prefix, destination] of Object.entries(EXTERNAL_REDIRECTS)) {
+        if (strippedPath === prefix || strippedPath.startsWith(prefix + "/")) {
+            const rest = strippedPath.slice(prefix.length);
+            return NextResponse.redirect(destination + rest, 308);
+        }
+    }
+
+    return intlMiddleware(request);
+}
+
 export const config = {
-    // Match only internationalized pathnames
     matcher: ["/((?!api|_next|_vercel|.*\\..*).*)"],
 };
