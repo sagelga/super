@@ -18,12 +18,14 @@ const languageOptions: LanguageOption[] = [
 ];
 
 interface LanguageSwitcherModalProps {
+    isOpen: boolean;
     currentLang: string;
     onClose: () => void;
     onLanguageSelect: (lang: string) => void;
 }
 
 const LanguageSwitcherModal: React.FC<LanguageSwitcherModalProps> = ({
+    isOpen,
     currentLang,
     onClose,
     onLanguageSelect,
@@ -36,7 +38,7 @@ const LanguageSwitcherModal: React.FC<LanguageSwitcherModalProps> = ({
 
     return (
         <BottomSheet
-            isOpen={true}
+            isOpen={isOpen}
             onClose={onClose}
             title={t("language.title")}
         >

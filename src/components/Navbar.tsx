@@ -6,7 +6,7 @@ import { useTranslations } from "next-intl";
 
 const Navbar: React.FC = () => {
     const t = useTranslations("common");
-    const [isHomeHovered, setIsHomeHovered] = useState(false);
+    const [isHomeMenuOpen, setIsHomeMenuOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
 
     useEffect(() => {
@@ -35,16 +35,24 @@ const Navbar: React.FC = () => {
                 <div className="flex items-center gap-8">
                     <div
                         className="relative"
-                        onMouseEnter={() => setIsHomeHovered(true)}
-                        onMouseLeave={() => setIsHomeHovered(false)}
+                        onMouseEnter={() => setIsHomeMenuOpen(true)}
+                        onMouseLeave={() => setIsHomeMenuOpen(false)}
+                        onFocus={() => setIsHomeMenuOpen(true)}
+                        onBlur={(e) => {
+                            if (!e.currentTarget.contains(e.relatedTarget)) {
+                                setIsHomeMenuOpen(false);
+                            }
+                        }}
                     >
                         <Link
                             href="/"
+                            aria-haspopup="true"
+                            aria-expanded={isHomeMenuOpen}
                             className="text-sm tracking-wide text-muted transition-colors duration-200 hover:text-cream"
                         >
                             {t("nav.home")}
                         </Link>
-                        {isHomeHovered && (
+                        {isHomeMenuOpen && (
                             <div className="absolute top-full left-1/2 mt-2 min-w-[180px] -translate-x-1/2 border border-rim bg-surface py-2 shadow-xl">
                                 <Link
                                     href="/home/experience"

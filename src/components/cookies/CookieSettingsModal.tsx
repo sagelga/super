@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { useTranslations } from "next-intl";
+import Link from "next/link";
 import BottomSheet from "../ui/BottomSheet";
 import { getCookiePreferences, setCookiePreferences } from "@/utils/cookies";
 import "./CookieSettingsModal.style.css";
@@ -113,13 +114,13 @@ const CookieSettingsModal: React.FC<CookieSettingsModalProps> = ({
             <div className="cookie-settings-footer">
                 <p className="cookie-learn-more">
                     {t("settings.learn_more")}
-                    <a
+                    <Link
                         href="/privacy-policy"
                         className="cookie-learn-more-link"
                         onClick={onClose}
                     >
                         {t("links.privacy_policy")}
-                    </a>
+                    </Link>
                 </p>
             </div>
 

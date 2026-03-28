@@ -6,7 +6,6 @@ interface Project {
     stack?: string[];
     githubLink?: string;
     demoLink?: string;
-    imageUrl?: string;
 }
 
 interface Experience {
@@ -36,32 +35,14 @@ interface Volunteering {
     };
 }
 
-interface Language {
-    name: string;
-    proficiency: string;
-    iconClass?: string;
-}
-
-interface OnlineProfile {
-    name: string;
-    url: string;
-    iconClass: string;
-}
-
 interface HomePageData {
     skills: string[];
     projects: Project[];
     experiences: Experience[];
     certifications: Certification[];
     volunteering: Volunteering[];
-    languages: Language[];
-    onlineProfiles: OnlineProfile[];
 }
 
-// Define a TFunction type that is compatible with next-intl's useTranslations hook
-// This type allows for the 'returnObjects' option and correctly handles the return type.
-
-// Define a TFunction type that is compatible with next-intl's useTranslations hook
 type TFunction = ReturnType<typeof useTranslations<"home">>;
 
 export const getHomePageData = (t: TFunction): HomePageData => {
@@ -71,7 +52,5 @@ export const getHomePageData = (t: TFunction): HomePageData => {
         experiences: t.raw("experiences"),
         certifications: t.raw("certifications"),
         volunteering: t.raw("volunteering"),
-        languages: t.raw("languages"),
-        onlineProfiles: t.raw("onlineProfiles"),
     };
 };

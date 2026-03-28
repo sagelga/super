@@ -10,8 +10,6 @@ import LanguageSwitcherModal from "./LanguageSwitcherModal";
 import ThemeSettingsModal from "./ThemeSettingsModal";
 import "./Footer.style.css";
 
-const CURRENT_YEAR = new Date().getFullYear();
-
 interface LinkItem {
     name: string;
     href: string;
@@ -151,7 +149,10 @@ const Footer: React.FC = () => {
                     </div>
                     <hr className="footer-divider" />
                     <div className="footer-bottom">
-                        <span>© 2021–{CURRENT_YEAR} Kunanon Srisuntiroj</span>
+                        <span>
+                            © 2021–{new Date().getFullYear()} Kunanon
+                            Srisuntiroj
+                        </span>
                         <div className="flex items-center gap-6">
                             <button
                                 onClick={() => setShowLanguageSwitcher(true)}
@@ -256,13 +257,12 @@ const Footer: React.FC = () => {
                 />
             )}
 
-            {showLanguageSwitcher && (
-                <LanguageSwitcherModal
-                    currentLang={lang}
-                    onClose={() => setShowLanguageSwitcher(false)}
-                    onLanguageSelect={handleLanguageSelect}
-                />
-            )}
+            <LanguageSwitcherModal
+                isOpen={showLanguageSwitcher}
+                currentLang={lang}
+                onClose={() => setShowLanguageSwitcher(false)}
+                onLanguageSelect={handleLanguageSelect}
+            />
 
             <ThemeSettingsModal
                 isOpen={showThemeSettings}

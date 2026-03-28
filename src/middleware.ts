@@ -23,6 +23,7 @@ export default function middleware(request: NextRequest) {
     for (const [prefix, destination] of Object.entries(EXTERNAL_REDIRECTS)) {
         if (strippedPath === prefix || strippedPath.startsWith(prefix + "/")) {
             const rest = strippedPath.slice(prefix.length);
+            if (rest !== "" && !rest.startsWith("/")) continue;
             return NextResponse.redirect(destination + rest, 308);
         }
     }

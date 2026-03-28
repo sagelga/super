@@ -50,7 +50,7 @@ const serifThai = Noto_Serif_Thai({
 const serifZh = Noto_Serif_SC({
     variable: "--font-serif-zh",
     weight: ["200", "300", "400", "500", "600", "700", "900"],
-    subsets: ["chinese-simplified"],
+    subsets: ["latin"],
     display: "swap",
 });
 
@@ -142,10 +142,6 @@ export async function generateMetadata({
                 "max-snippet": -1,
             },
         },
-        verification: {
-            google: "your-google-verification-code", // Replace with actual code
-            yandex: "your-yandex-verification-code", // Replace if needed
-        },
     };
 }
 
@@ -219,6 +215,7 @@ export default async function RootLayout({
                         __html: `(function(){try{var s=localStorage.getItem('theme-preference');var prefersDark=window.matchMedia('(prefers-color-scheme: dark)').matches;var dark=s==='dark'||(s!=='light'&&prefersDark)||!s;document.documentElement.classList.toggle('dark',dark);}catch(e){}})();`,
                     }}
                 />
+                <link rel="preconnect" href="https://cdn.jsdelivr.net" />
                 <link
                     rel="stylesheet"
                     href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css"
@@ -231,7 +228,6 @@ export default async function RootLayout({
                     href="/apple-touch-icon.png"
                 />
                 <link rel="manifest" href="/manifest.webmanifest" />
-                <link rel="preconnect" href="https://cdn.jsdelivr.net" />
                 <meta name="theme-color" content="#1A1814" />
                 <meta name="color-scheme" content="dark light" />
                 <meta

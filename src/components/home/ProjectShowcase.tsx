@@ -14,7 +14,6 @@ interface Project {
     stack?: string[];
     githubLink?: string;
     demoLink?: string;
-    imageUrl?: string;
 }
 
 interface ProjectShowcaseProps {
