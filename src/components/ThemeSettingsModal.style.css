@@ -1,0 +1,97 @@
+.theme-settings-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 0.25rem;
+}
+
+.theme-option {
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+  width: 100%;
+  padding: 1rem;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  text-align: left;
+}
+
+.theme-option:hover {
+  background: var(--color-surface, #252219);
+  border-color: var(--color-rim, #302C24);
+}
+
+.theme-option.active {
+  background: var(--color-surface, #252219);
+  border-color: var(--color-accent, #C9943A);
+}
+
+.theme-option-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: var(--color-canvas, #1A1814);
+  border-radius: 10px;
+  color: var(--color-muted, #9A9485);
+  transition: all 0.15s ease;
+}
+
+.theme-option:hover .theme-option-icon {
+  color: var(--color-accent, #C9943A);
+}
+
+.theme-option.active .theme-option-icon {
+  background: var(--color-accent, #C9943A);
+  color: var(--color-cream, #F0EAD6);
+}
+
+.theme-option-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+}
+
+.theme-option-label {
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--color-cream, #F0EAD6);
+}
+
+.theme-option.active .theme-option-label {
+  color: var(--color-cream, #F0EAD6);
+}
+
+.theme-option-description {
+  font-size: 0.8125rem;
+  color: var(--color-muted, #9A9485);
+}
+
+.theme-option-check {
+  color: var(--color-accent, #C9943A);
+  flex-shrink: 0;
+}
+
+@media (max-width: 480px) {
+  .theme-option {
+    padding: 0.875rem;
+  }
+
+  .theme-option-icon {
+    width: 36px;
+    height: 36px;
+  }
+
+  .theme-option-label {
+    font-size: 0.875rem;
+  }
+
+  .theme-option-description {
+    font-size: 0.75rem;
+  }
+}

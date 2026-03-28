@@ -1,25 +1,25 @@
 {
     "hero": {
-        "name": "Kunanon Srisuntiroj",
-        "title": "IT Professional",
-        "alt_image": "Kunanon Srisuntiroj"
+        "name": "马洋辉",
+        "title": "IT 专业人士",
+        "alt_image": "马洋辉"
     },
     "about": {
-        "title": "About Me",
-        "introduction": "Beyond his professional life, Kunanon cherishes his travels to Kumamoto, Japan. It's his personality that drives his creativity, straightforwardness, and self-awareness, reflecting his values of confident humility and innovation.",
-        "education_title": "Education",
-        "university_name": "King Mongkut's Institute of Technology Ladkrabang",
-        "school_years": "School of Information Technology, 2016 - 2020",
-        "grade": "Grade: 3.07"
+        "title": "关于我",
+        "introduction": "除了专业工作，马洋辉还热爱前往日本熊本旅游。是他的个性驱动了他的创意、坦率和自我认知，反映了他充满自信谦逊和创新精神的价值观。",
+        "education_title": "教育背景",
+        "university_name": "拉克拉邦王蒙古特理工学院",
+        "school_years": "信息技术学院，2016 - 2020",
+        "grade": "成绩：3.07"
     },
-    "experience_section_title": "Experience",
-    "skills_section_title": "Skills",
-    "projects_section_title": "Projects",
-    "certifications_section_title": "Licenses & Certifications",
-    "issued_label": "Issued:",
-    "skills_label": "Skills:",
-    "volunteering_section_title": "Volunteering",
-    "languages_section_title": "Languages",
+    "experience_section_title": "工作经历",
+    "skills_section_title": "技能",
+    "projects_section_title": "项目",
+    "certifications_section_title": "许可证与证书",
+    "issued_label": "颁发时间：",
+    "skills_label": "技能：",
+    "volunteering_section_title": "志愿服务",
+    "languages_section_title": "语言",
     "skills": [
         "JavaScript",
         "TypeScript",
@@ -96,157 +96,157 @@
     "projects": [
         {
             "title": "Super",
-            "description": "Personal portfolio website built with Next.js and Cloudflare Pages, integrating with Superbrain API. Orchestrated development using Gemini 2.5 Flash/Pro models for code generation and task execution.",
+            "description": "使用 Next.js 和 Cloudflare Pages 构建的个人作品集网站，集成了 Superbrain API。使用 Gemini 2.5 Flash/Pro 模型进行代码生成和任务执行的开发协调。",
             "githubLink": "https://github.com/sagelga/super",
-            "demoLink": "https://super.sagelga.workers.dev"
+            "demoLink": "https://sagelga.com"
         },
         {
             "title": "Superbrain",
-            "description": "API for blog content, retrieving Notion changes and storing them in Cloudflare D2 for fast retrieval. Fully runs on Cloudflare Workers; orchestrated development using Gemini models.",
+            "description": "用于博客内容的 API，检索 Notion 更改并将其存储在 Cloudflare D2 中以实现快速检索。完全运行在 Cloudflare Workers 上；使用 Gemini 模型进行开发协调。",
             "githubLink": "https://github.com/sagelga/superbrain",
             "demoLink": ""
         },
         {
             "title": "Todoist Notion Sync",
-            "description": "Utilizes Cloudflare Worker to listen to Webhook from Todoist and create a new task in Notion.",
+            "description": "利用 Cloudflare Worker 侦听来自 Todoist 的 Webhook，并在 Notion 中创建新任务。",
             "githubLink": "https://github.com/sagelga/todoist-tagging",
             "demoLink": "",
             "imageUrl": "/images/placeholder-project.png"
         },
         {
             "title": "Learn with sagelga",
-            "description": "Rebuilt learn.sagelga.com with Docusaurus, React, and TypeScript, enhancing search and speed to empower Python and SQL learners.",
+            "description": "使用 Docusaurus、React 和 TypeScript 重建 learn.sagelga.com，增强搜索和速度，为 Python 和 SQL 学习者赋能。",
             "githubLink": "https://github.com/sagelga/learn-with-sagelga",
             "demoLink": "https://learn.sagelga.com"
         },
         {
             "title": "Byteside.one",
-            "description": "Founded ByteSide.one, a tech, gadget, and gaming news publication, achieving 2.79 million Google Search impressions and 200k+ monthly Facebook impressions by Jan 2023.",
+            "description": "创立了 ByteSide.one，一个科技、小工具和游戏新闻发布平台，到 2023 年 1 月实现了 279 万次 Google 搜索展示和 20 万+ 月度 Facebook 展示。",
             "githubLink": "",
             "demoLink": "https://byteside.one/"
         },
         {
             "title": "The Sunny Side Publication",
-            "description": "Pioneered 'The Sunny Side' publication on Medium, a precursor to ByteSide.one, showcasing early content creation and publishing expertise.",
+            "description": "在 Medium 上开创了《The Sunny Side》出版物，是 ByteSide.one 的前身，展示了早期内容创作和发布专业知识。",
             "githubLink": "",
             "demoLink": "https://medium.com/the-sunny-side"
         },
         {
             "title": "Approval Workflow on Google Apps Script",
-            "description": "Developed an automated approval workflow for IMST using Google Apps Script, streamlining IT, Requisition, and Procurement processes with automated email triggers and Google Forms integration.",
+            "description": "使用 Google Apps Script 为 IMST 开发了自动审批工作流，通过自动化电子邮件触发和 Google Forms 集成来简化 IT、采购申请和采购流程。",
             "githubLink": "https://github.com/sagelga/approval-workflow",
             "demoLink": "https://docs.sagelga.com/approval-workflow/"
         },
         {
-            "title": "Essilor Asia Supplier Deduplication Report",
-            "description": "Developed Oracle SQL and PL/SQL scripts for Essilor Asia and Europe, generating supplier deduplication reports to enhance data quality in production Oracle ERP, including similarity scoring and normalization.",
+            "title": "Essilor Asia 供应商重复数据删除报告",
+            "description": "为 Essilor 亚洲和欧洲开发了 Oracle SQL 和 PL/SQL 脚本，生成供应商重复数据删除报告以增强生产 Oracle ERP 中的数据质量，包括相似性评分和规范化。",
             "githubLink": "",
             "demoLink": ""
         },
         {
-            "title": "Data Analytics on Body Fat",
-            "description": "Conducted multi-regression analysis on body fat and body part size relationships using IBM SPSS Statistics to create statistical models.",
+            "title": "身体脂肪数据分析",
+            "description": "使用 IBM SPSS Statistics 对身体脂肪与身体部位大小之间的关系进行多元回归分析，以创建统计模型。",
             "githubLink": "https://github.com/sagelga/bodyfat-regression",
             "demoLink": ""
         },
         {
-            "title": "Lecture sharing System (Oh Sheet!)",
-            "description": "Developed 'Oh Sheet!', a lecture sharing system using Vue, Parse, NodeJS, ExpressJS, and Digital Ocean Spaces, designed for easy sharing and discovery of educational content.",
+            "title": "讲座分享系统（Oh Sheet!）",
+            "description": "使用 Vue、Parse、NodeJS、ExpressJS 和 Digital Ocean Spaces 开发了《Oh Sheet!》讲座分享系统，旨在轻松分享和发现教育内容。",
             "githubLink": "https://github.com/sagelga/oh-sheet",
             "demoLink": "https://docs.sagelga.com/oh-sheet/"
         },
         {
-            "title": "Online Space Reservation System",
-            "description": "Designed and implemented an online space reservation system with PostgreSQL, Scala, GraphQL, and NodeJS, managing user requirements and approvals for building administrators.",
+            "title": "在线空间预订系统",
+            "description": "使用 PostgreSQL、Scala、GraphQL 和 NodeJS 设计并实施了在线空间预订系统，为建筑管理员管理用户需求和批准。",
             "githubLink": "https://github.com/itforge-eros/panda-website",
             "demoLink": "https://docs.sagelga.com/project-panda/"
         },
         {
-            "title": "Thai restaurant analysis",
-            "description": "Analyzed the prevalence of Thai restaurants in the United States, investigating underlying causes and trends.",
+            "title": "泰国餐厅分析",
+            "description": "分析了美国泰国餐厅的流行情况，调查了潜在原因和趋势。",
             "githubLink": "https://github.com/sagelga/data-journal",
             "demoLink": ""
         },
         {
             "title": "Trash Melody",
-            "description": "Developed 'Trash Melody', a fast-paced OSU!-inspired Java game, combining entertainment with education on trash categorization.",
+            "description": "开发了《Trash Melody》，一款快节奏的 OSU! 启发式 Java 游戏，将娱乐与垃圾分类教育相结合。",
             "githubLink": "https://github.com/sagelga/trashmelody",
             "demoLink": "https://docs.sagelga.com/trash-melody/"
         },
         {
-            "title": "Point of Sales (POS) System",
-            "description": "Engineered a comprehensive Point-of-Sale (POS) system in C, featuring analytics, stock/profit management, sales forecasting (Linear Regression), customer loyalty, and barcode scanner support, with data stored in CSV format.",
+            "title": "销售点（POS）系统",
+            "description": "使用 C 编程语言设计了一个综合销售点（POS）系统，包含分析、库存/利润管理、销售预测（线性回归）、客户忠诚度和条形码扫描仪支持，数据以 CSV 格式存储。",
             "githubLink": "https://github.com/sagelga/ComPro_Project",
             "demoLink": "https://docs.sagelga.com/compro-project/"
         }
     ],
     "experiences": [
         {
-            "title": "Freelance Teacher",
-            "company": "Freelance",
-            "duration": "August 2024 - Present",
+            "title": "自由教师",
+            "company": "自由职业者",
+            "duration": "2024 年 8 月 - 至今",
             "description": [
-                "Educate individuals and small groups on fundamental programming concepts and practical application of Python and SQL for data manipulation and analysis.",
-                "Develop customized curriculum and teaching materials tailored to diverse learning styles and skill levels.",
-                "Provide hands-on training and project-based learning experiences to reinforce understanding and build practical skills in database management and scripting.",
-                "Instruct on advanced usage of Notion for personal organization, project management, and collaborative workspaces, demonstrating its versatility as a productivity tool."
+                "为个人和小团体提供基础编程概念及 Python 和 SQL 数据操作与分析实际应用的教学。",
+                "根据不同学习风格和技能水平开发定制课程和教材。",
+                "提供实际操作培训和基于项目的学习体验，以加强理解并建立数据库管理和脚本编写的实践技能。",
+                "指导 Notion 的高级使用，包括个人组织、项目管理和协作工作区，展示其作为生产力工具的多功能性。"
             ]
         },
         {
-            "title": "Salesforce Business Analyst",
+            "title": "Salesforce 业务分析师",
             "company": "B3 Technology Co., Ltd.",
-            "duration": "September 2024 - April 2025",
+            "duration": "2024 年 9 月 - 2025 年 4 月",
             "description": [
-                "Collaborated with a leading insurance company to design and implement comprehensive Salesforce dashboards for Financial Advisors and their managers.",
-                "Developed key performance indicators (KPIs) and reporting mechanisms within Salesforce to enable real-time tracking of revenue, customer acquisition, and client engagement metrics.",
-                "Streamlined data visualization processes, empowering financial teams with actionable insights to optimize sales strategies and enhance client relationships.",
-                "Provided ongoing support and training to users, ensuring effective adoption and utilization of the new Salesforce functionalities."
+                "与领先保险公司合作，为财务顾问及其经理设计并实施综合 Salesforce 仪表板。",
+                "在 Salesforce 中开发关键绩效指标（KPI）和报告机制，以实现收入、客户获取和客户参与指标的实时跟踪。",
+                "简化数据可视化流程，为财务团队提供可操作的见解，以优化销售策略并增强客户关系。",
+                "为用户提供持续的支持和培训，确保有效采用和利用新的 Salesforce 功能。"
             ]
         },
         {
-            "title": "Salesforce Marketing Cloud Developer",
+            "title": "Salesforce Marketing Cloud 开发人员",
             "company": "Digital Vanguard Co., Ltd.",
-            "duration": "September 2023 - May 2024",
+            "duration": "2023 年 9 月 - 2024 年 5 月",
             "description": [
-                "Collaborated with Thailand's leading oil and retail enterprise to maintain and develop Salesforce Marketing Cloud with Knowesis solutions (Sift and Opolo), thereby facilitating data-driven, omnichannel marketing campaigns.",
-                "Developed automation for personalized customer campaign journeys using Salesforce’s Journey Builder and Automation Studio, importing and exporting data between customer engagement and analytics platforms such as Informatica, Cloudera, and Knowesis Sift.",
-                "Optimized SQL queries to efficiently retrieve campaign leads from analytics platforms, to reduce data retrieval time and enable faster campaign execution.",
-                "Developed campaign summary reports such as email open rates, click-through rates, campaign offerings, and automation status.",
-                "Improved email templates and landing pages using HTML, CSS, JavaScript, and Salesforce AMPScript, enhancing responsiveness and compatibility across devices and modern email clients.",
-                "Initiated a proactive contingency plan to handle Marketing Cloud’s maintenance periods, ensuring no disruptions to critical marketing campaigns and data flow automations."
+                "与泰国领先的石油和零售企业合作，使用 Knowesis 解决方案（Sift 和 Opolo）维护和开发 Salesforce Marketing Cloud，从而促进数据驱动的全渠道营销活动。",
+                "使用 Salesforce 的 Journey Builder 和 Automation Studio 为个性化客户活动旅程开发自动化，在客户参与和分析平台（如 Informatica、Cloudera 和 Knowesis Sift）之间导入和导出数据。",
+                "优化 SQL 查询，以高效地从分析平台检索活动线索，减少数据检索时间并加快活动执行。",
+                "开发活动摘要报告，如电子邮件打开率、点击率、活动优惠和自动化状态。",
+                "使用 HTML、CSS、JavaScript 和 Salesforce AMPScript 改进电子邮件模板和登陆页面，增强跨设备和现代电子邮件客户端的响应性和兼容性。",
+                "制定了一个主动的应急计划，以处理 Marketing Cloud 的维护期，确保对关键营销活动和数据流自动化没有中断。"
             ]
         },
         {
-            "title": "Web Developer, Administrator, and Content Creator",
+            "title": "网络开发者、管理员和内容创意者",
             "company": "ByteSide.one",
-            "duration": "September 2021 - September 2023",
+            "duration": "2021 年 9 月 - 2023 年 9 月",
             "description": [
-                "Founded a technology, gadget, and gaming news publication, reaching 125,000 website visits and 400,000 monthly post impressions on Facebook.",
-                "Architected and implemented scalable website infrastructure using WordPress, Cloudflare, AWS Lightsail and AWS CloudFront, ensuring optimal content delivery and security.",
-                "Executed omnichannel content monetization strategies, including Google AdSense and affiliate marketing across multiple mediums and affiliate networks, ensuring a sustainable business model for the publication."
+                "创立了一个科技、小工具和游戏新闻发布平台，达到了 12.5 万次网站访问和 40 万月度 Facebook 帖子展示。",
+                "使用 WordPress、Cloudflare、AWS Lightsail 和 AWS CloudFront 设计和实施了可扩展的网站基础设施，确保最优内容交付和安全。",
+                "执行全渠道内容货币化策略，包括跨多个媒介和联盟网络的 Google AdSense 和联盟营销，确保发布平台的可持续商业模式。"
             ]
         },
         {
-            "title": "Cooperative Studies Student",
+            "title": "合作研究学生",
             "company": "EssilorLuxottica",
-            "duration": "May 2019 - November 2019",
+            "duration": "2019 年 5 月 - 2019 年 11 月",
             "description": [
-                "Developed Approval Workflow, built-in to Google Sheets using Google Apps Script (JavaScript-based language), reducing costs and streamlining Essilor Shared Service's Approval Request workflow.",
-                "Gathering business requirements from users and maintainers.",
-                "Coordinating with the Master Data Management (MDM) team for maintaining the service.",
-                "Approval Workflow is currently being used in Essilor Shared Service's Requisition Department and IT Procurement Team.",
-                "Knowledge sharing and created documentation for Approval Workflow.",
-                "also developed Data Duplication and Cleaning Reports using OracleSQL and PL/SQL, improving Essilor's global supplier data quality.",
-                "Developed Approval Workflow using Google Apps Script (JavaScript-based language), Google Sheets, Google Forms, and Gmail.",
-                "Developed Duplication Report using OracleSQL and PL/SQL and deployed it to Oracle ERP.",
-                "Taught OracleSQL and Git to the team.",
-                "Created documentation for Duplication Reports."
+                "使用 Google Apps Script（基于 JavaScript 的语言）开发了内置于 Google Sheets 中的审批工作流，降低成本并简化了 Essilor 共享服务的审批请求工作流。",
+                "从用户和维护者收集业务需求。",
+                "与主数据管理（MDM）团队协调以维护该服务。",
+                "审批工作流目前被 Essilor 共享服务的采购申请部门和 IT 采购团队使用。",
+                "进行知识分享并为审批工作流创建文档。",
+                "还使用 OracleSQL 和 PL/SQL 开发了数据重复和清理报告，提高了 Essilor 全球供应商数据质量。",
+                "使用 Google Apps Script（基于 JavaScript 的语言）、Google Sheets、Google Forms 和 Gmail 开发了审批工作流。",
+                "使用 OracleSQL 和 PL/SQL 开发了重复数据删除报告并将其部署到 Oracle ERP。",
+                "向团队教授了 OracleSQL 和 Git。",
+                "为重复数据删除报告创建了文档。"
             ]
         }
     ],
     "certifications": [
         {
-            "title": "Badge 1: Data Warehousing Workshop",
+            "title": "徽章 1：数据仓库研讨会",
             "skills": [
                 "Snowflake",
                 "Data Engineering",
@@ -256,7 +256,7 @@
             ]
         },
         {
-            "title": "Building Language Models on AWS",
+            "title": "在 AWS 上构建语言模型",
             "skills": [
                 "Large Language Models (LLM)",
                 "Amazon Web Services (AWS)",
@@ -266,7 +266,7 @@
             ]
         },
         {
-            "title": "Foundations of Prompt Engineering",
+            "title": "提示工程基础",
             "skills": [
                 "Prompt Engineering",
                 "Amazon Web Services (AWS)",
@@ -276,7 +276,7 @@
             ]
         },
         {
-            "title": "Introduction to Generative AI",
+            "title": "生成式 AI 介绍",
             "skills": [
                 "Generative AI",
                 "Google Cloud Platform (GCP)",
@@ -307,7 +307,7 @@
         },
         {
             "title": "Flow Data Collections Specialist Superbadge",
-            "date": "June 2023",
+            "date": "2023 年 6 月",
             "skills": [
                 "Salesforce Flow",
                 "Data Collection",
@@ -337,7 +337,7 @@
             ]
         },
         {
-            "title": "React - The Complete Guide 2023 (incl. React Router & Redux)",
+            "title": "React - The Complete Guide 2023（包含 React Router 和 Redux）",
             "skills": [
                 "React.js",
                 "Redux.js",
@@ -347,7 +347,7 @@
             ]
         },
         {
-            "title": "MERN Stack Front To Back: Full Stack React, Redux & Node.js",
+            "title": "MERN Stack Front To Back：全栈 React、Redux 和 Node.js",
             "skills": [
                 "MERN Stack",
                 "React.js",
@@ -358,7 +358,7 @@
             ]
         },
         {
-            "title": "Salesforce Marketing Cloud Administrator Certification",
+            "title": "Salesforce Marketing Cloud 管理员认证",
             "skills": [
                 "Salesforce Marketing Cloud",
                 "Email Marketing",
@@ -368,7 +368,7 @@
             ]
         },
         {
-            "title": "The Complete Salesforce Certified Administrator Course",
+            "title": "完整 Salesforce 认证管理员课程",
             "skills": [
                 "Salesforce.com",
                 "Salesforce Administration",
@@ -378,7 +378,7 @@
             ]
         },
         {
-            "title": "Databases for Developers: Next Level",
+            "title": "数据库开发者：下一级",
             "skills": [
                 "OracleSQL",
                 "SQL",
@@ -388,7 +388,7 @@
             ]
         },
         {
-            "title": "Databases for Developers: Foundations",
+            "title": "数据库开发者：基础知识",
             "skills": [
                 "OracleSQL",
                 "SQL",
@@ -400,18 +400,18 @@
     ],
     "volunteering": [
         {
-            "title": "Senior advisor and referee",
+            "title": "高级顾问和裁判",
             "year": "2018",
             "description": [
-                "Advisor and refereee in 'PHP and JavaScript' competition on IT Open House 2018."
+                "在 2018 年 IT 开放日《PHP 和 JavaScript》竞赛中担任顾问和裁判。"
             ]
         },
         {
-            "title": "Education Team Member",
+            "title": "教育团队成员",
             "year": "2017",
             "description": [
-                "In practicing new student to learn how to code in Python3, practicing Problem Solving skills.",
-                "Starts for IT KMITL Python Pre-programming course on YouTube for on-demand online Python course, provisionned for infinite learning possibilities."
+                "在练习中教新学生学习如何用 Python3 编程，练习问题解决技能。",
+                "为 IT KMITL Python 预编程课程启动 YouTube 版本，提供按需在线 Python 课程，为无限学习可能性提供了条件。"
             ],
             "link": {
                 "text": "IT KMITL Python Pre-programming course on YouTube",
@@ -419,22 +419,22 @@
             }
         },
         {
-            "title": "Teaching Director",
+            "title": "教学主任",
             "year": "2017",
             "description": [
-                "Teaching new students on how the Cloud Service using Amazon Web Service."
+                "教新学生如何使用亚马逊网络服务进行云服务。"
             ]
         }
     ],
     "languages": [
         {
-            "name": "English",
-            "proficiency": "Professional proficiency",
+            "name": "英文",
+            "proficiency": "专业级",
             "iconClass": "devicon-english-plain"
         },
         {
-            "name": "Thai",
-            "proficiency": "Native proficiency",
+            "name": "泰文",
+            "proficiency": "母语级",
             "iconClass": "devicon-thai-plain"
         }
     ],

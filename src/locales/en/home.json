@@ -98,7 +98,7 @@
             "title": "Super",
             "description": "Personal portfolio website built with Next.js and Cloudflare Pages, integrating with Superbrain API. Orchestrated development using Gemini 2.5 Flash/Pro models for code generation and task execution.",
             "githubLink": "https://github.com/sagelga/super",
-            "demoLink": "https://super.sagelga.workers.dev"
+            "demoLink": "https://sagelga.com"
         },
         {
             "title": "Superbrain",

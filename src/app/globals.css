@@ -8,20 +8,41 @@
   --color-cream: #F0EAD6;
   --color-muted: #9A9485;
   --color-rim: #302C24;
+  --font-sans: 'IBM Plex Sans Thai', system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', monospace;
+  --font-serif: 'IBM Plex Serif', serif;
 }
 
-body {
-  background-color: #1A1814;
-  color: #F0EAD6;
-  font-family: var(--font-sans);
+@layer base {
+  body {
+    background-color: var(--color-canvas);
+    color: var(--color-cream);
+    font-family: var(--font-sans);
+  }
 }
 
-* {
-  font-family: var(--font-sans);
+/* Light mode — unlayered so it beats @layer theme's :root definitions */
+html:not(.dark) {
+  --color-canvas: #F5F0E8;
+  --color-surface: #EDE8DA;
+  --color-cream: #1A1814;
+  --color-muted: #6B6458;
+  --color-rim: #D4CDB8;
 }
 
 .font-display {
   font-family: var(--font-serif), "Georgia", serif;
+}
+
+/* Thai: override serif/display to use Noto Serif Thai — IBM Plex Serif has no Thai glyphs */
+html[lang="th"] {
+  --font-serif: var(--font-serif-thai), "Georgia", serif;
+}
+
+/* Chinese: IBM Plex has no CJK coverage — use Noto Serif SC for both body and display */
+html[lang="zh"] {
+  --font-sans: var(--font-serif-zh), "IBM Plex Sans Thai", system-ui, sans-serif;
+  --font-serif: var(--font-serif-zh), "Georgia", serif;
 }
 
 /* === Easing variables === */
@@ -91,11 +112,16 @@ body {
     transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-.reveal-stagger.is-revealed > *:nth-child(1) { opacity: 1; transform: none; transition-delay: 0ms; }
-.reveal-stagger.is-revealed > *:nth-child(2) { opacity: 1; transform: none; transition-delay: 70ms; }
-.reveal-stagger.is-revealed > *:nth-child(3) { opacity: 1; transform: none; transition-delay: 140ms; }
-.reveal-stagger.is-revealed > *:nth-child(4) { opacity: 1; transform: none; transition-delay: 210ms; }
-.reveal-stagger.is-revealed > *:nth-child(5) { opacity: 1; transform: none; transition-delay: 280ms; }
+.reveal-stagger.is-revealed > *:nth-child(1)  { opacity: 1; transform: none; transition-delay: 0ms; }
+.reveal-stagger.is-revealed > *:nth-child(2)  { opacity: 1; transform: none; transition-delay: 60ms; }
+.reveal-stagger.is-revealed > *:nth-child(3)  { opacity: 1; transform: none; transition-delay: 120ms; }
+.reveal-stagger.is-revealed > *:nth-child(4)  { opacity: 1; transform: none; transition-delay: 180ms; }
+.reveal-stagger.is-revealed > *:nth-child(5)  { opacity: 1; transform: none; transition-delay: 240ms; }
+.reveal-stagger.is-revealed > *:nth-child(6)  { opacity: 1; transform: none; transition-delay: 300ms; }
+.reveal-stagger.is-revealed > *:nth-child(7)  { opacity: 1; transform: none; transition-delay: 340ms; }
+.reveal-stagger.is-revealed > *:nth-child(8)  { opacity: 1; transform: none; transition-delay: 380ms; }
+.reveal-stagger.is-revealed > *:nth-child(9)  { opacity: 1; transform: none; transition-delay: 420ms; }
+.reveal-stagger.is-revealed > *:nth-child(n+10) { opacity: 1; transform: none; transition-delay: 450ms; }
 
 /* === Reduced motion: disable all animations === */
 @media (prefers-reduced-motion: reduce) {
@@ -113,6 +139,26 @@ body {
     transform: none !important;
     transition: none !important;
   }
+}
+
+/* === Focus-visible states === */
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Buttons and interactive elements get a subtler ring */
+button:focus-visible,
+a:focus-visible,
+[role="button"]:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* Remove default focus ring for mouse users */
+:focus:not(:focus-visible) {
+  outline: none;
 }
 
 /* Swiper overrides for pages that still use it */

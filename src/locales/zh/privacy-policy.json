@@ -1,99 +1,99 @@
 {
-    "title": "Privacy Policy",
-    "last_updated": "Last updated: {{date}}",
+    "title": "隐私政策",
+    "last_updated": "最后更新：{{date}}",
     "sections": [
         {
             "id": "introduction",
-            "title": "1. Introduction",
+            "title": "1. 简介",
             "paragraphs": [
-                "Welcome to {{websiteName}} (the \"Website\"). This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website, including any other media form, media channel, mobile website, or mobile application related or connected thereto (collectively, the \"Site\"). Please read this privacy policy carefully. If you do not agree with the terms of this privacy policy, please do not access the Site.",
-                "We reserve the right to make changes to this Privacy Policy at any time and for any reason. We will alert you about any changes by updating the \"Last updated\" date of this Privacy Policy. You are encouraged to periodically review this Privacy Policy to stay informed of updates. You will be deemed to have been made aware of, will be subject to, and will be deemed to have accepted the changes in any revised Privacy Policy by your continued use of the Site after the date such revised Privacy Policy is posted."
+                "欢迎访问 {{websiteName}}（以下简称\"本网站\"）。本隐私政策说明了当您访问我们的网站（包括任何相关或关联的其他媒体形式、媒体渠道、移动网站或移动应用程序）时，我们如何收集、使用、披露和保护您的信息（统称\"本网站\"）。请仔细阅读本隐私政策。如果您不同意本隐私政策的条款，请勿访问本网站。",
+                "我们保留随时以任何原因修改本隐私政策的权利。我们将通过更新本隐私政策的\"最后更新\"日期来提醒您任何变更。我们鼓励您定期查看本隐私政策以了解最新动态。如果您在修订后的隐私政策发布之日起继续使用本网站，您将被视为已了解、受约束并接受了隐私政策中的任何更改。"
             ]
         },
         {
             "id": "data-we-collect",
-            "title": "2. Data We Collect",
+            "title": "2. 我们收集的数据",
             "paragraphs": [
-                "We may collect information about you in a variety of ways. The information we may collect on the Site includes:"
+                "我们可能以多种方式收集关于您的信息。我们可能在本网站上收集的信息包括："
             ],
             "subsections": [
                 {
-                    "title": "Analytics Data (Cloudflare Metrics)",
-                    "paragraph": "We use Cloudflare Web Analytics to collect anonymous usage data about your visit to our website. This helps us understand how visitors interact with our site, which pages are popular, and how we can improve the user experience. Cloudflare Web Analytics does not use cookies or track individual users. It collects data such as the pages you visit, the time spent on those pages, and the general geographic location of your IP address (without storing the full IP address)."
+                    "title": "分析数据（Cloudflare 指标）",
+                    "paragraph": "我们使用 Cloudflare Web Analytics 收集有关您访问我们网站的匿名使用数据。这有助于我们了解访问者如何与我们的网站互动、哪些页面受欢迎，以及我们如何改进用户体验。Cloudflare Web Analytics 不使用 Cookie 或跟踪个人用户。它收集您访问的页面、在这些页面上花费的时间以及您的 IP 地址的大致地理位置（不存储完整的 IP 地址）等数据。"
                 },
                 {
-                    "title": "Cookies and Tracking Technologies",
-                    "paragraph": "We use essential cookies to ensure the proper functioning of our website. These cookies are strictly necessary for the website to operate and cannot be switched off in our systems. They are usually only set in response to actions made by you which amount to a request for services, such as setting your privacy preferences, logging in, or filling in forms. You can set your browser to block or alert you about these cookies, but some parts of the site will not then work.",
-                    "additional_paragraph": "We do not currently use non-essential cookies for advertising or extensive tracking purposes. If this changes in the future, we will update this policy and provide appropriate consent mechanisms."
+                    "title": "Cookie 和跟踪技术",
+                    "paragraph": "我们使用必要的 Cookie 确保我们网站的正常运行。这些 Cookie 是网站运行严格必需的，无法在我们的系统中关闭。它们通常仅在响应您的操作时设置，这些操作相当于对服务的请求，例如设置您的隐私偏好、登录或填写表格。您可以设置浏览器来阻止或提醒您这些 Cookie，但网站的某些部分将无法正常工作。",
+                    "additional_paragraph": "我们目前不使用非必要的 Cookie 进行广告或广泛跟踪。如果将来这种情况发生变化，我们将更新本政策并提供适当的同意机制。"
                 },
                 {
-                    "title": "Personal Data (if applicable)",
-                    "paragraph": "As a portfolio, blog, and art gallery website, we generally do not collect personal data unless you voluntarily provide it to us, for example, by contacting us via an email form or subscribing to a newsletter (if available). If you choose to provide personal data, it may include your name, email address, and any other information you choose to provide. We will only use this data for the purpose for which it was provided."
+                    "title": "个人数据（如适用）",
+                    "paragraph": "作为作品集、博客和美术馆网站，除非您自愿向我们提供信息（例如通过联系表格与我们联系或订阅新闻通讯（如有）），否则我们通常不收集个人数据。如果您选择提供个人数据，可能包括您的姓名、电子邮件地址和您选择提供的任何其他信息。我们仅将此数据用于提供数据的目的。"
                 }
             ]
         },
         {
             "id": "how-we-use-your-information",
-            "title": "3. How We Use Your Information",
+            "title": "3. 我们如何使用您的信息",
             "paragraphs": [
-                "Having accurate information about you permits us to provide you with a smooth, efficient, and customized experience. Specifically, we may use information collected about you via the Site to:"
+                "拥有关于您的准确信息使我们能够为您提供流畅、高效和定制的体验。具体来说，我们可能会使用通过本网站收集的关于您的信息来："
             ],
             "list_items": [
-                "Monitor and analyze usage and trends to improve your experience with the Site.",
-                "Improve the efficiency and operation of the Site.",
-                "Respond to your inquiries or requests if you contact us.",
-                "Perform other business activities as needed."
+                "监测和分析使用和趋势，改进您对本网站的体验。",
+                "提高本网站的效率和运营。",
+                "如果您与我们联系，回应您的询问或请求。",
+                "根据需要进行其他业务活动。"
             ]
         },
         {
             "id": "disclosure-of-your-information",
-            "title": "4. Disclosure of Your Information",
+            "title": "4. 您的信息的披露",
             "paragraphs": [
-                "We do not sell, trade, rent, or otherwise share your personal information with third parties without your consent, except as described in this Privacy Policy.",
-                "We may disclose information we have collected about you in certain situations:"
+                "我们不会未经您的同意向第三方出售、交易、出租或以其他方式共享您的个人信息，本隐私政策中描述的情况除外。",
+                "我们可能在某些情况下披露我们收集的关于您的信息："
             ],
             "subsections": [
                 {
-                    "title": "By Law or to Protect Rights",
-                    "paragraph": "If we believe the release of information about you is necessary to respond to legal process, to investigate or remedy potential violations of our policies, or to protect the rights, property, and safety of others, we may share your information as permitted or required by any applicable law, rule, or regulation."
+                    "title": "根据法律或保护权利",
+                    "paragraph": "如果我们认为披露关于您的信息是响应法律程序、调查或补救我们政策的潜在违规行为，或保护他人的权利、财产和安全所必需的，我们可能会根据任何适用的法律、规则或法规允许或要求的方式共享您的信息。"
                 },
                 {
-                    "title": "Third-Party Service Providers",
-                    "paragraph": "We may share your information with third parties that perform services for us or on our behalf, including data analysis, email delivery, hosting services, and marketing assistance. For example, Cloudflare processes analytics data on our behalf as described above."
+                    "title": "第三方服务提供商",
+                    "paragraph": "我们可能会与为我们或代表我们提供服务的第三方共享您的信息，包括数据分析、电子邮件传递、托管服务和营销协助。例如，Cloudflare 如上所述代表我们处理分析数据。"
                 }
             ]
         },
         {
             "id": "security-of-your-information",
-            "title": "5. Security of Your Information",
+            "title": "5. 您的信息的安全性",
             "paragraphs": [
-                "We use administrative, technical, and physical security measures to help protect your personal information. While we have taken reasonable steps to secure the personal information you provide to us, please be aware that despite our efforts, no security measures are perfect or impenetrable, and no method of data transmission can be guaranteed against any interception or other type of misuse."
+                "我们使用行政、技术和物理安全措施来帮助保护您的个人信息。虽然我们已采取合理措施来保护您向我们提供的个人信息，但请注意，尽管我们做出了努力，但没有任何安全措施是完美或无懈可击的，数据传输方法也无法保证防止任何拦截或其他类型的误用。"
             ]
         },
         {
             "id": "your-rights",
-            "title": "6. Your Rights (e.g., GDPR, CCPA)",
+            "title": "6. 您的权利（例如 GDPR、CCPA）",
             "paragraphs": [
-                "Depending on your location, you may have certain rights regarding your personal data, including:"
+                "根据您的位置，您可能对个人数据拥有某些权利，包括："
             ],
             "list_items": [
-                "The right to access your personal data.",
-                "The right to request correction of inaccurate personal data.",
-                "The right to request erasure of your personal data.",
-                "The right to object to the processing of your personal data.",
-                "The right to request restriction of processing your personal data.",
-                "The right to data portability.",
-                "The right to withdraw consent (where applicable)."
+                "访问您个人数据的权利。",
+                "请求更正不准确的个人数据的权利。",
+                "请求删除您个人数据的权利。",
+                "反对处理您个人数据的权利。",
+                "请求限制处理您个人数据的权利。",
+                "数据可携带权。",
+                "撤回同意的权利（如适用）。"
             ],
-            "additional_paragraph": "To exercise any of these rights, please contact us using the contact information provided below."
+            "additional_paragraph": "要行使这些权利中的任何一项，请使用下面提供的联系信息与我们联系。"
         },
         {
             "id": "contact-us",
-            "title": "7. Contact Us",
+            "title": "7. 联系我们",
             "paragraphs": [
-                "If you have questions or comments about this Privacy Policy, please contact us at:"
+                "如果您对本隐私政策有任何疑问或意见，请通过以下方式与我们联系："
             ]
         }
     ],
-    "table_of_contents_title": "Table of Contents"
+    "table_of_contents_title": "目录"
 }

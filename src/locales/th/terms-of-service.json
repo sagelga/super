@@ -1,86 +1,86 @@
 {
-    "title": "Terms of Service",
-    "last_updated": "Last updated: {{date}}",
+    "title": "เงื่อนไขการให้บริการ",
+    "last_updated": "อัปเดตล่าสุด: {{date}}",
     "sections": [
         {
             "id": "introduction",
-            "title": "1. Introduction",
+            "title": "1. บทนำ",
             "paragraphs": [
-                "Welcome to {{websiteName}} (the \"Website\"). These Terms of Service (\"Terms\") govern your access to and use of the Website and its content, features, and services (collectively, the \"Service\"). By accessing or using the Service, you agree to be bound by these Terms and our Privacy Policy. If you do not agree to these Terms, please do not use the Service."
+                "ยินดีต้อนรับสู่ {{websiteName}} (\"เว็บไซต์\") เงื่อนไขการให้บริการนี้ (\"เงื่อนไข\") กำหนดการเข้าถึงและการใช้เว็บไซต์และเนื้อหา คุณลักษณะ และบริการของมัน (รวมกันเรียกว่า \"บริการ\") โดยการเข้าถึงหรือใช้บริการ คุณตกลงที่จะต้องปฏิบัติตามเงื่อนไขเหล่านี้และนโยบายความเป็นส่วนตัวของเรา หากคุณไม่ยินยอมกับเงื่อนไขเหล่านี้ โปรดอย่าใช้บริการ"
             ]
         },
         {
             "id": "acceptance-of-terms",
-            "title": "2. Acceptance of Terms",
+            "title": "2. การยอมรับเงื่อนไข",
             "paragraphs": [
-                "By using our Service, you confirm that you are at least 18 years of age or have reached the age of majority in your jurisdiction, and that you are legally capable of entering into a binding agreement. If you are using the Service on behalf of an entity, you represent that you have the authority to bind that entity to these Terms."
+                "โดยการใช้บริการของเรา คุณยืนยันว่าคุณอายุอย่างน้อย 18 ปี หรือถึงอายุที่เป็นผู้ใหญ่ในเขตอำนาจศาลของคุณ และคุณมีความสามารถทางกฎหมายในการเข้าทำสัญญาที่มีผลผูกพัน หากคุณใช้บริการในนามของนิติบุคคล คุณรับรองว่าคุณมีอำนาจในการผูกพันหน่วยงานนั้นกับเงื่อนไขเหล่านี้"
             ]
         },
         {
             "id": "changes-to-terms",
-            "title": "3. Changes to Terms",
+            "title": "3. การเปลี่ยนแปลงเงื่อนไข",
             "paragraphs": [
-                "We reserve the right to modify or update these Terms at any time, at our sole discretion. We will notify you of any changes by posting the new Terms on this page and updating the \"Last updated\" date. Your continued use of the Service after any such changes constitutes your acceptance of the new Terms. It is your responsibility to review these Terms periodically for changes."
+                "เรามีสิทธิ์ที่จะแก้ไขหรืออัปเดตเงื่อนไขเหล่านี้ได้ตลอดเวลาตามความเห็นชอบโดยเดียว เราจะแจ้งให้คุณทราบเกี่ยวกับการเปลี่ยนแปลงใด ๆ โดยการโพสต์เงื่อนไขใหม่บนหน้านี้และอัปเดตวันที่ \"อัปเดตล่าสุด\" การใช้บริการอย่างต่อเนื่องของคุณหลังจากการเปลี่ยนแปลงดังกล่าว ถือเป็นการยอมรับเงื่อนไขใหม่ของคุณ เป็นหน้าที่ของคุณที่จะตรวจสอบเงื่อนไขเหล่านี้เป็นระยะ ๆ เพื่อดูการเปลี่ยนแปลง"
             ]
         },
         {
             "id": "user-obligations",
-            "title": "4. User Obligations",
+            "title": "4. หน้าที่ของผู้ใช้",
             "paragraphs": [
-                "As a user of the Service, you agree not to:"
+                "ในฐานะผู้ใช้บริการ คุณตกลงไม่:"
             ],
             "list_items": [
-                "Use the Service for any unlawful purpose or in any way that violates these Terms.",
-                "Infringe upon our intellectual property rights or the intellectual property rights of others.",
-                "Upload or transmit viruses or any other type of malicious code.",
-                "Harass, abuse, insult, harm, defame, slander, disparage, intimidate, or discriminate based on gender, sexual orientation, religion, ethnicity, race, age, national origin, or disability.",
-                "Collect or track the personal information of others.",
-                "Spam, phish, pharm, pretext, spider, crawl, or scrape.",
-                "Interfere with or circumvent the security features of the Service."
+                "ใช้บริการเพื่อวัตถุประสงค์ผิดกฎหมายหรือในวิธีใด ๆ ที่ละเมิดเงื่อนไขเหล่านี้",
+                "ละเมิดสิทธิ์ของเราในทรัพย์สินทางปัญญาหรือสิทธิ์ของผู้อื่นในทรัพย์สินทางปัญญา",
+                "อัปโหลดหรือส่งไวรัสหรือโค้ดที่เป็นอันตรายชนิดอื่น ๆ",
+                "บ騷擾 ทำร้าย ด่า ทำให้เกิดการดูหมิ่น ใส่ร้ายใจ ประชดประชัน ใส่ร้าย หรือแบ่งแยกบนพื้นฐานของเพศ การมีแนวโน้มทางเพศ ศาสนา ชาติพันธุ์ เชื้อชาติ อายุ ประเทศกำเนิด หรือความพิการ",
+                "เก็บรวบรวมหรือติดตามข้อมูลส่วนบุคคลของผู้อื่น",
+                "ส่งจดหมายขยะ ประตูลักษณ์ การทำไร่ ปลอมตัว แมงมุม คลาน หรือขูดหนังสือ",
+                "แทรกแซงหรือหลีกเลี่ยงคุณลักษณะความปลอดภัยของบริการ"
             ]
         },
         {
             "id": "intellectual-property",
-            "title": "5. Intellectual Property Rights",
+            "title": "5. สิทธิ์ของเรา",
             "paragraphs": [
-                "All content on the Website, including text, graphics, logos, images, and software, is our property or the property of our licensors and is protected by copyright and other intellectual property laws. You may not reproduce, distribute, modify, create derivative works of, publicly display, publicly perform, republish, download, store, or transmit any of the material on our Service, except as generally permitted by the Service."
+                "เนื้อหาทั้งหมดบนเว็บไซต์ รวมถึงข้อความ กราฟิก โลโก้ รูปภาพ และซอฟต์แวร์ เป็นสมบัติของเราหรือสมบัติของผู้ให้ใบอนุญาตและได้รับการคุ้มครองโดยลิขสิทธิ์และกฎหมายทรัพย์สินทางปัญญาอื่น ๆ คุณอาจไม่จำลอง กระจาย แก้ไข สร้างงานจากอนุพันธ์ แสดงสาธารณะ แสดงสาธารณะ เผยแพร่ซ้ำ ดาวน์โหลด เก็บ หรือส่งวัสดุใด ๆ บนบริการของเรา ยกเว้นตามที่อนุญาตโดยทั่วไปโดยบริการ"
             ]
         },
         {
             "id": "disclaimer-of-warranties",
-            "title": "6. Disclaimer of Warranties",
+            "title": "6. การปฏิเสธการรับประกัน",
             "paragraphs": [
-                "THE SERVICE IS PROVIDED ON AN \"AS IS\" AND \"AS AVAILABLE\" BASIS, WITHOUT ANY WARRANTIES OF ANY KIND, EITHER EXPRESS OR IMPLIED. WE DO NOT WARRANT THAT THE SERVICE WILL BE UNINTERRUPTED, SECURE, OR ERROR-FREE. WE DISCLAIM ALL WARRANTIES, INCLUDING, BUT NOT LIMITED TO, ANY WARRANTIES OF MERCHANTABILITY, NON-INFRINGEMENT, AND FITNESS FOR PARTICULAR PURPOSE."
+                "บริการมีให้บนพื้นฐาน \"ตามปัจจุบัน\" และ \"ตามที่พร้อมใช้งาน\" โดยไม่มีการรับประกันใด ๆ แต่อย่างใด ไม่ว่าจะชัดแจ้งหรือนัยโดยนัย เราไม่รับประกันว่าบริการจะไม่มีการหยุดชะงัก ปลอดภัย หรือปราศจากข้อผิดพลาด เราปฏิเสธการรับประกันทั้งหมด รวมถึงแต่ไม่จำกัดเพียงการรับประกันใด ๆ เกี่ยวกับความสามารถในการค้า การไม่ละเมิด และความเหมาะสมสำหรับวัตถุประสงค์เฉพาะ"
             ]
         },
         {
             "id": "limitation-of-liability",
-            "title": "7. Limitation of Liability",
+            "title": "7. ข้อจำกัดความรับผิดชอบ",
             "paragraphs": [
-                "IN NO EVENT WILL WE BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, INCLUDING WITHOUT LIMITATION, LOSS OF PROFITS, DATA, USE, GOODWILL, OR OTHER INTANGIBLE LOSSES, RESULTING FROM (I) YOUR ACCESS TO OR USE OF OR INABILITY TO ACCESS OR USE THE SERVICE; (II) ANY CONDUCT OR CONTENT OF ANY THIRD PARTY ON THE SERVICE; (III) ANY CONTENT OBTAINED FROM THE SERVICE; AND (IV) UNAUTHORIZED ACCESS, USE OR ALTERATION OF YOUR TRANSMISSIONS OR CONTENT, WHETHER BASED ON WARRANTY, CONTRACT, TORT (INCLUDING NEGLIGENCE) OR ANY OTHER LEGAL THEORY, WHETHER OR NOT WE HAVE BEEN INFORMED OF THE POSSIBILITY OF SUCH DAMAGE, AND EVEN IF A REMEDY SET FORTH HEREIN IS FOUND TO HAVE FAILED OF ITS ESSENTIAL PURPOSE."
+                "ในกรณีใด ๆ เราจะไม่รับผิดชอบต่อความเสียหายทางอ้อม อุบัติเหตุ พิเศษ ผลที่ตามมา หรือลงโทษ รวมถึง แต่ไม่จำกัดเพียงการสูญเสียกำไร ข้อมูล การใช้งาน ไมตรีสัมพันธ์ หรือความสูญเสียที่ไม่มีตัวตนอื่น ๆ ที่เป็นผลมาจาก (i) การเข้าถึงหรือใช้งานหรือไม่สามารถเข้าถึงหรือใช้บริการ (ii) พฤติกรรมหรือเนื้อหาใด ๆ ของบุคคลที่สามบนบริการ (iii) เนื้อหาใด ๆ ที่ได้มาจากบริการ และ (iv) การเข้าถึง การใช้งาน หรือการแก้ไขการส่งข้อมูลหรือเนื้อหาของคุณโดยไม่ได้รับอนุญาต ไม่ว่าจะอิงตามการรับประกัน สัญญา การกระทำที่ผิดกฎหมาย (รวมถึงการประมาท) หรือทฤษฎีกฎหมายอื่น ๆ ไม่ว่าเราได้รับแจ้งเกี่ยวกับความเป็นไปได้ของความเสียหายดังกล่าวหรือไม่ และแม้ว่าการแก้ไขที่กำหนดไว้ในที่นี้จะพบว่าล้มเหลวในวัตถุประสงค์ที่จำเป็นของมัน"
             ]
         },
         {
             "id": "indemnification",
-            "title": "8. Indemnification",
+            "title": "8. การชดใช้",
             "paragraphs": [
-                "You agree to defend, indemnify, and hold harmless [Your Website Name] and its affiliates, licensors, and service providers, and its and their respective officers, directors, employees, contractors, agents, licensors, suppliers, successors, and assigns from and against any claims, liabilities, damages, judgments, awards, losses, costs, expenses, or fees (including reasonable attorneys' fees) arising out of or relating to your violation of these Terms or your use of the Service."
+                "คุณตกลงที่จะป้องกัน ชดใช้ และคุ้มครอง sagelga.com และสิ่งอำนวยความสะดวก ผู้ให้ใบอนุญาต และผู้ให้บริการ รวมถึงเจ้าหน้าที่ ผู้บริหาร พนักงาน ผู้รับเหมา ตัวแทน ผู้ให้ใบอนุญาต ผู้จัดหา ผู้สืบทอด และผู้มอบหมายของพวกเขา จากและต่อต้านการเรียกร้องใด ๆ ความรับผิดชอบ ความเสียหาย คำพิพากษา รางวัล ความสูญเสีย ค่าใช้จ่าย ค่าใช้จ่าย หรือค่าธรรมเนียม (รวมถึงค่าธรรมเนียมของทนายความที่สมควร) ที่เกิดจากหรือเกี่ยวข้องกับการละเมิดเงื่อนไขของคุณหรือการใช้บริการของคุณ"
             ]
         },
         {
             "id": "governing-law",
-            "title": "9. Governing Law",
+            "title": "9. กฎหมายที่บังคับใช้",
             "paragraphs": [
-                "These Terms shall be governed and construed in accordance with the laws of [Your Country/State], without regard to its conflict of law provisions."
+                "เงื่อนไขเหล่านี้จะถูกควบคุมและตีความตามกฎหมายของประเทศไทย โดยไม่คำนึงถึงการให้บทบัญญัติเกี่ยวกับความขัดแย้งของกฎหมาย"
             ]
         },
         {
             "id": "contact-us",
-            "title": "10. Contact Us",
+            "title": "10. ติดต่อเรา",
             "paragraphs": [
-                "If you have any questions about these Terms, please contact us at:"
+                "หากคุณมีคำถามใด ๆ เกี่ยวกับเงื่อนไขเหล่านี้ โปรดติดต่อเรา:"
             ]
         }
     ],
-    "table_of_contents_title": "Table of Contents"
+    "table_of_contents_title": "สารบัญ"
 }

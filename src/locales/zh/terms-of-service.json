@@ -1,86 +1,86 @@
 {
-    "title": "Terms of Service",
-    "last_updated": "Last updated: {{date}}",
+    "title": "服务条款",
+    "last_updated": "最后更新：{{date}}",
     "sections": [
         {
             "id": "introduction",
-            "title": "1. Introduction",
+            "title": "1. 简介",
             "paragraphs": [
-                "Welcome to {{websiteName}} (the \"Website\"). These Terms of Service (\"Terms\") govern your access to and use of the Website and its content, features, and services (collectively, the \"Service\"). By accessing or using the Service, you agree to be bound by these Terms and our Privacy Policy. If you do not agree to these Terms, please do not use the Service."
+                "欢迎访问 {{websiteName}}（以下简称\"本网站\"）。本服务条款（以下简称\"条款\"）规定了您访问和使用本网站及其内容、功能和服务（统称\"服务\"）的条件。访问或使用服务即表示您同意受本条款和我们的隐私政策约束。如果您不同意本条款，请勿使用服务。"
             ]
         },
         {
             "id": "acceptance-of-terms",
-            "title": "2. Acceptance of Terms",
+            "title": "2. 条款接受",
             "paragraphs": [
-                "By using our Service, you confirm that you are at least 18 years of age or have reached the age of majority in your jurisdiction, and that you are legally capable of entering into a binding agreement. If you are using the Service on behalf of an entity, you represent that you have the authority to bind that entity to these Terms."
+                "使用我们的服务即表示您确认您已年满18岁或达到您所在司法管辖区的法定年龄，且您在法律上有能力订立具有约束力的协议。如果您代表任何实体使用服务，您声明您有权将该实体与本条款进行约束。"
             ]
         },
         {
             "id": "changes-to-terms",
-            "title": "3. Changes to Terms",
+            "title": "3. 条款变更",
             "paragraphs": [
-                "We reserve the right to modify or update these Terms at any time, at our sole discretion. We will notify you of any changes by posting the new Terms on this page and updating the \"Last updated\" date. Your continued use of the Service after any such changes constitutes your acceptance of the new Terms. It is your responsibility to review these Terms periodically for changes."
+                "我们保留随时按我们的唯一裁量权修改或更新本条款的权利。我们将通过在本页面发布新条款并更新\"最后更新\"日期来通知您任何变更。在任何此类变更后继续使用服务即表示您接受新条款。定期查看本条款的变更是您的责任。"
             ]
         },
         {
             "id": "user-obligations",
-            "title": "4. User Obligations",
+            "title": "4. 用户义务",
             "paragraphs": [
-                "As a user of the Service, you agree not to:"
+                "作为服务的使用者，您同意不进行以下行为："
             ],
             "list_items": [
-                "Use the Service for any unlawful purpose or in any way that violates these Terms.",
-                "Infringe upon our intellectual property rights or the intellectual property rights of others.",
-                "Upload or transmit viruses or any other type of malicious code.",
-                "Harass, abuse, insult, harm, defame, slander, disparage, intimidate, or discriminate based on gender, sexual orientation, religion, ethnicity, race, age, national origin, or disability.",
-                "Collect or track the personal information of others.",
-                "Spam, phish, pharm, pretext, spider, crawl, or scrape.",
-                "Interfere with or circumvent the security features of the Service."
+                "以任何非法目的使用服务，或以任何违反本条款的方式使用服务。",
+                "侵犯我们或他人的知识产权。",
+                "上传或传输病毒或任何其他类型的恶意代码。",
+                "骚扰、辱骂、侮辱、伤害、诽谤、造谣、贬低、恐吓或基于性别、性取向、宗教、种族、肤色、民族或国籍、年龄或残疾进行歧视。",
+                "收集或跟踪他人的个人信息。",
+                "发送垃圾邮件、钓鱼、欺骗、诱导、爬虫爬取或获取数据。",
+                "干扰或规避服务的安全功能。"
             ]
         },
         {
             "id": "intellectual-property",
-            "title": "5. Intellectual Property Rights",
+            "title": "5. 知识产权",
             "paragraphs": [
-                "All content on the Website, including text, graphics, logos, images, and software, is our property or the property of our licensors and is protected by copyright and other intellectual property laws. You may not reproduce, distribute, modify, create derivative works of, publicly display, publicly perform, republish, download, store, or transmit any of the material on our Service, except as generally permitted by the Service."
+                "本网站上的所有内容，包括文本、图形、徽标、图像和软件，是我们或我们许可人的财产，受版权和其他知识产权法保护。除服务通常允许的情况外，您不得复制、分发、修改、创建衍生作品、公开展示、公开表演、重新发布、下载、存储或传输服务上的任何材料。"
             ]
         },
         {
             "id": "disclaimer-of-warranties",
-            "title": "6. Disclaimer of Warranties",
+            "title": "6. 免责声明",
             "paragraphs": [
-                "THE SERVICE IS PROVIDED ON AN \"AS IS\" AND \"AS AVAILABLE\" BASIS, WITHOUT ANY WARRANTIES OF ANY KIND, EITHER EXPRESS OR IMPLIED. WE DO NOT WARRANT THAT THE SERVICE WILL BE UNINTERRUPTED, SECURE, OR ERROR-FREE. WE DISCLAIM ALL WARRANTIES, INCLUDING, BUT NOT LIMITED TO, ANY WARRANTIES OF MERCHANTABILITY, NON-INFRINGEMENT, AND FITNESS FOR PARTICULAR PURPOSE."
+                "本服务按\"现状\"和\"现有\"基础提供，不提供任何类型的明示或暗示的保证。我们不保证服务将不受中断、安全或无错误。我们否认所有保证，包括但不限于任何商品适销性、不侵权和特定用途适用性的保证。"
             ]
         },
         {
             "id": "limitation-of-liability",
-            "title": "7. Limitation of Liability",
+            "title": "7. 责任限制",
             "paragraphs": [
-                "IN NO EVENT WILL WE BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, INCLUDING WITHOUT LIMITATION, LOSS OF PROFITS, DATA, USE, GOODWILL, OR OTHER INTANGIBLE LOSSES, RESULTING FROM (I) YOUR ACCESS TO OR USE OF OR INABILITY TO ACCESS OR USE THE SERVICE; (II) ANY CONDUCT OR CONTENT OF ANY THIRD PARTY ON THE SERVICE; (III) ANY CONTENT OBTAINED FROM THE SERVICE; AND (IV) UNAUTHORIZED ACCESS, USE OR ALTERATION OF YOUR TRANSMISSIONS OR CONTENT, WHETHER BASED ON WARRANTY, CONTRACT, TORT (INCLUDING NEGLIGENCE) OR ANY OTHER LEGAL THEORY, WHETHER OR NOT WE HAVE BEEN INFORMED OF THE POSSIBILITY OF SUCH DAMAGE, AND EVEN IF A REMEDY SET FORTH HEREIN IS FOUND TO HAVE FAILED OF ITS ESSENTIAL PURPOSE."
+                "在任何情况下，我们均不对任何间接、附带、特殊、后果性或惩罚性损害赔偿负责，包括但不限于利润、数据、使用、商誉或其他无形损失的损害赔偿，这些损害赔偿由以下原因引起：(I) 您访问或使用或无法访问或使用服务；(II) 服务上任何第三方的行为或内容；(III) 从服务获得的任何内容；以及 (IV) 未经授权访问、使用或更改您的传输或内容，无论是基于保证、合同、侵权（包括过失）还是任何其他法律理论，无论我们是否已被告知可能发生此类损害的可能性，即使本文规定的补救措施被认为未能实现其基本目的。"
             ]
         },
         {
             "id": "indemnification",
-            "title": "8. Indemnification",
+            "title": "8. 赔偿",
             "paragraphs": [
-                "You agree to defend, indemnify, and hold harmless [Your Website Name] and its affiliates, licensors, and service providers, and its and their respective officers, directors, employees, contractors, agents, licensors, suppliers, successors, and assigns from and against any claims, liabilities, damages, judgments, awards, losses, costs, expenses, or fees (including reasonable attorneys' fees) arising out of or relating to your violation of these Terms or your use of the Service."
+                "您同意为 sagelga.com 及其附属公司、许可人和服务提供商及其各自的管理人员、董事、员工、承包商、代理人、许可人、供应商、继承人和受让人辩护、赔偿并保护其免受由您违反本条款或使用服务引起或与之相关的任何索赔、债务、损害赔偿、诉讼判决、裁定、损失、费用、支出或费用（包括合理的律师费）。"
             ]
         },
         {
             "id": "governing-law",
-            "title": "9. Governing Law",
+            "title": "9. 准据法",
             "paragraphs": [
-                "These Terms shall be governed and construed in accordance with the laws of [Your Country/State], without regard to its conflict of law provisions."
+                "本条款应受泰国法律的管辖和解释，不考虑其冲突法条款。"
             ]
         },
         {
             "id": "contact-us",
-            "title": "10. Contact Us",
+            "title": "10. 联系我们",
             "paragraphs": [
-                "If you have any questions about these Terms, please contact us at:"
+                "如果您对本条款有任何疑问，请通过以下方式与我们联系："
             ]
         }
     ],
-    "table_of_contents_title": "Table of Contents"
+    "table_of_contents_title": "目录"
 }

@@ -1,95 +1,95 @@
 {
     "hero": {
-        "title": "Personalized Tech Education: Your Path to Mastery Starts Here.",
-        "description": "Discover tailored 1-on-1 teaching in Python, SQL, TypeScript, Notion, and more. I guide curious minds of all ages to unlock their full potential.",
-        "explore_paths": "Explore Learning Paths",
-        "connect_with_me": "Connect with Me"
+        "title": "个性化科技教育：掌握之路从这里开始。",
+        "description": "发现 Python、SQL、TypeScript、Notion 等领域的定制一对一教学。我指导各个年龄段的求知者释放他们的全部潜力。",
+        "explore_paths": "探索学习路径",
+        "connect_with_me": "与我联系"
     },
     "why_choose_path": {
-        "title": "Why Choose This Path?",
-        "introduction": "My approach to teaching is centered on your unique learning style. I provide hands-on, project-based guidance, making complex topics accessible and enjoyable for every learner, from young beginners to seasoned professionals.",
-        "young_learners_title": "For Young Learners: Ignite Passion",
-        "young_learners_description": "Engaging and interactive sessions designed to build foundational tech skills and foster a love for learning.",
-        "adult_learners_title": "For Adult Learners: Accelerate Growth",
-        "adult_learners_description": "Practical, in-depth mentorship to enhance your skills, solve real-world problems, and advance your career."
+        "title": "为什么选择这条路径？",
+        "introduction": "我的教学方法以你独特的学习风格为中心。我提供实践操作、基于项目的指导，使复杂话题对每个学习者都易懂且有趣，从年轻初学者到资深专业人士。",
+        "young_learners_title": "青少年学习者：点燃热情",
+        "young_learners_description": "精心设计的互动式课程，旨在建立基础科技技能并培养学习热爱。",
+        "adult_learners_title": "成人学习者：加速成长",
+        "adult_learners_description": "实用深入的指导，增强你的技能、解决现实问题并推进职业发展。"
     },
     "discovery_paths": {
-        "title": "Our Discovery Paths",
+        "title": "我们的发现路径",
         "skills": [
             {
-                "title": "Python Fundamentals Path",
-                "description": "A guided journey through the core concepts of Python, with practical exercises and real-world applications.",
-                "benefits": ["Master Python basics", "Build simple scripts", "Understand data structures"],
-                "audience": "Young Learners & Adults"
+                "title": "Python 基础路径",
+                "description": "通过 Python 核心概念的引导之旅，包含实际练习和现实应用。",
+                "benefits": ["掌握 Python 基础", "构建简单脚本", "理解数据结构"],
+                "audience": "青少年学习者和成人"
             },
             {
-                "title": "SQL Database Essentials",
-                "description": "Learn to design, query, and manage relational databases effectively.",
-                "benefits": ["Write complex SQL queries", "Database design principles", "Data manipulation"],
-                "audience": "Adult Learners"
+                "title": "SQL 数据库要点",
+                "description": "学习如何有效地设计、查询和管理关系数据库。",
+                "benefits": ["编写复杂的 SQL 查询", "数据库设计原理", "数据操作"],
+                "audience": "成人学习者"
             },
             {
-                "title": "TypeScript Web Development",
-                "description": "Build robust and scalable web applications using TypeScript and modern frameworks.",
-                "benefits": ["Strongly-typed JavaScript", "Frontend framework integration", "Scalable code architecture"],
-                "audience": "Adult Learners"
+                "title": "TypeScript 网络开发",
+                "description": "使用 TypeScript 和现代框架构建健壮和可扩展的网络应用。",
+                "benefits": ["强类型 JavaScript", "前端框架集成", "可扩展代码架构"],
+                "audience": "成人学习者"
             },
             {
-                "title": "Notion Productivity & Organization",
-                "description": "Unlock Notion's full potential for personal organization, project management, and team collaboration.",
-                "benefits": ["Customizable workspaces", "Database management in Notion", "Workflow automation"],
-                "audience": "All Learners"
+                "title": "Notion 生产力与组织",
+                "description": "发现 Notion 在个人组织、项目管理和团队协作中的全部潜力。",
+                "benefits": ["可定制工作区", "Notion 中的数据库管理", "工作流自动化"],
+                "audience": "所有学习者"
             },
             {
-                "title": "HTML & CSS: Building Blocks Path",
-                "description": "Start your web development journey by mastering the foundational languages of the internet.",
-                "benefits": ["Structure web content", "Style web pages", "Responsive design basics"],
-                "audience": "Young Learners & Adults"
+                "title": "HTML 和 CSS：构建基础路径",
+                "description": "通过掌握互联网的基础语言开始你的网络开发之旅。",
+                "benefits": ["构建网络内容", "设计网页样式", "响应式设计基础"],
+                "audience": "青少年学习者和成人"
             },
             {
-                "title": "React.js: Component Design Showcase",
-                "description": "Dive into React to build interactive and dynamic user interfaces.",
-                "benefits": ["Component-based architecture", "State management", "Hooks and functional components"],
-                "audience": "Adult Learners"
+                "title": "React.js：组件设计展示",
+                "description": "深入 React 构建交互式和动态的用户界面。",
+                "benefits": ["基于组件的架构", "状态管理", "Hooks 和函数式组件"],
+                "audience": "成人学习者"
             },
             {
-                "title": "Git & GitHub: The Developer's Blueprint",
-                "description": "Learn essential version control for collaborative coding and project management.",
-                "benefits": ["Track code changes", "Collaborate with teams", "Manage project versions"],
-                "audience": "All Learners"
+                "title": "Git 和 GitHub：开发者的蓝图",
+                "description": "学习协作编程和项目管理的基本版本控制。",
+                "benefits": ["跟踪代码更改", "与团队协作", "管理项目版本"],
+                "audience": "所有学习者"
             }
         ],
-        "learn_more": "Learn More"
+        "learn_more": "了解更多"
     },
     "how_journey_works": {
-        "title": "How the Journey Works",
-        "step1_title": "Identify Your Path",
-        "step1_description": "Explore the diverse learning paths available and pinpoint the skills you want to master.",
-        "step2_title": "Connect with Me",
-        "step2_description": "Reach out via our contact form to discuss your goals and schedule an introductory chat.",
-        "step3_title": "Begin Your Learning",
-        "step3_description": "Start your personalized 1-on-1 sessions and embark on your journey to expertise!"
+        "title": "旅程如何进行",
+        "step1_title": "确认你的路径",
+        "step1_description": "探索可用的多样化学习路径，确定你想掌握的技能。",
+        "step2_title": "与我联系",
+        "step2_description": "通过我们的联系表格与我联系，讨论你的目标并安排入门聊天。",
+        "step3_title": "开始学习",
+        "step3_description": "开始你的个性化一对一课程，踏上专业知识之旅！"
     },
     "success_stories": {
-        "title": "Success Stories from the Path",
-        "testimonial1_text": "Learning Python with [Your Name] was incredible! The lessons were so clear and fun, and I built my first game. Highly recommend for kids!",
-        "testimonial1_author": "- Alex (Age 12)",
-        "testimonial2_text": "I needed to pick up TypeScript for a new role, and [Your Name]'s guidance was invaluable. The personalized approach helped me grasp complex concepts quickly. A true expert!",
-        "testimonial2_author": "- Sarah L. (Software Engineer)"
+        "title": "路径上的成功故事",
+        "testimonial1_text": "和 Kunanon 一起学 Python 太棒了！课程非常清晰有趣，我构建了我的第一个游戏。强烈推荐给孩子们！",
+        "testimonial1_author": "- Alex（12 岁）",
+        "testimonial2_text": "我需要为新职位学习 TypeScript，Kunanon 的指导非常宝贵。个性化的方法帮助我快速掌握复杂概念。真正的专家！",
+        "testimonial2_author": "- Sarah L.（软件工程师）"
     },
     "common_questions": {
-        "title": "Common Questions on the Path",
-        "q1_title": "What is the typical session format?",
-        "q1_description": "Sessions are typically 1-on-1, conducted online via video call, and are highly interactive with a focus on hands-on coding and problem-solving.",
-        "q2_title": "Can I customize my learning path?",
-        "q2_description": "Absolutely! While we have suggested paths, I work with each student to tailor the curriculum to their specific goals and interests.",
-        "q3_title": "What age groups do you teach?",
-        "q3_description": "I teach both young learners (typically 8+) and adults. My teaching style adapts to suit the age and experience level of the student."
+        "title": "路径上的常见问题",
+        "q1_title": "典型的课程格式是什么？",
+        "q1_description": "课程通常是一对一进行的，通过视频通话进行，且高度互动，重点是实践操作编程和问题解决。",
+        "q2_title": "我可以自定义学习路径吗？",
+        "q2_description": "绝对可以！虽然我们有建议的路径，但我与每个学生合作，根据他们的具体目标和兴趣定制课程。",
+        "q3_title": "你教哪些年龄段？",
+        "q3_description": "我教青少年学习者（通常 8 岁以上）和成人。我的教学风格适应学生的年龄和经验水平。"
     },
     "call_to_action": {
-        "title": "Ready to Start Your Journey?",
-        "description1": "Take the first step towards mastering new skills. I'm here to guide you.",
-        "description2": "Leave your contact details in the form below, and I'll get back to you to discuss your learning goals.",
-        "button_text": "Connect with Me Now"
+        "title": "准备好开始你的旅程了吗？",
+        "description1": "迈出掌握新技能的第一步。我在这里指导你。",
+        "description2": "在下面的表格中留下你的联系方式，我会与你联系讨论你的学习目标。",
+        "button_text": "现在与我联系"
     }
 }

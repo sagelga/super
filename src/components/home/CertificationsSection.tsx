@@ -31,10 +31,11 @@ const CertificationsSection: React.FC<CertificationsSectionProps> = ({
             id="certifications"
             title={t("certifications_section_title")}
             darkBg={true}
+            spacing="compact"
         >
             <div
                 ref={ref}
-                className={`reveal grid grid-cols-1 gap-px bg-rim md:grid-cols-2 lg:grid-cols-3 ${isVisible ? "is-revealed" : ""}`}
+                className={`reveal-stagger grid grid-cols-1 gap-px overflow-hidden rounded-xl bg-rim md:grid-cols-2 lg:grid-cols-3 ${isVisible ? "is-revealed" : ""}`}
             >
                 {certifications.map((cert, index) => (
                     <div
@@ -69,7 +70,7 @@ const CertificationsSection: React.FC<CertificationsSectionProps> = ({
                             {cert.skills.map((skill, i) => (
                                 <span
                                     key={i}
-                                    className="border border-rim px-2 py-0.5 font-mono text-[11px] text-muted/70"
+                                    className="border border-rim px-2 py-0.5 font-mono text-xs text-muted/70"
                                 >
                                     {skill}
                                 </span>

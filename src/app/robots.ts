@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next';
 
 export default function robots(): MetadataRoute.Robots {
-    const baseUrl = 'https://super.sagelga.workers.dev';
+    const baseUrl = 'https://sagelga.com';
 
     return {
         rules: [

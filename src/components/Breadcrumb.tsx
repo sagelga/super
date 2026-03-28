@@ -11,16 +11,16 @@ const Breadcrumb: React.FC = () => {
     const pathSegments = pathname.split('/').filter((segment) => segment !== '');
 
     const displayNameMap: { [key: string]: string } = {
-        home: t('breadcrumb.home'),
-        blog: t('breadcrumb.blog'),
-        gallery: t('breadcrumb.gallery'),
-        docs: t('breadcrumb.docs'),
-        experience: t('breadcrumb.experience'),
-        certifications: t('breadcrumb.certifications'),
-        volunteering: t('breadcrumb.volunteering'),
-        projects: t('breadcrumb.projects'),
-        'privacy-policy': t('breadcrumb.privacy_policy'),
-        'terms-of-service': t('breadcrumb.terms_of_service'),
+        home: t('nav.home'),
+        blog: t('nav.blog'),
+        gallery: t('nav.gallery'),
+        docs: t('nav.docs'),
+        experience: t('nav.experience'),
+        certifications: t('nav.certifications'),
+        volunteering: t('nav.volunteering'),
+        projects: t('nav.projects'),
+        'privacy-policy': t('nav.privacy_policy'),
+        'terms-of-service': t('nav.terms_of_service'),
     };
 
     return (
@@ -34,7 +34,7 @@ const Breadcrumb: React.FC = () => {
                         href="/"
                         className="text-muted transition-colors duration-200 hover:text-accent"
                     >
-                        {t('breadcrumb.home')}
+                        {t('nav.home')}
                     </Link>
                 </li>
                 {pathSegments.map((segment, index) => {

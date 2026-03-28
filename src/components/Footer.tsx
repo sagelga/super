@@ -1,20 +1,26 @@
 "use client";
 
-import React, { useMemo, useState } from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import { useLocale, useTranslations } from "next-intl";
 import { usePathname } from "next/navigation";
 import Breadcrumb from "./Breadcrumb";
-import { useScrollToTop } from "@/hooks/useScrollToTop";
 import CookieSettingsModal from "./cookies/CookieSettingsModal";
+import LanguageSwitcherModal from "./LanguageSwitcherModal";
+import ThemeSettingsModal from "./ThemeSettingsModal";
+import "./Footer.style.css";
 
 const CURRENT_YEAR = new Date().getFullYear();
 
 interface LinkItem {
     name: string;
     href: string;
-    iconClass?: string;
-    icon?: string;
+    external?: boolean;
+}
+
+interface LinkColumn {
+    title: string;
+    links: LinkItem[];
 }
 
 const Footer: React.FC = () => {
@@ -22,195 +28,246 @@ const Footer: React.FC = () => {
     const tCookies = useTranslations("cookies");
     const pathname = usePathname();
     const lang = useLocale();
-    const scrollToTop = useScrollToTop();
     const [showCookieSettings, setShowCookieSettings] = useState(false);
+    const [showLanguageSwitcher, setShowLanguageSwitcher] = useState(false);
+    const [showThemeSettings, setShowThemeSettings] = useState(false);
 
-    const handleLanguageChange = (
-        event: React.ChangeEvent<HTMLSelectElement>,
-    ) => {
-        const newLang = event.target.value;
-        // Strip current locale prefix to get the locale-free path
+    const handleLanguageSelect = (newLang: string) => {
         const localeFree = pathname.startsWith(`/${lang}`)
-            ? pathname.slice(`/${lang}`.length) || ""
+            ? pathname.slice(`/${lang}`.length) || "/"
             : pathname;
-        // Hard navigate so the middleware re-initializes the locale context
-        window.location.href = `/${newLang}${localeFree}`;
+        window.location.href =
+            newLang === "th" ? localeFree : `/${newLang}${localeFree}`;
     };
 
-    const sitemapLinks: { [key: string]: LinkItem[] } = useMemo(
-        () => ({
-            [t("footer.sitemap.kunanon_srisuntiroj")]: [
-                { name: t("footer.sitemap.home"), href: `/${lang}` },
-                { name: t("footer.sitemap.about"), href: `/${lang}/#about` },
-                { name: t("footer.sitemap.skills"), href: `/${lang}/#skills` },
-                {
-                    name: t("footer.sitemap.experience"),
-                    href: `/${lang}/#experience`,
-                },
-                {
-                    name: t("footer.sitemap.certifications"),
-                    href: `/${lang}/#certifications`,
-                },
-            ],
-            [t("footer.sitemap.projects")]: [
-                { name: t("footer.sitemap.todoist_notion_sync"), href: "#" },
-                {
-                    name: t("footer.sitemap.learn_with_sagelga"),
-                    href: "https://learn.sagelga.com",
-                },
-                {
-                    name: t("footer.sitemap.documentation_website"),
-                    href: "https://docs.sagelga.com/",
-                },
-                {
-                    name: t("footer.sitemap.byteside_one"),
-                    href: "https://byteside.one/",
-                },
-                {
-                    name: t("footer.sitemap.the_sunny_side_publication"),
-                    href: "https://medium.com/the-sunny-side",
-                },
-            ],
-            [t("footer.sitemap.connect")]: [
-                {
-                    name: t("footer.sitemap.linkedin"),
-                    href: "https://www.linkedin.com/in/kunanon/",
-                    iconClass: "devicon-linkedin-plain",
-                },
-                {
-                    name: t("footer.sitemap.github"),
-                    href: "https://github.com/sagelga",
-                    iconClass: "devicon-github-plain",
-                },
-                {
-                    name: t("footer.sitemap.salesforce_trailblazer"),
-                    href: "https://www.salesforce.com/trailblazer/sagelga",
-                    iconClass: "devicon-salesforce-plain",
-                },
-            ],
-        }),
-        [t, lang],
-    );
-
-    const legalLinks = [
+    const footerColumns: LinkColumn[] = [
         {
-            name: t("footer.legal.privacy_policy"),
-            href: `/${lang}/privacy-policy`,
+            title: t("footer.sitemap.kunanon_srisuntiroj"),
+            links: [
+                { name: t("nav.home"), href: "/" },
+                { name: t("footer.sitemap.about"), href: "/#about" },
+                { name: t("footer.sitemap.skills"), href: "/#skills" },
+                { name: t("nav.experience"), href: "/#experience" },
+                {
+                    name: t("nav.certifications"),
+                    href: "/#certifications",
+                },
+            ],
         },
         {
-            name: t("footer.legal.terms_of_service"),
-            href: `/${lang}/terms-of-service`,
+            title: t("nav.projects"),
+            links: [
+                {
+                    name: "Learn",
+                    href: "https://learn.sagelga.com",
+                    external: true,
+                },
+                {
+                    name: "Documentation",
+                    href: "https://docs.sagelga.com/",
+                    external: true,
+                },
+                {
+                    name: "Mahjong Hands",
+                    href: "https://mahjong.sagelga.com",
+                    external: true,
+                },
+                {
+                    name: "Telegram Thai",
+                    href: "https://telegram.sagelga.com",
+                    external: true,
+                },
+                {
+                    name: "Status Page",
+                    href: "https://status.sagelga.com/?brand=sagelga",
+                    external: true,
+                },
+            ],
+        },
+        {
+            title: t("footer.sitemap.connect"),
+            links: [
+                {
+                    name: "GitHub",
+                    href: "https://github.com/sagelga",
+                    external: true,
+                },
+                {
+                    name: "LinkedIn",
+                    href: "https://www.linkedin.com/in/kunanon/",
+                    external: true,
+                },
+                {
+                    name: "Salesforce Trailblazer",
+                    href: "https://www.salesforce.com/trailblazer/sagelga",
+                    external: true,
+                },
+            ],
         },
     ];
 
     return (
         <div>
             <Breadcrumb />
-            <footer className="border-t border-rim bg-surface">
-                <div className="container mx-auto px-8 py-16 lg:px-16">
-                    {/* Top: sitemap columns */}
-                    <div className="mb-16 grid grid-cols-1 gap-12 md:grid-cols-3">
-                        {Object.entries(sitemapLinks).map(
-                            ([category, links]) => (
-                                <div key={category}>
-                                    <p className="mb-5 font-mono text-xs tracking-[0.25em] text-accent uppercase">
-                                        {category}
+            <footer className="footer">
+                <div className="footer-container container mx-auto px-8 lg:px-16">
+                    <div className="footer-top">
+                        <div className="footer-brand">
+                            <Link href="/" className="footer-logo-text">
+                                {t("navbar.name")}
+                            </Link>
+                            <p className="footer-tagline">
+                                {t("footer.tagline")}
+                            </p>
+                        </div>
+                        <div className="footer-columns">
+                            {footerColumns.map((column, index) => (
+                                <div key={index} className="footer-col">
+                                    <p className="footer-col-title">
+                                        {column.title}
                                     </p>
-                                    <ul className="space-y-3">
-                                        {links.map((link, index) => (
-                                            <li key={index}>
-                                                <Link
-                                                    href={link.href}
-                                                    className="flex items-center gap-2 text-sm text-muted transition-colors duration-200 hover:text-cream"
-                                                    target={
-                                                        link.href.startsWith(
-                                                            "/",
-                                                        )
-                                                            ? "_self"
-                                                            : "_blank"
-                                                    }
-                                                    rel={
-                                                        link.href.startsWith(
-                                                            "/",
-                                                        )
-                                                            ? ""
-                                                            : "noopener noreferrer"
-                                                    }
-                                                >
-                                                    {link.iconClass && (
-                                                        <i
-                                                            className={`${link.iconClass} text-sm`}
-                                                        />
-                                                    )}
-                                                    {link.name}
-                                                </Link>
+                                    <ul>
+                                        {column.links.map((link, linkIndex) => (
+                                            <li key={linkIndex}>
+                                                {link.external ? (
+                                                    <a
+                                                        href={link.href}
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                    >
+                                                        {link.name}
+                                                    </a>
+                                                ) : (
+                                                    <Link href={link.href}>
+                                                        {link.name}
+                                                    </Link>
+                                                )}
                                             </li>
                                         ))}
                                     </ul>
                                 </div>
-                            ),
-                        )}
-                    </div>
-
-                    {/* Bottom bar */}
-                    <div className="flex flex-col items-start justify-between gap-4 border-t border-rim pt-6 sm:flex-row sm:items-center">
-                        <p className="font-mono text-xs text-muted">
-                            {t("footer.copyright", {
-                                year: CURRENT_YEAR,
-                                author: "Kunanon Srisuntiroj",
-                            })}
-                        </p>
-
-                        <div className="flex flex-wrap items-center gap-6">
-                            {legalLinks.map((link, index) => (
-                                <Link
-                                    key={index}
-                                    href={link.href}
-                                    className="text-xs text-muted transition-colors duration-200 hover:text-cream"
-                                >
-                                    {link.name}
-                                </Link>
                             ))}
-
-                            <select
-                                value={lang}
-                                onChange={handleLanguageChange}
-                                className="cursor-pointer border border-rim bg-canvas px-3 py-1.5 text-xs text-muted transition-all duration-200 focus:border-accent focus:text-accent focus:outline-none focus:ring-1 focus:ring-accent/30"
-                            >
-                                <option value="en">
-                                    {t("footer.english")}
-                                </option>
-                                <option value="th">{t("footer.thai")}</option>
-                                <option value="zh">
-                                    {t("footer.chinese")}
-                                </option>
-                            </select>
-
+                        </div>
+                    </div>
+                    <hr className="footer-divider" />
+                    <div className="footer-bottom">
+                        <span>© 2021–{CURRENT_YEAR} Kunanon Srisuntiroj</span>
+                        <div className="flex items-center gap-6">
                             <button
-                                onClick={scrollToTop}
-                                className="font-mono text-xs text-muted transition-colors duration-200 hover:text-accent"
+                                onClick={() => setShowLanguageSwitcher(true)}
+                                className="footer-toggle-btn footer-lang-btn"
                             >
-                                ↑ {t("footer.back_to_top")}
+                                <svg
+                                    width="14"
+                                    height="14"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    strokeWidth="2.2"
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    aria-hidden="true"
+                                >
+                                    <circle cx="12" cy="12" r="10" />
+                                    <line x1="2" y1="12" x2="22" y2="12" />
+                                    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+                                </svg>
+                                <span>{t("language.label")}</span>
                             </button>
-
                             <button
                                 onClick={() => setShowCookieSettings(true)}
-                                className="font-mono text-xs text-muted transition-colors duration-200 hover:text-accent"
+                                className="footer-toggle-btn"
                             >
-                                ⚙ {tCookies("footer.cookie_settings")}
+                                <svg
+                                    width="14"
+                                    height="14"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    strokeWidth="2.2"
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    aria-hidden="true"
+                                >
+                                    <circle cx="12" cy="12" r="3" />
+                                    <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z" />
+                                </svg>
+                                <span>
+                                    {tCookies("footer.cookie_settings")}
+                                </span>
+                            </button>
+                            <button
+                                onClick={() => setShowThemeSettings(true)}
+                                className="footer-toggle-btn"
+                            >
+                                <svg
+                                    width="14"
+                                    height="14"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    strokeWidth="2.2"
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    aria-hidden="true"
+                                >
+                                    <circle cx="12" cy="12" r="5" />
+                                    <line x1="12" y1="1" x2="12" y2="3" />
+                                    <line x1="12" y1="21" x2="12" y2="23" />
+                                    <line
+                                        x1="4.22"
+                                        y1="4.22"
+                                        x2="5.64"
+                                        y2="5.64"
+                                    />
+                                    <line
+                                        x1="18.36"
+                                        y1="18.36"
+                                        x2="19.78"
+                                        y2="19.78"
+                                    />
+                                    <line x1="1" y1="12" x2="3" y2="12" />
+                                    <line x1="21" y1="12" x2="23" y2="12" />
+                                    <line
+                                        x1="4.22"
+                                        y1="19.78"
+                                        x2="5.64"
+                                        y2="18.36"
+                                    />
+                                    <line
+                                        x1="18.36"
+                                        y1="5.64"
+                                        x2="19.78"
+                                        y2="4.22"
+                                    />
+                                </svg>
+                                <span>{t("theme.title")}</span>
                             </button>
                         </div>
                     </div>
                 </div>
             </footer>
 
-            {/* Cookie Settings Modal */}
             {showCookieSettings && (
                 <CookieSettingsModal
+                    isOpen={showCookieSettings}
                     onClose={() => setShowCookieSettings(false)}
                     onSave={() => setShowCookieSettings(false)}
                 />
             )}
+
+            {showLanguageSwitcher && (
+                <LanguageSwitcherModal
+                    currentLang={lang}
+                    onClose={() => setShowLanguageSwitcher(false)}
+                    onLanguageSelect={handleLanguageSelect}
+                />
+            )}
+
+            <ThemeSettingsModal
+                isOpen={showThemeSettings}
+                onClose={() => setShowThemeSettings(false)}
+            />
         </div>
     );
 };

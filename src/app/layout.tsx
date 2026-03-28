@@ -4,6 +4,8 @@ import {
     IBM_Plex_Sans_Thai,
     IBM_Plex_Mono,
     IBM_Plex_Serif,
+    Noto_Serif_Thai,
+    Noto_Serif_SC,
 } from "next/font/google";
 import "./globals.css";
 
@@ -36,17 +38,40 @@ const serif = IBM_Plex_Serif({
     display: "swap",
 });
 
+// Thai serif font — fills the gap IBM Plex Serif leaves for Thai glyphs
+const serifThai = Noto_Serif_Thai({
+    variable: "--font-serif-thai",
+    weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+    subsets: ["thai"],
+    display: "swap",
+});
+
+// Chinese serif font — IBM Plex has no CJK coverage at all
+const serifZh = Noto_Serif_SC({
+    variable: "--font-serif-zh",
+    weight: ["200", "300", "400", "500", "600", "700", "900"],
+    subsets: ["chinese-simplified"],
+    display: "swap",
+});
+
 // Define the metadata for the website
 export async function generateMetadata({
     params,
 }: {
     params: Promise<{ lang?: string }>;
 }): Promise<Metadata> {
-    const { lang = "en" } = await params;
-    const t = await getTranslations({ locale: lang, namespace: "metadata" });
-    const baseUrl = "https://super.sagelga.workers.dev";
+    const { lang } = await params;
+    // Thai is default (no prefix), English and Chinese have prefixes
+    const currentLang = lang ?? "th";
+    const t = await getTranslations({
+        locale: currentLang,
+        namespace: "metadata",
+    });
+    const baseUrl = "https://sagelga.com";
     const languages = ["en", "th", "zh"];
-    const currentUrl = lang === "en" ? baseUrl : `${baseUrl}/${lang}`;
+    // Thai (default) has no prefix, others do
+    const currentUrl =
+        currentLang === "th" ? baseUrl : `${baseUrl}/${currentLang}`;
 
     return {
         title: {
@@ -71,7 +96,10 @@ export async function generateMetadata({
         alternates: {
             canonical: currentUrl,
             languages: Object.fromEntries(
-                languages.map((l) => [l, l === "en" ? baseUrl : `${baseUrl}/${l}`])
+                languages.map((l) => [
+                    l,
+                    l === "th" ? baseUrl : `${baseUrl}/${l}`,
+                ]),
             ),
         },
         openGraph: {
@@ -87,7 +115,12 @@ export async function generateMetadata({
                     alt: t("image_alt"),
                 },
             ],
-            locale: lang === "th" ? "th_TH" : lang === "zh" ? "zh_CN" : "en_US",
+            locale:
+                currentLang === "th"
+                    ? "th_TH"
+                    : currentLang === "zh"
+                      ? "zh_CN"
+                      : "en_US",
             type: "website",
         },
         twitter: {
@@ -122,9 +155,9 @@ const jsonLd = {
     "@graph": [
         {
             "@type": "Person",
-            "@id": "https://super.sagelga.workers.dev/#person",
+            "@id": "https://sagelga.com/#person",
             name: "Kunanon Srisuntiroj",
-            url: "https://super.sagelga.workers.dev",
+            url: "https://sagelga.com",
             sameAs: [
                 "https://github.com/sagelga",
                 "https://linkedin.com/in/sagelga",
@@ -137,24 +170,24 @@ const jsonLd = {
         },
         {
             "@type": "WebSite",
-            "@id": "https://super.sagelga.workers.dev/#website",
-            url: "https://super.sagelga.workers.dev",
+            "@id": "https://sagelga.com/#website",
+            url: "https://sagelga.com",
             name: "Kunanon Srisuntiroj Portfolio",
-            publisher: { "@id": "https://super.sagelga.workers.dev/#person" },
+            publisher: { "@id": "https://sagelga.com/#person" },
             potentialAction: {
                 "@type": "SearchAction",
-                target: "https://super.sagelga.workers.dev/{lang}/blog?q={search_term_string}",
+                target: "https://sagelga.com/{lang}/blog?q={search_term_string}",
                 "query-input": "required name=search_term_string",
             },
         },
         {
             "@type": "Organization",
-            "@id": "https://super.sagelga.workers.dev/#organization",
+            "@id": "https://sagelga.com/#organization",
             name: "Kunanon Srisuntiroj Portfolio",
-            url: "https://super.sagelga.workers.dev",
+            url: "https://sagelga.com",
             logo: {
                 "@type": "ImageObject",
-                url: "https://super.sagelga.workers.dev/og-image.png",
+                url: "https://sagelga.com/og-image.png",
             },
         },
     ],
@@ -168,23 +201,30 @@ export default async function RootLayout({
     children: React.ReactNode;
     params: Promise<{ lang?: string }>;
 }) {
-    const { lang = "en" } = await params;
+    const { lang } = await params;
+    // Thai is default (no prefix)
+    const currentLang = lang ?? "th";
 
     const messages = await getMessages();
 
     return (
-        <html lang={lang}>
+        <html
+            lang={currentLang}
+            className={`dark ${serifThai.variable} ${serifZh.variable}`}
+        >
             <head>
+                {/* Apply stored theme before first paint to avoid flash */}
+                <script
+                    dangerouslySetInnerHTML={{
+                        __html: `(function(){try{var s=localStorage.getItem('theme-preference');var prefersDark=window.matchMedia('(prefers-color-scheme: dark)').matches;var dark=s==='dark'||(s!=='light'&&prefersDark)||!s;document.documentElement.classList.toggle('dark',dark);}catch(e){}})();`,
+                    }}
+                />
                 <link
                     rel="stylesheet"
                     href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css"
                 />
                 <link rel="icon" href="/favicon.ico" sizes="any" />
-                <link
-                    rel="icon"
-                    href="/icon.svg"
-                    type="image/svg+xml"
-                />
+                <link rel="icon" href="/icon.svg" type="image/svg+xml" />
                 <link
                     rel="apple-touch-icon"
                     sizes="180x180"
@@ -192,9 +232,12 @@ export default async function RootLayout({
                 />
                 <link rel="manifest" href="/manifest.webmanifest" />
                 <link rel="preconnect" href="https://cdn.jsdelivr.net" />
-                <meta name="theme-color" content="#f59e0b" />
+                <meta name="theme-color" content="#1A1814" />
                 <meta name="color-scheme" content="dark light" />
-                <meta name="referrer" content="strict-origin-when-cross-origin" />
+                <meta
+                    name="referrer"
+                    content="strict-origin-when-cross-origin"
+                />
                 <script
                     type="application/ld+json"
                     dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

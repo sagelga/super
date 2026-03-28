@@ -15,7 +15,12 @@ const SkillsList: React.FC<SkillsListProps> = ({ skills }) => {
     const { ref, isVisible } = useScrollReveal<HTMLDivElement>();
 
     return (
-        <Section id="skills" title={t("skills_section_title")} darkBg={false}>
+        <Section
+            id="skills"
+            title={t("skills_section_title")}
+            darkBg={false}
+            spacing="compact"
+        >
             <div
                 ref={ref}
                 className={`reveal flex flex-wrap gap-2.5 ${isVisible ? "is-revealed" : ""}`}

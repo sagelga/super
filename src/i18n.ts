@@ -4,7 +4,7 @@ import type { AbstractIntlMessages } from "next-intl";
 
 // Can be imported from a shared config
 const locales = ["en", "th", "zh"];
-const defaultLocale = "en"; // It's a good practice to define a default locale
+const defaultLocale = "th"; // Thai is now the default locale
 
 export default getRequestConfig(async ({ requestLocale }) => {
     // next-intl v4: requestLocale is a Promise

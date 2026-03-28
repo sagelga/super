@@ -11,6 +11,7 @@ const intlMiddleware = createMiddleware({
     locales: ["en", "th", "zh"],
     defaultLocale: "th",
     localePrefix: "as-needed",
+    localeDetection: false,
 });
 
 export default function middleware(request: NextRequest) {

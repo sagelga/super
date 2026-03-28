@@ -1,128 +1,128 @@
 {
-    "docs_page_title": "Comprehensive Documentation",
-    "docs_page_description": "Explore detailed guides, API references, and project insights for all my work.",
-    "projects_documentation_title": "Projects Documentation",
+    "docs_page_title": "综合文档",
+    "docs_page_description": "探索我所有工作的详细指南、API 参考和项目见解。",
+    "projects_documentation_title": "项目文档",
     "projects": [
         {
             "title": "Statuspage Pulse",
-            "description": "A real-time status page monitoring tool that displays system health and incident updates.",
+            "description": "实时状态页面监控工具，显示系统运行状况和事件更新。",
             "docsLink": "/docs/statuspage-pulse",
             "imageUrl": ""
         },
         {
             "title": "Mahjong Hands",
-            "description": "A mahjong hand calculator and validator for analyzing and scoring mahjong hands.",
+            "description": "麻将手牌计算器和验证器，用于分析和计算麻将手牌。",
             "docsLink": "/docs/mahjong-hands",
             "imageUrl": ""
         },
         {
             "title": "Todoist Notion Sync",
-            "description": "Documentation for the Todoist Notion Sync project, detailing setup and usage.",
+            "description": "Todoist Notion Sync 项目文档，详细说明设置和使用。",
             "docsLink": "/docs/todoist-notion-sync",
             "imageUrl": ""
         },
         {
             "title": "Todoist to Cloudflare KV",
-            "description": "A workflow that syncs Todoist tasks to Cloudflare KV for fast, globally distributed access.",
+            "description": "将 Todoist 任务同步到 Cloudflare KV 的工作流，以实现快速的全球分布式访问。",
             "docsLink": "/docs/todoist-to-cloudflarekv",
             "imageUrl": ""
         },
         {
             "title": "Cloudflare KV to Notion",
-            "description": "A connector that transfers data from Cloudflare KV to Notion databases seamlessly.",
+            "description": "连接器，将数据从 Cloudflare KV 无缝转移到 Notion 数据库。",
             "docsLink": "/docs/cloudflarekv-to-notion",
             "imageUrl": ""
         },
         {
             "title": "Byteside Fetcher",
-            "description": "A fetcher service that retrieves blog posts from Notion and displays them on Byteside.one.",
+            "description": "从 Notion 检索博客文章并在 Byteside.one 上显示的获取器服务。",
             "docsLink": "/docs/byteside-fetcher",
             "imageUrl": ""
         },
         {
             "title": "Super",
-            "description": "Documentation for the Super personal portfolio website, covering its features and development.",
+            "description": "Super 个人作品集网站的文档，涵盖其功能和开发。",
             "docsLink": "/docs/super",
             "imageUrl": ""
         },
         {
             "title": "Superbrain",
-            "description": "API documentation for Superbrain, detailing endpoints and data structures.",
+            "description": "Superbrain 的 API 文档，详细说明端点和数据结构。",
             "docsLink": "/docs/superbrain",
             "imageUrl": ""
         },
         {
             "title": "Learn with sagelga",
-            "description": "Guides and resources for learning Python and SQL on the Learn with sagelga platform.",
+            "description": "在 Learn with sagelga 平台上学习 Python 和 SQL 的指南和资源。",
             "docsLink": "/docs/learn-with-sagelga",
             "imageUrl": ""
         },
         {
-            "title": "Documentation Website",
-            "description": "Documentation for the documentation website itself, explaining its structure and how to contribute.",
+            "title": "文档网站",
+            "description": "文档网站本身的文档，解释其结构以及如何贡献。",
             "docsLink": "/docs/documentation-website",
             "imageUrl": ""
         },
         {
             "title": "Byteside.one",
-            "description": "Information about Byteside.one, a tech, gaming, and news publication.",
+            "description": "关于 Byteside.one 的信息，一个科技、游戏和新闻出版平台。",
             "docsLink": "/docs/byteside-one",
             "imageUrl": ""
         },
         {
             "title": "The Sunny Side Publication",
-            "description": "Details about The Sunny Side Publication on Medium, its content, and history.",
+            "description": "Medium 上的 The Sunny Side Publication 详细信息、其内容和历史。",
             "docsLink": "/docs/the-sunny-side-publication",
             "imageUrl": ""
         },
         {
             "title": "Approval Workflow on Google Apps Script",
-            "description": "Documentation for the automated approval workflow built with Google Apps Script.",
+            "description": "使用 Google Apps Script 构建的自动审批工作流的文档。",
             "docsLink": "/docs/approval-workflow-google-apps-script",
             "imageUrl": ""
         },
         {
-            "title": "Essilor Asia Supplier Deduplication Report",
-            "description": "Documentation for the Oracle SQL and PL/SQL scripts used for supplier deduplication.",
+            "title": "Essilor Asia 供应商重复数据删除报告",
+            "description": "用于供应商重复数据删除的 Oracle SQL 和 PL/SQL 脚本文档。",
             "docsLink": "/docs/essilor-asia-supplier-deduplication-report",
             "imageUrl": ""
         },
         {
-            "title": "Data Analytics on Body Fat",
-            "description": "Documentation for the data analytics project on body fat using IBM SPSS Statistics.",
+            "title": "身体脂肪数据分析",
+            "description": "使用 IBM SPSS Statistics 进行身体脂肪数据分析项目的文档。",
             "docsLink": "/docs/data-analytics-body-fat",
             "imageUrl": ""
         },
         {
-            "title": "Lecture sharing System (Oh Sheet!)",
-            "description": "Documentation for the 'Oh Sheet!' lecture sharing system.",
+            "title": "讲座分享系统（Oh Sheet!）",
+            "description": "《Oh Sheet!》讲座分享系统的文档。",
             "docsLink": "/docs/lecture-sharing-system",
             "imageUrl": ""
         },
         {
-            "title": "Online Space Reservation System",
-            "description": "Documentation for the online space reservation system.",
+            "title": "在线空间预订系统",
+            "description": "在线空间预订系统的文档。",
             "docsLink": "/docs/online-space-reservation-system",
             "imageUrl": ""
         },
         {
-            "title": "Thai restaurant analysis",
-            "description": "Documentation for the analysis of Thai restaurants in the United States.",
+            "title": "泰国餐厅分析",
+            "description": "美国泰国餐厅分析的文档。",
             "docsLink": "/docs/thai-restaurant-analysis",
             "imageUrl": ""
         },
         {
             "title": "Trash Melody",
-            "description": "Documentation for the 'Trash Melody' OSU!-inspired Java game.",
+            "description": "《Trash Melody》OSU! 启发式 Java 游戏的文档。",
             "docsLink": "/docs/trash-melody",
             "imageUrl": ""
         },
         {
-            "title": "Point of Sales (POS) System",
-            "description": "Documentation for the comprehensive Point-of-Sale (POS) system built in C.",
+            "title": "销售点（POS）系统",
+            "description": "用 C 构建的综合销售点（POS）系统的文档。",
             "docsLink": "/docs/pos-system",
             "imageUrl": ""
         }
     ],
-    "doc_detail_page_title": "Documentation Detail Page"
+    "doc_detail_page_title": "文档详情页面"
 }

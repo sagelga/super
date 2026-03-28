@@ -1,5 +1,4 @@
 {
-    "greeting": "Hello",
     "blog": {
         "search_placeholder": "Search articles...",
         "loading_posts": "Loading blog posts...",
@@ -14,48 +13,33 @@
         "table_of_contents": "Table of Contents"
     },
     "footer": {
-        "copyright": "© 2019-{year} Built with ❤️ by {author}",
-        "back_to_top": "Back to Top",
-        "english": "English",
-        "thai": "Thai",
-        "chinese": "Chinese",
-        "japanese": "Japanese",
+        "tagline": "Full-Stack Developer & Cloud Enthusiast",
         "sitemap": {
             "kunanon_srisuntiroj": "Kunanon Srisuntiroj",
-            "home": "Home",
             "about": "About",
             "skills": "Skills",
-            "experience": "Experience",
-            "certifications": "Certifications",
-            "projects": "Projects",
-            "todoist_notion_sync": "Todoist Notion Sync",
-            "learn_with_sagelga": "Learn with Sagelga",
-            "documentation_website": "Documentation Website",
-            "byteside_one": "Byteside One",
-            "the_sunny_side_publication": "The Sunny Side Publication",
-            "connect": "Connect",
-            "linkedin": "LinkedIn",
-            "github": "GitHub",
-            "salesforce_trailblazer": "Salesforce Trailblazer"
-        },
-        "legal": {
-            "privacy_policy": "Privacy Policy",
-            "terms_of_service": "Terms of Service"
+            "connect": "Connect"
         }
     },
     "github_label": "GitHub",
     "demo_label": "Demo",
-    "metadata": {
-        "title": "Kunanon Srisuntiroj | Full-Stack Developer & Cloud Enthusiast",
-        "description": "Kunanon Srisuntiroj, a Full-Stack Developer specializing in cloud technologies, web development, and open-source contributions.",
-        "site_name": "Kunanon Srisuntiroj Portfolio",
-        "image_alt": "Kunanon Srisuntiroj Portfolio Banner"
-    },
     "docs": {
         "sidebar_title": "Documentation"
     },
-    "navbar": {
-        "name": "Kunanon Srisuntiroj",
+    "theme": {
+        "title": "Theme Settings",
+        "light": "Light Mode",
+        "light_description": "Always use light theme",
+        "dark": "Dark Mode",
+        "dark_description": "Always use dark theme",
+        "system": "System",
+        "system_description": "Follow your device settings"
+    },
+    "language": {
+        "title": "Select Language",
+        "label": "Change Language"
+    },
+    "nav": {
         "home": "Home",
         "blog": "Blog",
         "gallery": "Gallery",
@@ -64,19 +48,12 @@
         "experience": "Experience",
         "certifications": "Certifications",
         "projects": "Projects",
-        "volunteering": "Volunteering"
-    },
-    "breadcrumb": {
-        "home": "Home",
-        "blog": "Blog",
-        "gallery": "Gallery",
-        "docs": "Docs",
-        "experience": "Experience",
-        "certifications": "Certifications",
         "volunteering": "Volunteering",
-        "projects": "Projects",
         "privacy_policy": "Privacy Policy",
         "terms_of_service": "Terms of Service"
+    },
+    "navbar": {
+        "name": "Kunanon Srisuntiroj"
     },
     "not_found": {
         "title": "Page Not Found",
@@ -88,8 +65,5 @@
         "image_alt": "Gallery image {{index}}"
     },
     "no_image_available": "No Image",
-    "read_documentation": "Read Documentation",
-    "site": {
-        "name": "Kunanon Srisuntiroj Portfolio"
-    }
+    "read_documentation": "Read Documentation"
 }

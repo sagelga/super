@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
-import Link from 'next/link';
-import Image from 'next/image';
-import { useTranslations } from 'next-intl';
+import React, { useState } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import { useTranslations } from "next-intl";
 
 // Define the props interface for the DocsProjectCard component
 export interface DocsProjectCardProps {
@@ -14,17 +14,25 @@ export interface DocsProjectCardProps {
 }
 
 // DocsProjectCard functional component
-const DocsProjectCard: React.FC<DocsProjectCardProps> = ({ title, description, docsLink, imageUrl }) => {
-    const t = useTranslations('common');
+const DocsProjectCard: React.FC<DocsProjectCardProps> = ({
+    title,
+    description,
+    docsLink,
+    imageUrl,
+}) => {
+    const t = useTranslations("common");
     // State to handle image loading errors
     const [imageError, setImageError] = useState(false);
 
     return (
-        <Link href={docsLink} className="group block flex h-full transform flex-col justify-between rounded-xl bg-white shadow-lg transition-shadow duration-300 ease-in-out hover:-translate-y-1 hover:shadow-xl dark:bg-surface">
+        <Link
+            href={docsLink}
+            className="group block flex h-full transform flex-col justify-between rounded-xl bg-surface shadow-lg transition-shadow duration-300 ease-in-out hover:-translate-y-1 hover:shadow-xl"
+        >
             {/* Image section of the card */}
             <div className="relative mb-4 h-48 w-full overflow-hidden rounded-t-xl">
                 {/* Conditionally render the image or a placeholder if image fails to load */}
-                {(imageUrl && !imageError) ? (
+                {imageUrl && !imageError ? (
                     <Image
                         src={imageUrl}
                         alt={title}
@@ -34,20 +42,35 @@ const DocsProjectCard: React.FC<DocsProjectCardProps> = ({ title, description, d
                         onError={() => setImageError(true)}
                     />
                 ) : (
-                    <div className="w-full h-full bg-cream-200 dark:bg-surface flex items-center justify-center text-muted">
-                        {t('no_image_available')}
+                    <div className="flex h-full w-full items-center justify-center bg-surface text-muted">
+                        {t("no_image_available")}
                     </div>
                 )}
             </div>
             {/* Content section of the card (title and description) */}
             <div className="flex-grow p-6">
-                <h3 className="mb-2 text-2xl font-bold text-canvas transition-colors duration-300 group-hover:text-brand dark:text-cream dark:group-hover:text-brand-400">{title}</h3>
-                <p className="leading-relaxed text-gray-700 dark:text-gray-300">{description}</p>
+                <h3 className="mb-2 text-2xl font-bold text-cream transition-colors duration-300 group-hover:text-accent">
+                    {title}
+                </h3>
+                <p className="leading-relaxed text-muted">{description}</p>
             </div>
             {/* Call to action section */}
-            <div className="mt-4 flex items-center p-6 pt-0 font-semibold text-brand group-hover:underline dark:text-brand-400">
-                {t('read_documentation')}
-                <svg className="ml-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+            <div className="mt-4 flex items-center p-6 pt-0 font-semibold text-accent group-hover:underline">
+                {t("read_documentation")}
+                <svg
+                    className="ml-2 h-4 w-4"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                >
+                    <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M17 8l4 4m0 0l-4 4m4-4H3"
+                    ></path>
+                </svg>
             </div>
         </Link>
     );

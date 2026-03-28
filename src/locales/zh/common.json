@@ -1,5 +1,4 @@
 {
-    "greeting": "你好",
     "blog": {
         "search_placeholder": "搜索文章...",
         "loading_posts": "正在加载博客文章...",
@@ -14,48 +13,33 @@
         "table_of_contents": "目录"
     },
     "footer": {
-        "copyright": "© 2019-{year} 由 {author} 用 ❤️ 建造",
-        "back_to_top": "回到顶部",
-        "english": "英语",
-        "thai": "泰语",
-        "chinese": "中文",
-        "japanese": "日语",
+        "tagline": "全栈开发者与云爱好者",
         "sitemap": {
-            "kunanon_srisuntiroj": "Kunanon Srisuntiroj",
-            "home": "主页",
+            "kunanon_srisuntiroj": "马洋辉",
             "about": "关于",
             "skills": "技能",
-            "experience": "经验",
-            "certifications": "认证",
-            "projects": "项目",
-            "todoist_notion_sync": "Todoist Notion 同步",
-            "learn_with_sagelga": "与 Sagelga 一起学习",
-            "documentation_website": "文档网站",
-            "byteside_one": "Byteside One",
-            "the_sunny_side_publication": "The Sunny Side 出版物",
-            "connect": "联系",
-            "linkedin": "领英",
-            "github": "GitHub",
-            "salesforce_trailblazer": "Salesforce 开拓者"
-        },
-        "legal": {
-            "privacy_policy": "隐私政策",
-            "terms_of_service": "服务条款"
+            "connect": "联系"
         }
     },
     "github_label": "GitHub",
     "demo_label": "演示",
-    "metadata": {
-        "title": "Kunanon Srisuntiroj | 全栈开发者与云爱好者",
-        "description": "Kunanon Srisuntiroj，一位专注于云技术、Web 开发和开源贡献的全栈开发者。",
-        "site_name": "Kunanon Srisuntiroj 个人作品集",
-        "image_alt": "Kunanon Srisuntiroj 个人作品集横幅"
-    },
     "docs": {
         "sidebar_title": "文档"
     },
-    "navbar": {
-        "name": "Kunanon Srisuntiroj",
+    "theme": {
+        "title": "主题设置",
+        "light": "浅色模式",
+        "light_description": "始终使用浅色主题",
+        "dark": "深色模式",
+        "dark_description": "始终使用深色主题",
+        "system": "跟随系统",
+        "system_description": "跟随您的设备设置"
+    },
+    "language": {
+        "title": "选择语言",
+        "label": "切换语言"
+    },
+    "nav": {
         "home": "主页",
         "blog": "博客",
         "gallery": "画廊",
@@ -64,19 +48,12 @@
         "experience": "经验",
         "certifications": "认证",
         "projects": "项目",
-        "volunteering": "志愿服务"
-    },
-    "breadcrumb": {
-        "home": "主页",
-        "blog": "博客",
-        "gallery": "画廊",
-        "docs": "文档",
-        "experience": "经验",
-        "certifications": "认证",
         "volunteering": "志愿服务",
-        "projects": "项目",
         "privacy_policy": "隐私政策",
         "terms_of_service": "服务条款"
+    },
+    "navbar": {
+        "name": "马洋辉"
     },
     "not_found": {
         "title": "页面未找到",
@@ -88,8 +65,5 @@
         "image_alt": "画廊图片 {{index}}"
     },
     "no_image_available": "无图片",
-    "read_documentation": "阅读文档",
-    "site": {
-        "name": "Kunanon Srisuntiroj 个人作品集"
-    }
+    "read_documentation": "阅读文档"
 }

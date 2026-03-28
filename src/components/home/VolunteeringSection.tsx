@@ -25,10 +25,14 @@ const VolunteeringSection: React.FC<VolunteeringSectionProps> = ({
     const { ref, isVisible } = useScrollReveal<HTMLDivElement>();
 
     return (
-        <Section title={t("volunteering_section_title")} darkBg={false}>
+        <Section
+            title={t("volunteering_section_title")}
+            darkBg={false}
+            spacing="generous"
+        >
             <div
                 ref={ref}
-                className={`reveal max-w-4xl space-y-12 ${isVisible ? "is-revealed" : ""}`}
+                className={`reveal-stagger max-w-4xl space-y-12 ${isVisible ? "is-revealed" : ""}`}
             >
                 {volunteering.map((item, index) => (
                     <div

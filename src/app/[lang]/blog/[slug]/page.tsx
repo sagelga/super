@@ -6,7 +6,7 @@ import PostHeader from '@/components/blog/PostHeader';
 import type { Post } from '@/types';
 import { formatDate } from '@/utils/formatDate';
 
-const baseUrl = 'https://super.sagelga.workers.dev';
+const baseUrl = 'https://sagelga.com';
 const languages = ['en', 'th', 'zh'];
 
 async function getPost(slug: string): Promise<Post | null> {
@@ -23,7 +23,7 @@ async function getPost(slug: string): Promise<Post | null> {
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string; lang?: string }> }): Promise<Metadata> {
-  const { slug } = await params;
+  const { slug, lang } = await params;
   const post = await getPost(slug);
 
   if (!post) {
@@ -32,8 +32,16 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     };
   }
 
+  // Thai is default (no prefix)
+  const currentLang = lang ?? 'th';
+
+  void currentLang; // used for language alternates
+  
   const languagesAlternates = Object.fromEntries(
-    languages.map((l) => [l, `${baseUrl}/${l}/blog/${slug}`])
+    languages.map((l) => {
+      const prefix = l === 'th' ? '' : `/${l}`;
+      return [l, `${baseUrl}${prefix}/blog/${slug}`];
+    })
   );
 
   return {

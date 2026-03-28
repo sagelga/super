@@ -42,58 +42,64 @@ const Navbar: React.FC = () => {
                             href="/"
                             className="text-sm tracking-wide text-muted transition-colors duration-200 hover:text-cream"
                         >
-                            {t("navbar.home")}
+                            {t("nav.home")}
                         </Link>
                         {isHomeHovered && (
                             <div className="absolute top-full left-1/2 mt-2 min-w-[180px] -translate-x-1/2 border border-rim bg-surface py-2 shadow-xl">
                                 <Link
                                     href="/home/experience"
-                                    className="block px-5 py-2 text-xs tracking-wide text-muted transition-colors duration-150 hover:bg-canvas hover:text-accent"
+                                    className="block px-5 py-2 text-sm tracking-wide text-muted transition-colors duration-150 hover:bg-canvas hover:text-accent"
                                 >
-                                    {t("navbar.experience")}
+                                    {t("nav.experience")}
                                 </Link>
                                 <Link
                                     href="/home/certifications"
-                                    className="block px-5 py-2 text-xs tracking-wide text-muted transition-colors duration-150 hover:bg-canvas hover:text-accent"
+                                    className="block px-5 py-2 text-sm tracking-wide text-muted transition-colors duration-150 hover:bg-canvas hover:text-accent"
                                 >
-                                    {t("navbar.certifications")}
+                                    {t("nav.certifications")}
                                 </Link>
                                 <Link
                                     href="/home/projects"
-                                    className="block px-5 py-2 text-xs tracking-wide text-muted transition-colors duration-150 hover:bg-canvas hover:text-accent"
+                                    className="block px-5 py-2 text-sm tracking-wide text-muted transition-colors duration-150 hover:bg-canvas hover:text-accent"
                                 >
-                                    {t("navbar.projects")}
+                                    {t("nav.projects")}
                                 </Link>
                                 <Link
                                     href="/home/volunteering"
-                                    className="block px-5 py-2 text-xs tracking-wide text-muted transition-colors duration-150 hover:bg-canvas hover:text-accent"
+                                    className="block px-5 py-2 text-sm tracking-wide text-muted transition-colors duration-150 hover:bg-canvas hover:text-accent"
                                 >
-                                    {t("navbar.volunteering")}
+                                    {t("nav.volunteering")}
                                 </Link>
                             </div>
                         )}
                     </div>
-                    <Link
-                        href="/blog"
+                    <a
+                        href="https://blog.sagelga.com"
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className="text-sm tracking-wide text-muted transition-colors duration-200 hover:text-cream"
                     >
-                        {t("navbar.blog")}
-                    </Link>
+                        {t("nav.blog")}
+                    </a>
                     <span className="cursor-not-allowed text-sm tracking-wide text-muted/40">
-                        {t("navbar.gallery")}
+                        {t("nav.gallery")}
                     </span>
-                    <Link
-                        href="/learn"
+                    <a
+                        href="https://learn.sagelga.com"
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className="text-sm tracking-wide text-muted transition-colors duration-200 hover:text-cream"
                     >
-                        {t("navbar.learn")}
-                    </Link>
-                    <Link
-                        href="/docs"
+                        {t("nav.learn")}
+                    </a>
+                    <a
+                        href="https://docs.sagelga.com"
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className="text-sm tracking-wide text-muted transition-colors duration-200 hover:text-cream"
                     >
-                        {t("navbar.docs")}
-                    </Link>
+                        {t("nav.docs")}
+                    </a>
                 </div>
             </div>
         </nav>

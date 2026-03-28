@@ -98,7 +98,7 @@
             "title": "Super",
             "description": "เว็บไซต์พอร์ตโฟลิโอส่วนตัวที่สร้างด้วย Next.js และ Cloudflare Pages ซึ่งผสานรวมกับ Superbrain API และใช้โมเดล Gemini 2.5 Flash/Pro ในการสร้างโค้ดและดำเนินงาน",
             "githubLink": "https://github.com/sagelga/super",
-            "demoLink": "https://super.sagelga.workers.dev"
+            "demoLink": "https://sagelga.com"
         },
         {
             "title": "Superbrain",
