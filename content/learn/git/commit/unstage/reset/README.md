@@ -1,0 +1,5 @@
+# Reset
+
+## Hard
+## Soft
+## Mixed

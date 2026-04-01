@@ -10,7 +10,9 @@
         "page_of": "Page {{currentPage}} of {{totalPages}}",
         "no_posts_found": "No blog posts found.",
         "all_categories": "All",
-        "table_of_contents": "Table of Contents"
+        "table_of_contents": "Table of Contents",
+        "eyebrow": "Writing",
+        "posts_count": "{count} posts on technology, development, and beyond."
     },
     "footer": {
         "tagline": "Full-Stack Developer & Cloud Enthusiast",
@@ -18,13 +20,34 @@
             "kunanon_srisuntiroj": "Kunanon Srisuntiroj",
             "about": "About",
             "skills": "Skills",
+            "sitemap": "Sitemap",
+            "explore": "Explore",
             "connect": "Connect"
         }
     },
     "github_label": "GitHub",
     "demo_label": "Demo",
     "docs": {
-        "sidebar_title": "Documentation"
+        "sidebar_title": "Documentation",
+        "all_projects_title": "All Projects",
+        "documented_projects": "{count} documented projects",
+        "pages_count": "{count} pages"
+    },
+    "gallery": {
+        "eyebrow": "Gallery",
+        "title": "Visual Work",
+        "subtitle": "Projects, photography, and design.",
+        "all": "All",
+        "projects": "Projects",
+        "photography": "Photography",
+        "design": "Design",
+        "items_count": "{count} items"
+    },
+    "learn": {
+        "eyebrow": "Cheatsheets & Guides",
+        "title": "Learn",
+        "subtitle": "Programming references and cheatsheets.",
+        "pages_count": "{count} pages"
     },
     "theme": {
         "title": "Theme Settings",
@@ -45,6 +68,7 @@
         "gallery": "Gallery",
         "learn": "Learn",
         "docs": "Docs",
+        "profiles": "Connect",
         "experience": "Experience",
         "certifications": "Certifications",
         "projects": "Projects",
@@ -58,12 +82,14 @@
     "not_found": {
         "title": "Page Not Found",
         "description": "The page you are looking for might have been removed, had its name changed, or is temporarily unavailable.",
-        "go_home": "Go back home"
-    },
-    "gallery": {
-        "title": "Gallery",
-        "image_alt": "Gallery image {{index}}"
+        "go_home": "Go to homepage"
     },
     "no_image_available": "No Image",
-    "read_documentation": "Read Documentation"
+    "read_documentation": "Read Documentation",
+    "content": {
+        "on_this_page": "On this page",
+        "collapse": "Collapse",
+        "expand": "Expand",
+        "contents": "Contents"
+    }
 }

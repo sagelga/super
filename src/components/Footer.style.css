@@ -49,7 +49,7 @@
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
-  min-width: 120px;
+  min-width: 100px;
 }
 
 .footer-col-title {
@@ -90,10 +90,11 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
   padding: 1.25rem 0;
   font-size: 0.8rem;
   color: var(--color-muted, #9A9485);
-  gap: 1rem;
+  gap: 0.75rem;
 }
 
 .footer-bottom > div {
@@ -173,7 +174,7 @@
   border-color: var(--color-accent, #C9943A);
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1024px) {
   .footer-top {
     flex-direction: column;
     gap: 2rem;

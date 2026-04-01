@@ -4,7 +4,7 @@ const withNextIntl = createNextIntlPlugin("./src/i18n.ts");
 
 const nextConfig = {
   experimental: {
-    optimizePackageImports: ['@cloudflare/next-on-pages'],
+    optimizePackageImports: ['@cloudflare/next-on-pages', 'next-intl', 'next-mdx-remote'],
   },
   images: {
     remotePatterns: [
@@ -19,6 +19,14 @@ const nextConfig = {
       {
         protocol: 'https',
         hostname: 'picsum.photos',
+      },
+      {
+        protocol: 'https',
+        hostname: 'res.cloudinary.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'github.com',
       },
     ],
   },

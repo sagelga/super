@@ -29,6 +29,7 @@ const ExperienceSection: React.FC<ExperienceSectionProps> = ({
         <Section
             id="experience"
             title={t("experience_section_title")}
+            subtitle={`${experiences.length}`}
             darkBg={false}
         >
             <div
@@ -61,7 +62,7 @@ const ExperienceSection: React.FC<ExperienceSectionProps> = ({
                         >
                             <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between">
                                 <h3
-                                    className={`font-display text-lg transition-colors duration-200 ${
+                                    className={`font-sans text-lg transition-colors duration-200 ${
                                         expanded === index
                                             ? "text-cream"
                                             : "text-muted group-hover:text-cream"
@@ -70,19 +71,27 @@ const ExperienceSection: React.FC<ExperienceSectionProps> = ({
                                     {exp.title}
                                 </h3>
                                 <div className="flex flex-shrink-0 items-center gap-3">
-                                    <span className="font-mono text-xs text-muted">
+                                    <span className="font-sans text-xs text-muted">
                                         {exp.duration}
                                     </span>
                                     {/* Chevron indicator */}
-                                    <span
-                                        className={`text-xs text-muted transition-transform duration-300 ${
+                                    <svg
+                                        className={`h-3.5 w-3.5 shrink-0 text-muted transition-transform duration-300 ${
                                             expanded === index
                                                 ? "rotate-180"
                                                 : ""
                                         }`}
+                                        fill="none"
+                                        stroke="currentColor"
+                                        viewBox="0 0 24 24"
                                     >
-                                        ↓
-                                    </span>
+                                        <path
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            strokeWidth={2}
+                                            d="M19 9l-7 7-7-7"
+                                        />
+                                    </svg>
                                 </div>
                             </div>
                             <p className="mt-0.5 text-sm text-accent">

@@ -1,0 +1,249 @@
+---
+slug: what-is-typescript
+title: TypeScript คืออะไร? ทำไมถึงเป็นที่นิยมในวงการ Web Developer?
+description: This is how you can host blog website for free with Docusaurus
+authors: [sagelga]
+tags: [TypeScript, JavaScript, Programming]
+image: https://images.unsplash.com/photo-1543966888-7c1dc482a810?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=640&q=80
+date: 2023-08-18
+---
+
+หากเราอยากจะทำหน้าเว็บไซต์ซักหน้าหนึ่ง เราก็คงจะได้ยินหรือคุ้นเคยชื่อภาษาโปรแกรมมิ่งอย่างภาษา HTML, CSS, และก็ JavaScript ใช่ไหมหล่ะครับ ซึ่งทั้งสามภาษาหลักนี้ก็ดูเหมือนจะไม่มีพิษมีภัยอะไร แต่เมื่อเพื่อน ๆ มีเว็บไซต์ขนาดใหญ่แล้วต้องการจัดการโค้ดเหล่านั้นให้เด็ดขาดก็จะทำได้ยากขึ้นซึ่งเป็นปัญหาของทุกภาษาโปรแกรมมิ่ง
+
+วันนี้ผมก็ได้พบเจอกับภาษาโปรแกรมมิ่งหน้าใหม่ที่ดีกว่าและมากกว่า JavaScript นั่นก็คือภาษา TypeScript ที่รวมเอาทั้งความเป็น Java และ JavaScript เข้าด้วยกันอย่างลงตัว แถมยังสามารถเอาไปใช้งานคู่กับ JavaScript เดิมที่เพื่อน ๆ อาจจะมีอยู่แล้วได้อีกด้วย
+
+แต่มันจะดีกว่าอย่างไรหล่ะ?! มาดูกันเลยครับ
+
+## ทำความรู้จักกับ TypeScript
+TypeScript นั้นเป็นภาษาโปรแกรมมิ่งหนึ่งที่ถูกสร้างขึ้นโดยบริษัท Microsoft ที่มีเป้าหมายเข้ามาแก้ไขการตรวจสอบประเภทตัวแปร (Static Typing) ที่ JavaScript นั้นไม่มีการตรวจสอบประเภทตัวแปร (Dynamic Typing) และฟังก์ชันก่อนการเริ่มทำงาน ทำให้ตัวภาษา TypeScript เองนั้นเป็น superset หรือครอบคลุมฟังก์ชันของการใช้งาน JavaScript และเพิ่มเติมด้วยการตรวจสอบและประกาศประเภทตัวแปร
+
+หากเราเอา TypeScript มาเปรียบเทียบกับ JavaScript ก็แทบจะแยกกันไม่ออกเลยหล่ะว่าอันไหนเป็นภาษาไหน
+
+ตัวอย่าง TypeScript เพื่อบวกเลข
+```typescript
+let number1: number = 12
+let number2 = 34 // ถ้าไม่ระบุประเภทข้อมูล TypeScript จะถือว่าเป็น number อัตโนมัติ
+
+function addValue (value1: number, value2: number): number {
+    return value1 + value2
+}
+
+console.log(addValue(number1, number2)) // 46 (type เป็น number)
+console.log(addValue('Hello', 'World')) // Error: Argument of type 'string' is not assignable to parameter of type 'number'
+```
+ซึ่งตัว TypeScript จะขึ้นข้อความว่าบรรทัดนี้จะมีปัญหาทันทีเพราะประเภทตัวแปร (ตอนนี้คือ string) ไม่ตรงกับที่ต้องการรับเข้า (ตอนนี้คือ number) และจะไม่ยอมให้เรารันโปรแกรมได้เลย
+
+แต่สำหรับภาษา JavaScript เพื่อบวกเลขแล้ว
+```javascript
+let number1 = 12
+let number2 = 34
+
+function addValue (value1, value2) {
+    return value1 + value2
+}
+
+console.log(addValue(number1, number2)) // 46 (type เป็น number)
+console.log(addValue('Hello', 'World')) // HelloWorld (type เป็น string
+```
+
+จากตัวอย่าง เพื่อน ๆ ก็จะเห็นว่า TypeScript จะไม่ยอมให้เพื่อน ๆ ใช้งานฟังก์ชัน `addValue()` ตั้งแต่แรกเพราะประเภทตัวแปรไม่ตรง แต่ JavaScript ยังเปิดรับอยู่
+แถมอีกว่าเพื่อน ๆ ก็จะเห็นการแจ้งเตือน Error (ขีดเส้นใต้สีแดง) ขึ้นในบรรทัดที่มีปัญหาบน IDE อย่าง Visual Studio Code หรือ IntelliJ IDEA ทันที แม้ว่าจะยังไม่ได้ลองใช้งาน (run-time) ก็ตาม
+
+ความเขี้ยวเรื่องประเภทตัวแปรทั้งการรับเข้าและส่งออกนั้น
+ทำให้นักพัฒนาที่ต้องการตั้งใจเขียนโปรแกรมเพื่อให้มีประสิทธิภาพสูงและไม่มีปัญหาเกิดขึ้นในอนาคตจึงเริ่มเปลี่ยนมาใช้ TypeScript ก็เพราะเหตุนี้แหละครับ
+
+## ความนิยมของภาษา TypeScript
+แถมยังเอาไปใช้งานแทน JavaScript ใน React, Vue, หรือแม้กระทั่งระบบ CRM ขนาดใหญ่อย่าง Salesforce Lightning Web Component และ Salesforce Functions ก็รองรับภาษา TypeScript แล้วทั้งนั้น*
+
+ทำให้วันนี้ใครกำลังจะคิดว่านี่เป็นแค่ภาษากระจอก ๆ ทั่ว ๆ ไป คุณก็คิดผิดแล้วหล่ะครับ!
+
+## TypeScript แก้ไขปัญหาอะไรใน JavaScript ได้บ้าง?
+- ปัญหาทับประเภทตัวแปร
+- ปัญหาข้อมูลหลายประเภทตัวแปร
+- ปัญหาการไม่พบข้อมูล
+
+### JavaScript ไม่ควรเปิดกว้างมากเท่านี้
+แม้ว่ามันจะเขียนง่ายมากก็ตาม หนึ่งปัญหาหลักของภาษา JavaScript คือเรื่องของการออกแบบให้ **ตัวเองสามารถเก็บข้อมูลประเภทอะไรก็ได้ และเปลี่ยนตอนไหนก็ได้ (Dynamic Typing)** ทำให้ก่อนที่โค้ดของเพื่อน ๆ จะทำงาน จะไม่มีการเช็คประเภทข้อมูล (Data Type) ทั้งสิ้น
+
+ซึ่ง TypeScript นั้นเปิดให้เพื่อน ๆ สร้างระบบการทำงานแบบ Static Typing หรือตัวแปรเดียวข้อมูลประเภทเดียว หรือจะมีหลายประเภทข้อมูลก็ได้เช่นเดียวกัน รวมเอาทั้งความเป็น Static และ Dynamic เข้าด้วยกันอย่างลงตัว
+
+ตัวอย่างเช่นการประกาศตัวแปร (Variable) ในภาษา JavaScript นั้นเราสามารถประกาศได้ทั้งแบบเก็บข้อมูลประเภทตัวเลข (Number) และแบบเก็บข้อมูลประเภทข้อความ (String) ได้เลย และเมื่อเรานำตัวแปรทั้งสองมาบวกกัน ก็จะได้ผลลัพธ์เป็นข้อความประเภท String ให้โดยอัตโนมัติ
+
+```javascript
+let text = 1212312121
+text = 'Hello World'
+
+console.log(text + 1) // Hello World1
+```
+
+ทำให้เวลาเราสร้างฟังก์ชัน (Function) หรือคอมโพเนนท์ (Component) นั้นก่อปัญหาว่าผู้ใช้งานสองสิ่งนั้นไม่ทราบประเภทข้อมูลที่รับเข้่าและออก ส่งผลให้เราต้องมานั่งแก้ไขโค้ดกันในภายหลังบ่อยครั้ง เป็นการเสียทั้งเวลาและเสียทั้งประสิทธิภาพในการทำงาน
+
+ตัวอย่างเช่นการประกาศฟังก์ชันบวกสองค่าเข้าด้วยกัน โดยผมอาจจะบอกว่าฟังก์ชันนี้ตั้งใจว่าจะให้**ตัวเลข**สองตัวมาเป็นข้อมูลเข้า (Input) และให้ออกผลลัพธ์ (Output) **มาเป็นตัวเลข**เช่นเดียวกัน
+
+```javascript
+function addValue (value1, value2) {
+    return value1 + value2
+}
+```
+
+ทำให้เราสามารถใช้งานได้ทั้งการบวกค่าตัวเลข (Number) ได้ตามปกติ แต่ JavaScript ก็ยังรองรับว่าการบวกก็คือการเอาค่ามาแปะกัน (Concatination) เช่นเดียวกัน
+เลยทำให้มันถูกเรียกใช้งานแบบผิด ๆ ไปได้อย่างปริยาย
+
+```javascript
+console.log(addValue(1, 2)) // 3
+console.log(addValue('Hello', 'World')) // 'HelloWorld'
+console.log(addValue('12', 34)) // '1234'
+```
+
+และนั่นคือปัญหาของ Developer ที่ต้องมานั่งทำความเข้าใจหรือลองทำมันพังก่อนถึงจะรู้ว่ามีอะไรผิดแปลกไป และหลายครั้ง Developer ก็อาจจะพลาดในส่วนนี้ไปอย่างเต็ม ๆ
+กว่าจะรู้ก็ตอนที่มันสร้างปัญหาให้คุณแล้ว อะไรประมาณนี้
+
+### การจัดการข้อมูลว่างเปล่า ที่ TypeScript ก็ทำได้ดีกว่า
+รวมไปถึงการจัดการข้อมูลประเภทว่างเปล่า (Null), ไม่คืนค่า (Void) และไม่ระบุ (Undefined) ที่ถ้าเป็น JavaScript นั้นเราก็ต้องไปลุ้นกันเอาเองหน้างาน หรือที่เรียกกันว่าตอน Run-time ว่าจะมีปัญหานี้หรือไม่ และถ้ามีก็ต้องไปแก้ไขโค้ดกันในภายหลังอีกครั้ง
+
+ตัวอย่างเช่นการค้นหาข้อมูลภายใน List ว่ามีข้อมูลอยู่หรือไม่บน JavaScript ที่มีโอกาสจะไม่พบข้อมูล (Null) สูง
+
+```javascript
+const list = [-1, 0, 1, 2, 3, 4, 5]
+const list2 = []
+
+function findIndex (value) {
+    return list.find(item => item === value)
+}
+
+list2.push(findIndex(1)) // 3
+list2.push(findIndex(6)) // undefined
+```
+
+ซึ่งต้องบอกว่า **มันทำงานได้อย่างไร้ที่ติ และตามการออกแบบที่คุณเขียนเอาไว้แล้ว**
+แต่เมื่อเพื่อน ๆ เอาโค้ดเดียวกันไปทำงานกับตัว TypeScript แล้วหล่ะก็ มันจะไม่ยอมเด็ดขาดเลย
+ว่าทำไมคุณถึงเอาข้อมูลที่**อาจจะเป็น** Undefined เข้ามาใส่ใน list ที่จะอนุญาตให้เฉพาะ number ได้อย่างไร
+
+```typescript
+const list: number[] = [-1, 0, 1, 2, 3, 4, 5]
+const list2: number[] = []
+
+function findIndex (value: number): number | undefined {
+    return list.find(item => item === value)
+}
+
+// highlight-start
+list2.push(findIndex(1))
+list2.push(findIndex(6))
+list2.push(findIndex('2'))
+// highlight-end
+```
+
+และเมื่อคุณได้กดรันสคริปต์ ก็จะขึ้นปิดด้วยปัญหานี้ทันที
+
+```
+Argument of type 'number | undefined' is not assignable to parameter of type 'number'.
+  Type 'undefined' is not assignable to type 'number'.(2345)
+```
+
+ทำให้หากว่าเราต้องการทำให้มันถูกต้องจริง ก็ควรที่จะตรวจสอบว่าข้อมูลที่จะเข้าไปนั้นจะต้องเป็นตัวเลขเท่านั้น แม้ว่าจะมีโอกาสเป็น Undefined ก็ตาม
+
+เช่่นการแทนค่าด้วย 0 หากไม่พบข้อมูล
+
+```typescript
+list2.push(findValue(1) || 0)
+list2.push(findValue(6) || 0)
+list2.push(findValue('2') || 0)
+```
+
+หรือสร้าง function ขึ้นมาใหม่เลยว่าข้อมูลที่จะเข้าไปใน list2 นั้นจะต้องเป็น number เท่านั้น ถ้าไม่ใช่ก็ไม่ต้องเอาข้อมูลเข้าไปเลยด้วยซ้ำ
+
+```typescript
+function safePush(value: any) {
+    const foundValue = findValue(value);
+    if (typeof foundValue === 'number') {
+        list2.push(foundValue);
+    }
+}
+
+safePush(1);
+safePush(6);
+safePush('2');
+```
+
+และเมื่อคุณทำแล้ว TypeScript ก็จะมั่นใจได้ว่าสิ่งที่คุณกำลังทำไปนั้นปลอดภัย (Type-safe) จริง ๆ และปิดการแจ้งปัญหาในที่สุด
+
+เรียกได้ว่าภาษา TypeScript เองก็มีเป้าหมายให้เพื่อน ๆ นั้นได้ตรวจสอบข้อมูลและรอบคอบมากขึ้น และสุดท้ายก็จะทำให้เพื่อน ๆ นั้นไม่ต้องมานั่งมึนงงว่าทำไมโค้ดของเราถึงพังนั่นเอง
+
+### แถมเช็คให้โดยอัตโนมัติว่าผลลัพธ์การทำงานจะเป็นอะไร
+นอกจากที่จะสามารถเช็คก่อนใช้งานแล้ว ก็ยังระมัดระวังไม่ให้เพื่อน ๆ เปลี่ยนประเภทตัวแปรหรือใช้งานแบบผิดประเภทเลย เช่นการใส่และใช้งานข้อมูลภายใน Object
+
+```typescript
+// ประกาศประเภท Object ที่มีคุณสมบัติ 'People' ไว้
+type People = {
+    name: string,
+    age: number,
+    gender: 'M' | 'F' | 'X'
+    salary?: number // ? คือเพื่อบอกว่าไม่บังคับมีข้อมูล
+}
+
+// ประกาศว่าจะเป็น list ที่ใส่ Object ประเภท People ได้เท่านั้น
+const peopleList: People[] = []
+```
+
+ทำให้เวลาเราใส่ข้อมูลก็จะต้องรู้ลักษณะของข้อมูลเป็นต้น ตัวอย่างเช่น
+
+```typescript
+peopleList.push({name: 'Taylor', age: 32, gender: 'X', salary: 10000})
+peopleList.push({name: 'Jennifer', age: 21, gender: 'F'})
+```
+
+และถ้าหากว่าฝืนใส่ข้อมูลไป ตัว TypeScript ก็จะรู้ว่ามีปัญหาก่อนโปรแกรมจะทำงานเสียอีก ตัวอย่างเช่น
+
+```typescript
+peopleList.push({name: 'Julia', age: 30, gender: 'L', salary: 20000})
+```
+
+ก็จะขึ้นตัวแดงเลยว่า 'Y' นั้นไม่ใช่ประเภทข้อมูลที่เรารับได้ เรารับได้แค่ 'M', 'F', หรือ 'X' เท่านั้น
+
+```
+Type '"Y"' is not assignable to type '"M" | "F" | "X"'.(2322)
+input.tsx(4, 5): The expected type comes from property 'gender' which is declared here on type 'People'
+```
+
+หรือ
+
+```typescript
+peopleList.push({name: 'Tanya', age: 'deceased', gender: 'F', salary: 20000})
+```
+
+ก็จะแจ้งไม่สามารถเก็บข้อมูลประเภท string บน number ได้
+
+```
+Type 'string' is not assignable to type 'number'.(2322)
+input.tsx(3, 5): The expected type comes from property 'age' which is declared here on type 'People'
+```
+
+รวมไปถึงการ (ตั้งใจ) ลืมใส่ข้อมูลที่บังคับว่าจะต้องมี
+```typescript
+peopleList.push({name: 'Robert', gender: 'M'})
+```
+
+ก็จะขึ้นตัวแดงเลยว่า ข้อมูลอายุ (age) นั้นไม่ได้ระบุไว้ (`required in type 'People'`) แต่ก็จะไม่ถามหา salary เพราะเป็นข้อมูลที่ไม่บังคับ (optional)
+
+```
+Argument of type '{ name: string; gender: "M"; }' is not assignable to parameter of type 'People'.
+  Property 'age' is missing in type '{ name: string; gender: "M"; }' but required in type 'People'.(2345)
+input.tsx(3, 5): 'age' is declared here.
+```
+
+## ทำให้ TypeScript เหมาะกับ Web Developer มากที่สุด
+ทั้งด้านการใช้งานที่เหมือน JavaScript แบบ 100% เพิ่มเติมคือบังคับบอกประเภทและการรู้ชอบว่าข้อมูลนี้เป็นประเภทอะไร ทำให้ภาษา TypeScript นั้นเหมาะสมมากกับการใช้งานจริง ตั้งแต่การพัฒนาเว็บไซต์หรือสร้าง Serverless Functions หรือการประมวลผลทั่วไป
+
+แต่ที่ทำให้มันเหมาะกับการใช้เพื่อพัฒนา Website แบบที่เพื่อน ๆ สามารถกระโดดขึ้นรถไฟได้เลยนั่นก็เพราะว่า TypeScript นั้นได้รับการรองรับจาก Framework ดัง ๆ อย่าง ReactJS ให้สามารถแปลงภาษา TypeScript กลับไปเป็น JavaScript เพื่อใช้งานจริงมาซักพักใหญ่แล้ว และยังสามารถใช้งานร่วมกับ JavaScript เดิมที่เพื่อน ๆ อาจจะมีอยู่แล้วได้อีกด้วย ทำให้เป็นเรื่องที่ไม่ยากเลยที่จะให้เพื่อน ๆ เปลี่ยนจาก JavaScript เป็นหลักมาเป็น TypeScript กันถ้วนหน้าได้อย่างไร้ความกังวล
+
+แถมตัวภาษา TypeScript เองก็ได้รับการสนับสนุนอย่างดีจากคอมมูนิตี้โปรแกรมเมอร์และตัวบริษัท Microsoft เองเช่นเดียวกัน ยิ่งสนับสนุนการเปลี่ยนมาใช้งาน TypeScript ให้ง่ายและสะดวกมากขึ้นอย่างเห็นได้ชัดเลยหล่ะครับ
+
+## ทดลองใช้งานภาษา TypeScript ได้แล้ววันนี้!
+สำหรับใครที่สนใจอยากจะทดลองใช้งานภาษา TypeScript ก็สามารถเข้าไปลองเล่น TypeScript Playground ได้ที่เว็บไซต์ของ TypeScript เลยที่ [https://www.typescriptlang.org/play?#code](https://www.typescriptlang.org/play?#code)
+
+หรือถ้าเพื่อน ๆ อยากจะสร้างโปรเจ็กต์ React ก็สามารถใช้ create-react-app ได้ด้วยการใช้คำสั่ง
+
+```bash
+npx create-react-app my-app --template typescript
+```

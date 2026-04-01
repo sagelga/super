@@ -1,0 +1,142 @@
+---
+slug: cloudfront-cdn-wordpress-aws
+title: ใช้ CloudFront เพื่อทำ WordPress CDN (ตอนที่ 4)
+description: ใครอยากมีเว็บไซต์ ? ฉันหน่ะสิ ฉันหน่ะสิ แต่ยากมั้ย ? ก็ยากหน่ะสิ ยากหน่ะสิ แต่ในสตอรีนี้เราก็จะมาสอนวิธีการสร้างเว็บไซต์และใช้ WordPress ผ่านบริการคลาวด์ที่ทุกคนสามารถทำได้ด้วยตนเองอย่าง Amazon Web Service (AWS) Lightsail พร้อมกับคำแนะนำในการทำให้เว็บไซต์นั้นสามารถเติบโต, ขยับขยายได้ตามความต้องการ และให้บริการได้อย่างรวดเร็วด้วย AWS S3, AWS CloudFront และ Plug-In ของ WordPress ที่เราก็จะนำมาแนะนำกันในสตอรีนี้ครับ
+authors: [sagelga]
+tags: [AWS, Wordpress, Programming]
+image: https://images.unsplash.com/photo-1620641788421-7a1c342ea42e
+date: 2021-07-14
+---
+
+หลังจากที่เราได้ทำการสร้าง Bucket บน S3 และให้ใช้ Bucket แทน Instance บน Lightsail แล้ว ขั้นตอนต่อไปที่เราจะต้องทำเพื่อบรรลุวัตถุประสงค์ของการสร้างโปรเจ็กต์นั่นก็คือการเพิ่มความเร็วให้กับการให้บริการรูป ด้วยการใช้เน็ตเวิร์คเพื่อให้บริการคอนเท้นท์อย่าง CloudFront ที่จะมาทำหน้าที่เป็นเครือข่ายการจัดส่งเนื้อหา (Content Delivery Network หรือ CDN) ให้กับเว็บไซต์ของเรา รวมไปถึงการใช้ Custom Domain บน CloudFront เพื่อเป็นการเพิ่มคะแนน Index อีกด้วย
+
+
+## ซีรีส์การสร้าง WordPress บน Amazon Web Service
+
+หากว่าเพื่อนๆ อยากจะย้อนหรือข้ามไปขั้นตอนอื่นของการทำ WordPress บน Amazon Web Service ก็สามารถกดเข้าไปอ่านสตอรีได้ตามลิงก์เหล่านี้เลยครับ
+
+-   [สร้างเว็บไซต์ WordPress ของคุณด้วย Amazon Web Service (ตอนที่ 1)](https://byteside.one/th/tutorial/lightsail-wordpress-aws/)
+-   [รองรับ HTTPS ให้กับ Instance บน Amazon Web Service (ตอนที่ 2)](https://byteside.one/th/tutorial/https-support-aws/)
+-   [ใช้ AWS S3 เก็บไฟล์มีเดียของ WordPress (ตอนที่ 3)](https://byteside.one/th/tutorial/wordpress-media-storage-s3-aws/)
+-   [ใช้ CloudFront เพื่อทำ WordPress CDN (ตอนที่ 4)](https://byteside.one/th/tutorial/cloudfront-cdn-wordpress-aws/)
+-   [ใช้ AWS CloudFront เพื่อโดเมนของตัวเองด้วย Route 53 (ตอนที่ 5)](https://byteside.one/th/tutorial/connect-cloudfront-to-route53-aws/)
+
+สตอรีนี้เราก็จะทำการสร้าง CloudFront Distributions และทำการโอนย้ายการเรียกใช้งานมีเดียจาก AWS S3 มาเป็น CloudFront อย่างสมบูรณ์แบบครับ รวมไปถึงอธิบายระดับการให้บริการ Distributions ที่อาจสร้างความได้เปรียบด้านความเร็วให้กับเว็บไซต์ของเราก็เป็นได้
+
+## อะไรคือ AWS CloudFront
+
+บริการ AWS CloudFront เป็นบริการเครือข่ายการจัดส่งเนื้อหา (CDN) ที่มีหน้าที่จัดส่งเนื้อหาอย่างมีเดียด้วยความเร็วสูง ด้วยการใช้ประโยชน์ของระบบเน็ตเวิร์คภายใน AWS เองและการใช้ Edge Locations เพื่อให้จุดให้บริการนั้นอยู่ใกล้ลูกค้ามากที่สุด โดย AWS เองนั้นมี Edge Locations และ Region อยู่ทั่วทุกมุมโลก ดังนั้นลูกค้าที่อยู่ต่างประเทศก็จะได้รับการให้บริการรวดเร็วเช่นกัน
+
+ด้วยการให้บริการนั้น นักพัฒนาเองก็สามารถเลือกให้บริการยังพื้นที่ต่างๆ ได้ สามารถจำกัดการเข้าถึงจากบางประเทศได้ รวมไปถึงการเปลี่ยนเส้นทาง HTTP ด้วยการใช้ Lambda Functions จนไปถึงการควบคุมค่าใช้จ่ายที่ลดต้นทุนการให้บริการรูปอย่างเช่นการซื้อเครดิตการใช้งาน CloudFront ล่วงหน้าเป็นต้น
+
+แต่สิ่งที่สำคัญมากที่สุดในการ AWS CloudFront นั้นก็คือการให้บริการที่เร็วกว่าการเข้าถึง Bucket บน S3 ที่ผู้ใช้จะต้องไปเรียกใช้บน Region Singapore แต่การใช้ CloudFront วันนี้จะทำให้เราเปลี่ยนไปใช้งานกันที่ Edge Locations ในประเทศไทย ซึ่งก็คือลูกค้าเป้าหมายของเรานั่นเอง
+
+![](https://static.byteside.one/media/2022/02/08093535/CloudFront-Generic.webp)
+
+และกดปุ่มสีน้ำเงิน ‘Create Distribution’ เพื่อสร้าง CloudFront Distributions อันใหม่ครับ
+
+![](https://static.byteside.one/media/2022/02/08093545/Screenshot-2021-07-13-at-15.05.44.webp)
+
+## ตั้งค่าการ Replicate ไปที่ Bucket
+
+ในหัวข้อ ‘Origin’ ให้เพื่อนๆ ทำการเลือก ‘Origin domain’ ไปที่ Bucket ที่เราใช้เก็บมีเดีย (ที่เราทำไว้ในตอนที่แล้ว) โดยจะอยู่ในหัวข้อ ‘Amazon S3’ ตามภาพครับ
+
+![](https://static.byteside.one/media/2022/02/08093400/Screenshot-2021-07-13-at-15.08.24.webp)
+
+## เลือกตัวเลือก S3 Bucket Access
+
+S3 bucket access เป็นการปิดไม่ให้ผู้ใช้งานสามารถเข้าดูไฟล์ผ่าน S3 และ CloudFront แต่จะให้เข้าผ่าน CloudFront เท่านั้น โดยการใช้ Origin access identity (OAI) โดยผมเองแนะนำว่าให้เปิด ‘Yes’ ไว้เพื่อลดการเข้าถึงไฟล์ผ่าน S3 ที่มีค่าใช้จ่ายสูงกว่าหรือเทียบเท่าครับ
+
+![](https://static.byteside.one/media/2022/02/08093414/Screenshot-2021-07-13-at-15.09.44.webp)
+
+## ตั้งค่า Price Class
+
+ข้ามไปที่หัวข้อ ‘Settings’ เลยครับ โดยในขั้นตอนนี้ CloudFront จะให้เราเลือก ‘Price Class’ เป็นกลุ่ม Edge Locations หรือประเทศที่จะไปเอามีเดีย โดยมีให้เลือกทั้งหมด 3 ระดับ (Tier) นั่นคือ
+
+-   Use All Edge Locations
+-   Use North America, Europe, Asia, Middle East, and Africa
+-   Use only North America and Europe
+
+ซึ่งก็จะส่งผลโดยตรงของการส่งมีเดียไปให้ผู้ใช้งาน ซึ่งหากว่า Latency ของผู้ใช้งานสูงก็อาจจะทำให้ผู้ใช้งานไม่เข้าใช้งานเว็บไซต์ของเราก็ได้ และก็จะทำให้คะแนน Ranking ของเว็บไซต์ลดลงอีกเช่นกันครับ เพราะผู้ใช้งานที่มีความเร็วอินเตอร์เน็ตที่ต่ำอาจเลือกที่จะไม่เข้าหน้าเว็บเพียงเพราะหน้าเว็บโหลดช้า
+
+![](https://static.byteside.one/media/2022/02/08093428/Screenshot-2021-07-13-at-15.10.58.webp)
+
+สำหรับเพื่อนๆ ที่ต้องการบุกผู้ใช้งานในประเทศไทย ผมก็ขอแนะนำว่าให้ตั้งเป็น Use All Edge Locations ไปเลย เพราะค่าใช้จ่ายสำหรับ Asia Pacific นั้นสูงกว่า Use only NA/EU เพียง [$0.04 ต่อ GB (สูงกว่า 41%)](https://aws.amazon.com/cloudfront/pricing/?nc2=type_a) รวมไปถึงความเร็วที่ต้องใช้เพื่อโหลดมีเดียก็จะสูงขึ้นเช่นกันหากว่าต้องไปโหลดมาจาก NA/EU แต่สุดท้ายแล้วก็อยู่ที่งบประมาณที่เพื่อนๆ ตั้งเอาไว้ ซึ่งส่วนใหญ่แล้วหากว่ามีเดียถูกบีบอัด (Compressed) แล้วก็แทบไม่ใช้เกินไปกว่า 1 GB ต่อเดือนอยู่แล้วครับ ดังนั้นหากว่าเพื่อนๆ กำลังคิดจะประหยัดในส่วนนี้ก็อาจจะเลือกไปประหยัดในจุดอื่นแทนจะเหมาะสมกว่าครับ
+
+หากว่าเพื่อนๆ ยังตัดสินใจไม่ได้ เราก็ได้ทำการทำตารางการเปรียบเทียบระหว่าง Price Class แต่ละระดับไว้ให้แล้วดังนี้ครับ
+
+-   ที่ตั้งทางภูมิศาสตร์: สหรัฐอเมริกา เม็กซิโก และแคนาดา
+    -   ทุก Location: ✔️
+    -   บาง Location: ✔️
+    -   NA/EU: ✔️
+-   ที่ตั้งทางภูมิศาสตร์: ยุโรปและอิสราเอล
+    -   ทุก Location: ✔️
+    -   บาง Location: ✔️
+    -   NA/EU: ✔️
+-   ที่ตั้งทางภูมิศาสตร์: แอฟริกาใต้ เคนยา และตะวันออกกลาง
+    -   ทุก Location: ✔️
+    -   บาง Location: ✔️
+    -   NA/EU: ❌
+-   ที่ตั้งทางภูมิศาสตร์: ญี่ปุ่น
+    -   ทุก Location: ✔️
+    -   บาง Location: ✔️
+    -   NA/EU: ❌
+-   ที่ตั้งทางภูมิศาสตร์: ฮ่องกง อินโดนีเซีย ฟิลิปปินส์ สิงคโปร์ เกาหลีใต้ ไต้หวัน และประเทศไทย
+    -   ทุก Location: ✔️
+    -   บาง Location: ✔️
+    -   NA/EU: ❌
+-   ที่ตั้งทางภูมิศาสตร์: อินเดีย
+    -   ทุก Location: ✔️
+    -   บาง Location: ✔️
+    -   NA/EU: ❌
+-   ที่ตั้งทางภูมิศาสตร์: อเมริกาใต้
+    -   ทุก Location: ✔️
+    -   บาง Location: ❌
+    -   NA/EU: ❌
+-   ที่ตั้งทางภูมิศาสตร์: ออสเตรเลียและนิวซีแลนด์
+    -   ทุก Location: ✔️
+    -   บาง Location: ❌
+    -   NA/EU: ❌
+
+### ตั้งค่า SSL Certificate และ CNAME
+
+ในขั้นตอนนี้ หากว่าเพื่อนๆ ต้องการทำ CDN แต่ใช้เป็นชื่อโดเมนของตัวเอง (Custom Domain) ก็สามารถมาทำในขั้นตอนนี้ครับ โดยรายละเอียดในการตั้งค่า Custom Domain เราจะมาพูดกันอีกครั้งหนึ่งในตอนถัดไปครับส่วนตอนนี้ถ้ายังทำไม่เป็นก็สามารถข้ามไปก่อนได้เลย
+
+![](https://static.byteside.one/media/2022/02/08093439/Screenshot-2021-07-13-at-15.23.10.webp)
+
+### ตรวจทานและกด Create distribution
+
+เมื่อเพื่อนๆ ทำเสร็จแล้ว ก็ทำการกด ‘Create distribution’ ได้เลย และรอซักพักหนึ่งเพื่อให้ Object ใน Origin (หรือ Bucket ใน S3) ไปอยู่บน Locations ที่เราตั้งค่าเอาไว้ในขั้นตอนข้างต้น
+
+![](https://static.byteside.one/media/2022/02/08093449/Screenshot-2021-07-13-at-15.23.56.webp)
+
+หากว่า Distributions นั้นทำสำเร็จแล้ว ก็จะมีติ้ก ‘Enabled’ ที่ช่อง ‘Status’ ของ Distribution ที่เราได้ทำการสร้างเมื่อขั้นตอนข้างต้นครับ
+
+![](https://static.byteside.one/media/2022/02/08093526/Screenshot-2021-07-13-at-16.50.58.webp)
+
+## ตั้งค่า CDN ใน Plug-In
+
+ในหัวข้อ ‘Provider’ ในหน้าการตั้งค่าของ Plug-In WP Offload Media Lite ให้ทำการกดเปลี่ยนจากตัวเลือก Amazon S3 มาเป็น Amazon CloudFront ดังภาพและกด Save เพื่อบันทึกการแก้ไขครับ
+
+![](https://static.byteside.one/media/2022/02/08093514/Screenshot-2021-07-13-at-16.05.40.webp)
+
+### ตรวจสอบช่อง Custom Domain (CNAME)
+
+เนื่องจากเรายังไม่ได้ทำการตั้ง Custom Domain ให้กับ CloudFront ดังนั้นเราจึงต้องใช้โดเมนทั่วไปอย่าง .cloudfront.net ไปก่อน ให้เพื่อนๆ ทำการคัดลอกโดเมน .cloudfront.net ของ Distribution ที่เราใช้งานมาแปะไว้ในช่อง ‘Custom Domain (CNAME)’ ครับ เพื่อให้หน้าเว็บไซต์แสดงผลมีเดียที่มาจาก CloudFront Distribution
+
+![](https://static.byteside.one/media/2022/02/08093501/Screenshot-2021-07-13-at-16.04.15.webp)
+
+แต่การตั้งไปใช้ .cloudfront.net ก็ยังเป็นผลเสียต่อหน้าเว็บไซต์ของเราอยู่ เพราะว่ามันจะเป็นการบอกว่าเราไป “ก็อปปี้” ข้อมูลพวกนี้มาจากไหน (แม้ว่าจะเป็น CloudFront ก็ตาม แต่ก็ไม่รู้ว่าเป็น CloudFront ของใคร) และก็จะส่งผลเสียต่อคะแนน Ranking ของหน้าเว็บเราเพราะว่า Google ก็สามารถหาคำตอบจาก “ข้อมูลต้นฉบับ” ได้จาก Domain CloudFront ครับ
+
+## เสร็จแล้ว!
+
+หากว่าเพื่อนๆ ตั้งค่าทุกอย่างสำเร็จแล้ว ไฟล์มีเดียทุกไฟล์จะถูกเปลี่ยน URL มาเป็น Custom Domain (.cloudfront.net) โดยอัตโนมัติครับผม และเพื่อนๆ ก็จะสามารถดูว่ามีเดียนั้นจะโหลดเร็วขึ้น เนื่องจากมีเีดียถูกให้บริการโดย CloudFront ใน Edge Location ประเทศไทย แทนที่จะเป็นลิงก์ Object บน S3 ครับผม
+
+ในตอนนี้เราก็ได้ทำการตั้งค่า CloudFront เป็นที่สำเร็จแล้ว ขั้นตอนต่อไปก็คือการตั้ง Certificate ให้กับตัว Domain Name และเปิดการใช้งาน HTTPS แบบเต็มตัวกันแล้วครับ ส่วนในสตอรีนี้ก็ต้องขอลากันไปก่อน สวัสดีครับ
+
+---
+
+###### ข้อมูลอ้างอิง
+
+-   [https://aws.amazon.com/cloudfront/pricing/](https://aws.amazon.com/cloudfront/pricing/)
+-   [https://aws.amazon.com/th/cloudfront/features/](https://aws.amazon.com/th/cloudfront/features/)

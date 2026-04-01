@@ -4,20 +4,21 @@ import {
     IBM_Plex_Sans_Thai,
     IBM_Plex_Mono,
     IBM_Plex_Serif,
-    Noto_Serif_Thai,
+    Trirong,
     Noto_Serif_SC,
 } from "next/font/google";
 import "./globals.css";
 
 // Import the main layout component
 import Layout from "../components/Layout";
+import DeviconsLoader from "../components/DeviconsLoader";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages, getTranslations } from "next-intl/server";
 
 // Configure the sans-serif font
 const sans = IBM_Plex_Sans_Thai({
     variable: "--font-sans",
-    weight: ["100", "200", "300", "400", "500", "600", "700"],
+    weight: ["400", "600", "700"],
     subsets: ["thai", "latin"],
     display: "swap",
 });
@@ -25,7 +26,7 @@ const sans = IBM_Plex_Sans_Thai({
 // Configure the monospace font
 const mono = IBM_Plex_Mono({
     variable: "--font-mono",
-    weight: ["400", "500", "600", "700"],
+    weight: ["400", "600"],
     subsets: ["latin"],
     display: "swap",
 });
@@ -33,23 +34,23 @@ const mono = IBM_Plex_Mono({
 // Configure the serif font for display
 const serif = IBM_Plex_Serif({
     variable: "--font-serif",
-    weight: ["400", "500", "600", "700"],
+    weight: ["400", "600", "700"],
     subsets: ["latin"],
     display: "swap",
 });
 
-// Thai serif font — fills the gap IBM Plex Serif leaves for Thai glyphs
-const serifThai = Noto_Serif_Thai({
+// Thai display serif font — elegant traditional Thai serif for headings
+const serifThai = Trirong({
     variable: "--font-serif-thai",
-    weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
-    subsets: ["thai"],
+    weight: ["400", "600", "700"],
+    subsets: ["thai", "latin"],
     display: "swap",
 });
 
 // Chinese serif font — IBM Plex has no CJK coverage at all
 const serifZh = Noto_Serif_SC({
     variable: "--font-serif-zh",
-    weight: ["200", "300", "400", "500", "600", "700", "900"],
+    weight: ["400", "700"],
     subsets: ["latin"],
     display: "swap",
 });
@@ -206,7 +207,8 @@ export default async function RootLayout({
     return (
         <html
             lang={currentLang}
-            className={`dark ${serifThai.variable} ${serifZh.variable}`}
+            className={`${serifThai.variable} ${serifZh.variable}`}
+            suppressHydrationWarning
         >
             <head>
                 {/* Apply stored theme before first paint to avoid flash */}
@@ -215,11 +217,9 @@ export default async function RootLayout({
                         __html: `(function(){try{var s=localStorage.getItem('theme-preference');var prefersDark=window.matchMedia('(prefers-color-scheme: dark)').matches;var dark=s==='dark'||(s!=='light'&&prefersDark)||!s;document.documentElement.classList.toggle('dark',dark);}catch(e){}})();`,
                     }}
                 />
-                <link rel="preconnect" href="https://cdn.jsdelivr.net" />
-                <link
-                    rel="stylesheet"
-                    href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css"
-                />
+                <link rel="dns-prefetch" href="https://cdn.jsdelivr.net" />
+                <link rel="dns-prefetch" href="https://res.cloudinary.com" />
+                <link rel="dns-prefetch" href="https://images.unsplash.com" />
                 <link rel="icon" href="/favicon.ico" sizes="any" />
                 <link rel="icon" href="/icon.svg" type="image/svg+xml" />
                 <link
@@ -228,6 +228,24 @@ export default async function RootLayout({
                     href="/apple-touch-icon.png"
                 />
                 <link rel="manifest" href="/manifest.webmanifest" />
+                <link
+                    rel="alternate"
+                    type="application/rss+xml"
+                    title="Kunanon Srisuntiroj Blog"
+                    href="/blog/feed.xml"
+                />
+                <link
+                    rel="alternate"
+                    type="application/atom+xml"
+                    title="Kunanon Srisuntiroj Blog"
+                    href="/blog/feed.xml"
+                />
+                <link
+                    rel="alternate"
+                    type="application/feed+json"
+                    title="Kunanon Srisuntiroj Blog"
+                    href="/blog/feed.json"
+                />
                 <meta name="theme-color" content="#1A1814" />
                 <meta name="color-scheme" content="dark light" />
                 <meta
@@ -244,6 +262,7 @@ export default async function RootLayout({
             >
                 <NextIntlClientProvider messages={messages}>
                     <Layout>{children}</Layout>
+                    <DeviconsLoader />
                 </NextIntlClientProvider>
             </body>
         </html>

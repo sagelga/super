@@ -2,9 +2,7 @@ import createMiddleware from "next-intl/middleware";
 import { NextRequest, NextResponse } from "next/server";
 
 const EXTERNAL_REDIRECTS: Record<string, string> = {
-    "/blog": "https://blog.sagelga.com",
-    "/docs": "https://docs.sagelga.com",
-    "/learn": "https://learn.sagelga.com",
+    // blog, docs, learn are now served locally
 };
 
 const intlMiddleware = createMiddleware({

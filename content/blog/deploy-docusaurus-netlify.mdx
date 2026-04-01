@@ -1,0 +1,57 @@
+---
+slug: deploy-docusaurus-netlify
+title: Deploying your Docusaurus with Netlify
+description: This is how you can host blog website for free with Docusaurus
+authors: [sagelga, chatgpt]
+tags: [SEO, Docusaurus, Programming]
+image: https://images.unsplash.com/photo-1620641788421-7a1c342ea42e
+date: 2023-07-29
+---
+
+
+Once you've finished customizing your Docusaurus blog and are happy with how it looks and functions, it's time to deploy it to the internet. Netlify is a great platform for hosting static websites like Docusaurus blogs. Here's how you can deploy your blog using Netlify:
+
+
+:::info
+Please be adviced that partial of this content was generated with OpenAI's ChatGPT.
+:::
+
+## Deploying your website to Netlify
+
+1. Create a Netlify Account: If you don't have one already, sign up for a free Netlify account at netlify.com.
+
+2. Install Netlify CLI: You'll need the Netlify Command Line Interface (CLI) to deploy your blog. Install it by running the following command:
+
+    ```bash
+    npm install -g netlify-cli
+    ```
+
+3. Build Your Docusaurus Blog: Before deploying, you need to build your Docusaurus project into static files. Run the following command:
+
+    ```bash
+    npm run build
+    ```
+
+4. Deploy to Netlify: Once the build process is complete, navigate to your project folder and deploy it to Netlify using the CLI:
+
+    ```bash
+    netlify deploy
+    ```
+
+Follow the on-screen instructions, and Netlify will provide you with a live URL where your Docusaurus blog is now hosted.
+
+## Become Google-searchable with Google Search Console
+
+Getting your blog indexed by search engines is essential to improve its visibility and attract organic traffic. One way to speed up the SEO process is by using Google Search Console. Here's how you can set it up:
+
+Create a Google Search Console Account: If you don't have one already, sign up for a free Google Search Console account at [search.google.com/search-console](https://search.google.com/search-console).
+
+1. Add Your Blog URL: Once you're logged in, click on "Add a Property" and enter the URL of your Docusaurus blog. Follow the verification steps to confirm ownership.
+
+2. Submit Your Sitemap: Docusaurus automatically generates a sitemap that helps search engines discover and index your content. Locate your sitemap at /static/sitemap.xml in your project folder. Then, submit the sitemap URL through the Google Search Console by navigating to "Sitemaps" in the left sidebar and clicking "Add a new sitemap."
+
+3. Monitor Performance: With your blog added to Google Search Console, you can now monitor how your content is performing in search results. Keep an eye on the "Coverage" and "Performance" sections to identify any issues and track your blog's SEO progress.
+
+![Google Search Console Interface](39dc4daccb09a7db017c96fc2887756a_yjrev1.png](https://res.cloudinary.com/bytesideone/image/upload/v1691058570/blog/39dc4daccb09a7db017c96fc2887756a_yjrev1)
+
+Congratulations! You've successfully set up your Docusaurus blog, deployed it to the internet with Netlify, and optimized its SEO using Google Search Console. Now you can focus on creating engaging content, sharing your thoughts and ideas with the world, and enjoying the benefits of having your own customizable and freely hosted blogging platform. Happy blogging!

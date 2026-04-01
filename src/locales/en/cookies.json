@@ -12,15 +12,15 @@
   },
   "settings": {
     "title": "Cookie Settings",
-    "description": "Manage your cookie preferences below. Essential cookies cannot be disabled as they are required for the website to function properly.",
+    "description": "Manage your cookie preferences. Functional cookies are always on — they're required for the site to work.",
     "close": "Close settings",
-    "learn_more": "Learn more about how we use cookies in our"
+    "learn_more": "To learn more about how I use cookies, see my"
   },
   "categories": {
     "required": "Required",
     "functional": {
       "name": "Functional Cookies",
-      "description": "These cookies are essential for the website to function properly. They enable core functionality such as security, network management, and accessibility. These cookies cannot be disabled."
+      "description": "These cookies are necessary for the website to function and cannot be switched off. They support core features like security, network management, and accessibility, and are only set in response to your actions on the site."
     },
     "analytics": {
       "name": "Analytics Cookies",

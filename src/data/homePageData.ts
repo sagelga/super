@@ -36,7 +36,7 @@ interface Volunteering {
 }
 
 interface HomePageData {
-    skills: string[];
+    skills: { core: string[]; proficient: string[]; familiar: string[] };
     projects: Project[];
     experiences: Experience[];
     certifications: Certification[];

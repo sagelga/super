@@ -24,8 +24,8 @@ const HeroSection: React.FC = () => {
             <div className="container mx-auto px-8 pt-24 pb-20 lg:px-16">
                 <div className="max-w-5xl">
                     {/* Label */}
-                    <p className="enter enter-d1 mb-6 font-mono text-xs tracking-[0.35em] text-accent uppercase">
-                        Portfolio · sagelga.com
+                    <p className="enter enter-d1 mb-6 font-sans text-xs tracking-[0.35em] text-accent uppercase">
+                        Portfolio
                     </p>
 
                     {/* Name — large display serif */}
@@ -46,7 +46,7 @@ const HeroSection: React.FC = () => {
                     </div>
 
                     {/* Disciplines */}
-                    <p className="enter-fade enter-d4 mb-16 font-mono text-sm tracking-widest text-muted">
+                    <p className="enter-fade enter-d4 mb-16 font-sans text-sm tracking-widest text-muted">
                         Salesforce · Full-Stack · Data · Teaching
                     </p>
 

@@ -10,7 +10,13 @@ const AboutMe: React.FC = () => {
     const { ref, isVisible } = useScrollReveal<HTMLDivElement>();
 
     return (
-        <Section id="about" title={t("about.title")} darkBg={true}>
+        <Section
+            id="about"
+            title={t("about.title")}
+            headingVariant="minimal"
+            spacing="generous"
+            darkBg={true}
+        >
             <div
                 ref={ref}
                 className={`reveal grid grid-cols-1 gap-12 lg:grid-cols-3 lg:gap-16 ${isVisible ? "is-revealed" : ""}`}
@@ -24,7 +30,7 @@ const AboutMe: React.FC = () => {
 
                 {/* Education — right column */}
                 <div>
-                    <p className="mb-5 font-mono text-xs tracking-[0.25em] text-accent uppercase">
+                    <p className="mb-5 font-sans text-xs tracking-[0.25em] text-accent uppercase">
                         {t("about.education_title")}
                     </p>
                     <p className="mb-2 leading-snug font-medium text-cream">

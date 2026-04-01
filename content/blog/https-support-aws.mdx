@@ -1,0 +1,189 @@
+---
+slug: https-support-aws
+title: รองรับ HTTPS ให้กับ Instance บน Amazon Web Service (ตอนที่ 2)
+description: ใครอยากมีเว็บไซต์ ? ฉันหน่ะสิ ฉันหน่ะสิ แต่ยากมั้ย ? ก็ยากหน่ะสิ ยากหน่ะสิ แต่ในสตอรีนี้เราก็จะมาสอนวิธีการสร้างเว็บไซต์และใช้ WordPress ผ่านบริการคลาวด์ที่ทุกคนสามารถทำได้ด้วยตนเองอย่าง Amazon Web Service (AWS) Lightsail พร้อมกับคำแนะนำในการทำให้เว็บไซต์นั้นสามารถเติบโต, ขยับขยายได้ตามความต้องการ และให้บริการได้อย่างรวดเร็วด้วย AWS S3, AWS CloudFront และ Plug-In ของ WordPress ที่เราก็จะนำมาแนะนำกันในสตอรีนี้ครับ
+authors: [sagelga]
+tags: [AWS, Wordpress, Programming]
+image: https://images.unsplash.com/photo-1620641788421-7a1c342ea42e
+date: 2021-07-05
+---
+
+ตอนที่สองแล้วสำหรับการทำเว็บไซต์ หลังจากที่เราได้ทำการสร้างเว็บไซต์ WordPress ของตัวเองเป็นที่เรียบร้อยแล้ว ขั้นตอนถัดไปของการทำเว็บไซต์ให้ผู้ใช้งานได้เข้าไปใช้อย่างสะดวกและปลอดภัยก็คือการตั้งค่า HTTPS เพื่อให้บริการเว็บไซต์ด้วยความปลอดภัยสูงสุด
+
+เว็บไซต์ของเราจะใช้บริการคลาวด์ชื่อดังอย่าง Amazon Web Service ที่จะทำหน้าที่เป็นตัวกลางในการเก็บไฟล์มีเดียด้วย AWS S3, การส่งคอนเท้นท์ไปทั่วโลกด้วย AWS CloudFront และเซิฟเวอร์ให้บริการที่ทำสำเร็จเพียงไม่กี่นาทีกับ AWS Lightsail
+
+
+## ซีรีส์การสร้าง WordPress บน Amazon Web Service
+
+หากว่าเพื่อนๆ อยากจะย้อนหรือข้ามไปขั้นตอนอื่นของการทำ WordPress บน Amazon Web Service ก็สามารถกดเข้าไปอ่านสตอรีได้ตามลิงก์เหล่านี้เลยครับ
+
+-   [สร้างเว็บไซต์ WordPress ของคุณด้วย Amazon Web Service (ตอนที่ 1)](https://byteside.one/th/tutorial/lightsail-wordpress-aws/)
+-   [รองรับ HTTPS ให้กับ Instance บน Amazon Web Service (ตอนที่ 2)](https://byteside.one/th/tutorial/https-support-aws/)
+-   [ใช้ AWS S3 เก็บไฟล์มีเดียของ WordPress (ตอนที่ 3)](https://byteside.one/th/tutorial/wordpress-media-storage-s3-aws/)
+-   [ใช้ CloudFront เพื่อทำ WordPress CDN (ตอนที่ 4)](https://byteside.one/th/tutorial/cloudfront-cdn-wordpress-aws/)
+-   [ใช้ AWS CloudFront เพื่อโดเมนของตัวเองด้วย Route 53 (ตอนที่ 5)](https://byteside.one/th/tutorial/connect-cloudfront-to-route53-aws/)
+
+โดยสตอรีนี้จะถูกแยกออกมาเป็นสตอรีตามประเภทการทำงาน ดังนั้นเพื่อนๆ สามารถติดตามตอนต่อไปของวิธีการทำเว็บไซต์ WordPress ด้วย Amazon Web Service ได้เลยครับผม! โดยในสตอรีนี้เราจะพูดถึง การเพิ่มความปลอดภัยให้กับผู้ใช้งานด้วยการให้บริการ HTTPS กับผู้ใช้งาน ด้วยการสร้าง Certificate และใช้ Plug-In เพื่อให้ WordPress ให้บริการ HTTPS อย่างเต็มตัว
+
+## ติด Static IP ให้กับ Instance
+
+จากเงื่อนไขของ Instance บน AWS ที่ Instance นั้นไม่จำเป็นจะต้องเป็นเครื่องบริการเดิม ทำให้ค่า IP ที่แอดมินจะเห็นก็จะเปลี่ยนแปลงไปทุกครั้งที่ Instance มีการรีสตาร์ทหรือเปิดเครื่องใหม่อีกครั้ง (Auto-assigned Public IP Address) ซึ่งอาจเป็นผลให้การใช้ Custom Domain นั้นเป็นไปได้ยากมากขึ้น ดังนั้นเราจึงทำการติด (Attach) Static IP ให้กับ Instance ซึ่งเป็นบริการฟรี\* จาก Lightsail
+
+### สร้าง Static IP
+
+เข้าไปที่หัวข้อ ‘Networking’ และกดเข้าไปที่ ‘Create static IP’ เพื่อสร้าง Static IP สำหรับ Instance อันนี้
+
+![](https://static.byteside.one/media/2021/07/09164652/lightsail-dynamicipv4-connect.webp)
+
+### ต้ังค่า Static IP
+
+ในขั้นตอนนี้ หากว่า ‘Static IP Location’ ตรงกันกับที่เพื่อนๆ ต้องการ และหากว่า ‘Attach to an instance’ นั้นตรงกันกับ Instance ที่เราต้องการ ก็ถือว่าถูกต้อง ไปยังชั้นตอนถัดไปได้เลยครับ
+
+![](https://static.byteside.one/media/2022/02/08090849/Screenshot-2021-07-05-at-19.40.35.webp)
+
+แล้วก็อย่าลืมตั้งชื่อให้กับ Static IP ด้วยหล่ะ และเมื่อเสร็จแล้วก็ให้กด ‘Create’ เพื่อสร้าง Static IP
+
+![](https://static.byteside.one/media/2022/02/08090859/Screenshot-2021-07-05-at-19.40.38.webp)
+
+### ยืนยันการมีอยู่ของ Static IP
+
+หากว่าเพื่อนๆ ทำเสร็จเรียบร้อยแล้ว เพื่อนๆ ก็จะเห็นว่ากล่อง ‘Public IP’ นั้นกลายมาเป็นสีเทา และมีการเขียนด้านล่างเป็นชื่อ Static IP ที่เราตั้งชื่อเอาไว้
+
+![](https://static.byteside.one/media/2022/02/08091249/Screenshot-2021-07-05-at-19.47.05.webp)
+
+## ตั้งค่า DNS สำหรับ Subdomain
+
+หากเพื่อนๆ ยังไม่ได้ไปตั้งค่า DNS สำหรับ Domain นั้นก็จะต้องไปทำก่อนที่ Domain DNS Provider ที่เพื่อนๆ ซื้อ Domain มา (เช่น Google Domains, GoDaddy) และหากว่าเพื่อนๆ ต้องการใช้ Sub-domain `www` ด้วยก็จะต้องทำการตั้ง `A` หรือ `CNAME` เพื่อให้ไปหา IP Address/Domain ที่เราต้องการครับ
+
+![](https://static.byteside.one/media/2022/02/08090424/Screenshot-2021-07-05-at-20.07.28.webp)
+
+## ตั้ง HTTPS ให้กับ AWS Lightsail
+
+### เชื่อมต่อผ่าน SSH
+
+![](https://static.byteside.one/media/2021/07/09164359/Screenshot-2021-07-05-at-12.13.59.webp)
+
+### ขอ Certificate ด้วยเครื่องมือสำเร็จรูปของ Bitnami
+
+เพื่อเปิดหน้าต่างสร้าง Certificate ให้เพื่อนๆ ทำการพิมพ์คำสั่งดังนี้เพื่อเข้าใช้งาน Bitnami Helper Tool และเลือกไปที่ ‘Set up Let’s Encrypt’
+
+```
+sudo /opt/bitnami/bnhelper-tool
+```
+
+![](https://static.byteside.one/media/2022/02/14173217/Screenshot-2021-07-05-at-19.49.13.webp)
+
+### อัพเดท bncert-tool
+
+ขั้นตอนนี้เพื่อนๆ ก็กด ENTER ไปเลยครับ และเพื่อนๆ อาจจะต้องทำการเปิด Bitnami Helper Tool อีกครั้งหนึ่ง
+
+![](https://static.byteside.one/media/2022/02/14172043/Screenshot-2021-07-05-at-19.49.23.webp)
+
+### พิมพ์ชื่อ Domain List ที่ต้องการสร้าง Certificate
+
+ในขั้นตอนนี้ ตัว Tool จะให้เพื่อนๆ กรอก Domain ที่เราต้องการให้ Certificate นี้อนุมัติ ซึ่งหากเพื่อนๆ มีหลาย Domain ที่ต้องการให้อนุมัติ HTTPS ด้วย Certificate นี้ก็จะต้องทำให้เสร็จในขั้นตอนนี้ครับ เพราะเราจะไม่กลับมา Invalidate Certificate เก่าอีกแล้ว
+
+หากเพื่อนๆ ไม่ได้รวม www. เข้าไปด้วยตัว Tools ก็จะถามว่าต้องการเพิ่มเข้าไปด้วยหรือไม่ในขั้นตอนถัดไป
+
+![](https://static.byteside.one/media/2021/07/14172100/Screenshot-2021-07-05-at-19.58.33.webp)
+
+### หากเพื่อนๆ มีปัญหาในการไปยังขั้นตอนถัดไป
+
+บางครั้งการตั้ง DNS ในขั้นตอนข้างต้นอาจใช้เวลามากกว่า 48 ชั่วโมง ดังนั้นหากเพื่อนๆ ไม่สามารถเข้าไปยังเว็บไซต์ผ่าน Domain ที่ได้ตั้งค่าเอาไว้ได้ ให้เพื่อนๆ เข้าไปตรวจสอบการ Query ข้อมูลพวกนี้ได้ที่ [https://www.whatsmydns.net](https://www.whatsmydns.net/)
+
+#### ‘The domain resolves to a different IP address’
+
+เพื่อนๆ อาจจะต้องรอซักพักหนึ่งเพื่อให้มันทำงานถูกต้อง หรือต้องไปดูว่ามีอะไรทับซ้อนกันหรือไม่ (เช่นเคยทำ Wildcard Certificate ไว้ หรือใช้ CNAME แทน A)​
+
+![](https://static.byteside.one/media/2022/02/08090401/Screenshot-2021-07-05-at-19.58.41.webp)
+
+#### ‘The domain does not resolve’
+
+DNS ยังไม่สามารถ Resolve ไปที่ไหนได้เลย หากเพื่อนๆ เพิ่งทำการเพิ่ม Record DNS ก็อาจจะต้องรอซักพักหนึ่ง
+
+![](https://static.byteside.one/media/2022/02/08090413/Screenshot-2021-07-05-at-20.03.15.webp)
+
+### เปิดการ Redirect HTTPS
+
+ตั้งให้ WordPress ของเพื่อนๆ เปลี่ยนไปใช้เป็น HTTPS แทน HTTP ให้อัตโนมัติ
+
+![](https://static.byteside.one/media/2022/02/08090447/Screenshot-2021-07-09-at-11.10.32.webp)
+
+## ตั้งค่าการ Redirect ระหว่าง www และ non-www
+
+หากว่าผู้ใช้งานพิมพ์ www.example.sagelga.com เข้ามา แล้วอยากให้เปลี่ยนไปเป็น example.sagelga.com แทนก็ให้กด Y ในคำถาม Enable www to non-www redirection และเช่นกันกับ Enable non-www to www ซึ่งค่าเริ่มต้นก็คือการโอนไปยัง www.
+
+![](https://static.byteside.one/media/2022/02/08090511/Screenshot-2021-07-09-at-11.10.40.webp)
+
+## ยืนยันการดำเนินการ
+
+ก่อนที่ Bitnami Helper Tool จะทำการตั้งค่า WordPress ก็จะมีสรุปว่า Tool จะทำอะไรบ้าง หากเพื่อนๆ อ่านแล้วต้องการทำต่อก็สามารถกด ENTER เพื่อดำเนินการต่อได้เลย
+
+![](https://static.byteside.one/media/2022/02/08090523/Screenshot-2021-07-09-at-11.10.46.webp)
+
+## กรอกอีเมล์
+
+ขั้นตอนต่อไปก็คือการตั้งค่า Certificate ที่แอดมินจะต้องไปทำการขอ Certificate กับ Let’s Encrypt โดยที่เราจะต้องกรอกอีเมล์ของแอดมินเพื่อดำเนินการต่อ
+
+![](https://static.byteside.one/media/2022/02/08090535/Screenshot-2021-07-09-at-11.10.54.webp)
+
+## ยอมรับเงื่อนไข Let’s Encrypt Agreement
+
+รวมไปถึงการยืนยัน ‘Subcriber Agreement’ เพื่อดำเนินการต่อ
+
+![](https://static.byteside.one/media/2022/02/08090546/Screenshot-2021-07-09-at-11.11.02.webp)
+
+## สำเร็จ
+
+หากขึ้นเหมือนหน้าต่างด้านล่างแล้ว ก็ถือว่าได้ดำเนินการติด HTTPS สำเร็จแล้ว ให้เพื่อนๆ ลองเข้าไปที่เว็บไซต์ของตัวเอง และตรวจสอบว่ามี Certificate และ HTTPS ขึ้นให้เห็น
+
+![](https://static.byteside.one/media/2022/02/08090612/Screenshot-2021-07-09-at-11.11.49.webp)
+
+จุดสังเกตคือมีสัญลักษณ์กลอนกุญแจ และเมื่อกดไปที่กลอนก็จะมีข้อมูลเกี่ยวกับ Certificate
+
+![](https://static.byteside.one/media/2022/02/08090625/Screenshot-2021-07-09-at-11.12.26.webp)
+
+หลังที่เราทำความรู้จักกับ Bitnami Helper Tool แล้ว อีกหนึ่งหน้าที่ของ Tool ก็คือการเอา​ Banner ที่อยู่มุมล่างขวาออก โดยการเข้าไปที่ Bitnami Helper Tool อีกครั้ง และเลือกที่คำว่า ‘Remove the Bitnami Banner’
+
+![](https://static.byteside.one/media/2022/02/08090636/Screenshot-2021-07-09-at-11.13.25.webp)
+
+เมื่อ ENTER เข้าไป ตัว Bitnami Helper Tool ก็จะทำการลบ Banner ให้โดยอัตโนมัติ หากว่าเพื่อนๆ ทำสำเร็จแล้วก็จะขึ้นว่าสำเร็จดังภาพด้านล่างครับ
+
+![](https://static.byteside.one/media/2022/02/08090646/Screenshot-2021-07-09-at-11.13.30.webp)
+
+### สำเร็จ
+
+หากทำสำเร็จจะเห็นได้ว่า Bitnami Banner นั้นได้หายไปแล้ว
+
+![](https://static.byteside.one/media/2022/02/08090657/Screenshot-2021-07-09-at-11.13.39.webp)
+
+## ตั้งค่า HTTPS ทั่วเว็บไซต์
+
+โดยในขั้นตอนนี้เราจะใช้ Plug-in อย่าง **Really Simple SSL** เพื่อตั้งค่า URL ที่ปัจจุบันอาจจะยังเลือกใช้ HTTP อยู่ ให้เปลี่ยนมาเป็น HTTPS ทั้งหมด โดยเพียงติดตั้ง (Install) ตัว Plug-In และเปิดใช้ (Activate)
+
+![](https://static.byteside.one/media/2022/02/08090718/Screenshot-2021-07-09-at-11.16.48.webp)
+
+### เปิด Access การเขียน htaccess.conf และ wp-config.php
+
+เพื่อให้ Plug-In สามารถเข้าไปแก้ไขการตั้งค่าต่างๆ ได้ เพื่อนๆ ก็จะต้องเข้าไปเปิด Access กับไฟล์ดังนี้ครับ
+
+```
+chmod 666 apps/wordpress/conf/htaccess.conf
+chmod 666 apps/wordpress/htdocs/wp-config.php
+```
+
+![](https://static.byteside.one/media/2022/02/08090811/Screenshot-2021-07-09-at-11.36.28.webp)
+
+และเมื่อทำเสร็จแล้วก็ให้ทำการ Refresh หน้าต่างอีกครั้ง
+
+![](https://static.byteside.one/media/2022/02/08090823/Screenshot-2021-07-09-at-11.42.15.webp)
+
+### เปิดการตั้งค่า 301 redirect
+
+ติ้กที่การตั้งค่า ‘Enable 301 .htaccess redirect’ เมื่อทำทุกอย่างเสร็จเรียบร้อยแล้วครับ (และอย่าลืมที่จะอ่านวิธีการเข้าถึง ‘regain access’ ด้วยนะ เผื่อมีอะไรผิดพลาดครับ)
+
+![](https://static.byteside.one/media/2022/02/08090747/Screenshot-2021-07-09-at-11.32.32.webp)
+
+## ตอนต่อไป…
+
+โดยหลังจากนี้เราก็จะไปสู่เรื่องของการนำไฟล์มีเดียที่อยู่บนเว็บไซต์ของเราออกไปเก็บยัง AWS Simple Storage Service (S3) และตั้งค่า Bucket เพื่อให้สามารถจัดการกับมีเดียที่ไม่ได้ใช้แล้ว / ไม่ค่อยได้ใช้งานด้วยการใช้ Intelligent Tiering อีกด้วยครับ

@@ -50,7 +50,7 @@ const VolunteeringSection: React.FC<VolunteeringSectionProps> = ({
 
                         {/* Content */}
                         <div className="border-l border-rim pl-8">
-                            <h3 className="font-display mb-3 text-lg text-cream">
+                            <h3 className="font-sans mb-3 text-lg text-cream">
                                 {item.title}
                             </h3>
                             <ul className="mb-4 space-y-2">

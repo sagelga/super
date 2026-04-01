@@ -10,7 +10,9 @@
         "page_of": "第 {{currentPage}} 页，共 {{totalPages}} 页",
         "no_posts_found": "未找到博客文章。",
         "all_categories": "全部",
-        "table_of_contents": "目录"
+        "table_of_contents": "目录",
+        "eyebrow": "写作",
+        "posts_count": "{count} 篇关于技术、开发等的文章"
     },
     "footer": {
         "tagline": "全栈开发者与云爱好者",
@@ -18,13 +20,34 @@
             "kunanon_srisuntiroj": "马洋辉",
             "about": "关于",
             "skills": "技能",
+            "sitemap": "网站地图",
+            "explore": "探索",
             "connect": "联系"
         }
     },
     "github_label": "GitHub",
     "demo_label": "演示",
     "docs": {
-        "sidebar_title": "文档"
+        "sidebar_title": "文档",
+        "all_projects_title": "所有项目",
+        "documented_projects": "{count} 个已记录项目",
+        "pages_count": "{count} 页"
+    },
+    "gallery": {
+        "eyebrow": "画廊",
+        "title": "视觉作品",
+        "subtitle": "项目、摄影与设计。",
+        "all": "全部",
+        "projects": "项目",
+        "photography": "摄影",
+        "design": "设计",
+        "items_count": "{count} 项"
+    },
+    "learn": {
+        "eyebrow": "速查表与指南",
+        "title": "学习",
+        "subtitle": "编程参考资料和速查表。",
+        "pages_count": "{count} 页"
     },
     "theme": {
         "title": "主题设置",
@@ -45,6 +68,7 @@
         "gallery": "画廊",
         "learn": "学习",
         "docs": "文档",
+        "profiles": "联系",
         "experience": "经验",
         "certifications": "认证",
         "projects": "项目",
@@ -60,10 +84,12 @@
         "description": "您要查找的页面可能已被删除、更改名称或暂时不可用。",
         "go_home": "返回主页"
     },
-    "gallery": {
-        "title": "画廊",
-        "image_alt": "画廊图片 {{index}}"
-    },
     "no_image_available": "无图片",
-    "read_documentation": "阅读文档"
+    "read_documentation": "阅读文档",
+    "content": {
+        "on_this_page": "本页内容",
+        "collapse": "折叠",
+        "expand": "展开",
+        "contents": "目录"
+    }
 }

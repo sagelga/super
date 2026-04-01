@@ -63,7 +63,7 @@
   margin: 0;
   font-size: 1.125rem;
   font-weight: 600;
-  font-family: var(--font-serif, 'IBM Plex Serif', serif);
+  font-family: var(--font-sans, sans-serif);
   color: var(--color-cream, #F0EAD6);
 }
 

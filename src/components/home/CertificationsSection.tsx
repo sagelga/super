@@ -30,6 +30,7 @@ const CertificationsSection: React.FC<CertificationsSectionProps> = ({
         <Section
             id="certifications"
             title={t("certifications_section_title")}
+            subtitle={`${certifications.length}`}
             darkBg={true}
             spacing="compact"
         >
@@ -61,7 +62,7 @@ const CertificationsSection: React.FC<CertificationsSectionProps> = ({
                                 </h3>
                             )}
                             {cert.date && (
-                                <p className="mt-1 font-mono text-xs text-muted">
+                                <p className="mt-1 font-sans text-xs text-muted">
                                     {t("issued_label")} {cert.date}
                                 </p>
                             )}
@@ -70,7 +71,7 @@ const CertificationsSection: React.FC<CertificationsSectionProps> = ({
                             {cert.skills.map((skill, i) => (
                                 <span
                                     key={i}
-                                    className="border border-rim px-2 py-0.5 font-mono text-xs text-muted/70"
+                                    className="border border-rim px-2 py-0.5 font-sans text-xs text-muted/70"
                                 >
                                     {skill}
                                 </span>

@@ -9,11 +9,15 @@ import type { ReactNode } from "react";
  */
 export interface SectionProps {
     title?: string;
+    /** Small muted text shown inline next to the amber label, e.g. a count or year range */
+    subtitle?: string;
+    /** "default" = amber label + 1px rule; "minimal" = muted label, no rule */
+    headingVariant?: "default" | "minimal";
     children: ReactNode;
     className?: string;
     id?: string;
     darkBg?: boolean;
-    spacing?: "compact" | "normal" | "generous";
+    spacing?: "compact" | "normal" | "generous" | "spacious";
 }
 
 // ============================================================================
@@ -52,3 +56,41 @@ export interface CookiePreferences {
  * Storage key for cookie consent
  */
 export const COOKIE_STORAGE_KEY = "cookie_consent";
+
+// ============================================================================
+// Content Types
+// ============================================================================
+
+export interface BlogFrontmatter {
+    slug: string;
+    title: string;
+    description: string;
+    date: string;
+    authors: string[];
+    tags: string[];
+    image?: string;
+}
+
+export interface DocFrontmatter {
+    title: string;
+    sidebar_label?: string;
+    slug?: string;
+    description?: string;
+}
+
+export interface LearnFrontmatter {
+    title?: string;
+}
+
+export interface SidebarItem {
+    label: string;
+    href?: string;
+    children?: SidebarItem[];
+}
+
+export interface AuthorInfo {
+    name: string;
+    title?: string;
+    url?: string;
+    image_url?: string;
+}

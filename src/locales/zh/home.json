@@ -8,176 +8,144 @@
         "title": "关于我",
         "introduction": "除了专业工作，马洋辉还热爱前往日本熊本旅游。是他的个性驱动了他的创意、坦率和自我认知，反映了他充满自信谦逊和创新精神的价值观。",
         "education_title": "教育背景",
-        "university_name": "拉克拉邦王蒙古特理工学院",
+        "university_name": "泰国先皇理工大学",
         "school_years": "信息技术学院，2016 - 2020",
         "grade": "成绩：3.07"
     },
     "experience_section_title": "工作经历",
     "skills_section_title": "技能",
     "projects_section_title": "项目",
-    "certifications_section_title": "许可证与证书",
+    "certifications_section_title": "证书与执照",
     "issued_label": "颁发时间：",
     "skills_label": "技能：",
     "volunteering_section_title": "志愿服务",
     "languages_section_title": "语言",
-    "skills": [
-        "JavaScript",
-        "TypeScript",
-        "Salesforce Apex",
-        "Salesforce SOQL",
-        "Python",
-        "MySQL",
-        "PostgreSQL",
-        "Oracle SQL",
-        "Microsoft T-SQL",
-        "Oracle PL/SQL",
-        "HTML",
-        "CSS",
-        "Vue",
-        "React",
-        "MongoDB",
-        "Salesforce CRM (SFDC)",
-        "Salesforce Marketing Cloud (SFMC)",
-        "Amazon Web Services (AWS)",
-        "Git",
-        "Google Analytics",
-        "Microsoft Office",
-        "Figma",
-        "Jira",
-        "GitHub",
-        "Postman",
-        "Bing Webmaster Tools",
-        "Google Search Console",
-        "Meta Business Suite",
-        "WordPress",
-        "Visual Studio Code",
-        "Jupyter Notebook",
-        "DataGrip",
-        "Cloudinary",
-        "Notion",
-        "Netlify",
-        "Docker",
-        "Algolia",
-        "Hotjar",
-        "Canva",
-        "Ahrefs",
-        "ChatGPT",
-        "DALL·E",
-        "Perplexity",
-        "Cloudflare Worker",
-        "Webhook",
-        "Next.js",
-        "Cloudflare Pages",
-        "API Integration",
-        "Google AI Studio",
-        "Cloudflare D2",
-        "Docusaurus",
-        "SEO",
-        "Content Monetization",
-        "Content Creation",
-        "Google Apps Script",
-        "Google Forms",
-        "Workflow Automation",
-        "Oracle ERP",
-        "Data Quality",
-        "Data Normalization",
-        "IBM SPSS Statistics",
-        "Regression Analysis",
-        "Statistical Modeling",
-        "Parse Platform",
-        "Node.js",
-        "Express.js",
-        "Digital Ocean Spaces",
-        "Data Analysis",
-        "Java",
-        "Game Development",
-        "C (Programming Language)"
-    ],
+    "skills": {
+        "core": [
+            "JavaScript", "TypeScript", "Python", "React", "Next.js",
+            "Salesforce CRM (SFDC)", "Salesforce Apex", "MySQL", "PostgreSQL", "Data Analysis"
+        ],
+        "proficient": [
+            "Node.js", "Vue", "HTML", "CSS", "MongoDB",
+            "Salesforce SOQL", "Salesforce Marketing Cloud (SFMC)",
+            "Amazon Web Services (AWS)", "Git", "Docker", "GitHub",
+            "Cloudflare Worker", "API Integration", "SEO",
+            "IBM SPSS Statistics", "Statistical Modeling", "Regression Analysis",
+            "Oracle SQL", "Microsoft T-SQL", "Oracle PL/SQL",
+            "Figma", "Notion"
+        ],
+        "familiar": [
+            "Express.js", "MongoDB", "Java", "C (Programming Language)", "Game Development",
+            "Google Analytics", "Google Apps Script", "Google Forms", "Google AI Studio",
+            "Google Search Console", "Bing Webmaster Tools", "Meta Business Suite",
+            "Postman", "Jira", "DataGrip", "Visual Studio Code", "Jupyter Notebook",
+            "Netlify", "Docusaurus", "Cloudinary", "Cloudflare Pages", "Cloudflare D2", "Algolia",
+            "WordPress", "Parse Platform", "Digital Ocean Spaces", "Webhook",
+            "Canva", "Ahrefs", "Hotjar", "Microsoft Office",
+            "ChatGPT", "DALL·E", "Perplexity",
+            "Content Creation", "Content Monetization", "Workflow Automation",
+            "Oracle ERP", "Data Quality", "Data Normalization"
+        ]
+    },
     "projects": [
         {
             "title": "Super",
             "description": "使用 Next.js 和 Cloudflare Pages 构建的个人作品集网站，集成了 Superbrain API。使用 Gemini 2.5 Flash/Pro 模型进行代码生成和任务执行的开发协调。",
             "githubLink": "https://github.com/sagelga/super",
-            "demoLink": "https://sagelga.com"
+            "demoLink": "https://sagelga.com",
+            "stack": ["Next.js", "React", "TypeScript", "Cloudflare Pages"]
         },
         {
             "title": "Superbrain",
             "description": "用于博客内容的 API，检索 Notion 更改并将其存储在 Cloudflare D2 中以实现快速检索。完全运行在 Cloudflare Workers 上；使用 Gemini 模型进行开发协调。",
             "githubLink": "https://github.com/sagelga/superbrain",
-            "demoLink": ""
+            "demoLink": "",
+            "stack": ["Cloudflare Worker", "Notion API", "Cloudflare D2", "TypeScript"]
         },
         {
             "title": "Todoist Notion Sync",
             "description": "利用 Cloudflare Worker 侦听来自 Todoist 的 Webhook，并在 Notion 中创建新任务。",
             "githubLink": "https://github.com/sagelga/todoist-tagging",
             "demoLink": "",
-            "imageUrl": "/images/placeholder-project.png"
+            "imageUrl": "/images/placeholder-project.png",
+            "stack": ["Cloudflare Worker", "Webhook", "Notion API", "Todoist API"]
         },
         {
             "title": "Learn with sagelga",
             "description": "使用 Docusaurus、React 和 TypeScript 重建 learn.sagelga.com，增强搜索和速度，为 Python 和 SQL 学习者赋能。",
             "githubLink": "https://github.com/sagelga/learn-with-sagelga",
-            "demoLink": "https://learn.sagelga.com"
+            "demoLink": "https://learn.sagelga.com",
+            "stack": ["Docusaurus", "React", "TypeScript"]
         },
         {
             "title": "Byteside.one",
             "description": "创立了 ByteSide.one，一个科技、小工具和游戏新闻发布平台，到 2023 年 1 月实现了 279 万次 Google 搜索展示和 20 万+ 月度 Facebook 展示。",
             "githubLink": "",
-            "demoLink": "https://byteside.one/"
+            "demoLink": "https://byteside.one/",
+            "stack": ["Next.js", "React", "TypeScript", "SEO"]
         },
         {
             "title": "The Sunny Side Publication",
             "description": "在 Medium 上开创了《The Sunny Side》出版物，是 ByteSide.one 的前身，展示了早期内容创作和发布专业知识。",
             "githubLink": "",
-            "demoLink": "https://medium.com/the-sunny-side"
+            "demoLink": "https://medium.com/the-sunny-side",
+            "stack": ["Medium", "Publishing", "Content Creation"]
         },
         {
             "title": "Approval Workflow on Google Apps Script",
             "description": "使用 Google Apps Script 为 IMST 开发了自动审批工作流，通过自动化电子邮件触发和 Google Forms 集成来简化 IT、采购申请和采购流程。",
             "githubLink": "https://github.com/sagelga/approval-workflow",
-            "demoLink": "https://docs.sagelga.com/approval-workflow/"
+            "demoLink": "https://docs.sagelga.com/approval-workflow/",
+            "stack": ["Google Apps Script", "Google Forms", "Workflow Automation"]
         },
         {
             "title": "Essilor Asia 供应商重复数据删除报告",
             "description": "为 Essilor 亚洲和欧洲开发了 Oracle SQL 和 PL/SQL 脚本，生成供应商重复数据删除报告以增强生产 Oracle ERP 中的数据质量，包括相似性评分和规范化。",
             "githubLink": "",
-            "demoLink": ""
+            "demoLink": "",
+            "stack": ["Oracle SQL", "Oracle PL/SQL", "Oracle ERP"]
         },
         {
             "title": "身体脂肪数据分析",
             "description": "使用 IBM SPSS Statistics 对身体脂肪与身体部位大小之间的关系进行多元回归分析，以创建统计模型。",
             "githubLink": "https://github.com/sagelga/bodyfat-regression",
-            "demoLink": ""
+            "demoLink": "",
+            "stack": ["IBM SPSS Statistics", "Regression Analysis", "Statistical Modeling"]
         },
         {
             "title": "讲座分享系统（Oh Sheet!）",
             "description": "使用 Vue、Parse、NodeJS、ExpressJS 和 Digital Ocean Spaces 开发了《Oh Sheet!》讲座分享系统，旨在轻松分享和发现教育内容。",
             "githubLink": "https://github.com/sagelga/oh-sheet",
-            "demoLink": "https://docs.sagelga.com/oh-sheet/"
+            "demoLink": "https://docs.sagelga.com/oh-sheet/",
+            "stack": ["Vue", "Parse Platform", "Node.js", "Express.js", "Digital Ocean Spaces"]
         },
         {
             "title": "在线空间预订系统",
             "description": "使用 PostgreSQL、Scala、GraphQL 和 NodeJS 设计并实施了在线空间预订系统，为建筑管理员管理用户需求和批准。",
             "githubLink": "https://github.com/itforge-eros/panda-website",
-            "demoLink": "https://docs.sagelga.com/project-panda/"
+            "demoLink": "https://docs.sagelga.com/project-panda/",
+            "stack": ["PostgreSQL", "Scala", "GraphQL", "Node.js"]
         },
         {
             "title": "泰国餐厅分析",
             "description": "分析了美国泰国餐厅的流行情况，调查了潜在原因和趋势。",
             "githubLink": "https://github.com/sagelga/data-journal",
-            "demoLink": ""
+            "demoLink": "",
+            "stack": ["Python", "Data Analysis"]
         },
         {
             "title": "Trash Melody",
             "description": "开发了《Trash Melody》，一款快节奏的 OSU! 启发式 Java 游戏，将娱乐与垃圾分类教育相结合。",
             "githubLink": "https://github.com/sagelga/trashmelody",
-            "demoLink": "https://docs.sagelga.com/trash-melody/"
+            "demoLink": "https://docs.sagelga.com/trash-melody/",
+            "stack": ["Java", "Game Development"]
         },
         {
             "title": "销售点（POS）系统",
             "description": "使用 C 编程语言设计了一个综合销售点（POS）系统，包含分析、库存/利润管理、销售预测（线性回归）、客户忠诚度和条形码扫描仪支持，数据以 CSV 格式存储。",
             "githubLink": "https://github.com/sagelga/ComPro_Project",
-            "demoLink": "https://docs.sagelga.com/compro-project/"
+            "demoLink": "https://docs.sagelga.com/compro-project/",
+            "stack": ["C (Programming Language)", "CSV", "POS Systems"]
         }
     ],
     "experiences": [
@@ -217,7 +185,7 @@
             ]
         },
         {
-            "title": "网络开发者、管理员和内容创意者",
+            "title": "网站开发者、运营管理员与内容创作者",
             "company": "ByteSide.one",
             "duration": "2021 年 9 月 - 2023 年 9 月",
             "description": [

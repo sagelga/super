@@ -10,7 +10,9 @@
         "page_of": "หน้า {{currentPage}} จาก {{totalPages}}",
         "no_posts_found": "ไม่พบบทความ",
         "all_categories": "ทั้งหมด",
-        "table_of_contents": "สารบัญ"
+        "table_of_contents": "สารบัญ",
+        "eyebrow": "บทความ",
+        "posts_count": "{count} บทความเกี่ยวกับเทคโนโลยี การพัฒนา และอื่นๆ"
     },
     "footer": {
         "tagline": "นักพัฒนา Full-Stack & ผู้ชื่นชอบคลาวด์",
@@ -18,13 +20,34 @@
             "kunanon_srisuntiroj": "คุณานนต์ ศรีสันติโรจน์",
             "about": "เกี่ยวกับ",
             "skills": "ทักษะ",
+            "sitemap": "แผนผังเว็บ",
+            "explore": "สำรวจ",
             "connect": "เชื่อมต่อ"
         }
     },
     "github_label": "GitHub",
     "demo_label": "Demo",
     "docs": {
-        "sidebar_title": "เอกสารประกอบ"
+        "sidebar_title": "เอกสารประกอบ",
+        "all_projects_title": "โครงการทั้งหมด",
+        "documented_projects": "{count} โครงการที่มีเอกสาร",
+        "pages_count": "{count} หน้า"
+    },
+    "gallery": {
+        "eyebrow": "แกลเลอรี",
+        "title": "ภาพและงานสร้างสรรค์",
+        "subtitle": "ผลงาน ภาพถ่าย และงานออกแบบ",
+        "all": "ทั้งหมด",
+        "projects": "โครงการ",
+        "photography": "ภาพถ่าย",
+        "design": "ออกแบบ",
+        "items_count": "{count} ภาพ"
+    },
+    "learn": {
+        "eyebrow": "สรุปและคู่มือ",
+        "title": "เรียนรู้",
+        "subtitle": "อ้างอิงการเขียนโปรแกรมและสรุปความ",
+        "pages_count": "{count} หน้า"
     },
     "theme": {
         "title": "ตั้งค่าธีม",
@@ -44,7 +67,8 @@
         "blog": "บล็อก",
         "gallery": "แกลเลอรี",
         "learn": "เรียนรู้",
-        "docs": "เอกสาร",
+        "docs": "เอกสารประกอบ",
+        "profiles": "ติดต่อ",
         "experience": "ประสบการณ์",
         "certifications": "ใบรับรอง",
         "projects": "โครงการ",
@@ -60,10 +84,12 @@
         "description": "หน้าที่คุณกำลังมองหาอาจถูกลบ เปลี่ยนชื่อ หรือไม่พร้อมใช้งานชั่วคราว",
         "go_home": "กลับสู่หน้าหลัก"
     },
-    "gallery": {
-        "title": "แกลเลอรี",
-        "image_alt": "รูปภาพแกลเลอรี {{index}}"
-    },
     "no_image_available": "ไม่มีรูปภาพ",
-    "read_documentation": "อ่านเอกสารประกอบ"
+    "read_documentation": "อ่านเอกสารประกอบ",
+    "content": {
+        "on_this_page": "ในหน้านี้",
+        "collapse": "ยุบ",
+        "expand": "ขยาย",
+        "contents": "เนื้อหา"
+    }
 }

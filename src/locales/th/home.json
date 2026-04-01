@@ -15,169 +15,137 @@
     "experience_section_title": "ประสบการณ์",
     "skills_section_title": "ทักษะ",
     "projects_section_title": "โครงการ",
-    "certifications_section_title": "ใบอนุญาตและการรับรอง",
+    "certifications_section_title": "ใบรับรองและใบอนุญาต",
     "issued_label": "ออกเมื่อ:",
     "skills_label": "ทักษะ:",
-    "volunteering_section_title": "การเป็นอาสาสมัคร",
+    "volunteering_section_title": "งานอาสา",
     "languages_section_title": "ภาษา",
-    "skills": [
-        "JavaScript",
-        "TypeScript",
-        "Salesforce Apex",
-        "Salesforce SOQL",
-        "Python",
-        "MySQL",
-        "PostgreSQL",
-        "Oracle SQL",
-        "Microsoft T-SQL",
-        "Oracle PL/SQL",
-        "HTML",
-        "CSS",
-        "Vue",
-        "React",
-        "MongoDB",
-        "Salesforce CRM (SFDC)",
-        "Salesforce Marketing Cloud (SFMC)",
-        "Amazon Web Services (AWS)",
-        "Git",
-        "Google Analytics",
-        "Microsoft Office",
-        "Figma",
-        "Jira",
-        "GitHub",
-        "Postman",
-        "Bing Webmaster Tools",
-        "Google Search Console",
-        "Meta Business Suite",
-        "WordPress",
-        "Visual Studio Code",
-        "Jupyter Notebook",
-        "DataGrip",
-        "Cloudinary",
-        "Notion",
-        "Netlify",
-        "Docker",
-        "Algolia",
-        "Hotjar",
-        "Canva",
-        "Ahrefs",
-        "ChatGPT",
-        "DALL·E",
-        "Perplexity",
-        "Cloudflare Worker",
-        "Webhook",
-        "Next.js",
-        "Cloudflare Pages",
-        "API Integration",
-        "Google AI Studio",
-        "Cloudflare D2",
-        "Docusaurus",
-        "SEO",
-        "Content Monetization",
-        "Content Creation",
-        "Google Apps Script",
-        "Google Forms",
-        "Workflow Automation",
-        "Oracle ERP",
-        "Data Quality",
-        "Data Normalization",
-        "IBM SPSS Statistics",
-        "Regression Analysis",
-        "Statistical Modeling",
-        "Parse Platform",
-        "Node.js",
-        "Express.js",
-        "Digital Ocean Spaces",
-        "Data Analysis",
-        "Java",
-        "Game Development",
-        "C (Programming Language)"
-    ],
+    "skills": {
+        "core": [
+            "JavaScript", "TypeScript", "Python", "React", "Next.js",
+            "Salesforce CRM (SFDC)", "Salesforce Apex", "MySQL", "PostgreSQL", "Data Analysis"
+        ],
+        "proficient": [
+            "Node.js", "Vue", "HTML", "CSS", "MongoDB",
+            "Salesforce SOQL", "Salesforce Marketing Cloud (SFMC)",
+            "Amazon Web Services (AWS)", "Git", "Docker", "GitHub",
+            "Cloudflare Worker", "API Integration", "SEO",
+            "IBM SPSS Statistics", "Statistical Modeling", "Regression Analysis",
+            "Oracle SQL", "Microsoft T-SQL", "Oracle PL/SQL",
+            "Figma", "Notion"
+        ],
+        "familiar": [
+            "Express.js", "MongoDB", "Java", "C (Programming Language)", "Game Development",
+            "Google Analytics", "Google Apps Script", "Google Forms", "Google AI Studio",
+            "Google Search Console", "Bing Webmaster Tools", "Meta Business Suite",
+            "Postman", "Jira", "DataGrip", "Visual Studio Code", "Jupyter Notebook",
+            "Netlify", "Docusaurus", "Cloudinary", "Cloudflare Pages", "Cloudflare D2", "Algolia",
+            "WordPress", "Parse Platform", "Digital Ocean Spaces", "Webhook",
+            "Canva", "Ahrefs", "Hotjar", "Microsoft Office",
+            "ChatGPT", "DALL·E", "Perplexity",
+            "Content Creation", "Content Monetization", "Workflow Automation",
+            "Oracle ERP", "Data Quality", "Data Normalization"
+        ]
+    },
     "projects": [
         {
             "title": "Super",
             "description": "เว็บไซต์พอร์ตโฟลิโอส่วนตัวที่สร้างด้วย Next.js และ Cloudflare Pages ซึ่งผสานรวมกับ Superbrain API และใช้โมเดล Gemini 2.5 Flash/Pro ในการสร้างโค้ดและดำเนินงาน",
             "githubLink": "https://github.com/sagelga/super",
-            "demoLink": "https://sagelga.com"
+            "demoLink": "https://sagelga.com",
+            "stack": ["Next.js", "React", "TypeScript", "Cloudflare Pages"]
         },
         {
             "title": "Superbrain",
             "description": "API สำหรับเนื้อหาบล็อก ดึงข้อมูลการเปลี่ยนแปลงจาก Notion และจัดเก็บใน Cloudflare D2 เพื่อการดึงข้อมูลที่รวดเร็ว ทำงานบน Cloudflare Workers ทั้งหมดและใช้โมเดล Gemini ในการพัฒนา",
             "githubLink": "https://github.com/sagelga/superbrain",
-            "demoLink": ""
+            "demoLink": "",
+            "stack": ["Cloudflare Worker", "Notion API", "Cloudflare D2", "TypeScript"]
         },
         {
             "title": "Todoist Notion Sync",
             "description": "ใช้ Cloudflare Worker เพื่อรอรับ Webhook จาก Todoist และสร้างงานใหม่ใน Notion",
             "githubLink": "https://github.com/sagelga/todoist-tagging",
             "demoLink": "",
-            "imageUrl": "/images/placeholder-project.png"
+            "imageUrl": "/images/placeholder-project.png",
+            "stack": ["Cloudflare Worker", "Webhook", "Notion API", "Todoist API"]
         },
         {
             "title": "Learn with sagelga",
             "description": "สร้างเว็บไซต์ learn.sagelga.com ขึ้นมาใหม่ด้วย Docusaurus, React และ TypeScript เพื่อเพิ่มประสิทธิภาพการค้นหาและความเร็วสำหรับผู้เรียน Python และ SQL",
             "githubLink": "https://github.com/sagelga/learn-with-sagelga",
-            "demoLink": "https://learn.sagelga.com"
+            "demoLink": "https://learn.sagelga.com",
+            "stack": ["Docusaurus", "React", "TypeScript"]
         },
         {
             "title": "Byteside.one",
             "description": "ก่อตั้ง Byteside.one สื่อข่าวเทคโนโลยี แกดเจ็ต และเกม ซึ่งมีการแสดงผลบน Google Search ถึง 2.79 ล้านครั้ง และบน Facebook มากกว่า 200,000 ครั้งต่อเดือนภายในเดือนมกราคม 2023",
             "githubLink": "",
-            "demoLink": "https://byteside.one/"
+            "demoLink": "https://byteside.one/",
+            "stack": ["Next.js", "React", "TypeScript", "SEO"]
         },
         {
             "title": "The Sunny Side Publication",
             "description": "บุกเบิกสื่อ 'The Sunny Side' บน Medium ซึ่งเป็นจุดเริ่มต้นของ ByteSide.one และแสดงให้เห็นถึงความเชี่ยวชาญในการสร้างและเผยแพร่เนื้อหาในช่วงแรก",
             "githubLink": "",
-            "demoLink": "https://medium.com/the-sunny-side"
+            "demoLink": "https://medium.com/the-sunny-side",
+            "stack": ["Medium", "Publishing", "Content Creation"]
         },
         {
             "title": "Approval Workflow on Google Apps Script",
             "description": "พัฒนาระบบเวิร์กโฟลว์การอนุมัติอัตโนมัติสำหรับ IMST โดยใช้ Google Apps Script ซึ่งช่วยเพิ่มประสิทธิภาพกระบวนการด้านไอที การขอเบิก และการจัดซื้อด้วยการแจ้งเตือนทางอีเมลอัตโนมัติและการผสานรวมกับ Google Forms",
             "githubLink": "https://github.com/sagelga/approval-workflow",
-            "demoLink": "https://docs.sagelga.com/approval-workflow/"
+            "demoLink": "https://docs.sagelga.com/approval-workflow/",
+            "stack": ["Google Apps Script", "Google Forms", "Workflow Automation"]
         },
         {
             "title": "Essilor Asia Supplier Deduplication Report",
             "description": "พัฒนาสคริปต์ Oracle SQL และ PL/SQL สำหรับ Essilor Asia และ Europe เพื่อสร้างรายงานการขจัดข้อมูลซ้ำซ้อนของซัพพลายเออร์ ซึ่งช่วยเพิ่มคุณภาพข้อมูลในระบบ Oracle ERP รวมถึงการให้คะแนนความคล้ายคลึงและการทำให้เป็นมาตรฐาน",
             "githubLink": "",
-            "demoLink": ""
+            "demoLink": "",
+            "stack": ["Oracle SQL", "Oracle PL/SQL", "Oracle ERP"]
         },
         {
             "title": "Data Analytics on Body Fat",
             "description": "วิเคราะห์การถดถอยพหุคูณเกี่ยวกับความสัมพันธ์ระหว่างไขมันในร่างกายและขนาดของส่วนต่างๆ ของร่างกายโดยใช้ IBM SPSS Statistics เพื่อสร้างแบบจำลองทางสถิติ",
             "githubLink": "https://github.com/sagelga/bodyfat-regression",
-            "demoLink": ""
+            "demoLink": "",
+            "stack": ["IBM SPSS Statistics", "Regression Analysis", "Statistical Modeling"]
         },
         {
             "title": "Lecture sharing System (Oh Sheet!)",
             "description": "พัฒนา 'Oh Sheet!' ระบบแบ่งปันเอกสารการบรรยายโดยใช้ Vue, Parse, NodeJS, ExpressJS และ Digital Ocean Spaces ซึ่งออกแบบมาเพื่อให้ง่ายต่อการแบ่งปันและค้นหาเนื้อหาทางการศึกษา",
             "githubLink": "https://github.com/sagelga/oh-sheet",
-            "demoLink": "https://docs.sagelga.com/oh-sheet/"
+            "demoLink": "https://docs.sagelga.com/oh-sheet/",
+            "stack": ["Vue", "Parse Platform", "Node.js", "Express.js", "Digital Ocean Spaces"]
         },
         {
             "title": "Online Space Reservation System",
             "description": "ออกแบบและติดตั้งระบบจองพื้นที่ออนไลน์ด้วย PostgreSQL, Scala, GraphQL และ NodeJS เพื่อจัดการความต้องการของผู้ใช้และการอนุมัติสำหรับผู้ดูแลอาคาร",
             "githubLink": "https://github.com/itforge-eros/panda-website",
-            "demoLink": "https://docs.sagelga.com/project-panda/"
+            "demoLink": "https://docs.sagelga.com/project-panda/",
+            "stack": ["PostgreSQL", "Scala", "GraphQL", "Node.js"]
         },
         {
             "title": "Thai restaurant analysis",
             "description": "วิเคราะห์ความชุกของร้านอาหารไทยในสหรัฐอเมริกา เพื่อสำรวจสาเหตุและแนวโน้มที่ซ่อนอยู่",
             "githubLink": "https://github.com/sagelga/data-journal",
-            "demoLink": ""
+            "demoLink": "",
+            "stack": ["Python", "Data Analysis"]
         },
         {
             "title": "Trash Melody",
             "description": "พัฒนา 'Trash Melody' เกม Java ที่ได้รับแรงบันดาลใจจาก OSU! ซึ่งผสมผสานความบันเทิงเข้ากับการให้ความรู้เรื่องการคัดแยกขยะ",
             "githubLink": "https://github.com/sagelga/trashmelody",
-            "demoLink": "https://docs.sagelga.com/trash-melody/"
+            "demoLink": "https://docs.sagelga.com/trash-melody/",
+            "stack": ["Java", "Game Development"]
         },
         {
             "title": "Point of Sales (POS) System",
             "description": "ออกแบบระบบ Point-of-Sale (POS) ที่ครอบคลุมในภาษา C ซึ่งมีทั้งการวิเคราะห์ การจัดการสต็อก/กำไร การพยากรณ์ยอดขาย (Linear Regression) การสร้างความภักดีของลูกค้า และการรองรับเครื่องสแกนบาร์โค้ด โดยจัดเก็บข้อมูลในรูปแบบ CSV",
             "githubLink": "https://github.com/sagelga/ComPro_Project",
-            "demoLink": "https://docs.sagelga.com/compro-project/"
+            "demoLink": "https://docs.sagelga.com/compro-project/",
+            "stack": ["C (Programming Language)", "CSV", "POS Systems"]
         }
     ],
     "experiences": [
@@ -429,12 +397,12 @@
     "languages": [
         {
             "name": "อังกฤษ",
-            "proficiency": "ความสามารถระดับมืออาชีพ",
+            "proficiency": "ระดับมืออาชีพ",
             "iconClass": "devicon-english-plain"
         },
         {
             "name": "ไทย",
-            "proficiency": "ความสามารถระดับเจ้าของภาษา",
+            "proficiency": "ภาษาแม่",
             "iconClass": "devicon-thai-plain"
         }
     ],

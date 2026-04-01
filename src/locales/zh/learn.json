@@ -1,6 +1,6 @@
 {
     "hero": {
-        "title": "个性化科技教育：掌握之路从这里开始。",
+        "title": "个性化科技教育，从这里开启你的成长之路。",
         "description": "发现 Python、SQL、TypeScript、Notion 等领域的定制一对一教学。我指导各个年龄段的求知者释放他们的全部潜力。",
         "explore_paths": "探索学习路径",
         "connect_with_me": "与我联系"
@@ -62,7 +62,7 @@
         "learn_more": "了解更多"
     },
     "how_journey_works": {
-        "title": "旅程如何进行",
+        "title": "学习流程",
         "step1_title": "确认你的路径",
         "step1_description": "探索可用的多样化学习路径，确定你想掌握的技能。",
         "step2_title": "与我联系",
@@ -71,14 +71,14 @@
         "step3_description": "开始你的个性化一对一课程，踏上专业知识之旅！"
     },
     "success_stories": {
-        "title": "路径上的成功故事",
+        "title": "学员心声",
         "testimonial1_text": "和 Kunanon 一起学 Python 太棒了！课程非常清晰有趣，我构建了我的第一个游戏。强烈推荐给孩子们！",
         "testimonial1_author": "- Alex（12 岁）",
         "testimonial2_text": "我需要为新职位学习 TypeScript，Kunanon 的指导非常宝贵。个性化的方法帮助我快速掌握复杂概念。真正的专家！",
         "testimonial2_author": "- Sarah L.（软件工程师）"
     },
     "common_questions": {
-        "title": "路径上的常见问题",
+        "title": "常见问题",
         "q1_title": "典型的课程格式是什么？",
         "q1_description": "课程通常是一对一进行的，通过视频通话进行，且高度互动，重点是实践操作编程和问题解决。",
         "q2_title": "我可以自定义学习路径吗？",

@@ -1,0 +1,198 @@
+---
+slug: wordpress-media-storage-s3-aws
+title: ใช้ AWS S3 เก็บไฟล์มีเดียของ WordPress (ตอนที่ 3)
+description: ใครอยากมีเว็บไซต์ ? ฉันหน่ะสิ ฉันหน่ะสิ แต่ยากมั้ย ? ก็ยากหน่ะสิ ยากหน่ะสิ แต่ในสตอรีนี้เราก็จะมาสอนวิธีการสร้างเว็บไซต์และใช้ WordPress ผ่านบริการคลาวด์ที่ทุกคนสามารถทำได้ด้วยตนเองอย่าง Amazon Web Service (AWS) Lightsail พร้อมกับคำแนะนำในการทำให้เว็บไซต์นั้นสามารถเติบโต, ขยับขยายได้ตามความต้องการ และให้บริการได้อย่างรวดเร็วด้วย AWS S3, AWS CloudFront และ Plug-In ของ WordPress ที่เราก็จะนำมาแนะนำกันในสตอรีนี้ครับ
+authors: [sagelga]
+tags: [AWS, Wordpress, Programming]
+image: https://images.unsplash.com/photo-1620641788421-7a1c342ea42e
+date: 2021-07-12
+---
+
+ในสตอรีนี้เป็นตอนที่ 3 จากการสร้างเว็บไซต์ WordPress ด้วยการใช้ AWS Lightsail, CloudFront, S3, Route 53, Certificate Manager และ IAM โดยเราจะมาเจาะลึกกับการให้บริการไฟล์มีเดียด้วยการใช้ AWS Simple Storage Service (AWS S3) ด้วยการให้บริการในรูปแบบ Content Delivery Network (CDN) เพื่อให้สามารถให้บริการผู้ใช้งานได้เร็วขึ้น ซึ่งส่งผลโดยตรงต่อคะแนน Index ของพวก Search Engine และสร้างความพึงพอใจกับผู้ใช้งานแม้เขาจะมีอินเตอร์เน็ตที่ช้าอืดอาดก็ตาม
+
+
+## ซีรีส์การสร้าง WordPress บน Amazon Web Service
+
+หากว่าเพื่อนๆ อยากจะย้อนหรือข้ามไปขั้นตอนอื่นของการทำ WordPress บน Amazon Web Service ก็สามารถกดเข้าไปอ่านสตอรีได้ตามลิงก์เหล่านี้เลยครับ
+
+-   [สร้างเว็บไซต์ WordPress ของคุณด้วย Amazon Web Service (ตอนที่ 1)](https://byteside.one/th/tutorial/lightsail-wordpress-aws/)
+-   [รองรับ HTTPS ให้กับ Instance บน Amazon Web Service (ตอนที่ 2)](https://byteside.one/th/tutorial/https-support-aws/)
+-   [ใช้ AWS S3 เก็บไฟล์มีเดียของ WordPress (ตอนที่ 3)](https://byteside.one/th/tutorial/wordpress-media-storage-s3-aws/)
+-   [ใช้ CloudFront เพื่อทำ WordPress CDN (ตอนที่ 4)](https://byteside.one/th/tutorial/cloudfront-cdn-wordpress-aws/)
+-   [ใช้ AWS CloudFront เพื่อโดเมนของตัวเองด้วย Route 53 (ตอนที่ 5)](https://byteside.one/th/tutorial/connect-cloudfront-to-route53-aws/)
+
+โดยสตอรีนี้จะถูกแยกออกมาเป็นสตอรีตามประเภทการทำงาน ดังนั้นเพื่อนๆ สามารถติดตามตอนต่อไปของวิธีการทำเว็บไซต์ WordPress ด้วย Amazon Web Service ได้เลยครับผม! โดยในสตอรีนี้เราจะพูดถึง การเพิ่มความปลอดภัยให้กับผู้ใช้งานด้วยการให้บริการ HTTPS กับผู้ใช้งาน ด้วยการสร้าง Certificate และใช้ Plug-In เพื่อให้ WordPress ให้บริการ HTTPS อย่างเต็มตัว
+
+## S3 คืออะไร?
+
+**S3 หรือ Simple Storage Service เป็นบริการเก็บ Object หรือที่หมายความว่าเก็บได้ทุกอย่างไม่จำเป็นจะต้องเป็นไฟล์ ที่ให้บริการโดย Amazon Web Service** ด้วยความพร้อมการให้บริการ 99.99999999999% (จุดทศนิยม 9 ยาว 11 ตัว) ที่สร้างขึ้นด้วยความทนทาน ประสิทธิภาพสูง รวมไปถึงการคิดค่าบริการตามการใช้งานจริง (On-Demand) บริษัทชั้นนำอย่าง Amazon.com เองก็ใช้ S3 เหมือนกัน
+
+โดยในสตอรีนี้เราจะทำการใช้ S3 แทนที่ Storage ที่ติดอยู่กับ Instance บน Lightsail ที่จะเพิ่มความเร็วให้กับการเรียกดูภาพและความพร้อมใช้งานไฟล์ที่สูงกว่าพร้อมกับค่าใช้จ่ายที่คุ้มค่ากว่า (Cost-effective) การ Host เองบนเครื่องบริการ
+
+![](https://static.byteside.one/media/2021/07/13224614/SiteMerch-CastleBlack_SocialMedia_2.webp)
+
+## มี Bucket ที่ตั้งค่าแล้วใน AWS S3
+
+ขั้นตอนแรกก่อนที่เราจะไปเคลื่อนย้ายภาพที่อยู่บน WordPress ของตัวเองก็คือการสร้างที่จัดเก็บบน AWS S3 ที่เรียกว่า Bucket (หรือตามความเข้าใจง่ายๆ ก็คือที่จัดเก็บ) ที่จะเอาไว้เก็บ Object ซึ่งนั่นรวมไปถึงรูปและวิดีโอ ที่ขั้นตอนต่อไปเราจะเอาไปไฟล์พวกนั้นไปเก็บ
+
+ดังนั้นหากว่าเพื่อนๆ ยังไม่มี Bucket เพื่อให้เก็บไฟล์ก็จะต้องไปสร้างกันก่อนครับ แล้วหลังจากนั้นเราถึงทำขั้นตอนต่อไปได้ แต่หากว่าเพื่อนๆ มี Bucket ที่จะใช้จัดเก็บแล้วก็สามารถข้ามขั้นตอนการสร้างและสามารถไปขั้นตอนต่อไปได้เลย แต่อย่าลืมแก้ไขการตั้งค่าให้เหมือนกับขั้นตอนข้างต้น (โดยเราจะขออนุญาตข้ามวิธีการแก้ไขการตั้งค่าไปเลย) ด้วยนะครับ
+
+### สร้าง Bucket
+
+เพื่อสร้าง Bucket ใหม่สำหรับการเก็บมีเดีย เราจะเข้าไปที่หน้าเซอร์วิส S3 ไปที่หัวข้อผ ‘Bucket’ และกดที่ปุ่มสีส้ม ‘Create bucket’ เพื่อสร้าง Bucket
+
+![](https://static.byteside.one/media/2021/07/13224640/Screenshot-2021-07-06-at-15.59.02.webp)
+
+### เลือก Region ของ Bucket
+
+โดยในที่นี้เราอาจจะเลือก Region อะไรก็ได้เพราะว่าอย่างไรก็ตามก็จะไปใช้ CloudFront เพื่อให้บริการส่งรูปอยู่ดี หากว่าเพื่อนๆ คิดว่าเรื่องการอัพโหลดมีเดียนั้นเป็นเรื่องที่สำคัญที่จะต้องรวดเร็วก็ให้เลือกหนึ่งใน Region ใกล้บ้านอย่าง ap-southeast (Singapore), ap-south (Mumbai), ap-east (Hong Kong) ก็ได้ครับ
+
+![](https://static.byteside.one/media/2021/07/13224640/Screenshot-2021-07-06-at-15.59.02.webp)
+
+### ตั้งการเข้าถึงไฟล์ให้เป็น Public Access
+
+ในหัวข้อ ‘Block Public Access settings for this bucket’ นี้จะเป็นการเปลี่ยนการตั้งค่าว่าจะให้ผู้ใช้งานอื่นสามารถเข้าไปดูคอนเทนต์ใน Bucket ผ่าน URL ของ S3 ได้หรือไม่ โดยเราจะทำการปลด ‘Block all public access’ เพื่อให้ผู้ใช้งานสามารถเข้าไปดูรูปบน S3 ได้ครับ
+
+โดยหลังจากนี้เราจะกลับมาบล็อค Public Access อีกครั้งหลังจากตั้งค่า CloudFront และ Access Control แล้ว แต่ ณ​ ตอนนี้เพื่อทดสอบการทำงานของ Plug-In เราก็จะขอเปิดเอาไว้ก่อนครับ
+
+![](https://static.byteside.one/media/2022/02/08093326/Screenshot-2021-07-06-at-15.59.22.webp)
+
+และด้านล่างจะมีกล่องแจ้งเตือนว่า Object ทั้งหมดใน Bucket นี้ ผู้ใช้งานภายนอกจะสามารถเข้าชมได้ทั้งหมด หากต้องการยืนยันว่า ‘เรารู้ว่าเรากำลังทำอะไรอยู่’ ก็ให้ทำการยืนยันด้วยการติ้กที่ช่อง ‘`I acknowledge that the current settings ... within becoming public`‘
+
+![](https://static.byteside.one/media/2022/02/08093338/Screenshot-2021-07-06-at-15.59.42.webp)
+
+พูดคุยกันเล่นเฉยๆ : ในดีไซน์หน้าต่างการแก้ไขสิทธิ์การเข้าถึงเก่านั้นไม่ได้เข้มงวดเรื่อง Public Access มากนัก แต่ด้วยว่ามีบริษัทลืมปิด Public Access ทำให้ข้อมูลลูกค้ารั่วไหลอยู่บ่อยครั้ง และคนที่โดนโยนขี้เป็นเจ้าแรกก็คือ S3 เสมอ ซึ่งผมเองก็รู้สึกผิดเหมือนกันครับที่ชอบไปบ่นว่าทำไมขั้นตอนวุ่นวายแบบนี้ 😀
+
+## อะไรคือ AWS S3 Intelligent Tiering
+
+นอกจากการจัดเก็บ Object แบบปกติ (Standard) แล้ว ภายใน S3 ก็มีตัวเลือกให้กับผู้ใช้ในการเก็บข้อมูลโดยแตกต่างด้วยความถี่ในการเข้าถึงข้อมูล (Access Frequency) หาก Object ไหนไม่ถูกเข้าถึงเลยเราก็สามารถปรับไปเป็นตัวเลือกการจัดเก็บที่ถูกกว่าได้ แต่เนื่องจากว่าระดับการจัดเก็บนั้น เราคงไม่ได้เข้าไปดูอะไรบ่อยๆ ว่าไฟล์ไหนถูกใช้งานบ่อยหรือไฟล์ไหนไม่เคยใช้งานเลย ดังนั้นวันนี้เราจะมานำเสนอ Intelligent Tiering ให้เข้าใจกันครับผม
+
+![](https://static.byteside.one/media/2021/07/13224621/AWS_StorageAsset-2%402x.0840a770e3a358b6075f7d2f703d0d8cef9836f4.webp)
+
+Intelligent Tiering จะมีฟังก์ชันอัตโนมัติที่จะทำการปรับระดับ (Tier) การจัดเก็บของแต่ละ Object ให้กับผู้ใช้งาน ด้วยเงื่อนไขแค่ว่าหาก Object ไหนมีการเรียกใช้งาน ก็จะกลับมาเป็น Standard Tier ที่มีค่าเข้าถึง (Transfer + Data Provoke) ถูกที่สุด และหาก Object ไหนไม่ถูกใช้งานนานๆ ก็จะถูกปรับ Tier ลงเพื่อให้มีค่าจัดเก็บถูกกว่า
+
+![](https://static.byteside.one/media/2021/07/13224633/lifecycle-transitions-v2.webp)
+
+ภาพจาก AWS Documentation
+
+รวมไปถึงเงื่อนไขที่ว่า หากเราทำการเปลี่ยน Tiering ลงเอง (ตามภาพประกอบด้านล่าง)​ เราจะไม่สามารถปรับ Tiering ขึ้นได้เลย แต่ Object ที่เก็บใน Intelligent Tiering จะสามารถปรับขึ้น-ลงได้ โดยไม่ต้องเสียค่าใช้จ่ายเรื่องการ Data Transfer + Provoke เลย (แต่มีค่าจัดปรับ Tiering อัตโนมัติเล็กน้อย)​
+
+Intelligent Tiering นั้นจึงเหมาะสมกับข้อมูลที่เราไม่รู้หรือไม่สามารถคาดการณ์ความถี่ในการเข้าถึงได้ ซึ่งก็เป็นอย่างเช่น Blog นี้ ที่เราจะไม่รู้ว่าสตอรีเก่าๆ นั้นจะถูกเข้าถึงบ่อยแค่ไหนหรืออาจจะไม่มีคนเข้าไปอ่านเลยก็ได้ ดังนั้นก็จะทำให้ผมสามารถประหยัดค่าใช้จ่ายโดยรวมได้มากกว่าการตั้งเป็น Standard นั่นเองครับ
+
+หากเพื่อนๆ ต้องการอ่านรายละเอียดว่า Intelligent Tiering นั้นเป็นอย่างไรก็สามารถเข้าไปดูได้ที่ [https://docs.aws.amazon.com/AmazonS3/latest/userguide/lifecycle-transition-general-considerations.html](https://docs.aws.amazon.com/AmazonS3/latest/userguide/lifecycle-transition-general-considerations.html)
+
+![](https://static.byteside.one/media/2021/07/13224606/Site-Merch_S3-Iceidore_SocialMedia_1.webp)
+
+## (ไม่บังคับ) ตั้งค่าการเก็บ Object ด้วย Lifecycle rules
+
+นอกจากค่าใช้จ่ายของ AWS Lightsail ที่เราต้องการลดแล้ว อีกส่วนหนึ่งของค่าใช้จ่ายนั่นก็คือเรื่องของพื้นที่จัดเก็บที่เราเองจะต้องลด แต่ด้วยว่าเราไม่สามารถทำความเข้าใจกับผู้ใช้งานว่าจะเข้ามาดู (โหลดดูภาพ) เมื่อไหร่ ดังนั้นเราก็จะทำการเปลี่ยนจากการจัดเก็บแบบ Standard ให้เป็น Intelligence Tiering
+
+### สร้าง Lifecycle Rules ใหม่
+
+เพื่อเปิดให้ S3 สามารถเปลี่ยนระดับการจัดเก็บได้ ให้กดเข้าไปที่ Bucket และเข้าไปที่หัวข้อ ‘Management’ และไปที่หัวข้อ ‘Lifecycle rules’
+
+![](https://static.byteside.one/media/2021/07/13224747/Screenshot-2021-07-06-at-16.00.17.webp)
+
+### ตั้งชื่อและเงื่อนไข Lifecycle Rule
+
+ในขั้นตอนนี้เราก็จะทำการตั้งชื่อ Rule ในช่อง ‘Lifecyle rule name’ และตั้งเงื่อนไขการใช้งานเงื่อนไข ‘Rule Scope’ ในที่นี้เราจะตั้งเป็น ‘This rule applies to all objects in the bucket’ หรือการใช้ Lifecycle Rule นี้กับทุก Object ที่อยู่ใน Bucket
+
+![](https://static.byteside.one/media/2021/07/13224317/Screenshot-2021-07-08-at-16.15.34.webp)
+
+### ตั้ง Lifecycle rule actions
+
+โดยในขั้นตอนนี้ ก็จะเป็นการแก้ไขกฎว่า Object แต่ละประเภทนั้นจะต้องทำอย่างไรต่อ โดยมีตัวเลือกดังนี้
+
+-   ตัวเลือก: Transition current versions of objects between storage classes
+    -   ความหมาย: เปลี่ยน Storage Class ให้เวอร์ชันล่าสุด
+-   ตัวเลือก: Transition previous versions of objects between storage classes
+    -   ความหมาย: เปลี่ยน Storage Class ให้เวอร์ชันที่แล้ว
+-   ตัวเลือก: Expire current versions of objects
+    -   ความหมาย: ลบ (Expire) Object เวอร์ชันล่าสุด
+-   ตัวเลือก: Permanent delete previous versions of objects
+    -   ความหมาย: ลบ Object เวอร์ชันที่แล้ว
+-   ตัวเลือก: Delete expired delete markers or incomplete multipart uploads
+    -   ความหมาย: ลบ Object ที่มี ‘delete markers’ หรืออัพโหลดไม่สำเร็จ
+
+![](https://static.byteside.one/media/2021/07/13224417/Screenshot-2021-07-09-at-01.36.30.webp)
+
+หากว่าเพื่อนๆ ยังไม่รู้ว่าควรที่จะตั้งค่าอะไรเป็นอะไรบ้างผมก็เลยมาแชร์ให้ดูครับ โดยผมตั้งค่าให้มีการ Lifecycle ดังนี้
+
+-   Object จะปรับเป็น Intelligent-Tiering ใน 14 วันหลังจากที่อัพโหลด (และวันที่ 30 จะถูกปรับมาเป็น Standard-IA ทันทีตามเงื่อนไข Intelligent-Tiering)
+-   Object ที่ถูกตั้งว่าเป็นเวอร์ชันเก่าจะถูกลบจริง 7 วันหลังจากที่อัพโหลดเวอร์ชันใหม่ทับ
+-   Object ที่อัพโหลดไม่สำเร็จจะถูกลบใน 1 วันให้หลัง
+-   Object ที่ถูกตั้งว่าให้ลบจะถูกลบทันที (Delete expired object delete markers)
+
+### ยืนยันการสร้าง Lifecycle Rules
+
+หากว่าเพื่อนๆ ทำการตั้งค่าเสร็จเรียบร้อยแล้ว ก็อย่าลืมที่จะตรวจทาน โดยหน้าเว็บก็จะมีการแสดงสรุปว่าจะทำอะไรกับเวอร์ชันปัจจุบันและเวอร์ชันที่แล้วอย่างไรบ้าง
+
+![](https://static.byteside.one/media/2021/07/13224429/Screenshot-2021-07-09-at-01.36.55.webp)
+
+## ขอ Access Key เพื่อเข้าถึง S3 ด้วย IAM
+
+เพื่อให้ Plug-in ที่เราจะทำการตั้งค่าในขั้นตอนต่อไปจำเป็นจะต้องมีสิทธิในการเขียน (อัพโหลด) มีเดียและดึง URL ของไฟล์ที่อยู่บนนั้นได้ ก็จะต้องมีการมอบสิทธิการเข้าถึง
+
+### สร้าง User ใหม่
+
+ขั้นตอนแรก เพื่อนๆ จะเข้าไปหน้าเซอร์วิสที่ชื่อว่า IAM ก็จะเห็นหน้าตาคอนโซลแบบนี้ครับ ให้เข้าไปที่หัวข้อ ‘Users’ ได้จาก Sidebar ด้านข้างครับ
+
+![](https://static.byteside.one/media/2021/07/13224515/Screenshot-2021-07-11-at-22.34.50.webp)
+
+และก็ให้ทำการกดไปที่ปุ่ม ‘Add user’ เพื่อสร้าง Access key ID/Password กันครับ
+
+![](https://static.byteside.one/media/2021/07/13224524/Screenshot-2021-07-11-at-22.35.33.webp)
+
+### เลือก AWS access type เป็น ‘Programmatic access’
+
+นอกจากที่เราจะตั้งชื่อ​ (เพื่อให้จำได้)​ ในช่อง ‘User name’ แล้ว เพื่อนๆ จะต้องไปติ้กที่ ‘Programmatic access’ ในหัวข้อของ Access type เพื่อได้มาเป็นเหมือน User/Password แต่ไม่สามารถเข้าไป Login ผ่าน AWS Console ได้
+
+![](https://static.byteside.one/media/2021/07/13224533/Screenshot-2021-07-11-at-22.35.58.webp)
+
+### เลือกการเข้าถึงเพียง S3
+
+ขั้นตอนนี้เราจะทำการให้สิทธิ์การอ่าน-เขียนเต็มที่กับ User นี้ โดยในหน้านี้ให้ทำการเลือก ‘Attatch existing policies directly’ ในหัวข้อ ‘Set Permission’ และเข้าไปค้นหาและติ้กที่นโยบายที่ชื่อว่า ‘S3FullAccess’ (ประเภท AWS managed) และก็สามารถข้ามขั้นตอนการสร้าง Key-Value Tag และ Review ไปได้เลยครับ
+
+![](https://static.byteside.one/media/2021/07/13224544/Screenshot-2021-07-11-at-22.36.19.webp)
+
+### เก็บ Access Key ID + Secret เอาไว้ให้ดี
+
+หากว่าเพื่อนๆ ทำเสร็จเรียบร้อยแล้ว IAM จะมีการให้ Username และ Password มาให้ เราจะทำการใช้ Username/Password นี้ในการตั้งค่า Plug-In กันครับ โดยที่เราจะยังไม่ปิดหน้าต่างนี้ เพราะหากว่าปิดแล้ว รหัสผ่าน (ที่เรายังไม่ได้ก็อปปี้) นั้นจะไม่สามารถกู้คืนได้ แต่หากว่าทำหายจริง เพื่อนๆ สามารถไปสร้างรหัสผ่านใหม่บน IAM ได้อีกครั้ง
+
+![](https://static.byteside.one/media/2021/07/13224555/Screenshot-2021-07-11-at-22.36.36.webp)
+
+## ตั้งค่า Plug-in
+
+หลังจากที่เราได้ไปตั้ง Bucket S3 และ IAM แล้ว ก็ได้เวลากลับมาตั้งค่า Plug-In กันแล้ว จากที่กล่าวไปในตอนที่หนึ่งว่าเราจะใช้ Plug-In WP Offload Media Lite ในการโอนไฟล์มีเดีย (จริง ๆ แล้วก็คือการคัดลอกแล้วก็ลบ) ไปเก็บไว้ใน S3
+
+ขั้นตอนแรกก็คือการเข้าไปที่หน้าการตั้งค่าของ Plug-In ด้วยการเข้าไปที่ Settings > Offload Media Lite
+
+![](https://static.byteside.one/media/2021/07/13224451/Screenshot-2021-07-09-at-12.03.54.webp)
+
+### ตั้งค่าการเข้าถึง
+
+ในขั้นตอนในการเพิ่ม Bucket เพื่อจัดเก็บ ในหัวข้อ ‘Storage Provider’ ให้เราทำการเลือกตัวเลือก ‘Define access keys in wp-config.php’ โดยการแก้ไขไฟล์ ‘wp-config.php’ ด้วย snippet ด้านล่าง แต่แก้ไขตรงบรรทัดที่เขียนว่า ‘access-key-id’ เป็น Acess Key ID และ ‘secret-access-key’ เป็น Secret Access Key ที่เราได้สร้างขึ้นมาในขั้นตอนของการสร้าง User ใน IAM
+
+![](https://static.byteside.one/media/2021/07/13224440/Screenshot-2021-07-09-at-12.02.43.webp)
+
+### เลือก Bucket ที่จะใช้เก็บมีเดีย
+
+หลังจากนั้น เชื่อมต่อกับ Bucket ที่เราต้องการ (ซึ่งก็คืออันเดียวกันกับที่เราสร้างเมื่อขั้นตอนก่อนหน้า) ด้วยการกดไปที่คำว่า ‘Browse existing buckets’ และเลือกชื่อ Bucket ที่เราต้องการ หากเสร็จเรียบร้อยแล้วกดต่อไป
+
+![](https://static.byteside.one/media/2021/07/13224503/Screenshot-2021-07-09-at-12.27.30.webp)
+
+### เลือกตัวเลือกเพิ่มเติม
+
+หากทำสำเร็จในขั้นตอนข้างต้นแล้ว ก็จะมีผลลัพธ์ให้เห็นดังนี้ครับ ไฟล์มีเดียต่างๆ ก็จะมีการเปลี่ยน URL จากบน Instance (ด้วยโดเมนเดียวกันกับ Instance) มาเป็นลิงก์ Bucket ของ S3 หากว่าไฟล์มีเดียนั้นอัพโหลดขึ้นไปบน S3 เป้าหมายแล้ว
+
+![](https://static.byteside.one/media/2021/07/13224352/Screenshot-2021-07-08-at-19.53.02.webp)
+
+## สำเร็จ!
+
+เสร็จแล้วสำหรับขั้นตอนในการโอนไฟล์มีเดียจากบน Instance ของ Lightsail ไปเก็บไว้อยู่บน S3 ด้วยการใช้ Credential ด้วยการให้สิทธิ์ FullAccess บนหน้าควบคุม IAM สำหรับขั้นตอนต่อไปที่เราจะไปตั้งค่ากันต่อก็จะเป็นการนำไฟล์บน S3 ไปให้บริการบน CloudFront เพื่อให้หน้าเว็บนั้นโหลดเร็วขึ้น ที่จะเป็นผลดีต่อคะแนนการ Index ของเว็บไซต์เพื่อนๆ รวมไปถึงการใช้ Certificate Manager เพื่อทำการใช้ Custom Domain สำหรับลิงก์ CloudFront ที่เราจะใช้เป็น Custom Domain อีกด้วย
+
+---
+
+###### ข้อมูลอ้างอิง
+
+-   [https://aws.amazon.com/th/s3/faqs/](https://aws.amazon.com/th/s3/faqs/)

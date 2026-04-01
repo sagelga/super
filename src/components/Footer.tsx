@@ -38,9 +38,11 @@ const Footer: React.FC = () => {
             newLang === "th" ? localeFree : `/${newLang}${localeFree}`;
     };
 
+    const langPrefix = lang === "th" ? "" : `/${lang}`;
+
     const footerColumns: LinkColumn[] = [
         {
-            title: t("footer.sitemap.kunanon_srisuntiroj"),
+            title: t("nav.home"),
             links: [
                 { name: t("nav.home"), href: "/" },
                 { name: t("footer.sitemap.about"), href: "/#about" },
@@ -53,18 +55,16 @@ const Footer: React.FC = () => {
             ],
         },
         {
+            title: t("footer.sitemap.explore"),
+            links: [
+                { name: t("nav.blog"), href: `${langPrefix}/blog` },
+                { name: t("nav.learn"), href: `${langPrefix}/learn` },
+                { name: t("nav.docs"), href: `${langPrefix}/docs` },
+            ],
+        },
+        {
             title: t("nav.projects"),
             links: [
-                {
-                    name: "Learn",
-                    href: "https://learn.sagelga.com",
-                    external: true,
-                },
-                {
-                    name: "Documentation",
-                    href: "https://docs.sagelga.com/",
-                    external: true,
-                },
                 {
                     name: "Mahjong Hands",
                     href: "https://mahjong.sagelga.com",
@@ -156,7 +156,7 @@ const Footer: React.FC = () => {
                         <div className="flex items-center gap-6">
                             <button
                                 onClick={() => setShowLanguageSwitcher(true)}
-                                className="footer-toggle-btn footer-lang-btn"
+                                className="footer-toggle-btn"
                             >
                                 <svg
                                     width="14"

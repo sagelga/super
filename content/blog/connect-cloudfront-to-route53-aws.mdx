@@ -1,0 +1,113 @@
+---
+slug: connect-cloudfront-to-route53-aws
+title: ใช้ AWS CloudFront เพื่อโดเมนของตัวเองด้วย Route 53 (ตอนที่ 5)
+description: ใครอยากมีเว็บไซต์ ? ฉันหน่ะสิ ฉันหน่ะสิ แต่ยากมั้ย ? ก็ยากหน่ะสิ ยากหน่ะสิ แต่ในสตอรีนี้เราก็จะมาสอนวิธีการสร้างเว็บไซต์และใช้ WordPress ผ่านบริการคลาวด์ที่ทุกคนสามารถทำได้ด้วยตนเองอย่าง Amazon Web Service (AWS) Lightsail พร้อมกับคำแนะนำในการทำให้เว็บไซต์นั้นสามารถเติบโต, ขยับขยายได้ตามความต้องการ และให้บริการได้อย่างรวดเร็วด้วย AWS S3, AWS CloudFront และ Plug-In ของ WordPress ที่เราก็จะนำมาแนะนำกันในสตอรีนี้ครับ
+authors: [sagelga]
+tags: [AWS, Wordpress, Programming]
+image: https://images.unsplash.com/photo-1620641788421-7a1c342ea42e
+date: 2021-07-16
+---
+
+ตอนสุดท้ายแล้วสำหรับการสร้างเว็บไซต์ WordPress ใน Amazon Web Service (AWS) ที่ในตอนนี้เรามาถึงในเรื่องของการโอนย้ายหน้าที่การให้บริการมีเดียมายัง AWS CloudFront และขั้นตอนสุดท้ายนั่นก็คือการให้ Plug-In นั้นทำหน้าที่เปลี่ยน URL มีเดียที่อยู่บนหน้าเว็บทั้งหมดให้มาเป็น CloudFront เพื่อเปลี่ยนมาขอมีเดียจาก CloudFront แทนนั่นเอง
+
+ดังนั้นในสตอรีนี้ เราจะมาทำการเชื่อมต่อบริการ AWS CloudFront กับ WordPress Plug-In และเริ่มบริการมีเดียแก่ผู้ใช้งานด้วยความปลอดภัยระดับ HTTPS และได้รับประโยชน์จากการใช้ HTTPS อย่างเช่นการเพิ่มคะแนน Google Index และให้ผู้ใช้งานนั้นอุ่นใจเมื่อเข้าเว็บไซต์ของเราครับ โดยเราจะพาทุกคนไปดูขั้นตอนการสร้าง Certificate ด้วย AWS Certificate Manager และเชื่อมต่อ Certificate Manager เข้ากับชื่อโดเมนที่เราจะใช้เป็น CDN ในขั้นตอนที่แล้วเพื่อรองรับ (หรือบังคับ) ให้บริการมีเดียผ่านความปลอดภัยอย่าง HTTPS
+
+
+## ซีรีส์การสร้าง WordPress บน Amazon Web Service
+
+หากว่าเพื่อนๆ อยากจะย้อนหรือข้ามไปขั้นตอนอื่นของการทำ WordPress บน Amazon Web Service ก็สามารถกดเข้าไปอ่านสตอรีได้ตามลิงก์เหล่านี้เลยครับ
+
+-   [สร้างเว็บไซต์ WordPress ของคุณด้วย Amazon Web Service (ตอนที่ 1)](https://byteside.one/th/tutorial/lightsail-wordpress-aws/)
+-   [รองรับ HTTPS ให้กับ Instance บน Amazon Web Service (ตอนที่ 2)](https://byteside.one/th/tutorial/https-support-aws/)
+-   [ใช้ AWS S3 เก็บไฟล์มีเดียของ WordPress (ตอนที่ 3)](https://byteside.one/th/tutorial/wordpress-media-storage-s3-aws/)
+-   [ใช้ CloudFront เพื่อทำ WordPress CDN (ตอนที่ 4)](https://byteside.one/th/tutorial/cloudfront-cdn-wordpress-aws/)
+-   [ใช้ AWS CloudFront เพื่อโดเมนของตัวเองด้วย Route 53 (ตอนที่ 5)](https://byteside.one/th/tutorial/connect-cloudfront-to-route53-aws/)
+
+โดยสตอรีนี้จะถูกแยกออกมาเป็นสตอรีตามประเภทการทำงาน ดังนั้นเพื่อนๆ สามารถติดตามตอนต่อไปของวิธีการทำเว็บไซต์ WordPress ด้วย Amazon Web Service ได้เลยครับผม! โดยในสตอรีนี้เราจะพูดถึง การเพิ่มความปลอดภัยให้กับผู้ใช้งานด้วยการให้บริการ HTTPS กับผู้ใช้งาน ด้วยการสร้าง Certificate และใช้ Plug-In เพื่อให้ WordPress ให้บริการ HTTPS อย่างเต็มตัว
+
+## สร้าง Certificate ด้วย AWS Certificate Manager
+
+หากเพื่อนๆ ยังไม่มี Certificate ที่ต้องการใช้ก็ให้ทำการกดไปที่ ‘Get Started’ ในหัวข้อ ‘Provision certificates’ หรือกดไปที่คำว่า ‘Request a certificate’ หากเพื่อนๆ เคยสร้าง Certificate เอาไว้แล้ว
+
+![](https://static.byteside.one/media/2021/07/09163832/Screenshot-2021-07-13-at-14.43.40.webp)
+
+### อะไรคือ AWS Certificate Manager
+
+AWS Certificate Manager เป็นบริการจากทาง Amazon Web Service ที่มีหน้าที่ในการสร้างและจัดการ Certificate ทั้งแบบ Private เพื่อนำไปใช้ในวงเน็ตเวิร์ค (VPC) ของผู้ใช้งาน เช่นกันกับการสร้าง Certificate แบบ Public ที่จะทำให้ชื่อโดเมนนั้นสามารถบริการด้วย HTTPS ได้ด้วยใบรับรอง SSL/TLS ที่สามารถนำเอาไปติดกับบริการต่างๆ ของ Amazon Web Service ได้อย่างง่ายดาย ซึ่งเพื่อนๆ สามารถเข้าไปอ่านฟีเจอร์ทั้งหมดที่ทาง AWS Certificate Manager นั้นให้บริการได้จากเว็บไซต์ของ AWS [https://aws.amazon.com/th/certificate-manager/](https://aws.amazon.com/th/certificate-manager/)
+
+### เปลี่ยน Region มาเป็น us-east-1
+
+โดย Certificate ที่เราจะเอาไปใช้นั้นเกี่ยวข้องกับ CloudFront ที่เป็นบริการทั่วโลก (Global) ดังนั้นเราต้องทำการเปลี่ยน Region ที่ใช้สร้าง Certificate มาเป็น US East (North Virginia) us-east-1 เท่านั้น ถึงจะสามารถใช้ Certificate นี้ร่วมกับ CloudFront ที่เราได้ทำการสร้างเอาไว้ในตอนที่แล้วได้ โดยสามารถเปลี่ยน Region โดยการกดไปที่ชื่อ Region มุมบนขวาและเลือก US East (N. Virginia) ตามภาพ
+
+![](https://static.byteside.one/media/2022/02/08093641/Screenshot-2021-07-13-at-17.34.24.webp)
+
+### เลือก Public Certificate
+
+ในขั้นตอนนี้เราจะทำการขอ Certificate แบบ Public ซึ่งเป็นบริการที่เหมาะสำหรับการเอาไปใช้กับบริการที่ใช้ใน Browser และไม่มีค่าใช้จ่ายเพิ่มเติมอีกด้วย
+
+![](https://static.byteside.one/media/2022/02/08085802/Screenshot-2021-07-14-at-17.45.16.webp)
+
+### เพิ่ม Domain names
+
+ขั้นตอนแรกในการเพิ่มก็คือพิมพ์ Domain ที่เราจะใช้เป็นตัวหลักสำหรับ Certficate อันนั้น และหากว่าต้องการเพิ่ม Domain (อย่างเช่น Domain Wildcard หรือโดเมนชื่ออื่น)​ ก็สามารถกดเพิ่มได้ที่ปุ่ม ‘Add another name to this certificate’
+
+![](https://static.byteside.one/media/2022/02/08085851/Screenshot-2021-07-06-at-16.09.24.webp)
+
+### เลือกวิธีการยืนยันความเป็นเจ้าของ (Validation Method)
+
+เราจะทำการเลือก ‘Email validation’ เนื่องจากการตรวจสอบด้วย DNS (DNS validation) อาจจะใช้เวลานานสูงสุด 24 ชั่วโมง​ ดังนั้นเราจึงเลือกเป็นการยืนยันตัวตนผ่านอีเมล์ (Email validation) เพื่อความรวดเร็วครับ โดยในวิธีนี้จะเป็นการส่งอีเมล์ยืนยันไปให้กับเจ้าของโดเมน (ซึ่งก็น่าจะเป็นคุณ) เพื่อยืนยันการสร้าง Certificate สำหรับ Domain
+
+![](https://static.byteside.one/media/2022/02/08093738/Screenshot-2021-07-06-at-16.08.41.webp)
+
+### ยืนยันความเป็นเจ้าของ
+
+โดยอีเมล์นั้นจะถูกจัดส่งไปที่เจ้าของโดเมนที่เราตั้งค่าเอาไว้ หากว่าเพื่อนๆ ยังไม่ได้ตั้งค่า Forward Email และไม่มีอินบ็อกซ์ของ Domain ที่ว่ามานี้ ก็ให้ไปดำเนินการตั้งค่าให้เสร็จเรียบร้อยก่อน และกดต่อไปเมื่อพร้อมแล้ว
+
+![](https://static.byteside.one/media/2022/02/08093750/Screenshot-2021-07-06-at-16.12.55.webp)
+
+### กดลิงก์ยืนยันตัวตนบนอีเมล์
+
+โดยเพื่อนๆ จะได้รับอีเมล์แจ้งเตือนการขอ Certificate ที่จะมีลิงก์ที่ให้กดยืนยันอยู่ภายในเมล์ (ตำแหน่งด้านล่าง)
+
+![](https://static.byteside.one/media/2022/02/08093803/Screenshot-2021-07-06-at-16.13.23.webp)
+
+หลังจากที่กดลิงก์ด้านล่างก็จะถูก redirect มาที่หน้าเว็บดังนี้ครับ ให้เพื่อนๆ ทำการกด ‘I Approve’ ด้านล่างเพื่อดำเนินการต่อได้เลย
+
+![](https://static.byteside.one/media/2022/02/08093815/Screenshot-2021-07-06-at-16.14.12.webp)
+
+### ยืนยันการอนุมัติใช้งาน Certificate
+
+และหลังจากที่เพื่อนๆ ได้ทำการยืนยันแล้ว ในช่อง Status ก็จะเขียนคำว่า ‘Issued’ และเราก็จะสามารถนำ Certificate นี้ไปใช้งานได้ครับ
+
+![](https://static.byteside.one/media/2022/02/08093555/Screenshot-2021-07-06-at-16.15.33.webp)
+
+## ตั้งค่าการใช้ Custom SSL Certificate
+
+หากว่าเพื่อนๆ ยังไม่ได้ทำการตั้งค่า (หรือตั้งไปแล้ว) ตัว Distributions ก็สามารถเพิ่ม SSL Certificate ภายหลังได้ โดยการเข้าไปที่หัวข้อ SSL Certificate และที่ตัวเลือก ‘Custom SSL Certificate (example.com)’ และเลือก SSL Certificate ที่เราสร้างขึ้นในขั้นตอนที่แล้ว
+
+![](https://static.byteside.one/media/2022/02/08093654/Screenshot-2021-07-13-at-17.44.25.webp)
+
+คำแนะนำ : หากว่ายังไม่ขึ้นอาจจะเพราะว่าสถานะ SSL Certificate ยังไม่ได้รับการอนุมัติ หรือ สร้าง Certificate ใน region อื่นนั่นเอง วิธีการแก้ไขการทำผิด Region ก็คือการเข้าไปที่ปุ่ม ‘Request or Import a Certificate with ACM’ และสร้าง Certificate อีกครั้ง
+
+## เชื่อมต่อมาที่ CloudFront ให้ครบลูป
+
+เพื่อให้เราสามารถเข้า URL จาก Domain ที่เราตั้งค่าเอาไว้ให้เพื่อนๆ ทำการตั้งค่า DNS ใน Domain โดยตั้ง CNAME โยงไปที่ Distribution URL (หรือช่อง ‘Domain name’) บน CloudFront (ที่ลงท้ายด้วย .cloudfront.net) ดังภาพครับ ซึ่งก็จะต้องตรงกันกับ Alternative Name ที่เราตั้งเอาไว้ใน Distribution บนช่อง ‘Alternate Name’
+
+![](https://static.byteside.one/media/2022/02/08093631/Screenshot-2021-07-13-at-16.49.26.webp)
+
+### แก้ไข Custom Domain (CNAME)
+
+ให้เพื่อนๆ ทำการเปิดการตั้งค่า Custom Domain (CNAME) และพิมพ์ Custom Domain Name ที่เราจะใช้ครับ โดยในตัวเลือกอื่นอย่าง ‘Rewrite Media URLs’ และ ‘Force HTTPS’ นั้นเราก็สามารถทำการติ้กได้หลังจากที่เราทำการตั้งค่าทุกอย่างสำเร็จแล้วครับ
+
+![](https://static.byteside.one/media/2022/02/08093501/Screenshot-2021-07-13-at-16.04.15.webp)
+
+## สำเร็จ
+
+หลังจากเพิ่ม Certificate แล้วก็อาจจะต้องให้ CloudFront ทำการประมวลผลซักพักหนึ่ง ไม่นานมาก และเราก็จะได้มากับรูปภาพที่มีการส่งมาแบบ HTTPS เรียบร้อย ที่มาพร้อมกับชื่อโดเมนที่เราตั้งเองอีกด้วย ในตอนต่อไปเราจะทำการสรุปกันแล้วครับว่าที่ผ่านมาทั้งหมด 5 ตอน เพื่อนๆ ได้อะไรจากการทำ WordPress บน AWS และพูดถึงเรื่องของการประหยัดด้านทรัพยากรเงินและรวมไปถึงเซิฟเวอร์ ว่าจะมีประสิทธิภาพในอนาคตมากขนาดไหน ส่วนตอนนี้ก็ต้องขอลาไปก่อน สวัสดีครับ
+
+---
+
+###### ข้อมูลอ้างอิง
+
+-   [Routing traffic to an Amazon CloudFront web distribution by using your domain name – Amazon Web Service](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-to-cloudfront-distribution.html)
+-   [Choosing between alias and non-alias records – Amazon Web Service](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/resource-record-sets-choosing-alias-non-alias.html)

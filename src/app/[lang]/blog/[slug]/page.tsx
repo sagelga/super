@@ -1,26 +1,24 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import PostContent from "@/components/blog/PostContent";
+import { getBlogPosts, getContentBySlug, getAuthors } from "@/lib/content";
+import {
+    generateBlogPostingJsonLd,
+    generateBreadcrumbJsonLd,
+    extractTableOfContents,
+    estimateReadingTime,
+} from "@/lib/seo";
+import MdxRenderer from "@/components/content/MdxRenderer";
 import PostHeader from "@/components/blog/PostHeader";
-import type { Post } from "@/types";
-import { formatDate } from "@/utils/formatDate";
+import TableOfContents from "@/components/content/TableOfContents";
 
-const baseUrl = "https://sagelga.com";
-const languages = ["en", "th", "zh"];
+const BASE_URL = "https://sagelga.com";
+const LOCALES = ["en", "th", "zh"];
 
-async function getPost(slug: string): Promise<Post | null> {
-    try {
-        const res = await fetch(
-            `https://superbrain.sagelga.workers.dev/api/posts/${slug}`,
-        );
-        if (!res.ok) {
-            return null;
-        }
-        return res.json();
-    } catch (error) {
-        console.error("Failed to fetch post:", error);
-        return null;
-    }
+export async function generateStaticParams() {
+    const posts = getBlogPosts();
+    return LOCALES.flatMap((lang) =>
+        posts.map((post) => ({ lang, slug: post.slug })),
+    );
 }
 
 export async function generateMetadata({
@@ -28,53 +26,55 @@ export async function generateMetadata({
 }: {
     params: Promise<{ slug: string; lang?: string }>;
 }): Promise<Metadata> {
-    const { slug } = await params;
-    const post = await getPost(slug);
+    const { slug, lang } = await params;
+    const item = getContentBySlug("blog", [slug]);
+    if (!item) return { title: "Post Not Found" };
 
-    if (!post) {
-        return {
-            title: "Post Not Found",
-        };
-    }
-
-    const languagesAlternates = Object.fromEntries(
-        languages.map((l) => {
-            const prefix = l === "th" ? "" : `/${l}`;
-            return [l, `${baseUrl}${prefix}/blog/${slug}`];
-        }),
-    );
+    const fm = item.frontmatter as {
+        title?: string;
+        description?: string;
+        image?: string;
+        date?: string;
+        tags?: string[];
+        authors?: string[];
+    };
+    const title = fm.title || "Blog Post";
+    const description = fm.description || "";
+    const image = fm.image || `${BASE_URL}/og-image.png`;
+    const locale = lang ?? "th";
+    const langPrefix = (l: string) => (l === "th" ? "" : `/${l}`);
+    const canonical = `${BASE_URL}/blog/${slug}`;
 
     return {
-        title: post.title,
-        description: post.excerpt,
+        title,
+        description,
         authors: [{ name: "Kunanon Srisuntiroj" }],
         openGraph: {
-            title: post.title,
-            description: post.excerpt,
-            url: `${baseUrl}/blog/${slug}`,
-            siteName: "Kunanon Srisuntiroj Portfolio",
-            images: [
-                {
-                    url: post.feature_image || "/og-image.png",
-                    width: 1200,
-                    height: 630,
-                    alt: post.title,
-                },
-            ],
+            title,
+            description,
+            url: canonical,
             type: "article",
-            publishedTime: post.published_at,
+            publishedTime: fm.date,
             authors: ["Kunanon Srisuntiroj"],
-            tags: post.primary_tag?.name ? [post.primary_tag.name] : [],
+            tags: fm.tags,
+            images: [{ url: image, width: 1200, height: 630, alt: title }],
+            locale:
+                locale === "th" ? "th_TH" : locale === "zh" ? "zh_CN" : "en_US",
         },
         twitter: {
             card: "summary_large_image",
-            title: post.title,
-            description: post.excerpt,
-            images: [post.feature_image || "/og-image.png"],
+            title,
+            description,
+            images: [image],
         },
         alternates: {
-            canonical: `${baseUrl}/blog/${slug}`,
-            languages: languagesAlternates,
+            canonical,
+            languages: Object.fromEntries(
+                LOCALES.map((l) => [
+                    l,
+                    `${BASE_URL}${langPrefix(l)}/blog/${slug}`,
+                ]),
+            ),
         },
     };
 }
@@ -84,21 +84,75 @@ export default async function PostPage({
 }: {
     params: Promise<{ slug: string; lang?: string }>;
 }) {
-    const { slug } = await params;
-    const post = await getPost(slug);
+    const { slug, lang } = await params;
+    const item = getContentBySlug("blog", [slug]);
+    if (!item) notFound();
 
-    if (!post) {
-        notFound();
-    }
+    const fm = item.frontmatter as {
+        title?: string;
+        description?: string;
+        image?: string;
+        date?: string;
+        tags?: string[];
+        authors?: string[];
+    };
+    const authorData = getAuthors();
+    const toc = extractTableOfContents(item.source);
+    const readingTime = estimateReadingTime(item.source);
+    const wordCount = item.source.split(/\s+/).length;
+
+    const blogJsonLd = generateBlogPostingJsonLd({
+        slug,
+        title: fm.title || "",
+        description: fm.description || "",
+        date: fm.date || "",
+        tags: fm.tags,
+        image: fm.image,
+        wordCount,
+    });
+    const breadcrumbJsonLd = generateBreadcrumbJsonLd([
+        { name: "Home", href: "/" },
+        { name: "Blog", href: "/blog" },
+        { name: fm.title || slug, href: `/blog/${slug}` },
+    ]);
 
     return (
-        <article className="container mx-auto px-4 py-8">
-            <PostHeader
-                title={post.title}
-                date={formatDate(post.published_at)}
-                category={post.primary_tag?.name || "General"}
+        <>
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(blogJsonLd) }}
             />
-            <PostContent content={post.content} />
-        </article>
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{
+                    __html: JSON.stringify(breadcrumbJsonLd),
+                }}
+            />
+
+            <div className="container mx-auto px-8 py-12 lg:px-16">
+                <div className="flex gap-12">
+                    <article className="max-w-3xl min-w-0 flex-1">
+                        <PostHeader
+                            title={fm.title || slug}
+                            date={fm.date || ""}
+                            tags={fm.tags}
+                            image={fm.image}
+                            readingTime={readingTime}
+                            authors={fm.authors}
+                            authorData={authorData}
+                            locale={lang ?? "en"}
+                        />
+                        <MdxRenderer source={item.source} />
+                    </article>
+                    {toc.length >= 2 && (
+                        <aside className="hidden w-56 shrink-0 xl:block">
+                            <div className="sticky top-24">
+                                <TableOfContents items={toc} />
+                            </div>
+                        </aside>
+                    )}
+                </div>
+            </div>
+        </>
     );
 }
