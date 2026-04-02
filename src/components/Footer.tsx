@@ -44,13 +44,22 @@ const Footer: React.FC = () => {
         {
             title: t("nav.home"),
             links: [
-                { name: t("nav.home"), href: "/" },
-                { name: t("footer.sitemap.about"), href: "/#about" },
-                { name: t("footer.sitemap.skills"), href: "/#skills" },
-                { name: t("nav.experience"), href: "/#experience" },
+                { name: t("nav.home"), href: `${langPrefix}/` },
+                {
+                    name: t("footer.sitemap.about"),
+                    href: `${langPrefix}/#about`,
+                },
+                {
+                    name: t("footer.sitemap.skills"),
+                    href: `${langPrefix}/#skills`,
+                },
+                {
+                    name: t("nav.experience"),
+                    href: `${langPrefix}/#experience`,
+                },
                 {
                     name: t("nav.certifications"),
-                    href: "/#certifications",
+                    href: `${langPrefix}/#certifications`,
                 },
             ],
         },
@@ -111,7 +120,10 @@ const Footer: React.FC = () => {
                 <div className="footer-container container mx-auto px-8 lg:px-16">
                     <div className="footer-top">
                         <div className="footer-brand">
-                            <Link href="/" className="footer-logo-text">
+                            <Link
+                                href={`${langPrefix}/`}
+                                className="footer-logo-text"
+                            >
                                 {t("navbar.name")}
                             </Link>
                             <p className="footer-tagline">

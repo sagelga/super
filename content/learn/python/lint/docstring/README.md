@@ -7,7 +7,7 @@
 
 Reference : [https://github.com/google/styleguide/blob/gh-pages/pyguide.md#38-comments-and-docstrings](https://github.com/google/styleguide/blob/gh-pages/pyguide.md#38-comments-and-docstrings)
 
-และอันนี้ก็เป็นตัวอย่าง Docstring ที่เขียนไว้อยู่ระหว่างฟังก์ชั่น<br>
+และอันนี้ก็เป็นตัวอย่าง Docstring ที่เขียนไว้อยู่ระหว่างฟังก์ชั่น<br />
 โดยฟังก์ชั่นนี้มีเป้าหมายในการแปลงคะแนนเต็ม 100 (คะแนนดิบ) ไปเป็นเกรด ที่มีค่าระหว่าง 0.0 ถึง 4.0
 ```python
 def gpa_calculator(first_name, raw_score):

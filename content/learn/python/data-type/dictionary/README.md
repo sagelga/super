@@ -100,7 +100,7 @@ my_dict['kumamon'] = 12
 del my_dict['Kumamon']
 ```
 
-มันก็จะทำการลบค่า Key + Value ที่ Key มีค่าเท่ากับ 'Kumamon' ออกไป<br>
+มันก็จะทำการลบค่า Key + Value ที่ Key มีค่าเท่ากับ 'Kumamon' ออกไป<br />
 เหมือนกับว่ามันไม่เคยเกิดขึ้นมาก่อนเลย
 
 ### ลบค่าทุกตัวออกจาก Dictionary
@@ -130,7 +130,7 @@ NameError: name 'mydict' is not defined
 ---
 
 ## เช็คค่า Keys และ Values ที่อยู่ใน Dictionary
-น้องๆสามารถใช้ `.keys()` สำหรับการดูค่า keys ทั้งหมดใน Dictionary<br>
+น้องๆสามารถใช้ `.keys()` สำหรับการดูค่า keys ทั้งหมดใน Dictionary<br />
 และใช้ `.values()` เพื่อดูค่า values ทั้งหมดใน Dictionary
 
 ตัวอย่างการใช้งาน

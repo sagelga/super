@@ -7,7 +7,7 @@
         "other_posts_title": "บทความอื่นๆ",
         "previous_button": "ก่อนหน้า",
         "next_button": "ถัดไป",
-        "page_of": "หน้า {{currentPage}} จาก {{totalPages}}",
+        "page_of": "หน้า {currentPage} จาก {totalPages}",
         "no_posts_found": "ไม่พบบทความ",
         "all_categories": "ทั้งหมด",
         "table_of_contents": "สารบัญ",

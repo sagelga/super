@@ -1,9 +1,9 @@
 # Class & Object
-In the word **object**, it is like a features in a single item. <br>
-Like, printer for example. Printers can `scan` and `print` and `copy`. These are called objects <br>
+In the word **object**, it is like a features in a single item. <br />
+Like, printer for example. Printers can `scan` and `print` and `copy`. These are called objects <br />
 and printers is called **class**.
 
-Class can have many objects. Unlimted is another word.<br>
+Class can have many objects. Unlimted is another word.<br />
 But to use a object and functions inside a object is another part.
 
 Let's try creating a new class!

@@ -43,7 +43,7 @@ Margining the datatypes or constraints is not required by SQL compiler, but we d
 
 ## Create `PRIMARY KEY` constraints
 ### Example One
-Create a table `Employees` with following columns and data types.<br>
+Create a table `Employees` with following columns and data types.<br />
 This time, we choose `id` attribute as the table Primary Key.
 
 | Name       | Data Type    | PK                      | AI  | UQ  | NN  | FK  | Ref. FK |
@@ -69,7 +69,7 @@ Table constraint name is not required to be in format. You will have to remember
 :::
 
 ### Example Two
-Create a table `Employees` with following columns and data types.<br>
+Create a table `Employees` with following columns and data types.<br />
 This time, we choose `id` **and** `first_name` attribute as the table Primary Key (As a Composite Primary Key)
 
 | Name       | Data Type    | PK                      | AI  | UQ  | NN  | FK  | Ref. FK |
@@ -96,7 +96,7 @@ Similar to Primary Key, but we have to point the Foreign Key to another table at
 ### Example One
 Create a table `Employees` with following columns and data types.
 
-This time, `workplace_id` attribute is created to let employees know that which `Workplace` are they in by connecting it to `id` attribute (`Workplace` mandatory one---optional many `Employees`)<br>
+This time, `workplace_id` attribute is created to let employees know that which `Workplace` are they in by connecting it to `id` attribute (`Workplace` mandatory one---optional many `Employees`)<br />
 But they requires another key (`id`) to identify each employee. Which generates composite key.
 
 So this is how `Employees` table are designed.
@@ -155,7 +155,7 @@ by adding these constraints, the row will delete safely (able to delete normally
 
 ## Adding `NOT NULL` constraints
 ### Example One
-Create a table `Employees` with following columns and data types.<br>
+Create a table `Employees` with following columns and data types.<br />
 This time, we choose `id` attribute as the table Primary Key.
 
 | Name       | Data Type    | PK                      | AI  | UQ  | NN                      | FK  | Ref. FK |
@@ -181,8 +181,8 @@ CREATE TABLE Employees (
 Adding a unique constraint will force new entries to have different unique value. Primary key is unique as a default.
 
 ### Example One
-Create a table `Employees` with following columns and data types.<br>
-We choose `id` attribute as the table Primary Key.<br>
+Create a table `Employees` with following columns and data types.<br />
+We choose `id` attribute as the table Primary Key.<br />
 and let the `first_name` attribute to be unique.
 
 | Name       | Data Type    | PK                      | AI  | UQ                      | NN  | FK  | Ref. FK |
@@ -205,8 +205,8 @@ CREATE TABLE Employees (
 ```
 
 ### Example Two
-Create a table `Employees` with following columns and data types.<br>
-We choose `id` attribute as the table Primary Key.<br>
+Create a table `Employees` with following columns and data types.<br />
+We choose `id` attribute as the table Primary Key.<br />
 and let the `first_name` **and** `last_name` attribute to be unique (as composite unique constraint).
 
 | Name       | Data Type    | PK                      | AI  | UQ                                        | NN  | FK  | Ref. FK |
@@ -229,8 +229,8 @@ CREATE TABLE Employees (
 ```
 
 ### Example Three
-Create a table `Employees` with following columns and data types.<br>
-We choose `id` attribute as the table Primary Key.<br>
+Create a table `Employees` with following columns and data types.<br />
+We choose `id` attribute as the table Primary Key.<br />
 and let the `first_name`, `last_name` attribute to be **individually** unique.
 
 | Name       | Data Type    | PK                      | AI  | UQ                      | NN  | FK  | Ref. FK |
@@ -254,10 +254,10 @@ CREATE TABLE Employees (
 ```
 
 ::: danger
-Composite unique and 2 individual unique are not the same.<br>
+Composite unique and 2 individual unique are not the same.<br />
 Composite unique requires `first_name` **and** `last_name` to be the same to reject the input. As shown in comparison below.
 
-| Input<br>(as `first_name` and `last_name`) | 2 Individual Unique Constraint | Composite Unique Constraint |
+| Input<br />(as `first_name` and `last_name`) | 2 Individual Unique Constraint | Composite Unique Constraint |
 | ------------------------------------------ | ------------------------------ | --------------------------- |
 | **Sam** Smith, **Sam** Mercury, Jeff Sam   | :x:                            | :o:                         |
 | **Sam Smith**, **Sam Smith**, Sam Sam      | :x:                            | :x:                         |

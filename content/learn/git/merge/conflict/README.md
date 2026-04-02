@@ -35,7 +35,7 @@ print("hello myself")
 >>>>>>> feature/printer
 ```
 
-หมายความว่า HEAD มีโค้ดเขียนว่า `print("hello world")`<br>
+หมายความว่า HEAD มีโค้ดเขียนว่า `print("hello world")`<br />
 และ feature/printer มีโค้ดเขียนว่า `print("hello myself")`
 
 ## วิธีการแก้ไข

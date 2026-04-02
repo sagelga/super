@@ -15,9 +15,9 @@
 
 
 ## Hypothesis
-|           | Row Effect<br>ตัวแปร A มีความเกี่ยวข้องกัน | Column Effect<br>ตัวแปร B มีความเกี่ยวข้องกัน | Interaction Effect<br>ตัวแปร A+B เมื่อเจอกันทำให้เกี่ยวข้อง |
+|           | Row Effect<br />ตัวแปร A มีความเกี่ยวข้องกัน | Column Effect<br />ตัวแปร B มีความเกี่ยวข้องกัน | Interaction Effect<br />ตัวแปร A+B เมื่อเจอกันทำให้เกี่ยวข้อง |
 | --------- | ------------------------------------------ | --------------------------------------------- | ----------------------------------------------------------- |
-| Null      | Row mean เท่ากันทั้งหมด                    | Column mean เท่ากันทั้งหมด                    | Interaction Effect เท่ากับ 0 <br>(ไม่มี Interaction Effect) |
+| Null      | Row mean เท่ากันทั้งหมด                    | Column mean เท่ากันทั้งหมด                    | Interaction Effect เท่ากับ 0 <br />(ไม่มี Interaction Effect) |
 | Alternate | Row mean ซักอันแตกต่าง                     | Column mean ซักอันแตกต่าง                     | มี Interaction Effect อยู่                                  |
 
 โดยที่ Row หรือ/และ Column ก็ไม่สามารถอธิบายว่าถ้าเอา Row มารวมกับ Column แล้วจะไม่มีผล

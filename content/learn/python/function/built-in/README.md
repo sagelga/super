@@ -1,5 +1,5 @@
 # ฟังก์ชัน Built-in
-In Python, we have a function that calculate the product built-in to python. <br>
+In Python, we have a function that calculate the product built-in to python. <br />
 See it all here : [https://docs.python.org/3/library/functions.html](https://docs.python.org/3/library/functions.html)
 
 การที่จะตั้งชื่อฟังก์ชั่นนั้นไม่ได้ตั้งชื่ออะไรก็ได้นะครับ โดยชื่อฟังก์ชั่นที่ Python จองไว้ไม่ให้ตั้งชื่อเหมือน จะมีดังนี้ครับ
@@ -112,7 +112,7 @@ pow(2, 3, 2) # Returns 0 (as 2**3 % 2)
 ```
 
 ### Using round()
-Returns a number that will be rounded up (if >= .5) or round down (if < .5) <br>
+Returns a number that will be rounded up (if >= .5) or round down (if < .5) <br />
 If you want to forced round up or round down, You can use math library to help
 ```python
 How to use
@@ -124,8 +124,8 @@ round(12.153, 2) # Returns 12.15
 ```
 
 ### Using sorted()
-Returns a arrays of values that have been sorted, pending on their value types <br>
-Parameter reverse is when you want to sort in descending order <br>
+Returns a arrays of values that have been sorted, pending on their value types <br />
+Parameter reverse is when you want to sort in descending order <br />
 Parameter key is when you want to sort dictionary using only some data to determine
 ```python
 How to use
@@ -152,6 +152,6 @@ float(number) # Returns 12.0
 number = 12.55
 int(number) # Returns 12
 ```
-chr() convert value to string type (if possible) <br>
-float() convert value to float type (if possible) <br>
+chr() convert value to string type (if possible) <br />
+float() convert value to float type (if possible) <br />
 int() convert value to integer type (if possible)

@@ -7,7 +7,7 @@
         "other_posts_title": "其他文章",
         "previous_button": "上一页",
         "next_button": "下一页",
-        "page_of": "第 {{currentPage}} 页，共 {{totalPages}} 页",
+        "page_of": "第 {currentPage} 页，共 {totalPages} 页",
         "no_posts_found": "未找到博客文章。",
         "all_categories": "全部",
         "table_of_contents": "目录",

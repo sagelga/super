@@ -7,7 +7,7 @@
         "other_posts_title": "Other Posts",
         "previous_button": "Previous",
         "next_button": "Next",
-        "page_of": "Page {{currentPage}} of {{totalPages}}",
+        "page_of": "Page {currentPage} of {totalPages}",
         "no_posts_found": "No blog posts found.",
         "all_categories": "All",
         "table_of_contents": "Table of Contents",

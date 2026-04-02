@@ -11,7 +11,7 @@ SAVEPOINT <savepoint_name>
     ROLLBACK TO SAVEPOINT <savepoint_name>
 
 ## Transaction Log
-เก็บว่ามีการเปลี่ยนแปลงอะไรบ้างระหว่างการรอ COMMIT หรือ REVERT<br>
+เก็บว่ามีการเปลี่ยนแปลงอะไรบ้างระหว่างการรอ COMMIT หรือ REVERT<br />
 ผู้ใช้จะต้องทำการ COMMIT เพื่อเก็บข้อมูลใหม่ โดยที่ DBMS จะทำการ lock database ที่มีการเปลี่ยนแปลง เพื่อรอให้คนที่แก้ ทำการ COMMIT
 
 ผู้ใช้คนอื่นจะยังไม่เห็นการเปลี่ยนแปลงของ database หากผู้ใช้ยังไม่ทำการ COMMIT

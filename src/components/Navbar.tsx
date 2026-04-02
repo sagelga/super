@@ -2,11 +2,13 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import ConnectModal from "./ConnectModal";
 
 const Navbar: React.FC = () => {
     const t = useTranslations("common");
+    const lang = useLocale();
+    const p = (path: string) => (lang === "th" ? path : `/${lang}${path}`);
     const [isHomeMenuOpen, setIsHomeMenuOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
     const [showConnect, setShowConnect] = useState(false);
@@ -39,7 +41,7 @@ const Navbar: React.FC = () => {
             <div className="container mx-auto flex h-16 items-center justify-between px-8 lg:px-16">
                 {/* Logo */}
                 <Link
-                    href="/"
+                    href={p("/")}
                     className="font-sans text-sm tracking-[0.15em] text-cream uppercase transition-colors duration-200 hover:text-accent"
                 >
                     {t("navbar.name")}
@@ -59,7 +61,7 @@ const Navbar: React.FC = () => {
                         }}
                     >
                         <Link
-                            href="/"
+                            href={p("/")}
                             aria-haspopup="true"
                             aria-expanded={isHomeMenuOpen}
                             className="text-sm tracking-wide text-muted transition-colors duration-200 hover:text-cream"
@@ -69,25 +71,25 @@ const Navbar: React.FC = () => {
                         {isHomeMenuOpen && (
                             <div className="absolute top-full left-1/2 mt-2 min-w-[180px] -translate-x-1/2 border border-rim bg-surface py-2 shadow-xl">
                                 <Link
-                                    href="/home/experience"
+                                    href={p("/home/experience")}
                                     className="block px-5 py-2 text-sm tracking-wide text-muted transition-colors duration-150 hover:bg-canvas hover:text-accent"
                                 >
                                     {t("nav.experience")}
                                 </Link>
                                 <Link
-                                    href="/home/certifications"
+                                    href={p("/home/certifications")}
                                     className="block px-5 py-2 text-sm tracking-wide text-muted transition-colors duration-150 hover:bg-canvas hover:text-accent"
                                 >
                                     {t("nav.certifications")}
                                 </Link>
                                 <Link
-                                    href="/home/projects"
+                                    href={p("/home/projects")}
                                     className="block px-5 py-2 text-sm tracking-wide text-muted transition-colors duration-150 hover:bg-canvas hover:text-accent"
                                 >
                                     {t("nav.projects")}
                                 </Link>
                                 <Link
-                                    href="/home/volunteering"
+                                    href={p("/home/volunteering")}
                                     className="block px-5 py-2 text-sm tracking-wide text-muted transition-colors duration-150 hover:bg-canvas hover:text-accent"
                                 >
                                     {t("nav.volunteering")}
@@ -96,25 +98,25 @@ const Navbar: React.FC = () => {
                         )}
                     </div>
                     <Link
-                        href="/blog"
+                        href={p("/blog")}
                         className="text-sm tracking-wide text-muted transition-colors duration-200 hover:text-cream"
                     >
                         {t("nav.blog")}
                     </Link>
                     <Link
-                        href="/gallery"
+                        href={p("/gallery")}
                         className="text-sm tracking-wide text-muted transition-colors duration-200 hover:text-cream"
                     >
                         {t("nav.gallery")}
                     </Link>
                     <Link
-                        href="/learn"
+                        href={p("/learn")}
                         className="text-sm tracking-wide text-muted transition-colors duration-200 hover:text-cream"
                     >
                         {t("nav.learn")}
                     </Link>
                     <Link
-                        href="/docs"
+                        href={p("/docs")}
                         className="text-sm tracking-wide text-muted transition-colors duration-200 hover:text-cream"
                     >
                         {t("nav.docs")}
@@ -184,7 +186,7 @@ const Navbar: React.FC = () => {
                 {/* Drawer header */}
                 <div className="flex h-16 flex-shrink-0 items-center justify-between border-b border-rim px-8">
                     <Link
-                        href="/"
+                        href={p("/")}
                         className="font-sans text-sm tracking-[0.15em] text-cream uppercase"
                         onClick={() => setIsMobileMenuOpen(false)}
                     >
@@ -237,28 +239,28 @@ const Navbar: React.FC = () => {
                         {isHomeMenuOpen && (
                             <div className="flex flex-col gap-1 pb-2 pl-4">
                                 <Link
-                                    href="/home/experience"
+                                    href={p("/home/experience")}
                                     className="block py-2 text-sm tracking-wide text-muted transition-colors duration-150 hover:text-accent"
                                     onClick={() => setIsMobileMenuOpen(false)}
                                 >
                                     {t("nav.experience")}
                                 </Link>
                                 <Link
-                                    href="/home/certifications"
+                                    href={p("/home/certifications")}
                                     className="block py-2 text-sm tracking-wide text-muted transition-colors duration-150 hover:text-accent"
                                     onClick={() => setIsMobileMenuOpen(false)}
                                 >
                                     {t("nav.certifications")}
                                 </Link>
                                 <Link
-                                    href="/home/projects"
+                                    href={p("/home/projects")}
                                     className="block py-2 text-sm tracking-wide text-muted transition-colors duration-150 hover:text-accent"
                                     onClick={() => setIsMobileMenuOpen(false)}
                                 >
                                     {t("nav.projects")}
                                 </Link>
                                 <Link
-                                    href="/home/volunteering"
+                                    href={p("/home/volunteering")}
                                     className="block py-2 text-sm tracking-wide text-muted transition-colors duration-150 hover:text-accent"
                                     onClick={() => setIsMobileMenuOpen(false)}
                                 >
@@ -268,28 +270,28 @@ const Navbar: React.FC = () => {
                         )}
                     </div>
                     <Link
-                        href="/blog"
+                        href={p("/blog")}
                         className="block py-3 text-sm tracking-wide text-muted transition-colors duration-200 hover:text-cream"
                         onClick={() => setIsMobileMenuOpen(false)}
                     >
                         {t("nav.blog")}
                     </Link>
                     <Link
-                        href="/gallery"
+                        href={p("/gallery")}
                         className="block py-3 text-sm tracking-wide text-muted transition-colors duration-200 hover:text-cream"
                         onClick={() => setIsMobileMenuOpen(false)}
                     >
                         {t("nav.gallery")}
                     </Link>
                     <Link
-                        href="/learn"
+                        href={p("/learn")}
                         className="block py-3 text-sm tracking-wide text-muted transition-colors duration-200 hover:text-cream"
                         onClick={() => setIsMobileMenuOpen(false)}
                     >
                         {t("nav.learn")}
                     </Link>
                     <Link
-                        href="/docs"
+                        href={p("/docs")}
                         className="block py-3 text-sm tracking-wide text-muted transition-colors duration-200 hover:text-cream"
                         onClick={() => setIsMobileMenuOpen(false)}
                     >

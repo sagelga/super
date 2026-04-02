@@ -16,18 +16,18 @@ There should be *only* one Primary Key (or use Foreign Key) in the table as [Sec
 ## Surrogate Key (Replacement Key)
 When there is no attribute that is good enough to be a key (For example, `first_name` cannot explains `salary`, so the `first_name` should not be a Primary Key). Replacement key is generated.
 
-Surrogate key is an attribute that **is born to be** Primary Key.<br>
+Surrogate key is an attribute that **is born to be** Primary Key.<br />
 and use *automatic increment* constraint for easier management.
 
 Mostly a system-generated key and have a property of Primary Key
 
 ::: warning
-Create a surrogate key when there is no attribute that is a good key.<br>
+Create a surrogate key when there is no attribute that is a good key.<br />
 If there is an attribute that is good enough already, don't create surrogate key.
 :::
 
 ## Automatic Incremental (AI)
-For use with Primary Key.<br>
+For use with Primary Key.<br />
 Will create new value of primary key (for example 1, 2, 3, 4) to make Primary Key remains Unique and Not Null
 
 ## Unique (UQ) + Not Null (NN)

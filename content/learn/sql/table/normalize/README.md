@@ -8,7 +8,7 @@
 ## สรุปการทำ Normalization
 | Normal Form | Criteria Test                                                               | Normalization                                                                                                                                                                                 |
 | ----------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 1NF         | - ไม่มี multivalued atttibutes<br>- ไม่มี composite attributes                  | สร้างรีเลชันสำหรับแต่ละ multivalued atttibutes โดยใช้ primary key ในรีเลชันเดิม เป็น primary key ร่วมกับในรีเลชันใหม่ ในกรณีมี composite attribute ให้แตก composite attributes เป็น single attributes อยู่ในรีเลชันนั้น |
+| 1NF         | - ไม่มี multivalued atttibutes<br />- ไม่มี composite attributes                  | สร้างรีเลชันสำหรับแต่ละ multivalued atttibutes โดยใช้ primary key ในรีเลชันเดิม เป็น primary key ร่วมกับในรีเลชันใหม่ ในกรณีมี composite attribute ให้แตก composite attributes เป็น single attributes อยู่ในรีเลชันนั้น |
 | 2NF         | - ไม่มี Non-key ใดๆ ขึ้นอยู่กับ Partial Key ในตารางที่ Composite Key เป็น Primary Key | แตกรีเลชัน และสร้างรีเลชันใหม่สำหรับแต่ละ partial key กับ attribute ที่ partial key นั้น determine โดยที่ในรีเลชันเดิมยังคงมีแอตทริบิวต์ที่เป็น partial key อยู่                                                           |
 | 3NF         | - ไม่มี Non-Key Attribute อธิบาย Non-Key Attribute อื่น                          | ต้องแตกรีเลชัน และสร้างรีเลชันใหม่ที่ประกอบด้วยแอตทริบิวต์ nonkey ที่มีความสัมพันธ์กัน โดยมี determinant เป็น primary key (คง FK ในรีเลชันเดิม)                                                                        |
 | BCNF        | - ไม่มี Non-Key Attribute อธิบาย Partial key                                   | ต้องแตกรีเลชัน และสร้างรีเลชันใหม่ที่ประกอบด้วยแอตทริบิวต์ nonkey นั้นๆ (ไปเป็น primary key ในรีเลชันใหม่) และ partial key ที่ถูก determine สำหรับรีเลชันเดิม ให้ใช้ nonkey นั้น ไปเป็น partial key แทนแอตทริบิวต์เดิม            |
@@ -19,7 +19,7 @@
 เป็นกลุ่ม attribute ที่ไว้ใช้บอก tuple
 
 **Candidate Key (Key Attribute)**
-เป็น key ที่จะต้องใช้ เพื่ออธิบาย attribute<br>
+เป็น key ที่จะต้องใช้ เพื่ออธิบาย attribute<br />
 เป็นเหมือน Minimal Super Key
 
 **Prime Attribute**
