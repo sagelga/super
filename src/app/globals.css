@@ -163,11 +163,3 @@ a:focus-visible,
   outline: none;
 }
 
-/* Swiper overrides for pages that still use it */
-.swiper-button-next,
-.swiper-button-prev {
-  color: #C9943A !important;
-}
-.swiper-pagination-bullet-active {
-  background: #C9943A !important;
-}
