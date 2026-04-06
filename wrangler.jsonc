@@ -16,6 +16,13 @@
         "directory": ".open-next/assets",
         "binding": "ASSETS"
     },
+    "d1_databases": [
+        {
+            "binding": "DB",
+            "database_name": "super-auth",
+            "database_id": "b95d13f8-aca0-4962-b74c-e040d527a811"
+        }
+    ],
     "routes": [
     {
       "pattern": "sagelga.com",

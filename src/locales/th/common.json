@@ -62,6 +62,16 @@
         "title": "เลือกภาษา",
         "label": "เปลี่ยนภาษา"
     },
+    "contact": {
+        "eyebrow": "ติดต่อ",
+        "title": "มาคุยกัน",
+        "subtitle": "เปิดรับงานฟรีแลนซ์ ที่ปรึกษา และงานประจำ",
+        "available_label": "พร้อมรับงาน",
+        "email_label": "ส่งอีเมล",
+        "email_cta": "hello@sagelga.com",
+        "socials_heading": "ช่องทางอื่นๆ",
+        "response_note": "โดยปกติฉันจะตอบกลับภายใน 48 ชั่วโมง"
+    },
     "nav": {
         "home": "หน้าหลัก",
         "blog": "บล็อก",
@@ -69,6 +79,7 @@
         "learn": "เรียนรู้",
         "docs": "เอกสารประกอบ",
         "profiles": "ติดต่อ",
+        "contact": "ติดต่อ",
         "experience": "ประสบการณ์",
         "certifications": "ใบรับรอง",
         "projects": "โครงการ",

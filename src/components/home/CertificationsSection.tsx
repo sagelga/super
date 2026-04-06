@@ -31,6 +31,7 @@ const CertificationsSection: React.FC<CertificationsSectionProps> = ({
             id="certifications"
             title={t("certifications_section_title")}
             subtitle={`${certifications.length}`}
+            headingVariant="minimal"
             darkBg={true}
             spacing="compact"
         >

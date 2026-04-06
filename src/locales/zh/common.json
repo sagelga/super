@@ -62,6 +62,16 @@
         "title": "选择语言",
         "label": "切换语言"
     },
+    "contact": {
+        "eyebrow": "联系我",
+        "title": "一起合作吧",
+        "subtitle": "欢迎自由职业、咨询及全职合作机会。",
+        "available_label": "接受工作",
+        "email_label": "发送邮件",
+        "email_cta": "hello@sagelga.com",
+        "socials_heading": "其他平台",
+        "response_note": "我通常在 48 小时内回复。"
+    },
     "nav": {
         "home": "主页",
         "blog": "博客",
@@ -69,6 +79,7 @@
         "learn": "学习",
         "docs": "文档",
         "profiles": "联系",
+        "contact": "联系",
         "experience": "经验",
         "certifications": "认证",
         "projects": "项目",

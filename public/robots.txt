@@ -1,11 +1,69 @@
 User-agent: *
 Allow: /
 
+# Google
 User-agent: Googlebot
 Allow: /
 
+User-agent: Googlebot-Image
+Allow: /
+
+# OpenAI
 User-agent: ChatGPT-User
 Allow: /
 
 User-agent: GPTBot
 Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+# Anthropic / Claude
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+# Perplexity
+User-agent: PerplexityBot
+Allow: /
+
+# Common Crawl (used by many AI training datasets)
+User-agent: CCBot
+Allow: /
+
+# Apple
+User-agent: Applebot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+# Meta
+User-agent: Meta-ExternalAgent
+Allow: /
+
+User-agent: FacebookBot
+Allow: /
+
+# Microsoft / Bing
+User-agent: bingbot
+Allow: /
+
+User-agent: msnbot
+Allow: /
+
+# Cohere
+User-agent: cohere-ai
+Allow: /
+
+# ByteDance
+User-agent: Bytespider
+Allow: /
+
+# Sitemap location
+Sitemap: https://sagelga.com/sitemap.xml

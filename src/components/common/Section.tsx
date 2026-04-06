@@ -40,10 +40,11 @@ const Section: React.FC<SectionProps> = ({
                     </div>
                 )}
                 {title && headingVariant === "minimal" && (
-                    <div className="mb-12">
-                        <p className="font-sans text-xs tracking-[0.15em] text-muted/60 uppercase">
+                    <div className="mb-10">
+                        <p className="font-sans text-xs tracking-[0.2em] text-muted/50 uppercase">
                             {title}
                         </p>
+                        <div className="h-px w-6 bg-rim mt-3" />
                     </div>
                 )}
                 {children}

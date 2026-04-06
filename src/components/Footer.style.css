@@ -1,3 +1,5 @@
+@import "../styles/design-tokens.css";
+
 .footer {
   background: var(--color-canvas, #1A1814);
   color: var(--color-muted, #9A9485);

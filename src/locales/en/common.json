@@ -62,6 +62,16 @@
         "title": "Select Language",
         "label": "Change Language"
     },
+    "contact": {
+        "eyebrow": "Get in touch",
+        "title": "Let's Connect",
+        "subtitle": "Open to freelance projects, consulting, and full-time opportunities.",
+        "available_label": "Available for work",
+        "email_label": "Send an email",
+        "email_cta": "hello@sagelga.com",
+        "socials_heading": "Find me on",
+        "response_note": "I typically respond within 48 hours."
+    },
     "nav": {
         "home": "Home",
         "blog": "Blog",
@@ -69,6 +79,7 @@
         "learn": "Learn",
         "docs": "Docs",
         "profiles": "Connect",
+        "contact": "Connect",
         "experience": "Experience",
         "certifications": "Certifications",
         "projects": "Projects",

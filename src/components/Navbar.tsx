@@ -3,16 +3,25 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { useLocale, useTranslations } from "next-intl";
+import { usePathname } from "next/navigation";
 import ConnectModal from "./ConnectModal";
 
 const Navbar: React.FC = () => {
     const t = useTranslations("common");
     const lang = useLocale();
+    const pathname = usePathname();
     const p = (path: string) => (lang === "th" ? path : `/${lang}${path}`);
     const [isHomeMenuOpen, setIsHomeMenuOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
     const [showConnect, setShowConnect] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+    // Determine active nav link based on pathname
+    const isHomeActive = pathname === p("/") || pathname === `/${lang}`;
+    const isBlogActive = pathname.includes("/blog");
+    const isGalleryActive = pathname.includes("/gallery");
+    const isLearnActive = pathname.includes("/learn");
+    const isDocsActive = pathname.includes("/docs");
 
     useEffect(() => {
         const handleScroll = () => setScrolled(window.scrollY > 40);
@@ -42,7 +51,7 @@ const Navbar: React.FC = () => {
                 {/* Logo */}
                 <Link
                     href={p("/")}
-                    className="font-sans text-sm tracking-[0.15em] text-cream uppercase transition-colors duration-200 hover:text-accent"
+                    className="font-sans text-sm tracking-[0.15em] text-cream uppercase transition-colors duration-200 hover:text-brand"
                 >
                     {t("navbar.name")}
                 </Link>
@@ -64,7 +73,11 @@ const Navbar: React.FC = () => {
                             href={p("/")}
                             aria-haspopup="true"
                             aria-expanded={isHomeMenuOpen}
-                            className="text-sm tracking-wide text-muted transition-colors duration-200 hover:text-cream"
+                            className={`text-sm tracking-wide transition-colors duration-200 ${
+                                isHomeActive
+                                    ? "border-b border-accent text-cream"
+                                    : "text-muted hover:text-cream"
+                            }`}
                         >
                             {t("nav.home")}
                         </Link>
@@ -99,33 +112,59 @@ const Navbar: React.FC = () => {
                     </div>
                     <Link
                         href={p("/blog")}
-                        className="text-sm tracking-wide text-muted transition-colors duration-200 hover:text-cream"
+                        className={`text-sm tracking-wide transition-colors duration-200 ${
+                            isBlogActive
+                                ? "border-b border-accent text-cream"
+                                : "text-muted hover:text-cream"
+                        }`}
                     >
                         {t("nav.blog")}
                     </Link>
                     <Link
                         href={p("/gallery")}
-                        className="text-sm tracking-wide text-muted transition-colors duration-200 hover:text-cream"
+                        className={`text-sm tracking-wide transition-colors duration-200 ${
+                            isGalleryActive
+                                ? "border-b border-accent text-cream"
+                                : "text-muted hover:text-cream"
+                        }`}
                     >
                         {t("nav.gallery")}
                     </Link>
                     <Link
                         href={p("/learn")}
-                        className="text-sm tracking-wide text-muted transition-colors duration-200 hover:text-cream"
+                        className={`text-sm tracking-wide transition-colors duration-200 ${
+                            isLearnActive
+                                ? "border-b border-accent text-cream"
+                                : "text-muted hover:text-cream"
+                        }`}
                     >
                         {t("nav.learn")}
                     </Link>
                     <Link
                         href={p("/docs")}
-                        className="text-sm tracking-wide text-muted transition-colors duration-200 hover:text-cream"
+                        className={`text-sm tracking-wide transition-colors duration-200 ${
+                            isDocsActive
+                                ? "border-b border-accent text-cream"
+                                : "text-muted hover:text-cream"
+                        }`}
                     >
                         {t("nav.docs")}
                     </Link>
-                    <button
-                        onClick={() => setShowConnect(true)}
-                        className="text-sm tracking-wide text-muted transition-colors duration-200 hover:text-cream"
+                    <Link
+                        href={p("/contact")}
+                        className={`text-sm tracking-wide transition-colors duration-200 ${
+                            pathname.includes("/contact")
+                                ? "border-b border-accent text-cream"
+                                : "text-muted hover:text-cream"
+                        }`}
                     >
-                        {t("nav.profiles")}
+                        {t("nav.contact")}
+                    </Link>
+                    <button
+                        disabled
+                        className="cursor-not-allowed bg-accent px-3 py-1 text-sm tracking-wide text-canvas opacity-60"
+                    >
+                        {t("nav.contact")}
                     </button>
                 </div>
 
@@ -299,16 +338,20 @@ const Navbar: React.FC = () => {
                     </Link>
                 </nav>
 
-                {/* Profiles button at bottom */}
-                <div className="flex-shrink-0 border-t border-rim px-8 py-6">
-                    <button
-                        onClick={() => {
-                            setShowConnect(true);
-                            setIsMobileMenuOpen(false);
-                        }}
-                        className="w-full py-2 text-left text-sm tracking-wide text-muted transition-colors duration-200 hover:text-cream"
+                {/* Profiles and auth buttons at bottom */}
+                <div className="flex-shrink-0 space-y-3 border-t border-rim px-8 py-6">
+                    <Link
+                        href={p("/contact")}
+                        className="block py-3 text-sm tracking-wide text-muted transition-colors duration-200 hover:text-cream"
+                        onClick={() => setIsMobileMenuOpen(false)}
                     >
-                        {t("nav.profiles")}
+                        {t("nav.contact")}
+                    </Link>
+                    <button
+                        disabled
+                        className="w-full cursor-not-allowed bg-accent px-3 py-2 text-left text-sm tracking-wide text-canvas opacity-60"
+                    >
+                        {t("nav.contact")}
                     </button>
                 </div>
             </div>

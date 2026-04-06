@@ -27,6 +27,7 @@ const VolunteeringSection: React.FC<VolunteeringSectionProps> = ({
     return (
         <Section
             title={t("volunteering_section_title")}
+            headingVariant="minimal"
             darkBg={false}
             spacing="generous"
         >

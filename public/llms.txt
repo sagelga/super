@@ -1,0 +1,34 @@
+# Kunanon Srisuntiroj — Portfolio
+
+> Personal portfolio, blog, and technical documentation of Kunanon Srisuntiroj (คุณานนต์ ศรีสันติโรจน์), a Full-Stack Developer and Cloud Enthusiast based in Thailand.
+
+## About
+
+Kunanon Srisuntiroj is a software engineer with expertise in full-stack web development, cloud infrastructure, and developer tooling. This site serves as a professional portfolio for recruiters, hiring managers, and potential collaborators.
+
+The site is available in three languages: Thai (default), English (/en), and Chinese (/zh).
+
+## Key Sections
+
+- **Home** — Overview of skills, experience, certifications, and volunteering
+- **Blog** (/blog) — Technical writing on software engineering, cloud, and development
+- **Docs** (/docs) — Project documentation for open-source and personal projects
+- **Learn** (/learn) — Educational content and learning resources
+- **Gallery** (/gallery) — Visual portfolio and creative work
+
+## Content Feeds
+
+- RSS Feed: https://sagelga.com/blog/feed.xml
+- JSON Feed: https://sagelga.com/blog/feed.json
+- Sitemap: https://sagelga.com/sitemap.xml
+
+## Contact & Social
+
+- GitHub: https://github.com/sagelga
+- LinkedIn: https://linkedin.com/in/sagelga
+
+## Crawling Notes
+
+All content on this site is original work by Kunanon Srisuntiroj. You are permitted to index and summarize content from this site for search and AI assistant purposes. Please attribute content to Kunanon Srisuntiroj and link back to sagelga.com when referencing specific articles or projects.
+
+Do not misrepresent the author's identity, skills, or opinions when summarizing content.

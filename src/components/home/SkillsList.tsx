@@ -55,27 +55,37 @@ const SkillsList: React.FC<SkillsListProps> = ({ skills }) => {
         <Section
             id="skills"
             title={t("skills_section_title")}
+            headingVariant="minimal"
             darkBg={false}
             spacing="compact"
         >
             <div
                 ref={ref}
-                className={`reveal space-y-4 ${isVisible ? "is-revealed" : ""}`}
+                className={`reveal space-y-6 ${isVisible ? "is-revealed" : ""}`}
             >
-                <div className="flex flex-wrap gap-2">
-                    {skills.core.map((skill, i) => (
-                        <SkillPill key={i} skill={skill} tier="core" />
-                    ))}
+                <div>
+                    <p className="mb-3 font-sans text-[10px] tracking-[0.3em] text-muted/40 uppercase">Core</p>
+                    <div className="flex flex-wrap gap-2">
+                        {skills.core.map((skill, i) => (
+                            <SkillPill key={i} skill={skill} tier="core" />
+                        ))}
+                    </div>
                 </div>
-                <div className="flex flex-wrap gap-2">
-                    {skills.proficient.map((skill, i) => (
-                        <SkillPill key={i} skill={skill} tier="proficient" />
-                    ))}
+                <div>
+                    <p className="mb-3 font-sans text-[10px] tracking-[0.3em] text-muted/40 uppercase">Proficient</p>
+                    <div className="flex flex-wrap gap-2">
+                        {skills.proficient.map((skill, i) => (
+                            <SkillPill key={i} skill={skill} tier="proficient" />
+                        ))}
+                    </div>
                 </div>
-                <div className="flex flex-wrap gap-2">
-                    {skills.familiar.map((skill, i) => (
-                        <SkillPill key={i} skill={skill} tier="familiar" />
-                    ))}
+                <div>
+                    <p className="mb-3 font-sans text-[10px] tracking-[0.3em] text-muted/40 uppercase">Familiar</p>
+                    <div className="flex flex-wrap gap-2">
+                        {skills.familiar.map((skill, i) => (
+                            <SkillPill key={i} skill={skill} tier="familiar" />
+                        ))}
+                    </div>
                 </div>
             </div>
         </Section>

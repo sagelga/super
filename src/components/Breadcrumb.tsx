@@ -26,6 +26,7 @@ const Breadcrumb: React.FC = () => {
         certifications: t("nav.certifications"),
         volunteering: t("nav.volunteering"),
         projects: t("nav.projects"),
+        contact: t("nav.contact"),
         "privacy-policy": t("nav.privacy_policy"),
         "terms-of-service": t("nav.terms_of_service"),
     };

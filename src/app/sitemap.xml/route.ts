@@ -10,25 +10,28 @@ function langPrefix(lang: string) {
     return lang === "th" ? "" : `/${lang}`;
 }
 
-function hreflangAlts(path: string) {
+// basePath = path WITHOUT lang prefix (e.g. "/blog", "/blog/my-post")
+function hreflangAlts(basePath: string) {
     return LOCALES.map(
         (l) =>
-            `<xhtml:link rel="alternate" hreflang="${l}" href="${BASE_URL}${langPrefix(l)}${path}"/>`,
+            `<xhtml:link rel="alternate" hreflang="${l}" href="${BASE_URL}${langPrefix(l)}${basePath}"/>`,
     ).join("");
 }
 
 function urlEntry(
-    path: string,
+    loc: string,
+    basePath: string,
     lastmod: string,
     priority: string,
     changefreq: string,
+    includeHreflang = true,
 ) {
     return `  <url>
-    <loc>${BASE_URL}${path}</loc>
+    <loc>${BASE_URL}${loc || "/"}</loc>
     <lastmod>${lastmod}</lastmod>
     <changefreq>${changefreq}</changefreq>
     <priority>${priority}</priority>
-    ${hreflangAlts(path)}
+    ${includeHreflang ? hreflangAlts(basePath || "/") : ""}
   </url>`;
 }
 
@@ -36,58 +39,66 @@ export async function GET() {
     const now = new Date().toISOString();
     const urls: string[] = [];
 
-    // Static routes
-    const staticRoutes = [
+    // Routes with [lang] variants
+    const i18nRoutes = [
         { path: "", priority: "1.0", changefreq: "daily" },
         { path: "/blog", priority: "0.9", changefreq: "weekly" },
         { path: "/docs", priority: "0.8", changefreq: "weekly" },
         { path: "/learn", priority: "0.8", changefreq: "weekly" },
-        {
-            path: "/home/certifications",
-            priority: "0.6",
-            changefreq: "monthly",
-        },
-        { path: "/home/experience", priority: "0.6", changefreq: "monthly" },
-        { path: "/home/projects", priority: "0.6", changefreq: "monthly" },
-        { path: "/home/volunteering", priority: "0.6", changefreq: "monthly" },
+        { path: "/gallery", priority: "0.6", changefreq: "monthly" },
+        { path: "/privacy-policy", priority: "0.3", changefreq: "yearly" },
+        { path: "/terms-of-service", priority: "0.3", changefreq: "yearly" },
     ];
 
     for (const lang of LOCALES) {
-        for (const route of staticRoutes) {
-            const path = `${langPrefix(lang)}${route.path}`;
+        for (const route of i18nRoutes) {
+            const loc = `${langPrefix(lang)}${route.path}` || "/";
             urls.push(
-                urlEntry(path || "/", now, route.priority, route.changefreq),
+                urlEntry(loc, route.path || "/", now, route.priority, route.changefreq),
             );
         }
+    }
+
+    // Routes WITHOUT lang variants (not under [lang])
+    const rootRoutes = [
+        { path: "/home/certifications", priority: "0.5", changefreq: "monthly" },
+        { path: "/home/experience", priority: "0.5", changefreq: "monthly" },
+        { path: "/home/projects", priority: "0.5", changefreq: "monthly" },
+        { path: "/home/volunteering", priority: "0.5", changefreq: "monthly" },
+    ];
+
+    for (const route of rootRoutes) {
+        urls.push(urlEntry(route.path, route.path, now, route.priority, route.changefreq, false));
     }
 
     // Blog posts
     const posts = getBlogPosts();
     for (const post of posts) {
+        const basePath = `/blog/${post.slug}`;
+        const lastmod = post.date ? new Date(post.date).toISOString() : now;
         for (const lang of LOCALES) {
-            const path = `${langPrefix(lang)}/blog/${post.slug}`;
-            const lastmod = post.date ? new Date(post.date).toISOString() : now;
-            urls.push(urlEntry(path, lastmod, "0.8", "monthly"));
+            const loc = `${langPrefix(lang)}${basePath}`;
+            urls.push(urlEntry(loc, basePath, lastmod, "0.8", "monthly"));
         }
     }
 
     // Docs pages
     const docSlugs = getAllSlugs("docs");
     for (const slugParts of docSlugs) {
-        const path = `/docs/${slugParts.join("/")}`;
+        const basePath = `/docs/${slugParts.join("/")}`;
         for (const lang of LOCALES) {
-            const langPath = `${langPrefix(lang)}${path}`;
-            urls.push(urlEntry(langPath, now, "0.6", "monthly"));
+            const loc = `${langPrefix(lang)}${basePath}`;
+            urls.push(urlEntry(loc, basePath, now, "0.6", "monthly"));
         }
     }
 
     // Learn pages
     const learnSlugs = getAllSlugs("learn");
     for (const slugParts of learnSlugs) {
-        const path = `/learn/${slugParts.join("/")}`;
+        const basePath = `/learn/${slugParts.join("/")}`;
         for (const lang of LOCALES) {
-            const langPath = `${langPrefix(lang)}${path}`;
-            urls.push(urlEntry(langPath, now, "0.7", "monthly"));
+            const loc = `${langPrefix(lang)}${basePath}`;
+            urls.push(urlEntry(loc, basePath, now, "0.7", "monthly"));
         }
     }
 

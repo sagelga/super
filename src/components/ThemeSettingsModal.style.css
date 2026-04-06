@@ -1,3 +1,5 @@
+@import "../styles/design-tokens.css";
+
 .theme-settings-list {
   display: flex;
   flex-direction: column;
