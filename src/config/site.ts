@@ -1,8 +1,9 @@
-// Configuration for the website
+import { BASE_URL, SITE_NAME } from "@/lib/config";
+
 export const siteConfig = () => {
     return {
-        name: "Kunanon Srisuntiroj", // The name of the website
-        url: "https://sagelga.com", // The URL of the website
-        email: "privacy@sagelga.com", // Contact email for privacy inquiries or general contact
+        name: SITE_NAME,
+        url: BASE_URL,
+        email: "privacy@sagelga.com",
     };
 };

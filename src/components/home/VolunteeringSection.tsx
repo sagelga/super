@@ -26,9 +26,10 @@ const VolunteeringSection: React.FC<VolunteeringSectionProps> = ({
 
     return (
         <Section
+            id="volunteering"
             title={t("volunteering_section_title")}
             headingVariant="minimal"
-            darkBg={false}
+            variant="canvas"
             spacing="generous"
         >
             <div
@@ -41,17 +42,17 @@ const VolunteeringSection: React.FC<VolunteeringSectionProps> = ({
                         className="grid grid-cols-[4rem_1fr] items-start gap-8 sm:grid-cols-[6rem_1fr]"
                     >
                         {/* Year */}
-                        <div className="text-right">
-                            {item.year && (
-                                <span className="font-display pt-1 text-5xl leading-none font-bold text-muted/20 select-none sm:text-6xl">
+                        {item.year && (
+                            <div className="pt-1 text-right">
+                                <span className="font-display -translate-x-[10px] pt-1 text-5xl leading-none font-bold text-muted/20 select-none sm:text-6xl">
                                     {item.year}
                                 </span>
-                            )}
-                        </div>
+                            </div>
+                        )}
 
                         {/* Content */}
                         <div className="border-l border-rim pl-8">
-                            <h3 className="font-sans mb-3 text-lg text-cream">
+                            <h3 className="text-cream mb-3 font-sans text-lg">
                                 {item.title}
                             </h3>
                             <ul className="mb-4 space-y-2">
@@ -70,7 +71,7 @@ const VolunteeringSection: React.FC<VolunteeringSectionProps> = ({
                                     href={item.link.href}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="inline-flex items-center gap-2 border border-accent/40 px-4 py-1.5 text-sm text-accent transition-colors duration-200 hover:border-accent hover:text-cream"
+                                    className="hover:text-cream inline-flex items-center gap-2 border border-accent/40 px-4 py-1.5 text-sm text-accent transition-colors duration-200 hover:border-accent"
                                 >
                                     {item.link.text}
                                     <span className="text-xs">↗</span>

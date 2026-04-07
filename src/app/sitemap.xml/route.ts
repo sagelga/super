@@ -1,9 +1,8 @@
 import { NextResponse } from "next/server";
 import { getBlogPosts, getAllSlugs } from "@/lib/content";
+import { BASE_URL } from "@/lib/config";
 
 export const dynamic = "force-static";
-
-const BASE_URL = "https://sagelga.com";
 const LOCALES = ["en", "th", "zh"];
 
 function langPrefix(lang: string) {
@@ -54,21 +53,40 @@ export async function GET() {
         for (const route of i18nRoutes) {
             const loc = `${langPrefix(lang)}${route.path}` || "/";
             urls.push(
-                urlEntry(loc, route.path || "/", now, route.priority, route.changefreq),
+                urlEntry(
+                    loc,
+                    route.path || "/",
+                    now,
+                    route.priority,
+                    route.changefreq,
+                ),
             );
         }
     }
 
     // Routes WITHOUT lang variants (not under [lang])
     const rootRoutes = [
-        { path: "/home/certifications", priority: "0.5", changefreq: "monthly" },
+        {
+            path: "/home/certifications",
+            priority: "0.5",
+            changefreq: "monthly",
+        },
         { path: "/home/experience", priority: "0.5", changefreq: "monthly" },
         { path: "/home/projects", priority: "0.5", changefreq: "monthly" },
         { path: "/home/volunteering", priority: "0.5", changefreq: "monthly" },
     ];
 
     for (const route of rootRoutes) {
-        urls.push(urlEntry(route.path, route.path, now, route.priority, route.changefreq, false));
+        urls.push(
+            urlEntry(
+                route.path,
+                route.path,
+                now,
+                route.priority,
+                route.changefreq,
+                false,
+            ),
+        );
     }
 
     // Blog posts

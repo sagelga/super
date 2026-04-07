@@ -1,12 +1,19 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { getDocProjects, getContentBySlug } from "@/lib/content";
-import { generateTechArticleJsonLd, generateBreadcrumbJsonLd } from "@/lib/seo";
-import { buildSidebarTree } from "@/lib/sidebar";
+import {
+    generateTechArticleJsonLd,
+    generateBreadcrumbJsonLd,
+    extractTableOfContents,
+    estimateReadingTime,
+} from "@/lib/seo";
+import { buildSidebarTree, getAdjacentDocPages } from "@/lib/sidebar";
 import ContentLayout from "@/components/content/ContentLayout";
 import MdxRenderer from "@/components/content/MdxRenderer";
-
-const BASE_URL = "https://sagelga.com";
+import TableOfContents from "@/components/content/TableOfContents";
+import DocHeader from "@/components/content/DocHeader";
+import ArticleFooterNav from "@/components/content/ArticleFooterNav";
+import { BASE_URL } from "@/lib/config";
 const LOCALES = ["en", "th", "zh"];
 
 export async function generateStaticParams() {
@@ -45,16 +52,22 @@ export default async function DocProjectPage({
     if (!item) notFound();
 
     const fm = item.frontmatter as { title?: string; description?: string };
+    const title = fm.title || project;
     const sidebarItems = buildSidebarTree("docs", project);
+    const toc = extractTableOfContents(item.source);
+    const readingTime = estimateReadingTime(item.source);
+    const currentHref = `/docs/${project}`;
+    const { prev, next } = getAdjacentDocPages(currentHref, sidebarItems);
+
     const techJsonLd = generateTechArticleJsonLd({
         path: `/docs/${project}`,
-        title: fm.title || project,
+        title,
         description: fm.description,
     });
     const breadcrumbJsonLd = generateBreadcrumbJsonLd([
         { name: "Home", href: "/" },
         { name: "Docs", href: "/docs" },
-        { name: fm.title || project, href: `/docs/${project}` },
+        { name: title, href: `/docs/${project}` },
     ]);
 
     return (
@@ -69,11 +82,29 @@ export default async function DocProjectPage({
                     __html: JSON.stringify(breadcrumbJsonLd),
                 }}
             />
-            <ContentLayout
-                sidebarItems={sidebarItems}
-                sidebarTitle={fm.title || project}
-            >
-                <MdxRenderer source={item.source} />
+            <ContentLayout sidebarItems={sidebarItems} sidebarTitle={title}>
+                <div className="flex gap-12">
+                    <article className="min-w-0 flex-1">
+                        <DocHeader
+                            title={title}
+                            description={fm.description}
+                            readingTime={readingTime}
+                            breadcrumbs={[
+                                { label: "Docs", href: "/docs" },
+                                { label: title, href: `/docs/${project}` },
+                            ]}
+                        />
+                        <MdxRenderer source={item.source} />
+                        <ArticleFooterNav prev={prev} next={next} />
+                    </article>
+                    {toc.length >= 2 && (
+                        <aside className="hidden w-56 shrink-0 xl:block">
+                            <div className="sticky top-24">
+                                <TableOfContents items={toc} />
+                            </div>
+                        </aside>
+                    )}
+                </div>
             </ContentLayout>
         </>
     );

@@ -3,8 +3,7 @@ import { generateCollectionPageJsonLd } from "@/lib/seo";
 import { getTranslations } from "next-intl/server";
 import Link from "next/link";
 import type { Metadata } from "next";
-
-const BASE_URL = "https://sagelga.com";
+import { BASE_URL } from "@/lib/config";
 
 export const metadata: Metadata = {
     title: "Documentation",
@@ -17,6 +16,8 @@ export const metadata: Metadata = {
     alternates: { canonical: `${BASE_URL}/docs` },
 };
 
+const pad = (n: number) => String(n).padStart(2, "0");
+
 export default async function DocsPage() {
     const projects = getDocProjects();
     const t = await getTranslations("common");
@@ -28,6 +29,8 @@ export default async function DocsPage() {
     });
 
     const sorted = [...projects].sort((a, b) => b.pageCount - a.pageCount);
+    const featured = sorted.slice(0, 5);
+    const rest = sorted.slice(5);
 
     return (
         <>
@@ -40,60 +43,124 @@ export default async function DocsPage() {
                     <p className="mb-2 font-sans text-xs font-semibold tracking-widest text-accent uppercase">
                         {t("nav.docs")}
                     </p>
-                    <h1 className="font-serif text-4xl font-semibold text-cream">
+                    <h1 className="text-cream font-serif text-4xl font-semibold">
                         {t("docs.all_projects_title")}
                     </h1>
-                    <p className="mt-3 text-muted">
-                        {t("docs.documented_projects", {
-                            count: projects.length,
-                        })}
+                    <p className="mt-3 max-w-lg text-muted">
+                        {t("docs.subtitle", { count: projects.length })}
                     </p>
                 </header>
-                <div className="space-y-4">
-                    {/* Featured top 3 */}
-                    <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
-                        {sorted.slice(0, 3).map((project) => (
+
+                {/* Bento featured section — top 5 by page count */}
+                <div className="mb-4 grid grid-cols-1 gap-4 md:grid-cols-3">
+                    {featured.map((project, i) => {
+                        const isHero = i === 0;
+                        return (
                             <Link
                                 key={project.slug}
                                 href={`/docs/${project.slug}`}
-                                className="group block border border-rim bg-surface p-6 transition-colors duration-200 hover:border-accent/50"
+                                className={[
+                                    "group relative overflow-hidden border border-rim bg-surface",
+                                    "flex flex-col transition-all duration-300",
+                                    "hover:border-accent/50 hover:shadow-[0_4px_32px_-8px_rgba(201,148,58,0.12)]",
+                                    isHero
+                                        ? "min-h-[220px] p-8 md:col-span-2"
+                                        : "min-h-[160px] p-6",
+                                ].join(" ")}
                             >
-                                <h2 className="mb-2 font-serif text-xl font-semibold text-cream transition-colors group-hover:text-accent">
+                                {/* Decorative large ordinal */}
+                                <span
+                                    className={[
+                                        "text-cream/[0.03] pointer-events-none absolute font-serif leading-none select-none",
+                                        isHero
+                                            ? "-right-4 -bottom-6 text-[140px]"
+                                            : "-right-3 -bottom-4 text-[90px]",
+                                    ].join(" ")}
+                                    aria-hidden="true"
+                                >
+                                    {pad(i + 1)}
+                                </span>
+
+                                {/* Hero-only decorative arrow — brightens on hover */}
+                                {isHero && (
+                                    <span
+                                        className="pointer-events-none absolute right-8 bottom-6 font-serif text-[72px] leading-none text-accent/[0.06] transition-colors duration-300 select-none group-hover:text-accent/[0.15]"
+                                        aria-hidden="true"
+                                    >
+                                        →
+                                    </span>
+                                )}
+
+                                <p className="mb-2 font-sans text-[10px] font-semibold tracking-widest text-accent/70 uppercase">
+                                    {t("docs.pages_count", {
+                                        count: project.pageCount,
+                                    })}
+                                </p>
+                                <h2
+                                    className={[
+                                        "text-cream font-serif font-semibold transition-colors duration-200 group-hover:text-accent",
+                                        isHero
+                                            ? "mb-3 text-2xl md:text-3xl"
+                                            : "mb-2 text-lg",
+                                    ].join(" ")}
+                                >
                                     {project.title}
                                 </h2>
                                 {project.description && (
-                                    <p className="mb-3 line-clamp-3 text-sm text-muted">
+                                    <p
+                                        className={[
+                                            "flex-1 text-sm text-muted",
+                                            isHero
+                                                ? "line-clamp-4"
+                                                : "line-clamp-2",
+                                        ].join(" ")}
+                                    >
                                         {project.description}
                                     </p>
                                 )}
-                                <p className="font-sans text-xs text-accent/70">
-                                    {t("docs.pages_count", {
-                                        count: project.pageCount,
-                                    })}
-                                </p>
+                                {isHero ? (
+                                    <div className="mt-6 flex -translate-x-1 items-center gap-1.5 font-sans text-xs text-accent/0 transition-all duration-200 group-hover:translate-x-0 group-hover:text-accent/80">
+                                        Read the docs <span>→</span>
+                                    </div>
+                                ) : (
+                                    <span className="mt-3 font-sans text-xs text-accent/0 transition-colors duration-200 group-hover:text-accent/70">
+                                        →
+                                    </span>
+                                )}
                             </Link>
-                        ))}
-                    </div>
-                    {/* Remaining in compact 4-column grid */}
-                    <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-                        {sorted.slice(3).map((project) => (
+                        );
+                    })}
+                </div>
+
+                {/* Compact numbered list — remaining projects */}
+                {rest.length > 0 && (
+                    <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
+                        {rest.map((project, i) => (
                             <Link
                                 key={project.slug}
                                 href={`/docs/${project.slug}`}
-                                className="group block border border-rim bg-surface px-4 py-3 transition-colors duration-200 hover:border-accent/50"
+                                className="group flex min-h-[64px] items-center gap-3 border border-rim bg-surface px-4 py-3 transition-all duration-200 hover:border-accent/50"
                             >
-                                <h2 className="font-serif text-sm font-semibold text-cream transition-colors group-hover:text-accent">
-                                    {project.title}
-                                </h2>
-                                <p className="mt-1 font-sans text-xs text-muted/50">
-                                    {t("docs.pages_count", {
-                                        count: project.pageCount,
-                                    })}
-                                </p>
+                                <span className="w-6 shrink-0 font-sans text-xs text-accent/40 tabular-nums transition-colors duration-200 group-hover:text-accent/70">
+                                    {pad(featured.length + i + 1)}
+                                </span>
+                                <div className="min-w-0 flex-1">
+                                    <p className="text-cream truncate font-serif text-sm font-semibold transition-colors duration-200 group-hover:text-accent">
+                                        {project.title}
+                                    </p>
+                                    <p className="font-sans text-xs text-muted/50">
+                                        {t("docs.pages_count", {
+                                            count: project.pageCount,
+                                        })}
+                                    </p>
+                                </div>
+                                <span className="shrink-0 font-sans text-xs text-muted/0 transition-colors duration-200 group-hover:text-accent/60">
+                                    →
+                                </span>
                             </Link>
                         ))}
                     </div>
-                </div>
+                )}
             </div>
         </>
     );
