@@ -33,34 +33,46 @@ export default function TableOfContents({ items }: TableOfContentsProps) {
         );
 
         headingEls.forEach((el) => observerRef.current!.observe(el));
-        return () => observerRef.current?.disconnect();
+        return () => {
+            headingEls.forEach((el) => observerRef.current?.unobserve(el));
+            observerRef.current?.disconnect();
+        };
     }, [items]);
 
     if (items.length < 2) return null;
 
     return (
-        <nav aria-label="Table of contents" className="hidden xl:block">
+        <nav aria-label="Table of contents">
             <p className="mb-3 font-sans text-xs font-semibold tracking-widest text-muted uppercase">
                 {t("content.on_this_page")}
             </p>
-            <ul className="space-y-1.5">
-                {items.map((item) => (
-                    <li
-                        key={item.id}
-                        style={{ paddingLeft: item.level === 3 ? 12 : 0 }}
-                    >
-                        <a
-                            href={`#${item.id}`}
-                            className={`block text-sm transition-colors duration-150 ${
-                                activeId === item.id
-                                    ? "font-medium text-accent"
-                                    : "text-muted hover:text-cream"
-                            }`}
+            <ul className="space-y-1">
+                {items.map((item) => {
+                    const isActive = activeId === item.id;
+                    return (
+                        <li
+                            key={item.id}
+                            style={{ paddingLeft: item.level === 3 ? 12 : 0 }}
                         >
-                            {item.text}
-                        </a>
-                    </li>
-                ))}
+                            <a
+                                href={`#${item.id}`}
+                                className={`block py-0.5 text-sm transition-colors duration-150 ${
+                                    isActive
+                                        ? "font-medium text-accent"
+                                        : "hover:text-cream text-muted"
+                                }`}
+                            >
+                                {item.text}
+                            </a>
+                            {isActive && (
+                                <div
+                                    className="mt-0.5 h-px bg-accent/25"
+                                    aria-hidden="true"
+                                />
+                            )}
+                        </li>
+                    );
+                })}
             </ul>
         </nav>
     );

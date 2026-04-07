@@ -5,13 +5,15 @@ import {
     generateTechArticleJsonLd,
     generateBreadcrumbJsonLd,
     extractTableOfContents,
+    estimateReadingTime,
 } from "@/lib/seo";
-import { buildSidebarTree } from "@/lib/sidebar";
+import { buildSidebarTree, getAdjacentDocPages } from "@/lib/sidebar";
 import ContentLayout from "@/components/content/ContentLayout";
 import MdxRenderer from "@/components/content/MdxRenderer";
 import TableOfContents from "@/components/content/TableOfContents";
-
-const BASE_URL = "https://sagelga.com";
+import DocHeader from "@/components/content/DocHeader";
+import ArticleFooterNav from "@/components/content/ArticleFooterNav";
+import { BASE_URL } from "@/lib/config";
 
 const LOCALES = ["en", "th", "zh"];
 
@@ -62,7 +64,9 @@ export default async function DocPage({
     const title = fm.title || slug[slug.length - 1] || project;
     const sidebarItems = buildSidebarTree("docs", project);
     const toc = extractTableOfContents(item.source);
+    const readingTime = estimateReadingTime(item.source);
     const currentPath = `/docs/${project}/${slug.join("/")}`;
+    const { prev, next } = getAdjacentDocPages(currentPath, sidebarItems);
 
     const techJsonLd = generateTechArticleJsonLd({
         path: currentPath,
@@ -89,12 +93,23 @@ export default async function DocPage({
                 }}
             />
             <ContentLayout sidebarItems={sidebarItems} sidebarTitle={project}>
-                <div className="flex gap-8">
+                <div className="flex gap-12">
                     <article className="min-w-0 flex-1">
+                        <DocHeader
+                            title={title}
+                            description={fm.description}
+                            readingTime={readingTime}
+                            breadcrumbs={[
+                                { label: "Docs", href: "/docs" },
+                                { label: project, href: `/docs/${project}` },
+                                { label: title, href: currentPath },
+                            ]}
+                        />
                         <MdxRenderer source={item.source} />
+                        <ArticleFooterNav prev={prev} next={next} />
                     </article>
                     {toc.length >= 2 && (
-                        <aside className="hidden w-48 shrink-0 xl:block">
+                        <aside className="hidden w-56 shrink-0 xl:block">
                             <div className="sticky top-24">
                                 <TableOfContents items={toc} />
                             </div>

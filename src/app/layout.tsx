@@ -1,5 +1,6 @@
 // Import necessary types and fonts from Next.js
 import type { Metadata } from "next";
+import { BASE_URL } from "@/lib/config";
 import {
     IBM_Plex_Sans_Thai,
     IBM_Plex_Mono,
@@ -68,11 +69,10 @@ export async function generateMetadata({
         locale: currentLang,
         namespace: "metadata",
     });
-    const baseUrl = "https://sagelga.com";
     const languages = ["en", "th", "zh"];
     // Thai (default) has no prefix, others do
     const currentUrl =
-        currentLang === "th" ? baseUrl : `${baseUrl}/${currentLang}`;
+        currentLang === "th" ? BASE_URL : `${BASE_URL}/${currentLang}`;
 
     return {
         title: {
@@ -93,13 +93,13 @@ export async function generateMetadata({
         authors: [{ name: "Kunanon Srisuntiroj" }],
         creator: "Kunanon Srisuntiroj",
         publisher: "Kunanon Srisuntiroj",
-        metadataBase: new URL(baseUrl),
+        metadataBase: new URL(BASE_URL),
         alternates: {
             canonical: currentUrl,
             languages: Object.fromEntries(
                 languages.map((l) => [
                     l,
-                    l === "th" ? baseUrl : `${baseUrl}/${l}`,
+                    l === "th" ? BASE_URL : `${BASE_URL}/${l}`,
                 ]),
             ),
         },
@@ -152,9 +152,9 @@ const jsonLd = {
     "@graph": [
         {
             "@type": "Person",
-            "@id": "https://sagelga.com/#person",
+            "@id": `${BASE_URL}/#person`,
             name: "Kunanon Srisuntiroj",
-            url: "https://sagelga.com",
+            url: BASE_URL,
             sameAs: [
                 "https://github.com/sagelga",
                 "https://linkedin.com/in/sagelga",
@@ -167,24 +167,24 @@ const jsonLd = {
         },
         {
             "@type": "WebSite",
-            "@id": "https://sagelga.com/#website",
-            url: "https://sagelga.com",
+            "@id": `${BASE_URL}/#website`,
+            url: BASE_URL,
             name: "Kunanon Srisuntiroj Portfolio",
-            publisher: { "@id": "https://sagelga.com/#person" },
+            publisher: { "@id": `${BASE_URL}/#person` },
             potentialAction: {
                 "@type": "SearchAction",
-                target: "https://sagelga.com/{lang}/blog?q={search_term_string}",
+                target: `${BASE_URL}/{lang}/blog?q={search_term_string}`,
                 "query-input": "required name=search_term_string",
             },
         },
         {
             "@type": "Organization",
-            "@id": "https://sagelga.com/#organization",
+            "@id": `${BASE_URL}/#organization`,
             name: "Kunanon Srisuntiroj Portfolio",
-            url: "https://sagelga.com",
+            url: BASE_URL,
             logo: {
                 "@type": "ImageObject",
-                url: "https://sagelga.com/og-image.png",
+                url: `${BASE_URL}/og-image.png`,
             },
         },
     ],

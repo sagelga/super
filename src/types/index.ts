@@ -16,7 +16,7 @@ export interface SectionProps {
     children: ReactNode;
     className?: string;
     id?: string;
-    darkBg?: boolean;
+    variant?: "surface" | "canvas";
     spacing?: "compact" | "normal" | "generous" | "spacious";
 }
 

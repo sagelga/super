@@ -1,27 +1,62 @@
 import { getBlogPosts } from "@/lib/content";
 import { generateCollectionPageJsonLd } from "@/lib/seo";
+import { BASE_URL, SITE_NAME } from "@/lib/config";
 import BlogCard from "@/components/blog/BlogCard";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { getTranslations, getLocale } from "next-intl/server";
 
-const BASE_URL = "https://sagelga.com";
-const POSTS_PER_PAGE = 8;
+const POSTS_PER_PAGE = 10;
+const LOCALES = ["en", "th", "zh"] as const;
 
-export const metadata: Metadata = {
-    title: "Blog",
-    description:
-        "Thoughts on technology, software development, and life by Kunanon Srisuntiroj.",
-    openGraph: {
-        title: "Blog | Kunanon Srisuntiroj",
-        description: "Thoughts on technology, software development, and life.",
-        url: `${BASE_URL}/blog`,
-        type: "website",
-    },
-    alternates: {
-        canonical: `${BASE_URL}/blog`,
-    },
+const OG_LOCALE: Record<string, string> = {
+    th: "th_TH",
+    en: "en_US",
+    zh: "zh_CN",
 };
+
+export async function generateMetadata({
+    params,
+}: {
+    params: Promise<{ lang: string }>;
+}): Promise<Metadata> {
+    const { lang } = await params;
+    const [t, tMeta] = await Promise.all([
+        getTranslations({ locale: lang, namespace: "common" }),
+        getTranslations({ locale: lang, namespace: "metadata" }),
+    ]);
+
+    const canonical =
+        lang === "th" ? `${BASE_URL}/blog` : `${BASE_URL}/${lang}/blog`;
+    const title = `${t("nav.blog")} | ${SITE_NAME}`;
+    const description = tMeta("description");
+
+    return {
+        title,
+        description,
+        openGraph: {
+            title,
+            description,
+            url: canonical,
+            type: "website",
+            locale: OG_LOCALE[lang] ?? "en_US",
+        },
+        twitter: {
+            card: "summary",
+            title,
+            description,
+        },
+        alternates: {
+            canonical,
+            languages: Object.fromEntries(
+                LOCALES.map((l) => [
+                    l,
+                    l === "th" ? `${BASE_URL}/blog` : `${BASE_URL}/${l}/blog`,
+                ]),
+            ),
+        },
+    };
+}
 
 interface BlogPageProps {
     searchParams: Promise<{ page?: string }>;
@@ -60,7 +95,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
                     <p className="mb-2 font-sans text-xs font-semibold tracking-widest text-accent uppercase">
                         {t("blog.eyebrow")}
                     </p>
-                    <h1 className="font-serif text-4xl font-semibold text-cream">
+                    <h1 className="text-cream font-serif text-4xl font-semibold">
                         {t("nav.blog")}
                     </h1>
                     <p className="mt-3 text-muted">
@@ -80,7 +115,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
                         {clampedPage > 1 ? (
                             <Link
                                 href={pageHref(clampedPage - 1)}
-                                className="flex items-center gap-2 border border-rim bg-surface px-5 py-2.5 text-sm tracking-wide text-cream transition-colors duration-200 hover:border-accent hover:text-accent"
+                                className="text-cream flex items-center gap-2 border border-rim bg-surface px-5 py-2.5 text-sm tracking-wide transition-colors duration-200 hover:border-accent hover:text-accent"
                             >
                                 <svg
                                     width="14"
@@ -109,7 +144,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
                         {clampedPage < totalPages ? (
                             <Link
                                 href={pageHref(clampedPage + 1)}
-                                className="flex items-center gap-2 border border-rim bg-surface px-5 py-2.5 text-sm tracking-wide text-cream transition-colors duration-200 hover:border-accent hover:text-accent"
+                                className="text-cream flex items-center gap-2 border border-rim bg-surface px-5 py-2.5 text-sm tracking-wide transition-colors duration-200 hover:border-accent hover:text-accent"
                             >
                                 {t("blog.next_button")}
                                 <svg

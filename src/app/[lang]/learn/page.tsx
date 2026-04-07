@@ -3,8 +3,7 @@ import { generateCollectionPageJsonLd } from "@/lib/seo";
 import { getTranslations } from "next-intl/server";
 import Link from "next/link";
 import type { Metadata } from "next";
-
-const BASE_URL = "https://sagelga.com";
+import { BASE_URL } from "@/lib/config";
 
 const TOPIC_ICONS: Record<string, string> = {
     python: "devicon-python-plain",
@@ -46,7 +45,7 @@ export default async function LearnPage() {
                     <p className="mb-2 font-sans text-xs font-semibold tracking-widest text-accent uppercase">
                         {t("learn.eyebrow")}
                     </p>
-                    <h1 className="font-serif text-4xl font-semibold text-cream">
+                    <h1 className="text-cream font-serif text-4xl font-semibold">
                         {t("learn.title")}
                     </h1>
                     <p className="mt-3 text-muted">{t("learn.subtitle")}</p>
@@ -69,7 +68,7 @@ export default async function LearnPage() {
                                     />
                                 )}
                                 <div>
-                                    <h2 className="mb-1 font-serif text-3xl font-semibold text-cream transition-colors group-hover:text-accent">
+                                    <h2 className="text-cream mb-1 font-serif text-3xl font-semibold transition-colors group-hover:text-accent">
                                         {featured.title}
                                     </h2>
                                     <p className="mt-2 font-sans text-sm text-muted/60">
@@ -96,7 +95,7 @@ export default async function LearnPage() {
                                             />
                                         )}
                                         <div>
-                                            <h2 className="mb-1 font-serif text-lg font-semibold text-cream transition-colors group-hover:text-accent">
+                                            <h2 className="text-cream mb-1 font-serif text-lg font-semibold transition-colors group-hover:text-accent">
                                                 {topic.title}
                                             </h2>
                                             <p className="mt-1 font-sans text-xs text-muted/60">

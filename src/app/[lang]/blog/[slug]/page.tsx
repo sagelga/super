@@ -1,6 +1,11 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { getBlogPosts, getContentBySlug, getAuthors } from "@/lib/content";
+import {
+    getBlogPosts,
+    getContentBySlug,
+    getAuthors,
+    getAdjacentBlogPosts,
+} from "@/lib/content";
 import {
     generateBlogPostingJsonLd,
     generateBreadcrumbJsonLd,
@@ -10,8 +15,9 @@ import {
 import MdxRenderer from "@/components/content/MdxRenderer";
 import PostHeader from "@/components/blog/PostHeader";
 import TableOfContents from "@/components/content/TableOfContents";
-
-const BASE_URL = "https://sagelga.com";
+import ArticleFooterNav from "@/components/content/ArticleFooterNav";
+import BackToTop from "@/components/content/BackToTop";
+import { BASE_URL } from "@/lib/config";
 const LOCALES = ["en", "th", "zh"];
 
 export async function generateStaticParams() {
@@ -100,6 +106,7 @@ export default async function PostPage({
     const toc = extractTableOfContents(item.source);
     const readingTime = estimateReadingTime(item.source);
     const wordCount = item.source.split(/\s+/).length;
+    const { prev, next } = getAdjacentBlogPosts(slug);
 
     const blogJsonLd = generateBlogPostingJsonLd({
         slug,
@@ -143,6 +150,24 @@ export default async function PostPage({
                             locale={lang ?? "en"}
                         />
                         <MdxRenderer source={item.source} />
+                        <ArticleFooterNav
+                            prev={
+                                prev
+                                    ? {
+                                          label: prev.title,
+                                          href: `/blog/${prev.slug}`,
+                                      }
+                                    : null
+                            }
+                            next={
+                                next
+                                    ? {
+                                          label: next.title,
+                                          href: `/blog/${next.slug}`,
+                                      }
+                                    : null
+                            }
+                        />
                     </article>
                     {toc.length >= 2 && (
                         <aside className="hidden w-56 shrink-0 xl:block">
@@ -153,6 +178,7 @@ export default async function PostPage({
                     )}
                 </div>
             </div>
+            <BackToTop />
         </>
     );
 }

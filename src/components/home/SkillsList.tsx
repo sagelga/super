@@ -56,7 +56,7 @@ const SkillsList: React.FC<SkillsListProps> = ({ skills }) => {
             id="skills"
             title={t("skills_section_title")}
             headingVariant="minimal"
-            darkBg={false}
+            variant="canvas"
             spacing="compact"
         >
             <div
@@ -64,7 +64,9 @@ const SkillsList: React.FC<SkillsListProps> = ({ skills }) => {
                 className={`reveal space-y-6 ${isVisible ? "is-revealed" : ""}`}
             >
                 <div>
-                    <p className="mb-3 font-sans text-[10px] tracking-[0.3em] text-muted/40 uppercase">Core</p>
+                    <p className="mb-3 font-sans text-[10px] tracking-[0.3em] text-muted/40 uppercase">
+                        Core
+                    </p>
                     <div className="flex flex-wrap gap-2">
                         {skills.core.map((skill, i) => (
                             <SkillPill key={i} skill={skill} tier="core" />
@@ -72,15 +74,23 @@ const SkillsList: React.FC<SkillsListProps> = ({ skills }) => {
                     </div>
                 </div>
                 <div>
-                    <p className="mb-3 font-sans text-[10px] tracking-[0.3em] text-muted/40 uppercase">Proficient</p>
+                    <p className="mb-3 font-sans text-[10px] tracking-[0.3em] text-muted/40 uppercase">
+                        Proficient
+                    </p>
                     <div className="flex flex-wrap gap-2">
                         {skills.proficient.map((skill, i) => (
-                            <SkillPill key={i} skill={skill} tier="proficient" />
+                            <SkillPill
+                                key={i}
+                                skill={skill}
+                                tier="proficient"
+                            />
                         ))}
                     </div>
                 </div>
                 <div>
-                    <p className="mb-3 font-sans text-[10px] tracking-[0.3em] text-muted/40 uppercase">Familiar</p>
+                    <p className="mb-3 font-sans text-[10px] tracking-[0.3em] text-muted/40 uppercase">
+                        Familiar
+                    </p>
                     <div className="flex flex-wrap gap-2">
                         {skills.familiar.map((skill, i) => (
                             <SkillPill key={i} skill={skill} tier="familiar" />

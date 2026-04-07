@@ -10,8 +10,7 @@ import { buildSidebarTree } from "@/lib/sidebar";
 import ContentLayout from "@/components/content/ContentLayout";
 import MdxRenderer from "@/components/content/MdxRenderer";
 import TableOfContents from "@/components/content/TableOfContents";
-
-const BASE_URL = "https://sagelga.com";
+import { BASE_URL } from "@/lib/config";
 
 const LOCALES = ["en", "th", "zh"];
 

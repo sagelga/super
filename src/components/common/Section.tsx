@@ -15,13 +15,13 @@ const Section: React.FC<SectionProps> = ({
     children,
     className = "",
     id,
-    darkBg = true,
+    variant = "surface",
     spacing = "normal",
 }) => {
     return (
         <section
             id={id}
-            className={`${spacingClasses[spacing]} ${darkBg ? "bg-surface" : "bg-canvas"} ${className}`}
+            className={`${spacingClasses[spacing]} ${variant === "canvas" ? "bg-canvas" : "bg-surface"} ${className}`}
         >
             <div className="container mx-auto px-8 lg:px-16">
                 {title && headingVariant === "default" && (
@@ -44,7 +44,7 @@ const Section: React.FC<SectionProps> = ({
                         <p className="font-sans text-xs tracking-[0.2em] text-muted/50 uppercase">
                             {title}
                         </p>
-                        <div className="h-px w-6 bg-rim mt-3" />
+                        <div className="mt-3 h-px w-6 bg-rim" />
                     </div>
                 )}
                 {children}

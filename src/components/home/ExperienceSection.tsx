@@ -30,7 +30,7 @@ const ExperienceSection: React.FC<ExperienceSectionProps> = ({
             id="experience"
             title={t("experience_section_title")}
             subtitle={`${experiences.length}`}
-            darkBg={false}
+            variant="canvas"
         >
             <div
                 ref={ref}
@@ -47,7 +47,7 @@ const ExperienceSection: React.FC<ExperienceSectionProps> = ({
                             className={`absolute top-1.5 left-0 h-3.5 w-3.5 rounded-full border-2 transition-colors duration-300 ${
                                 expanded === index
                                     ? "border-accent bg-accent"
-                                    : "border-muted bg-canvas"
+                                    : "bg-canvas border-muted"
                             }`}
                         />
 
@@ -65,7 +65,7 @@ const ExperienceSection: React.FC<ExperienceSectionProps> = ({
                                     className={`font-sans text-lg transition-colors duration-200 ${
                                         expanded === index
                                             ? "text-cream"
-                                            : "text-muted group-hover:text-cream"
+                                            : "group-hover:text-cream text-muted"
                                     }`}
                                 >
                                     {exp.title}
