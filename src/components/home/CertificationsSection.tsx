@@ -32,7 +32,6 @@ const CertificationsSection: React.FC<CertificationsSectionProps> = ({
             title={t("certifications_section_title")}
             subtitle={`${certifications.length}`}
             headingVariant="minimal"
-            darkBg={true}
             spacing="compact"
         >
             <div
@@ -42,7 +41,7 @@ const CertificationsSection: React.FC<CertificationsSectionProps> = ({
                 {certifications.map((cert, index) => (
                     <div
                         key={index}
-                        className="group bg-surface p-6 transition-colors duration-200 hover:bg-canvas"
+                        className="group hover:bg-canvas bg-surface p-6 transition-colors duration-200"
                     >
                         <div className="mb-3">
                             {cert.url ? (

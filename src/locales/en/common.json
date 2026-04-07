@@ -22,7 +22,8 @@
             "skills": "Skills",
             "sitemap": "Sitemap",
             "explore": "Explore",
-            "connect": "Connect"
+            "connect": "Connect",
+            "legal": "Legal"
         }
     },
     "github_label": "GitHub",
@@ -31,6 +32,7 @@
         "sidebar_title": "Documentation",
         "all_projects_title": "All Projects",
         "documented_projects": "{count} documented projects",
+        "subtitle": "Implementation notes and architecture write-ups — {count} projects documented.",
         "pages_count": "{count} pages"
     },
     "gallery": {
@@ -59,7 +61,7 @@
         "system_description": "Follow your device settings"
     },
     "language": {
-        "title": "Select Language",
+        "title": "Language Settings",
         "label": "Change Language"
     },
     "contact": {
@@ -85,7 +87,8 @@
         "projects": "Projects",
         "volunteering": "Volunteering",
         "privacy_policy": "Privacy Policy",
-        "terms_of_service": "Terms of Service"
+        "terms_of_service": "Terms of Service",
+        "status_page": "Status Page"
     },
     "navbar": {
         "name": "Kunanon Srisuntiroj"
@@ -95,6 +98,23 @@
         "description": "The page you are looking for might have been removed, had its name changed, or is temporarily unavailable.",
         "go_home": "Go to homepage"
     },
+    "error": {
+        "title": "Something went wrong",
+        "description": "An unexpected error occurred. Please try again.",
+        "try_again": "Try again",
+        "go_home": "Go home"
+    },
+    "games": {
+        "eyebrow": "While you're here",
+        "memory_match": "Memory Match",
+        "solo_uno": "Solo Uno",
+        "moves": "{count} moves",
+        "you_won": "You cleared it!",
+        "play_again": "Play again",
+        "draw": "Draw",
+        "no_moves": "No moves left — game over",
+        "uno": "UNO!"
+    },
     "no_image_available": "No Image",
     "read_documentation": "Read Documentation",
     "content": {
@@ -102,5 +122,35 @@
         "collapse": "Collapse",
         "expand": "Expand",
         "contents": "Contents"
+    },
+    "cookies": {
+        "banner": {
+            "title": "We value your privacy",
+            "description": "We use cookies to enhance your browsing experience, serve personalized content, and analyze our traffic. By clicking \"Accept All\", you consent to our use of cookies."
+        },
+        "buttons": {
+            "accept_all": "Accept All",
+            "reject_all": "Reject All",
+            "settings": "Cookie Settings",
+            "save_preferences": "Save Preferences",
+            "cancel": "Cancel"
+        },
+        "settings": {
+            "title": "Cookie Settings",
+            "description": "Manage your cookie preferences. Functional cookies are always on — they're required for the site to work.",
+            "close": "Close settings",
+            "learn_more": "To learn more about how I use cookies, see my"
+        },
+        "categories": {
+            "required": "Required",
+            "functional": {
+                "name": "Functional Cookies",
+                "description": "These cookies are necessary for the website to function and cannot be switched off. They support core features like security, network management, and accessibility, and are only set in response to your actions on the site."
+            },
+            "analytics": {
+                "name": "Analytics Cookies",
+                "description": "These cookies help us understand how visitors interact with our website by collecting and reporting information anonymously. This helps us improve our website and your experience."
+            }
+        }
     }
 }

@@ -22,7 +22,8 @@
             "skills": "技能",
             "sitemap": "网站地图",
             "explore": "探索",
-            "connect": "联系"
+            "connect": "联系",
+            "legal": "法律"
         }
     },
     "github_label": "GitHub",
@@ -31,6 +32,7 @@
         "sidebar_title": "文档",
         "all_projects_title": "所有项目",
         "documented_projects": "{count} 个已记录项目",
+        "subtitle": "开发笔记、架构决策与实现参考 — {count} 个项目",
         "pages_count": "{count} 页"
     },
     "gallery": {
@@ -59,7 +61,7 @@
         "system_description": "跟随您的设备设置"
     },
     "language": {
-        "title": "选择语言",
+        "title": "语言设置",
         "label": "切换语言"
     },
     "contact": {
@@ -85,7 +87,8 @@
         "projects": "项目",
         "volunteering": "志愿服务",
         "privacy_policy": "隐私政策",
-        "terms_of_service": "服务条款"
+        "terms_of_service": "服务条款",
+        "status_page": "状态页面"
     },
     "navbar": {
         "name": "马洋辉"
@@ -95,6 +98,23 @@
         "description": "您要查找的页面可能已被删除、更改名称或暂时不可用。",
         "go_home": "返回主页"
     },
+    "error": {
+        "title": "出现了一些问题",
+        "description": "发生了意外错误，请稍后重试。",
+        "try_again": "重试",
+        "go_home": "返回首页"
+    },
+    "games": {
+        "eyebrow": "既然来了，不如玩一玩",
+        "memory_match": "记忆配对",
+        "solo_uno": "单人 UNO",
+        "moves": "{count} 步",
+        "you_won": "你赢了！",
+        "play_again": "再玩一次",
+        "draw": "摸牌",
+        "no_moves": "无牌可出，游戏结束",
+        "uno": "UNO！"
+    },
     "no_image_available": "无图片",
     "read_documentation": "阅读文档",
     "content": {
@@ -102,5 +122,35 @@
         "collapse": "折叠",
         "expand": "展开",
         "contents": "目录"
+    },
+    "cookies": {
+        "banner": {
+            "title": "我们重视您的隐私",
+            "description": "我们使用 Cookie 来提升您的浏览体验、提供个性化内容并分析我们的流量。点击「全部接受」即表示您同意我们使用 Cookie。"
+        },
+        "buttons": {
+            "accept_all": "全部接受",
+            "reject_all": "全部拒绝",
+            "settings": "Cookie 设置",
+            "save_preferences": "保存设置",
+            "cancel": "取消"
+        },
+        "settings": {
+            "title": "Cookie 设置",
+            "description": "请在下方管理您的 Cookie 偏好。功能性 Cookie 始终开启，是网站正常运行的基础，无法关闭。",
+            "close": "关闭",
+            "learn_more": "如需了解我如何使用 Cookie，请参阅我的"
+        },
+        "categories": {
+            "required": "必要",
+            "functional": {
+                "name": "功能性 Cookie",
+                "description": "这些 Cookie 对网站的正常运行至关重要，提供安全、网络管理和无障碍访问等核心功能，无法禁用。"
+            },
+            "analytics": {
+                "name": "分析 Cookie",
+                "description": "这些 Cookie 帮助我们通过匿名收集和报告数据，了解访客如何使用网站，从而持续改善用户体验。"
+            }
+        }
     }
 }

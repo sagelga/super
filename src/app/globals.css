@@ -1,15 +1,18 @@
 @import "tailwindcss";
-@import "../styles/design-tokens.css";
 @import "../styles/prose.css";
 
 @theme {
-  --color-canvas: #1A1814;
+  --color-background: #1A1814;
   --color-surface: #252219;
-  --color-brand: #3B4A8C;
+  --color-primary: #3B4A8C;
   --color-accent: #C9943A;
-  --color-cream: #F0EAD6;
+  --color-secondary: var(--color-accent);    /* tailwind: secondary → accent */
+  --color-text: #F0EAD6;
+  --color-text-primary: var(--color-text);   /* tailwind: text.primary → text */
   --color-muted: #9A9485;
-  --color-rim: #302C24;
+  --color-text-secondary: var(--color-muted); /* tailwind: text.secondary → muted */
+  --color-border: #302C24;
+  --color-rim: var(--color-border);          /* tailwind: rim → border */
   --font-sans: 'IBM Plex Sans Thai', system-ui, sans-serif;
   --font-mono: 'IBM Plex Mono', monospace;
   --font-serif: 'IBM Plex Serif', serif;
@@ -17,32 +20,35 @@
 
 @layer base {
   body {
-    background-color: var(--color-canvas);
-    color: var(--color-cream);
+    background-color: var(--color-background);
+    color: var(--color-text);
     font-family: var(--font-sans);
+    overflow-x: hidden;
   }
 }
 
 /* Light mode — unlayered so it beats @layer theme's :root definitions */
 html:not(.dark) {
-  --color-canvas: #F5F0E8;
+  --color-background: #F5F0E8;
   --color-surface: #EDE8DA;
-  --color-cream: #1A1814;
+  --color-text: #1A1814;
   --color-muted: #6B6458;
-  --color-rim: #D4CDB8;
+  --color-border: #D4CDB8;
 }
 
 .font-display {
   font-family: var(--font-serif), "Georgia", serif;
 }
 
-/* Thai: override serif/display to use Noto Serif Thai — IBM Plex Serif has no Thai glyphs */
-html[lang="th"] {
+/* Thai: override serif/display to use Trirong — IBM Plex Serif has no Thai glyphs.
+   Target body (not html) to beat next/font's variable class specificity on body. */
+html[lang="th"] body {
   --font-serif: var(--font-serif-thai), "Georgia", serif;
 }
 
-/* Chinese: IBM Plex has no CJK coverage — use Noto Serif SC for both body and display */
-html[lang="zh"] {
+/* Chinese: IBM Plex has no CJK coverage — use Noto Serif SC for both body and display.
+   Target body to beat next/font's variable class specificity. */
+html[lang="zh"] body {
   --font-sans: var(--font-serif-zh), "IBM Plex Sans Thai", system-ui, sans-serif;
   --font-serif: var(--font-serif-zh), "Georgia", serif;
 }
@@ -67,6 +73,11 @@ html[lang="zh"] {
 @keyframes grow-x {
   from { transform: scaleX(0); }
   to   { transform: scaleX(1); }
+}
+
+/* === Page transition === */
+.page-enter {
+  animation: fade-in 0.25s var(--ease-out-quart) backwards;
 }
 
 /* === Hero entrance animation classes === */
@@ -127,6 +138,11 @@ html[lang="zh"] {
 
 /* === Reduced motion: disable all animations === */
 @media (prefers-reduced-motion: reduce) {
+  .page-enter {
+    animation: none !important;
+    opacity: 1 !important;
+  }
+
   .enter,
   .enter-fade,
   .grow-rule {
