@@ -1,12 +1,12 @@
 {
     "hero": {
         "name": "马洋辉",
-        "title": "IT 专业人士",
+        "title": "全栈工程师",
         "alt_image": "马洋辉"
     },
     "about": {
         "title": "关于我",
-        "introduction": "除了专业工作，马洋辉还热爱前往日本熊本旅游。是他的个性驱动了他的创意、坦率和自我认知，反映了他充满自信谦逊和创新精神的价值观。",
+        "introduction": "工作之余，我常在日本熊本旅拍，相机不离手。我在乎把事情做好：写清晰的代码，把问题讲清楚，交出经得起考验的作品。",
         "education_title": "教育背景",
         "university_name": "泰国先皇理工大学",
         "school_years": "信息技术学院，2016 - 2020",
@@ -50,14 +50,14 @@
     "projects": [
         {
             "title": "Super",
-            "description": "使用 Next.js 和 Cloudflare Pages 构建的个人作品集网站，集成了 Superbrain API。使用 Gemini 2.5 Flash/Pro 模型进行代码生成和任务执行的开发协调。",
+            "description": "基于 Next.js 和 Cloudflare Pages 构建的个人作品集网站，集成 Superbrain API，并借助 Gemini 2.5 Flash/Pro 模型辅助开发，提升编码效率。",
             "githubLink": "https://github.com/sagelga/super",
             "demoLink": "https://sagelga.com",
             "stack": ["Next.js", "React", "TypeScript", "Cloudflare Pages"]
         },
         {
             "title": "Superbrain",
-            "description": "用于博客内容的 API，检索 Notion 更改并将其存储在 Cloudflare D2 中以实现快速检索。完全运行在 Cloudflare Workers 上；使用 Gemini 模型进行开发协调。",
+            "description": "博客内容 API，从 Notion 同步数据并缓存至 Cloudflare D1，便于快速检索。完全部署在 Cloudflare Workers 上，借助 Gemini 模型辅助开发。",
             "githubLink": "https://github.com/sagelga/superbrain",
             "demoLink": "",
             "stack": ["Cloudflare Worker", "Notion API", "Cloudflare D2", "TypeScript"]
@@ -86,7 +86,7 @@
         },
         {
             "title": "The Sunny Side Publication",
-            "description": "在 Medium 上开创了《The Sunny Side》出版物，是 ByteSide.one 的前身，展示了早期内容创作和发布专业知识。",
+            "description": "在 Medium 上创办了《The Sunny Side》出版物，作为 ByteSide.one 的前身，积累了早期内容创作与发布运营经验。",
             "githubLink": "",
             "demoLink": "https://medium.com/the-sunny-side",
             "stack": ["Medium", "Publishing", "Content Creation"]
@@ -142,7 +142,7 @@
         },
         {
             "title": "销售点（POS）系统",
-            "description": "使用 C 编程语言设计了一个综合销售点（POS）系统，包含分析、库存/利润管理、销售预测（线性回归）、客户忠诚度和条形码扫描仪支持，数据以 CSV 格式存储。",
+            "description": "使用 C 语言设计了一套功能完善的销售点（POS）系统，涵盖数据分析、库存与利润管理、销售预测（线性回归）、客户忠诚度及条形码扫描支持，数据以 CSV 格式存储。",
             "githubLink": "https://github.com/sagelga/ComPro_Project",
             "demoLink": "https://docs.sagelga.com/compro-project/",
             "stack": ["C (Programming Language)", "CSV", "POS Systems"]
@@ -150,14 +150,14 @@
     ],
     "experiences": [
         {
-            "title": "自由教师",
+            "title": "独立讲师",
             "company": "自由职业者",
             "duration": "2024 年 8 月 - 至今",
             "description": [
-                "为个人和小团体提供基础编程概念及 Python 和 SQL 数据操作与分析实际应用的教学。",
+                "为个人和小团体讲授 Python 与 SQL 基础编程概念，结合数据操作与分析的实际应用场景。",
                 "根据不同学习风格和技能水平开发定制课程和教材。",
-                "提供实际操作培训和基于项目的学习体验，以加强理解并建立数据库管理和脚本编写的实践技能。",
-                "指导 Notion 的高级使用，包括个人组织、项目管理和协作工作区，展示其作为生产力工具的多功能性。"
+                "以项目驱动的方式开展实操培训，帮助学员扎实掌握数据库管理与脚本编写的实践技能。",
+                "指导学员深度使用 Notion，涵盖个人管理、项目协作等场景，充分发挥其作为生产力工具的价值。"
             ]
         },
         {
@@ -165,50 +165,46 @@
             "company": "B3 Technology Co., Ltd.",
             "duration": "2024 年 9 月 - 2025 年 4 月",
             "description": [
-                "与领先保险公司合作，为财务顾问及其经理设计并实施综合 Salesforce 仪表板。",
-                "在 Salesforce 中开发关键绩效指标（KPI）和报告机制，以实现收入、客户获取和客户参与指标的实时跟踪。",
-                "简化数据可视化流程，为财务团队提供可操作的见解，以优化销售策略并增强客户关系。",
-                "为用户提供持续的支持和培训，确保有效采用和利用新的 Salesforce 功能。"
+                "与领先保险公司合作，为财务顾问及管理层设计并落地全面的 Salesforce 数据看板。",
+                "在 Salesforce 中搭建 KPI 与报告机制，实现收入、客户获取和客户互动指标的实时追踪。",
+                "优化数据可视化流程，为财务团队提供有效的数据洞察，助力销售策略优化与客户关系管理。",
+                "持续为用户提供支持与培训，确保新 Salesforce 功能的顺利推广和落地。"
             ]
         },
         {
-            "title": "Salesforce Marketing Cloud 开发人员",
+            "title": "Salesforce Marketing Cloud 工程师",
             "company": "Digital Vanguard Co., Ltd.",
             "duration": "2023 年 9 月 - 2024 年 5 月",
             "description": [
-                "与泰国领先的石油和零售企业合作，使用 Knowesis 解决方案（Sift 和 Opolo）维护和开发 Salesforce Marketing Cloud，从而促进数据驱动的全渠道营销活动。",
-                "使用 Salesforce 的 Journey Builder 和 Automation Studio 为个性化客户活动旅程开发自动化，在客户参与和分析平台（如 Informatica、Cloudera 和 Knowesis Sift）之间导入和导出数据。",
+                "与泰国领先的能源与零售企业合作，基于 Knowesis 解决方案（Sift 和 Opolo）维护和开发 Salesforce Marketing Cloud，推动数据驱动的全渠道营销活动落地。",
+                "使用 Salesforce Journey Builder 和 Automation Studio 搭建个性化活动自动化流程，并实现与 Informatica、Cloudera、Knowesis Sift 等分析平台间的数据双向同步。",
                 "优化 SQL 查询，以高效地从分析平台检索活动线索，减少数据检索时间并加快活动执行。",
                 "开发活动摘要报告，如电子邮件打开率、点击率、活动优惠和自动化状态。",
                 "使用 HTML、CSS、JavaScript 和 Salesforce AMPScript 改进电子邮件模板和登陆页面，增强跨设备和现代电子邮件客户端的响应性和兼容性。",
-                "制定了一个主动的应急计划，以处理 Marketing Cloud 的维护期，确保对关键营销活动和数据流自动化没有中断。"
+                "制定预防性应急预案，保障 Marketing Cloud 维护窗口期间关键营销活动与数据流的持续稳定运行。"
             ]
         },
         {
-            "title": "网站开发者、运营管理员与内容创作者",
+            "title": "创始人 & 全栈工程师",
             "company": "ByteSide.one",
             "duration": "2021 年 9 月 - 2023 年 9 月",
             "description": [
                 "创立了一个科技、小工具和游戏新闻发布平台，达到了 12.5 万次网站访问和 40 万月度 Facebook 帖子展示。",
                 "使用 WordPress、Cloudflare、AWS Lightsail 和 AWS CloudFront 设计和实施了可扩展的网站基础设施，确保最优内容交付和安全。",
-                "执行全渠道内容货币化策略，包括跨多个媒介和联盟网络的 Google AdSense 和联盟营销，确保发布平台的可持续商业模式。"
+                "推进全渠道内容变现策略，涵盖多媒介的 Google AdSense 广告与联盟推广，推动平台实现稳定盈利。"
             ]
         },
         {
-            "title": "合作研究学生",
+            "title": "联合培养实习生",
             "company": "EssilorLuxottica",
             "duration": "2019 年 5 月 - 2019 年 11 月",
             "description": [
-                "使用 Google Apps Script（基于 JavaScript 的语言）开发了内置于 Google Sheets 中的审批工作流，降低成本并简化了 Essilor 共享服务的审批请求工作流。",
-                "从用户和维护者收集业务需求。",
-                "与主数据管理（MDM）团队协调以维护该服务。",
-                "审批工作流目前被 Essilor 共享服务的采购申请部门和 IT 采购团队使用。",
-                "进行知识分享并为审批工作流创建文档。",
-                "还使用 OracleSQL 和 PL/SQL 开发了数据重复和清理报告，提高了 Essilor 全球供应商数据质量。",
-                "使用 Google Apps Script（基于 JavaScript 的语言）、Google Sheets、Google Forms 和 Gmail 开发了审批工作流。",
-                "使用 OracleSQL 和 PL/SQL 开发了重复数据删除报告并将其部署到 Oracle ERP。",
-                "向团队教授了 OracleSQL 和 Git。",
-                "为重复数据删除报告创建了文档。"
+                "使用 Google Apps Script（基于 JavaScript）在 Google Sheets 中开发审批工作流，自动化 Essilor 共享服务的 IT 采购与采购申请流程，有效降低人工成本。",
+                "收集用户与运维团队的业务需求，并与主数据管理（MDM）团队协作维护服务。",
+                "审批工作流已在 Essilor 共享服务的采购申请部门和 IT 采购团队中正式落地使用。",
+                "主导知识分享与文档沉淀，确保团队可独立维护和持续迭代该工作流。",
+                "使用 OracleSQL 和 PL/SQL 开发并部署供应商去重报告至 Oracle ERP，提升 Essilor 全球供应商数据质量。",
+                "对团队进行 OracleSQL 和 Git 技能培训，并为去重报告编写完整技术文档。"
             ]
         }
     ],
@@ -224,7 +220,7 @@
             ]
         },
         {
-            "title": "在 AWS 上构建语言模型",
+            "title": "在 AWS 上构建大型语言模型",
             "skills": [
                 "Large Language Models (LLM)",
                 "Amazon Web Services (AWS)",
@@ -368,7 +364,7 @@
     ],
     "volunteering": [
         {
-            "title": "高级顾问和裁判",
+            "title": "评审顾问",
             "year": "2018",
             "description": [
                 "在 2018 年 IT 开放日《PHP 和 JavaScript》竞赛中担任顾问和裁判。"
@@ -378,8 +374,8 @@
             "title": "教育团队成员",
             "year": "2017",
             "description": [
-                "在练习中教新学生学习如何用 Python3 编程，练习问题解决技能。",
-                "为 IT KMITL Python 预编程课程启动 YouTube 版本，提供按需在线 Python 课程，为无限学习可能性提供了条件。"
+                "辅导新生学习 Python3 编程，训练算法与问题解决能力。",
+                "开设了 IT KMITL Python 预编程课程的 YouTube 在线版，为学生提供随时可学的课程资源。"
             ],
             "link": {
                 "text": "IT KMITL Python Pre-programming course on YouTube",
@@ -387,10 +383,10 @@
             }
         },
         {
-            "title": "教学主任",
+            "title": "教学负责人",
             "year": "2017",
             "description": [
-                "教新学生如何使用亚马逊网络服务进行云服务。"
+                "指导新生上手 AWS 云服务的基础操作与实践。"
             ]
         }
     ],
