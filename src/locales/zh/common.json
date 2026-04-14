@@ -8,11 +8,11 @@
         "previous_button": "上一页",
         "next_button": "下一页",
         "page_of": "第 {currentPage} 页，共 {totalPages} 页",
-        "no_posts_found": "未找到博客文章。",
+        "no_posts_found": "暂无文章，正在创作中，敬请期待。",
         "all_categories": "全部",
         "table_of_contents": "目录",
         "eyebrow": "写作",
-        "posts_count": "{count} 篇关于技术、开发等的文章"
+        "posts_count": "{count} 篇文章——以技术为主，偶有杂感。"
     },
     "footer": {
         "tagline": "全栈开发者与云爱好者",
@@ -32,7 +32,7 @@
         "sidebar_title": "文档",
         "all_projects_title": "所有项目",
         "documented_projects": "{count} 个已记录项目",
-        "subtitle": "开发笔记、架构决策与实现参考 — {count} 个项目",
+        "subtitle": "开发笔记、架构决策与实现参考，共 {count} 个项目",
         "pages_count": "{count} 页"
     },
     "gallery": {
@@ -67,12 +67,12 @@
     "contact": {
         "eyebrow": "联系我",
         "title": "一起合作吧",
-        "subtitle": "欢迎自由职业、咨询及全职合作机会。",
-        "available_label": "接受工作",
+        "subtitle": "有项目想聊？欢迎联系 — 外包、顾问或全职均可。",
+        "available_label": "现开放项目合作",
         "email_label": "发送邮件",
         "email_cta": "hello@sagelga.com",
         "socials_heading": "其他平台",
-        "response_note": "我通常在 48 小时内回复。"
+        "response_note": "我通常在工作日 48 小时内回复。"
     },
     "nav": {
         "home": "主页",
@@ -80,7 +80,7 @@
         "gallery": "画廊",
         "learn": "学习",
         "docs": "文档",
-        "profiles": "联系",
+        "profiles": "社交主页",
         "contact": "联系",
         "experience": "经验",
         "certifications": "认证",
@@ -105,7 +105,7 @@
         "go_home": "返回首页"
     },
     "games": {
-        "eyebrow": "既然来了，不如玩一玩",
+        "eyebrow": "来都来了，玩一局吧",
         "memory_match": "记忆配对",
         "solo_uno": "单人 UNO",
         "moves": "{count} 步",
@@ -137,7 +137,7 @@
         },
         "settings": {
             "title": "Cookie 设置",
-            "description": "请在下方管理您的 Cookie 偏好。功能性 Cookie 始终开启，是网站正常运行的基础，无法关闭。",
+            "description": "请在下方管理您的 Cookie 偏好。功能性 Cookie 为必要项，始终开启，无法关闭。",
             "close": "关闭",
             "learn_more": "如需了解我如何使用 Cookie，请参阅我的"
         },
