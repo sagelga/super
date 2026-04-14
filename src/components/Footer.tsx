@@ -166,6 +166,21 @@ const Footer: React.FC = () => {
                             Srisuntiroj
                         </span>
                         <div className="flex items-center gap-6">
+                            <a
+                                href="https://webring.wonderful.software#hewkawar.xyz"
+                                title="วงแหวนเว็บ"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="opacity-60 transition-opacity duration-150 hover:opacity-100"
+                            >
+                                {/* eslint-disable-next-line @next/next/no-img-element */}
+                                <img
+                                    alt="วงแหวนเว็บ"
+                                    width={32}
+                                    height={32}
+                                    src="https://webring.wonderful.software/webring.white.svg"
+                                />
+                            </a>
                             <button
                                 onClick={() => setShowLanguageSwitcher(true)}
                                 className="footer-toggle-btn"
