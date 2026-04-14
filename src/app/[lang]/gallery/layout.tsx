@@ -13,7 +13,7 @@ export async function generateMetadata({
     const t = await getTranslations({ locale: lang, namespace: "common" });
     const canonical =
         lang === "th" ? `${BASE_URL}/gallery` : `${BASE_URL}/${lang}/gallery`;
-    const title = t("gallery.title");
+    const title = t("nav.gallery");
     const description = t("gallery.subtitle");
 
     return {

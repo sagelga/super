@@ -5,21 +5,45 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { BASE_URL } from "@/lib/config";
 
-export const metadata: Metadata = {
-    title: "Documentation",
-    description: "Technical documentation for projects by Kunanon Srisuntiroj.",
-    openGraph: {
-        title: "Documentation | Kunanon Srisuntiroj",
-        url: `${BASE_URL}/docs`,
-        type: "website",
-    },
-    alternates: { canonical: `${BASE_URL}/docs` },
-};
+const LOCALES = ["en", "th", "zh"] as const;
+
+export async function generateMetadata({
+    params,
+}: {
+    params: Promise<{ lang: string }>;
+}): Promise<Metadata> {
+    const { lang } = await params;
+    const t = await getTranslations({ locale: lang, namespace: "common" });
+    const canonical =
+        lang === "th" ? `${BASE_URL}/docs` : `${BASE_URL}/${lang}/docs`;
+    const title = t("nav.docs");
+    const description = t("docs.sidebar_title");
+
+    return {
+        title,
+        description,
+        openGraph: {
+            title,
+            description,
+            url: canonical,
+            type: "website",
+        },
+        alternates: {
+            canonical,
+            languages: Object.fromEntries(
+                LOCALES.map((l) => [
+                    l,
+                    l === "th" ? `${BASE_URL}/docs` : `${BASE_URL}/${l}/docs`,
+                ]),
+            ),
+        },
+    };
+}
 
 const pad = (n: number) => String(n).padStart(2, "0");
 
 export default async function DocsPage() {
-    const projects = getDocProjects();
+    const projects = await getDocProjects();
     const t = await getTranslations("common");
 
     const jsonLd = generateCollectionPageJsonLd({

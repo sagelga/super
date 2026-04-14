@@ -2,21 +2,42 @@ import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { BASE_URL } from "@/lib/config";
 
-export const metadata: Metadata = {
-    title: "Contact",
-    description:
-        "Get in touch with Kunanon Srisuntiroj — open to freelance, consulting, and full-time opportunities.",
-    openGraph: {
-        title: "Contact | Kunanon Srisuntiroj",
-        description:
-            "Get in touch — open to freelance, consulting, and full-time opportunities.",
-        url: `${BASE_URL}/contact`,
-        type: "website",
-    },
-    alternates: {
-        canonical: `${BASE_URL}/contact`,
-    },
-};
+const LOCALES = ["en", "th", "zh"] as const;
+
+export async function generateMetadata({
+    params,
+}: {
+    params: Promise<{ lang: string }>;
+}): Promise<Metadata> {
+    const { lang } = await params;
+    const t = await getTranslations({ locale: lang, namespace: "common" });
+    const canonical =
+        lang === "th" ? `${BASE_URL}/contact` : `${BASE_URL}/${lang}/contact`;
+    const title = t("nav.contact");
+    const description = t("contact.subtitle");
+
+    return {
+        title,
+        description,
+        openGraph: {
+            title,
+            description,
+            url: canonical,
+            type: "website",
+        },
+        alternates: {
+            canonical,
+            languages: Object.fromEntries(
+                LOCALES.map((l) => [
+                    l,
+                    l === "th"
+                        ? `${BASE_URL}/contact`
+                        : `${BASE_URL}/${l}/contact`,
+                ]),
+            ),
+        },
+    };
+}
 
 const socials = [
     {

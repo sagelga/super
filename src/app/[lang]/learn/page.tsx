@@ -5,6 +5,8 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { BASE_URL } from "@/lib/config";
 
+const LOCALES = ["en", "th", "zh"] as const;
+
 const TOPIC_ICONS: Record<string, string> = {
     python: "devicon-python-plain",
     git: "devicon-git-plain",
@@ -12,20 +14,41 @@ const TOPIC_ICONS: Record<string, string> = {
     spss: "devicon-r-plain",
 };
 
-export const metadata: Metadata = {
-    title: "Learn",
-    description:
-        "Programming and technology cheatsheets and guides by Kunanon Srisuntiroj.",
-    openGraph: {
-        title: "Learn | Kunanon Srisuntiroj",
-        url: `${BASE_URL}/learn`,
-        type: "website",
-    },
-    alternates: { canonical: `${BASE_URL}/learn` },
-};
+export async function generateMetadata({
+    params,
+}: {
+    params: Promise<{ lang: string }>;
+}): Promise<Metadata> {
+    const { lang } = await params;
+    const t = await getTranslations({ locale: lang, namespace: "common" });
+    const canonical =
+        lang === "th" ? `${BASE_URL}/learn` : `${BASE_URL}/${lang}/learn`;
+    const title = t("nav.learn");
+    const description = t("learn.subtitle");
+
+    return {
+        title,
+        description,
+        openGraph: {
+            title,
+            description,
+            url: canonical,
+            type: "website",
+        },
+        alternates: {
+            canonical,
+            languages: Object.fromEntries(
+                LOCALES.map((l) => [
+                    l,
+                    l === "th" ? `${BASE_URL}/learn` : `${BASE_URL}/${l}/learn`,
+                ]),
+            ),
+        },
+    };
+}
 
 export default async function LearnPage() {
-    const topics = getLearnTopics();
+    const topics = await getLearnTopics();
     const t = await getTranslations("common");
 
     const jsonLd = generateCollectionPageJsonLd({
