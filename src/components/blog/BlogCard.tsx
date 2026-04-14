@@ -21,13 +21,13 @@ export default function BlogCard({ post, locale }: BlogCardProps) {
             {post.image &&
                 (post.image.startsWith("http") ||
                     post.image.startsWith("/")) && (
-                    <div className="h-36 w-full shrink-0 overflow-hidden rounded-sm sm:w-52">
+                    <div className="h-36 w-full shrink-0 overflow-hidden rounded-sm sm:h-48 sm:w-48 md:w-56">
                         <Image
                             src={post.image}
                             alt={post.title}
-                            width={208}
-                            height={144}
-                            sizes="208px"
+                            width={224}
+                            height={192}
+                            sizes="(max-width: 640px) 100vw, (max-width: 768px) 208px, 224px"
                             className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                         />
                     </div>
@@ -44,7 +44,7 @@ export default function BlogCard({ post, locale }: BlogCardProps) {
                     <h2 className="mb-2">
                         <Link
                             href={`/blog/${post.slug}`}
-                            className="font-serif text-xl font-semibold text-cream transition-colors duration-200 hover:text-accent"
+                            className="text-cream font-serif text-xl font-semibold transition-colors duration-200 hover:text-accent"
                         >
                             {post.title}
                         </Link>
