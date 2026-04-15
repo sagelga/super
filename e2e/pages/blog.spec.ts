@@ -49,6 +49,58 @@ test.describe("Blog Page", () => {
     });
 });
 
+test.describe("mobile blog layout", () => {
+    test.use({ viewport: { width: 375, height: 812 } });
+
+    test("blog listing has no horizontal overflow on mobile", async ({
+        page,
+    }) => {
+        await page.goto("/en/blog");
+        await waitForPageLoad(page);
+        await acceptCookiesIfVisible(page);
+
+        const { scrollWidth, clientWidth } = await page.evaluate(() => ({
+            scrollWidth: document.documentElement.scrollWidth,
+            clientWidth: document.documentElement.clientWidth,
+        }));
+        expect(scrollWidth).toBeLessThanOrEqual(clientWidth + 1);
+    });
+
+    test("blog post links are tap-target sized on mobile", async ({ page }) => {
+        await page.goto("/en/blog");
+        await waitForPageLoad(page);
+        await acceptCookiesIfVisible(page);
+
+        const box = await page.locator("article a").first().boundingBox();
+        if (box) {
+            expect(box.height).toBeGreaterThanOrEqual(44);
+        }
+    });
+
+    test("filter/category controls are reachable on mobile", async ({
+        page,
+    }) => {
+        await page.goto("/en/blog");
+        await waitForPageLoad(page);
+        await acceptCookiesIfVisible(page);
+
+        const filterBar = page
+            .locator('[class*="filter"], button')
+            .filter({ hasText: /all/i })
+            .first();
+        if (await filterBar.isVisible({ timeout: 3000 }).catch(() => false)) {
+            const clientWidth = await page.evaluate(
+                () => document.documentElement.clientWidth,
+            );
+            const box = await filterBar.boundingBox();
+            if (box) {
+                expect(box.x).toBeGreaterThanOrEqual(0);
+                expect(box.x + box.width).toBeLessThanOrEqual(clientWidth + 1);
+            }
+        }
+    });
+});
+
 test.describe("Blog Page - Navigation", () => {
     test("should navigate to individual blog post", async ({ page }) => {
         await page.goto("/en/blog");
