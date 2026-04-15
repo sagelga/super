@@ -124,10 +124,10 @@ describe("SEO Configuration", () => {
             expect(fs.existsSync(iconPath)).toBe(true);
         });
 
-        it("should have robots.txt", async () => {
+        it("should have dynamic robots handler", async () => {
             const fs = await import("fs");
             const path = await import("path");
-            const robotsPath = path.join(process.cwd(), "public/robots.txt");
+            const robotsPath = path.join(process.cwd(), "src/app/robots.ts");
             expect(fs.existsSync(robotsPath)).toBe(true);
         });
     });
