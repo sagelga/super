@@ -1,0 +1,155 @@
+---
+slug: super-development-process
+title: "Building Super: AI-Assisted Portfolio Development"
+description: "A behind-the-scenes look at how I built this portfolio using Claude Code, Next.js 15, Cloudflare Workers, and a custom design system — and what I learned along the way."
+date: "2026-04-15"
+authors:
+  - sagelga
+tags:
+  - nextjs
+  - cloudflare
+  - tailwind
+  - ai
+  - portfolio
+  - development-process
+---
+
+Every developer eventually reaches the point where they want to build their own portfolio — something that actually represents who they are, not just another cloned template with swapped-out colors. I've been at that point a few times. This time I decided to do it properly: plan it, build it with modern tooling, and be honest about the process, including the role that AI played throughout.
+
+This is that honest account.
+
+## AI as a Development Partner
+
+I used Claude Code extensively throughout this project, and I want to be specific about what that actually means — because "I used AI" has become a meaningless phrase.
+
+### What AI handled well
+
+The bulk of Claude Code's contribution was in pattern application and boilerplate elimination. When I needed to add `generateMetadata` to every page under `src/app/[lang]/`, Claude could look at one well-written example and replicate the pattern across a dozen files without introducing subtle inconsistencies. When I needed to migrate from one CSS variable naming scheme to another, it could apply a consistent transformation across thirty-odd files while I reviewed the diff.
+
+Code review was another strong area. After writing a new component, I'd run `/review` and get back a structured list of issues — critical first, then high, then medium. It caught a missing `aria-label` on an icon button. It flagged a component that was doing too much and suggested splitting it. It noticed I'd forgotten to handle the loading state in a fetch hook.
+
+The `/plan` workflow changed how I approached larger features. Instead of starting to type code and discovering structural problems halfway through, I'd describe the feature and ask for a plan. The output was a structured breakdown of components, data flow, and edge cases — something I could review and push back on before writing a single line.
+
+### Where human judgment was irreplaceable
+
+Design decisions, full stop. Claude could implement whatever design system I described, but it couldn't tell me whether the warm amber accent color felt right against the near-black canvas, or whether the heading hierarchy actually communicated hierarchy to a real reader.
+
+Architectural trade-offs were similar. When I was deciding between putting content in a database versus serving it as static files from the repo, Claude could lay out the pros and cons of each approach, but the decision required understanding my actual deployment constraints, my comfort with different failure modes, and what I actually wanted to optimize for.
+
+There's also something that I'd call "taste under pressure." When a layout wasn't quite working, I didn't need more code — I needed to step back and look at it. Claude is fast, which is genuinely valuable, but speed can become a trap if you're generating variations of a bad idea instead of reconsidering the idea itself.
+
+### The /batch workflow
+
+One thing that surprised me: batch tasks. I set up a pattern where I'd describe a set of related changes — say, "update all blog page components to use the new Section API" — and Claude would work through them systematically, applying consistent transformations across files while I reviewed each batch. It felt like pair programming with someone who doesn't get tired and doesn't lose context across files.
+
+:::tip
+The most effective pattern I found was treating Claude Code as a senior collaborator who needs clear requirements, not a code generator who needs prompts. "Add a loading state to this component following the same pattern as HeroSection.tsx" gets better results than "add a loading spinner."
+:::
+
+## Tech Stack Choices
+
+### Next.js 15 with App Router
+
+The App Router is the right choice for a content-heavy site like this. Server components mean that most pages render without shipping any JavaScript to the client — the blog post page, for instance, is entirely server-rendered. `generateMetadata` made per-page SEO straightforward: each page exports an async function that can fetch its own metadata, and Next.js handles the rest.
+
+The one rough edge is the learning curve around when to use `'use client'` and when not to. I over-applied it early on and had to go back and fix components that didn't need to be client components. The rule of thumb I settled on: if it doesn't need interactivity or browser APIs, it's a server component.
+
+### Cloudflare Workers via OpenNext
+
+The decision not to deploy on Vercel was deliberate. Cloudflare Workers runs at the edge, meaning the server handling a request in Bangkok is closer to a Thai visitor than a Vercel deployment in a single AWS region. For a portfolio that leads with Thai as its default locale, that matters.
+
+OpenNext makes it possible to deploy Next.js on Cloudflare without forking the framework or maintaining a custom adapter. The setup required some configuration — `wrangler.jsonc` for bindings, D1 for auth/session storage, R2 for incremental cache — but once it was running, it was running.
+
+:::note
+The R2 binding for OpenNext's incremental cache is defined in `wrangler.jsonc` as `super-cache`. This is what makes `generateStaticParams` actually useful in a Workers environment — pages that can be pre-rendered are cached at the edge rather than re-rendered on every request.
+:::
+
+### Tailwind CSS v4
+
+Tailwind v4 moved the configuration into CSS, which sounds like a step backward until you actually use it. The design token system lives in `src/app/globals.css` as CSS custom properties, which means they're available to both Tailwind utilities and raw CSS alike. No more jumping between `tailwind.config.js` and stylesheets to find where a value is defined.
+
+The semantic token layer was intentional. Rather than using raw palette values in components, I defined named tokens — `primary`, `secondary`, `background`, `surface`, `text-primary`, `text-secondary` — and components reference those. When a token needs to change, it changes in one place.
+
+### next-intl for Three Locales
+
+Three locales: Thai (`th`), English (`en`), Chinese (`zh`). Thai is the default and served without a URL prefix. English gets `/en/`, Chinese gets `/zh/`.
+
+The locale detection is intentionally disabled. Visitors get Thai unless they explicitly navigate to a prefixed URL. This was a considered choice: the primary audience for this portfolio is Thai-speaking — recruiters, companies, contacts in the Thai tech ecosystem. Locale detection based on browser language would be actively unhelpful for most visitors.
+
+## Design Decisions
+
+### The Aesthetic Brief
+
+I started with a clear anti-pattern list before anything else:
+
+- No glassmorphism cards with glow borders
+- No cyan or purple neon on dark backgrounds
+- No gradient text metric displays
+- No identical card grids with icon + heading + text repeated endlessly
+
+These aren't arbitrary restrictions. They're the aesthetic vocabulary of "generic developer portfolio" — the visual equivalent of using a lorem ipsum placeholder bio. If you've seen a thousand portfolios that look the same, the goal is to look like none of them.
+
+The direction I landed on was what I'd call artisan/handcrafted: warm dark tones, typography with personality, layouts that break grids intentionally rather than adhering to them. Think aged leather notebooks and candlelight rather than sterile dark mode.
+
+### The Palette
+
+The palette was designed as a cohesive system, not a collection of colors:
+
+- **Background** (`#1A1814`): Warm near-black with brown undertones, not pure black. Pure black reads as cold and digital; this reads as a surface.
+- **Surface** (`#252219`): Cards and sections sit slightly above the background. The difference is subtle — on purpose.
+- **Primary** (`#3B4A8C`): Deep indigo for structural elements. Conveys craft and depth without being flashy.
+- **Secondary/accent** (`#C9943A`): Warm amber. This is the most important token. It's used like lamplight — sparingly, on things worth noticing: links, hover states, active indicators, key labels.
+
+The restraint on amber is deliberate. When everything is accented, nothing is. Using it only on interactive and high-importance elements means the eye is trained to look for it.
+
+### Typography as Personality
+
+Fonts aren't decoration — they're the first thing a reader experiences before they read a single word. The heading typeface has weight and character. The body typeface is readable at length. The monospace typeface (for code) is legible at small sizes.
+
+None of this sounds revolutionary because it isn't. What's surprising is how rarely portfolios treat typography as a design decision rather than a default.
+
+:::warning
+One thing I kept having to resist: adding more visual variety just because I could. More font weights, more accent uses, more motion. Restraint is the discipline. The design should feel considered, not exhausted.
+:::
+
+## The i18n and Content System
+
+### Three Audiences, Three Locales
+
+Thai is personal — this is where I sound most like myself, writing to people who share cultural context with me. The content assumes familiarity. It's warmer and more direct.
+
+English is recruiter-facing. Hiring managers and tech leads outside Thailand are reading English. The voice is still mine, but calibrated toward clarity and professional legibility. A recruiter who lands on the homepage should understand what I do within ten seconds.
+
+Chinese is future reach. I'm not fluent, which means Chinese content requires more careful handling — and it's why every locale has its own files under `src/locales/{en,th,zh}/` rather than auto-translation from one source.
+
+### The Translation Trap
+
+The most important lesson from i18n work: don't translate literally. Literal translations sound like translations. Real localization sounds like native writing.
+
+The discipline I developed: before writing text in any locale, find a real native reference. For Thai, look at how LinkedIn Thailand or Skooldio write. For Chinese, look at Juejin. Use those as reference for register, phrasing, and the specific vocabulary a native speaker would actually choose. Never translate a sentence — write the sentence.
+
+### The MDX Pipeline
+
+Content lives in `/content/` outside `src/`. Blog posts in `/content/blog/`, docs in `/content/docs/{project}/`, learning paths in `/content/learn/{topic}/`.
+
+Everything goes through `src/lib/content.ts`, which uses gray-matter for frontmatter parsing and two custom remark plugins: `remark-admonitions.ts` for `:::note`/`:::tip`/`:::warning` blocks, and `remark-resolve-images.ts` for handling image paths relative to the content file.
+
+The hybrid caching approach — Cloudflare R2 for static assets, D1 for structured data — means content can be served quickly at the edge. Markdown files don't require a database round-trip; they're processed at build time and the result is cached.
+
+### Sidebar Generation
+
+The docs sidebar generates from the file tree automatically via `src/lib/sidebar.ts`. Drop a file in `/content/docs/project/section/page.md` and it appears in the sidebar. The ordering comes from numeric prefixes on filenames — `01-introduction.md` appears before `02-quickstart.md`. It's a simple convention that removes an entire category of configuration.
+
+## What I'd Do Differently
+
+Build in public earlier. I spent too long with the site in a state that felt "not ready" — which meant nobody could give me feedback on it. The first version of the blog section that had even one real post was more valuable than months of component work without content.
+
+Lighthouse baseline earlier. I ran a formal audit in April and found an LCP of 6.2 seconds on the home page and a CLS of 0.206. Both are solvable, but they're easier to solve when you haven't already shipped a hundred other things. Adding performance monitoring to the development loop from the start would have caught these earlier.
+
+Less abstraction, more shipping. I built a component library before I had enough content to know what I actually needed. Some of those components never got used. Better to build the content first, extract components when you see a pattern repeating, and accept that the first version of something is allowed to be bespoke.
+
+---
+
+If you're building something similar — a portfolio that actually represents your work rather than your ability to copy a template — I hope this is useful. The tech choices matter less than the design intention, and the design intention matters less than having real content worth reading.
+
+The code is the easy part.
