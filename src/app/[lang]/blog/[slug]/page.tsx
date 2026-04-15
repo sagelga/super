@@ -21,7 +21,7 @@ import { BASE_URL } from "@/lib/config";
 const LOCALES = ["en", "th", "zh"];
 
 export async function generateStaticParams() {
-    const posts = getBlogPosts();
+    const posts = await getBlogPosts();
     return LOCALES.flatMap((lang) =>
         posts.map((post) => ({ lang, slug: post.slug })),
     );
@@ -33,7 +33,7 @@ export async function generateMetadata({
     params: Promise<{ slug: string; lang?: string }>;
 }): Promise<Metadata> {
     const { slug, lang } = await params;
-    const item = getContentBySlug("blog", [slug]);
+    const item = await getContentBySlug("blog", [slug]);
     if (!item) return { title: "Post Not Found" };
 
     const fm = item.frontmatter as {
@@ -91,7 +91,7 @@ export default async function PostPage({
     params: Promise<{ slug: string; lang?: string }>;
 }) {
     const { slug, lang } = await params;
-    const item = getContentBySlug("blog", [slug]);
+    const item = await getContentBySlug("blog", [slug]);
     if (!item) notFound();
 
     const fm = item.frontmatter as {
@@ -102,11 +102,11 @@ export default async function PostPage({
         tags?: string[];
         authors?: string[];
     };
-    const authorData = getAuthors();
+    const authorData = await getAuthors();
     const toc = extractTableOfContents(item.source);
     const readingTime = estimateReadingTime(item.source);
     const wordCount = item.source.split(/\s+/).length;
-    const { prev, next } = getAdjacentBlogPosts(slug);
+    const { prev, next } = await getAdjacentBlogPosts(slug);
 
     const blogJsonLd = generateBlogPostingJsonLd({
         slug,
@@ -170,7 +170,7 @@ export default async function PostPage({
                         />
                     </article>
                     {toc.length >= 2 && (
-                        <aside className="hidden w-56 shrink-0 xl:block">
+                        <aside className="hidden w-56 shrink-0 lg:block">
                             <div className="sticky top-24">
                                 <TableOfContents items={toc} />
                             </div>

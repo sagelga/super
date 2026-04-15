@@ -66,7 +66,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
     const t = await getTranslations("common");
     const locale = await getLocale();
     const { page: pageParam } = await searchParams;
-    const allPosts = getBlogPosts();
+    const allPosts = await getBlogPosts();
 
     const currentPage = Math.max(1, parseInt(pageParam ?? "1", 10) || 1);
     const totalPages = Math.ceil(allPosts.length / POSTS_PER_PAGE);
@@ -83,6 +83,9 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
     const langPrefix = locale === "th" ? "" : `/${locale}`;
     const pageHref = (n: number) =>
         `${langPrefix}/blog${n > 1 ? `?page=${n}` : ""}`;
+
+    const paginationLinkClass =
+        "text-cream flex min-h-[44px] min-w-[44px] touch-manipulation items-center gap-2 border border-rim bg-surface px-5 py-2.5 text-sm tracking-wide transition-colors duration-200 hover:border-accent hover:text-accent";
 
     return (
         <>
@@ -103,9 +106,21 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
                     </p>
                 </header>
                 <div>
-                    {posts.map((post) => (
-                        <BlogCard key={post.slug} post={post} locale={locale} />
-                    ))}
+                    {posts.length === 0 ? (
+                        <div className="py-24 text-center">
+                            <p className="text-muted">
+                                {t("blog.no_posts_found")}
+                            </p>
+                        </div>
+                    ) : (
+                        posts.map((post) => (
+                            <BlogCard
+                                key={post.slug}
+                                post={post}
+                                locale={locale}
+                            />
+                        ))
+                    )}
                 </div>
                 {totalPages > 1 && (
                     <nav
@@ -115,7 +130,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
                         {clampedPage > 1 ? (
                             <Link
                                 href={pageHref(clampedPage - 1)}
-                                className="text-cream flex items-center gap-2 border border-rim bg-surface px-5 py-2.5 text-sm tracking-wide transition-colors duration-200 hover:border-accent hover:text-accent"
+                                className={paginationLinkClass}
                             >
                                 <svg
                                     width="14"
@@ -144,7 +159,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
                         {clampedPage < totalPages ? (
                             <Link
                                 href={pageHref(clampedPage + 1)}
-                                className="text-cream flex items-center gap-2 border border-rim bg-surface px-5 py-2.5 text-sm tracking-wide transition-colors duration-200 hover:border-accent hover:text-accent"
+                                className={paginationLinkClass}
                             >
                                 {t("blog.next_button")}
                                 <svg
