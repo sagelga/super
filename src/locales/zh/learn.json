@@ -1,16 +1,16 @@
 {
     "hero": {
-        "title": "个性化科技教育，从这里开启你的成长之路。",
-        "description": "发现 Python、SQL、TypeScript、Notion 等领域的定制一对一教学。我指导各个年龄段的求知者释放他们的全部潜力。",
+        "title": "定制化技术教学，助你掌握真正实用的技能。",
+        "description": "提供 Python、SQL、TypeScript、Notion 等方向的定制一对一授课，面向各年龄段学习者，激发学习潜能。",
         "explore_paths": "探索学习路径",
         "connect_with_me": "与我联系"
     },
     "why_choose_path": {
         "title": "为什么选择这条路径？",
-        "introduction": "我的教学方法以你独特的学习风格为中心。我提供实践操作、基于项目的指导，使复杂话题对每个学习者都易懂且有趣，从年轻初学者到资深专业人士。",
-        "young_learners_title": "青少年学习者：点燃热情",
+        "introduction": "我的教学以学员的学习风格为中心，提供项目驱动的实操指导，让复杂概念对每位学员都通俗易懂、生动有趣，无论是初学者还是职场专业人士。",
+        "young_learners_title": "青少年学习者：建立兴趣，夯实基础",
         "young_learners_description": "精心设计的互动式课程，旨在建立基础科技技能并培养学习热爱。",
-        "adult_learners_title": "成人学习者：加速成长",
+        "adult_learners_title": "成人学习者：系统提升，学以致用",
         "adult_learners_description": "实用深入的指导，增强你的技能、解决现实问题并推进职业发展。"
     },
     "discovery_paths": {
@@ -29,9 +29,9 @@
                 "audience": "成人学习者"
             },
             {
-                "title": "TypeScript 网络开发",
+                "title": "TypeScript Web 开发",
                 "description": "使用 TypeScript 和现代框架构建健壮和可扩展的网络应用。",
-                "benefits": ["强类型 JavaScript", "前端框架集成", "可扩展代码架构"],
+                "benefits": ["强类型 JavaScript", "前端框架集成", "可维护的代码架构"],
                 "audience": "成人学习者"
             },
             {
@@ -47,13 +47,13 @@
                 "audience": "青少年学习者和成人"
             },
             {
-                "title": "React.js：组件设计展示",
+                "title": "React.js：组件化开发实战",
                 "description": "深入 React 构建交互式和动态的用户界面。",
                 "benefits": ["基于组件的架构", "状态管理", "Hooks 和函数式组件"],
                 "audience": "成人学习者"
             },
             {
-                "title": "Git 和 GitHub：开发者的蓝图",
+                "title": "Git 和 GitHub：版本管理入门",
                 "description": "学习协作编程和项目管理的基本版本控制。",
                 "benefits": ["跟踪代码更改", "与团队协作", "管理项目版本"],
                 "audience": "所有学习者"
@@ -62,13 +62,13 @@
         "learn_more": "了解更多"
     },
     "how_journey_works": {
-        "title": "学习流程",
-        "step1_title": "确认你的路径",
+        "title": "如何开始",
+        "step1_title": "选择你的方向",
         "step1_description": "探索可用的多样化学习路径，确定你想掌握的技能。",
         "step2_title": "与我联系",
         "step2_description": "通过我们的联系表格与我联系，讨论你的目标并安排入门聊天。",
         "step3_title": "开始学习",
-        "step3_description": "开始你的个性化一对一课程，踏上专业知识之旅！"
+        "step3_description": "开始你的个性化一对一课程，正式踏上学习之路！"
     },
     "success_stories": {
         "title": "学员心声",
@@ -82,13 +82,13 @@
         "q1_title": "典型的课程格式是什么？",
         "q1_description": "课程通常是一对一进行的，通过视频通话进行，且高度互动，重点是实践操作编程和问题解决。",
         "q2_title": "我可以自定义学习路径吗？",
-        "q2_description": "绝对可以！虽然我们有建议的路径，但我与每个学生合作，根据他们的具体目标和兴趣定制课程。",
+        "q2_description": "当然可以。虽然有建议路径，但我会根据每位学员的具体目标和兴趣定制课程内容。",
         "q3_title": "你教哪些年龄段？",
         "q3_description": "我教青少年学习者（通常 8 岁以上）和成人。我的教学风格适应学生的年龄和经验水平。"
     },
     "call_to_action": {
-        "title": "准备好开始你的旅程了吗？",
-        "description1": "迈出掌握新技能的第一步。我在这里指导你。",
+        "title": "准备好开始学习了吗？",
+        "description1": "迈出学习新技能的第一步，我会全程陪伴指导。",
         "description2": "在下面的表格中留下你的联系方式，我会与你联系讨论你的学习目标。",
         "button_text": "现在与我联系"
     }
