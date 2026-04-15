@@ -61,9 +61,9 @@ export default async function Home() {
     const { skills, projects, experiences, certifications, volunteering } =
         getHomePageData(t);
 
-    const blogPosts = getBlogPosts().slice(0, 3);
-    const learnTopics = getLearnTopics();
-    const docProjects = getDocProjects()
+    const blogPosts = (await getBlogPosts()).slice(0, 3);
+    const learnTopics = await getLearnTopics();
+    const docProjects = (await getDocProjects())
         .sort((a, b) => b.pageCount - a.pageCount)
         .slice(0, 4);
     const galleryItems = GALLERY_ITEMS.slice(0, 6);

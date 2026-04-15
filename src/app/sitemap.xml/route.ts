@@ -64,7 +64,7 @@ export async function GET() {
     }
 
     // Blog posts
-    const posts = getBlogPosts();
+    const posts = await getBlogPosts();
     for (const post of posts) {
         const basePath = `/blog/${post.slug}`;
         const lastmod = post.date ? new Date(post.date).toISOString() : now;
@@ -75,7 +75,7 @@ export async function GET() {
     }
 
     // Docs pages
-    const docSlugs = getAllSlugs("docs");
+    const docSlugs = await getAllSlugs("docs");
     for (const slugParts of docSlugs) {
         const basePath = `/docs/${slugParts.join("/")}`;
         for (const lang of LOCALES) {
@@ -85,7 +85,7 @@ export async function GET() {
     }
 
     // Learn pages
-    const learnSlugs = getAllSlugs("learn");
+    const learnSlugs = await getAllSlugs("learn");
     for (const slugParts of learnSlugs) {
         const basePath = `/learn/${slugParts.join("/")}`;
         for (const lang of LOCALES) {

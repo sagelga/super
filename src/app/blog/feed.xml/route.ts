@@ -5,8 +5,7 @@ import { BASE_URL } from "@/lib/config";
 export const dynamic = "force-static";
 
 export async function GET() {
-    const posts = getBlogPosts();
-    const authors = getAuthors();
+    const [posts, authors] = await Promise.all([getBlogPosts(), getAuthors()]);
     const now = new Date().toUTCString();
 
     const items = posts
