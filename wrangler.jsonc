@@ -22,17 +22,35 @@
             "bucket_name": "super-cache"
         }
     ],
+    "kv_namespaces": [
+        {
+            "binding": "SUPER_CACHE",
+            "id": "PLACEHOLDER_ID",
+            "preview_id": "PLACEHOLDER_PREVIEW_ID"
+        }
+    ],
     "d1_databases": [
         {
             "binding": "DB",
             "database_name": "super-auth",
             "database_id": "b95d13f8-aca0-4962-b74c-e040d527a811"
+        },
+        {
+            "binding": "CONTENT_DB",
+            "database_name": "super-content",
+            "database_id": "ae9eba62-7597-4150-b64c-5a5156b5270f"
         }
     ],
     "routes": [
     {
       "pattern": "sagelga.com",
       "custom_domain": true
+    }
+  ],
+  "services": [
+    {
+      "binding": "SUPERBRAIN",
+      "service": "superbrain-v2"
     }
   ]
 }

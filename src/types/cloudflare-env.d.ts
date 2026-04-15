@@ -5,8 +5,14 @@
  * Used with @opennextjs/cloudflare getCloudflareContext()
  */
 export interface CloudflareEnv {
-  DB: D1Database;
-  ASSETS: Fetcher;
+    DB: D1Database;
+    CONTENT_DB: D1Database;
+    ASSETS: Fetcher;
+    SUPER_CACHE: KVNamespace;
+    /** Service binding to the superbrain-v2 blog API worker */
+    SUPERBRAIN?: Fetcher;
+    /** Fallback URL for the Superbrain API (used when service binding is unavailable) */
+    SUPERBRAIN_URL?: string;
 }
 
 /**
@@ -17,18 +23,24 @@ export interface CloudflareEnv {
  * - JWT_SECRET: Secret key for signing JWTs
  */
 declare global {
-  interface CloudflareEnv {
-    DB: D1Database;
-    ASSETS: Fetcher;
-  }
-
-  namespace NodeJS {
-    interface ProcessEnv {
-      ADMIN_EMAIL?: string;
-      GOOGLE_CLIENT_ID?: string;
-      GOOGLE_CLIENT_SECRET?: string;
-      JWT_SECRET?: string;
-      NODE_ENV?: 'development' | 'production';
+    interface CloudflareEnv {
+        DB: D1Database;
+        CONTENT_DB: D1Database;
+        ASSETS: Fetcher;
+        SUPER_CACHE: KVNamespace;
+        /** Service binding to the superbrain-v2 blog API worker */
+        SUPERBRAIN?: Fetcher;
+        /** Fallback URL for the Superbrain API (used when service binding is unavailable) */
+        SUPERBRAIN_URL?: string;
     }
-  }
+
+    namespace NodeJS {
+        interface ProcessEnv {
+            ADMIN_EMAIL?: string;
+            GOOGLE_CLIENT_ID?: string;
+            GOOGLE_CLIENT_SECRET?: string;
+            JWT_SECRET?: string;
+            NODE_ENV?: "development" | "production";
+        }
+    }
 }
