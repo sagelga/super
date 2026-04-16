@@ -15,8 +15,8 @@ import { BASE_URL } from "@/lib/config";
 const LOCALES = ["en", "th", "zh"];
 
 export async function generateStaticParams() {
-    const topics = getLearnTopics();
-    const allSlugs = getAllSlugs("learn");
+    const topics = await getLearnTopics();
+    const allSlugs = await getAllSlugs("learn");
     const contentParams: { topic: string; slug: string[] }[] = [];
     for (const t of topics) {
         const slugs = allSlugs.filter((s) => s[0] === t.slug && s.length > 1);
@@ -35,7 +35,7 @@ export async function generateMetadata({
     params: Promise<{ topic: string; slug: string[] }>;
 }): Promise<Metadata> {
     const { topic, slug } = await params;
-    const item = getContentBySlug("learn", [topic, ...slug]);
+    const item = await getContentBySlug("learn", [topic, ...slug]);
     const title =
         (item?.frontmatter?.title as string) || slug[slug.length - 1] || topic;
     const canonical = `${BASE_URL}/learn/${topic}/${slug.join("/")}`;
@@ -52,12 +52,12 @@ export default async function LearnPage({
     params: Promise<{ topic: string; slug: string[] }>;
 }) {
     const { topic, slug } = await params;
-    const item = getContentBySlug("learn", [topic, ...slug]);
+    const item = await getContentBySlug("learn", [topic, ...slug]);
     if (!item) notFound();
 
     const fm = item.frontmatter as { title?: string };
     const title = fm.title || slug[slug.length - 1] || topic;
-    const sidebarItems = buildSidebarTree("learn", topic);
+    const sidebarItems = await buildSidebarTree("learn", topic);
     const toc = extractTableOfContents(item.source);
     const currentPath = `/learn/${topic}/${slug.join("/")}`;
 

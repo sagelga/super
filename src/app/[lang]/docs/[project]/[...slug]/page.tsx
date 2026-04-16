@@ -18,8 +18,8 @@ import { BASE_URL } from "@/lib/config";
 const LOCALES = ["en", "th", "zh"];
 
 export async function generateStaticParams() {
-    const projects = getDocProjects();
-    const allSlugs = getAllSlugs("docs");
+    const projects = await getDocProjects();
+    const allSlugs = await getAllSlugs("docs");
     const contentParams: { project: string; slug: string[] }[] = [];
     for (const p of projects) {
         const slugs = allSlugs.filter((s) => s[0] === p.slug && s.length > 1);
@@ -38,7 +38,7 @@ export async function generateMetadata({
     params: Promise<{ project: string; slug: string[] }>;
 }): Promise<Metadata> {
     const { project, slug } = await params;
-    const item = getContentBySlug("docs", [project, ...slug]);
+    const item = await getContentBySlug("docs", [project, ...slug]);
     const title =
         (item?.frontmatter?.title as string) ||
         slug[slug.length - 1] ||
@@ -57,12 +57,12 @@ export default async function DocPage({
     params: Promise<{ project: string; slug: string[] }>;
 }) {
     const { project, slug } = await params;
-    const item = getContentBySlug("docs", [project, ...slug]);
+    const item = await getContentBySlug("docs", [project, ...slug]);
     if (!item) notFound();
 
     const fm = item.frontmatter as { title?: string; description?: string };
     const title = fm.title || slug[slug.length - 1] || project;
-    const sidebarItems = buildSidebarTree("docs", project);
+    const sidebarItems = await buildSidebarTree("docs", project);
     const toc = extractTableOfContents(item.source);
     const readingTime = estimateReadingTime(item.source);
     const currentPath = `/docs/${project}/${slug.join("/")}`;

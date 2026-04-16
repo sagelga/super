@@ -17,7 +17,7 @@ import { BASE_URL } from "@/lib/config";
 const LOCALES = ["en", "th", "zh"];
 
 export async function generateStaticParams() {
-    const projects = getDocProjects();
+    const projects = await getDocProjects();
     return LOCALES.flatMap((lang) =>
         projects.map((p) => ({ lang, project: p.slug })),
     );
@@ -29,7 +29,7 @@ export async function generateMetadata({
     params: Promise<{ project: string }>;
 }): Promise<Metadata> {
     const { project } = await params;
-    const item = getContentBySlug("docs", [project]);
+    const item = await getContentBySlug("docs", [project]);
     const title = (item?.frontmatter?.title as string) || project;
     return {
         title,
@@ -48,12 +48,12 @@ export default async function DocProjectPage({
     params: Promise<{ project: string }>;
 }) {
     const { project } = await params;
-    const item = getContentBySlug("docs", [project]);
+    const item = await getContentBySlug("docs", [project]);
     if (!item) notFound();
 
     const fm = item.frontmatter as { title?: string; description?: string };
     const title = fm.title || project;
-    const sidebarItems = buildSidebarTree("docs", project);
+    const sidebarItems = await buildSidebarTree("docs", project);
     const toc = extractTableOfContents(item.source);
     const readingTime = estimateReadingTime(item.source);
     const currentHref = `/docs/${project}`;

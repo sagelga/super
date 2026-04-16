@@ -9,7 +9,7 @@ import { BASE_URL } from "@/lib/config";
 const LOCALES = ["en", "th", "zh"];
 
 export async function generateStaticParams() {
-    const topics = getLearnTopics();
+    const topics = await getLearnTopics();
     return LOCALES.flatMap((lang) =>
         topics.map((t) => ({ lang, topic: t.slug })),
     );
@@ -21,7 +21,7 @@ export async function generateMetadata({
     params: Promise<{ topic: string }>;
 }): Promise<Metadata> {
     const { topic } = await params;
-    const item = getContentBySlug("learn", [topic]);
+    const item = await getContentBySlug("learn", [topic]);
     const title = (item?.frontmatter?.title as string) || topic;
     return {
         title,
@@ -40,12 +40,12 @@ export default async function LearnTopicPage({
     params: Promise<{ topic: string }>;
 }) {
     const { topic } = await params;
-    const item = getContentBySlug("learn", [topic]);
+    const item = await getContentBySlug("learn", [topic]);
     if (!item) notFound();
 
     const fm = item.frontmatter as { title?: string };
     const title = fm.title || topic.charAt(0).toUpperCase() + topic.slice(1);
-    const sidebarItems = buildSidebarTree("learn", topic);
+    const sidebarItems = await buildSidebarTree("learn", topic);
     const techJsonLd = generateTechArticleJsonLd({
         path: `/learn/${topic}`,
         title,
