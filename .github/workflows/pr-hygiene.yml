@@ -65,14 +65,32 @@ jobs:
               core.warning(`Could not apply label '${label}': ${e.message}`);
             }
 
-            // Warn on XL PRs
+            // Warn on XL PRs — only post once (update existing bot comment if present)
             if (changed > 1000) {
-              await github.rest.issues.createComment({
+              const warningBody = `> [!WARNING]\n> This PR modifies **${changed} lines** (+${additions} / -${deletions}). Note: lockfile changes are included in this count.\n> Consider splitting into smaller PRs for easier review.`;
+              const { data: comments } = await github.rest.issues.listComments({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 issue_number: context.issue.number,
-                body: `> [!WARNING]\n> This PR modifies **${changed} lines** (+${additions} / -${deletions}). Note: lockfile changes are included in this count.\n> Consider splitting into smaller PRs for easier review.`,
               });
+              const existing = comments.find(
+                c => c.user.type === 'Bot' && c.body.includes('This PR modifies')
+              );
+              if (existing) {
+                await github.rest.issues.updateComment({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  comment_id: existing.id,
+                  body: warningBody,
+                });
+              } else {
+                await github.rest.issues.createComment({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: context.issue.number,
+                  body: warningBody,
+                });
+              }
             }
 
             core.info(`PR size: ${changed} lines (+${additions} / -${deletions}) → ${label}`);
