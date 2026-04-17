@@ -70,3 +70,6 @@ build-output.txt
 Thumbs.db
 ehthumbs.db
 Desktop.ini
+
+# Claude Code agent worktrees
+.claude/worktrees/
