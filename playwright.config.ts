@@ -13,6 +13,16 @@ export default defineConfig({
         trace: "on-first-retry",
         screenshot: "only-on-failure",
     },
+    webServer: process.env.BASE_URL
+        ? undefined
+        : {
+              command: "npm run dev",
+              url: "http://localhost:3000",
+              reuseExistingServer: !process.env.CI,
+              timeout: 120_000,
+              stdout: "pipe",
+              stderr: "pipe",
+          },
     projects: [
         {
             name: "chromium",

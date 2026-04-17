@@ -117,23 +117,10 @@ jobs:
       - name: Install Playwright browsers
         run: npx playwright install --with-deps chromium
 
-      - name: Start dev server
-        run: npm run dev > /tmp/nextserver-e2e.log 2>&1 &
-
-      - name: Wait for server
-        run: |
-          for i in $(seq 1 30); do
-            CODE=$(curl -s -o /dev/null -w "%{http_code}" --max-time 3 http://localhost:3000/ 2>/dev/null)
-            if echo "$CODE" | grep -qE '^[23]'; then echo "Server ready (HTTP $CODE)"; exit 0; fi
-            echo "  attempt $i: HTTP $CODE"; sleep 2
-          done
-          echo "Server failed to start. Logs:"; cat /tmp/nextserver-e2e.log; exit 1
-
       - name: Run E2E tests (Chromium only)
         run: npm run test:e2e:chromium
         env:
           CI: true
-          BASE_URL: http://localhost:3000
 
       - name: Upload Playwright report
         uses: actions/upload-artifact@v4
