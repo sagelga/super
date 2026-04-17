@@ -26,11 +26,11 @@ function SkillPill({
     const iconClass = getIconClass(skill);
 
     const tierStyles = {
-        core: "border-accent/40 bg-accent/5 px-4 py-2 text-sm font-medium text-cream hover:border-accent hover:bg-accent/10",
+        core: "border-accent/40 bg-accent/5 px-4 py-2 text-sm font-medium text-text hover:border-accent hover:bg-accent/10",
         proficient:
-            "border-rim px-3 py-1.5 text-sm text-muted hover:border-accent/50 hover:text-cream",
+            "border-rim px-3 py-1.5 text-sm text-muted hover:border-accent/50 hover:text-text",
         familiar:
-            "border-rim/50 px-2.5 py-1 text-xs text-muted/60 hover:border-rim hover:text-muted",
+            "border-rim/50 px-2.5 py-1 text-xs text-muted/70 hover:border-rim hover:text-muted",
     };
 
     return (
@@ -64,7 +64,7 @@ const SkillsList: React.FC<SkillsListProps> = ({ skills }) => {
                 className={`reveal space-y-6 ${isVisible ? "is-revealed" : ""}`}
             >
                 <div>
-                    <p className="mb-3 font-sans text-[10px] tracking-[0.3em] text-muted/40 uppercase">
+                    <p className="mb-3 font-sans text-[10px] tracking-[0.3em] text-muted/70 uppercase">
                         Core
                     </p>
                     <div className="flex flex-wrap gap-2">
@@ -74,7 +74,7 @@ const SkillsList: React.FC<SkillsListProps> = ({ skills }) => {
                     </div>
                 </div>
                 <div>
-                    <p className="mb-3 font-sans text-[10px] tracking-[0.3em] text-muted/40 uppercase">
+                    <p className="mb-3 font-sans text-[10px] tracking-[0.3em] text-muted/70 uppercase">
                         Proficient
                     </p>
                     <div className="flex flex-wrap gap-2">
@@ -88,7 +88,7 @@ const SkillsList: React.FC<SkillsListProps> = ({ skills }) => {
                     </div>
                 </div>
                 <div>
-                    <p className="mb-3 font-sans text-[10px] tracking-[0.3em] text-muted/40 uppercase">
+                    <p className="mb-3 font-sans text-[10px] tracking-[0.3em] text-muted/70 uppercase">
                         Familiar
                     </p>
                     <div className="flex flex-wrap gap-2">

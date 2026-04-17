@@ -71,7 +71,7 @@ const ConnectModal: React.FC<ConnectModalProps> = ({ isOpen, onClose }) => {
                             </p>
                         </div>
                         <svg
-                            className="ml-auto h-3.5 w-3.5 shrink-0 text-muted/50"
+                            className="ml-auto h-3.5 w-3.5 shrink-0 text-muted/65"
                             fill="none"
                             stroke="currentColor"
                             viewBox="0 0 24 24"

@@ -44,7 +44,7 @@ export default function BlogCard({ post, locale }: BlogCardProps) {
                     <h2 className="mb-2">
                         <Link
                             href={`/blog/${post.slug}`}
-                            className="text-cream font-serif text-xl font-semibold transition-colors duration-200 hover:text-accent"
+                            className="text-text font-serif text-xl font-semibold transition-colors duration-200 hover:text-accent"
                         >
                             {post.title}
                         </Link>

@@ -43,7 +43,7 @@ function NavItem({
                     className={`mb-1.5 block text-sm font-medium transition-colors ${
                         isActive
                             ? "text-accent"
-                            : "text-cream hover:text-accent"
+                            : "text-text hover:text-accent"
                     }`}
                 >
                     {item.label}
@@ -63,7 +63,7 @@ function NavItem({
                                 className={`block py-0.5 text-sm transition-colors ${
                                     pathname === child.href
                                         ? "text-accent"
-                                        : "text-muted hover:text-cream"
+                                        : "text-muted hover:text-text"
                                 }`}
                             >
                                 {child.label}
@@ -78,7 +78,7 @@ function NavItem({
                                                 className={`block py-0.5 text-xs transition-colors ${
                                                     pathname === grandchild.href
                                                         ? "text-accent"
-                                                        : "text-muted hover:text-cream"
+                                                        : "text-muted hover:text-text"
                                                 }`}
                                             >
                                                 {grandchild.label}
@@ -116,7 +116,7 @@ export default function DocNav({ items, title }: DocNavProps) {
                     {active && (
                         <>
                             <span className="shrink-0 text-rim">/</span>
-                            <span className="truncate text-cream">
+                            <span className="truncate text-text">
                                 {active.label}
                             </span>
                         </>
