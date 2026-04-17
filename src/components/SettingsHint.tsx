@@ -9,6 +9,14 @@ function SettingsHint() {
     const [showHint, setShowHint] = useState(false);
     const [isDismissing, setIsDismissing] = useState(false);
 
+    const dismissHint = () => {
+        setIsDismissing(true);
+        setTimeout(() => {
+            setShowHint(false);
+            setIsDismissing(false);
+        }, 200);
+    };
+
     useEffect(() => {
         if (typeof window === "undefined") return;
         const showTimer = setTimeout(() => setShowHint(true), 3000);
@@ -17,15 +25,7 @@ function SettingsHint() {
             clearTimeout(showTimer);
             clearTimeout(hideTimer);
         };
-    }, []);
-
-    const dismissHint = () => {
-        setIsDismissing(true);
-        setTimeout(() => {
-            setShowHint(false);
-            setIsDismissing(false);
-        }, 200);
-    };
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     if (!showHint) return null;
 
