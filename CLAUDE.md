@@ -51,3 +51,5 @@
 4. **Scannable depth** — Parseable at a glance for recruiters, rewarding to linger for engineers. Use visual hierarchy to layer: headline → summary → detail.
 
 5. **Personal, not performative** — Kunanon's personality (travels to Kumamoto, confident humility, creativity) should be woven into the voice and visual texture throughout the interface.
+
+6. **Opacity discipline** — Navigation bars, mobile menus, modal overlays, and interactive UI chrome must use fully opaque or near-opaque backgrounds (≥95% opacity). Gradient overlays sitting on top of text content must maintain readable contrast throughout — avoid `via-transparent` or very-low-opacity mid-stops (`/10`) where text is overlaid. Decorative SVG illustrations, background dot patterns, and fade-edge masks may use transparency freely for artistic effect.
