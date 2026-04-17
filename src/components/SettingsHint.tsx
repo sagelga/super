@@ -8,18 +8,12 @@ function SettingsHint() {
     const t = useTranslations("common");
     const [showHint, setShowHint] = useState(false);
     const [isDismissing, setIsDismissing] = useState(false);
-    const [globePulsing, setGlobePulsing] = useState(false);
 
     useEffect(() => {
         if (typeof window === "undefined") return;
-        const pulseTimer = setTimeout(() => setGlobePulsing(true), 2000);
-        const showTimer = setTimeout(() => {
-            setGlobePulsing(false);
-            setShowHint(true);
-        }, 3000);
-        const hideTimer = setTimeout(() => dismissHint(), 15000);
+        const showTimer = setTimeout(() => setShowHint(true), 3000);
+        const hideTimer = setTimeout(() => dismissHint(), 11000);
         return () => {
-            clearTimeout(pulseTimer);
             clearTimeout(showTimer);
             clearTimeout(hideTimer);
         };

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useLocale, useTranslations } from "next-intl";
 import { usePathname } from "next/navigation";
@@ -21,6 +21,17 @@ function Navbar() {
     const [showConnect, setShowConnect] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [showLanguageSwitcher, setShowLanguageSwitcher] = useState(false);
+    const [globePulsing, setGlobePulsing] = useState(false);
+
+    useEffect(() => {
+        if (typeof window === "undefined") return;
+        const pulseTimer = setTimeout(() => setGlobePulsing(true), 2000);
+        const hideTimer = setTimeout(() => setGlobePulsing(false), 3000);
+        return () => {
+            clearTimeout(pulseTimer);
+            clearTimeout(hideTimer);
+        };
+    }, []);
 
     const handleLanguageSelect = (newLang: string) => {
         const localeFree = pathname.startsWith(`/${lang}`)
@@ -159,7 +170,7 @@ function Navbar() {
                         <button
                             onClick={() => setShowLanguageSwitcher(true)}
                             aria-label="Change language"
-                            className="hover:text-cream flex h-8 w-8 items-center justify-center text-muted transition-colors duration-200"
+                            className={`hover:text-cream flex h-8 w-8 items-center justify-center text-muted transition-colors duration-200 ${globePulsing ? "navbar-globe-pulsing" : ""}`}
                         >
                             <Languages width={16} height={16} />
                         </button>
