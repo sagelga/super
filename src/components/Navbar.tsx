@@ -8,6 +8,7 @@ import ConnectModal from "./ConnectModal";
 import NavbarMobileMenu from "./NavbarMobileMenu";
 import NavbarReadingProgress from "./NavbarReadingProgress";
 import LanguageSwitcherModal from "./LanguageSwitcherModal";
+import "./Navbar.style.css";
 
 const HINT_KEY = "navbar-settings-hint-dismissed";
 
@@ -21,24 +22,32 @@ function Navbar() {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [showLanguageSwitcher, setShowLanguageSwitcher] = useState(false);
     const [showSettingsHint, setShowSettingsHint] = useState(false);
+    const [isDismissingHint, setIsDismissingHint] = useState(false);
+    const [globePulsing, setGlobePulsing] = useState(false);
 
     useEffect(() => {
         if (typeof window === "undefined") return;
         if (sessionStorage.getItem(HINT_KEY)) return;
-        const showTimer = setTimeout(() => setShowSettingsHint(true), 3000);
-        const hideTimer = setTimeout(() => {
-            setShowSettingsHint(false);
-            sessionStorage.setItem(HINT_KEY, "1");
-        }, 11000);
+        const pulseTimer = setTimeout(() => setGlobePulsing(true), 2000);
+        const showTimer = setTimeout(() => {
+            setGlobePulsing(false);
+            setShowSettingsHint(true);
+        }, 3000);
+        const hideTimer = setTimeout(() => dismissHint(), 11000);
         return () => {
+            clearTimeout(pulseTimer);
             clearTimeout(showTimer);
             clearTimeout(hideTimer);
         };
-    }, []);
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const dismissHint = () => {
-        setShowSettingsHint(false);
-        sessionStorage.setItem(HINT_KEY, "1");
+        setIsDismissingHint(true);
+        setTimeout(() => {
+            setShowSettingsHint(false);
+            setIsDismissingHint(false);
+            sessionStorage.setItem(HINT_KEY, "1");
+        }, 200);
     };
 
     const handleLanguageSelect = (newLang: string) => {
@@ -168,9 +177,12 @@ function Navbar() {
                     </Link>
                     <div className="relative">
                         <button
-                            onClick={() => setShowLanguageSwitcher(true)}
+                            onClick={() => {
+                                dismissHint();
+                                setShowLanguageSwitcher(true);
+                            }}
                             aria-label="Change language"
-                            className="hover:text-cream flex h-8 w-8 items-center justify-center text-muted transition-colors duration-200"
+                            className={`hover:text-cream flex h-8 w-8 items-center justify-center text-muted transition-colors duration-200 ${globePulsing ? "navbar-globe-pulsing" : ""}`}
                         >
                             <svg
                                 width="16"
@@ -189,10 +201,11 @@ function Navbar() {
                         </button>
 
                         {showSettingsHint && (
-                            <div className="bg-surface border-rim absolute top-full right-0 z-50 mt-3 w-56 border p-3 shadow-xl">
+                            <div className={`bg-surface border-rim absolute top-full right-0 z-50 mt-3 w-56 border p-3 shadow-xl navbar-hint ${isDismissingHint ? "dismissing" : ""}`}>
+                                <div className="navbar-hint-caret" />
                                 <button
                                     onClick={dismissHint}
-                                    className="text-muted hover:text-cream absolute top-2 right-2 transition-colors"
+                                    className="text-muted hover:text-cream absolute top-2 right-2 transition-colors duration-150"
                                     aria-label="Dismiss"
                                 >
                                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
