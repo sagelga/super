@@ -62,10 +62,10 @@
     },
     "language": {
         "title": "Language Settings",
-        "label": "Change Language"
+        "label": "Settings"
     },
     "settings": {
-        "hint_description": "Theme and cookie settings are also available in the footer."
+        "hint_description": "Change language, theme, and cookies by clicking here."
     },
     "contact": {
         "eyebrow": "Get in touch",
