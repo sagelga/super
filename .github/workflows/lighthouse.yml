@@ -10,6 +10,9 @@ on:
       - "content/**"
       - "next.config.mjs"
       - "tailwind.config.mjs"
+      - "migrations/**"
+      - ".github/workflows/lighthouse.yml"
+      - ".lighthouserc.json"
 
 jobs:
   lighthouse:
