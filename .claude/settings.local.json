@@ -150,7 +150,16 @@
       "Bash(CLOUDFLARE_ACCOUNT_ID=9124272a5c3e327f2e943bf27c0910c4 npx wrangler d1 execute super-content --remote --command=\"SELECT section, sub_path FROM sidebar_trees WHERE section='learn'\")",
       "Bash(git -C /Users/kumamon/Developer/super/.claude/worktrees/agent-aa367041 diff src/locales/zh/metadata.json src/locales/zh/docs.json)",
       "Bash(CLOUDFLARE_ACCOUNT_ID=9124272a5c3e327f2e943bf27c0910c4 npx wrangler r2 object list super-cache)",
-      "Bash(CLOUDFLARE_ACCOUNT_ID=9124272a5c3e327f2e943bf27c0910c4 npx wrangler r2 bucket list)"
+      "Bash(CLOUDFLARE_ACCOUNT_ID=9124272a5c3e327f2e943bf27c0910c4 npx wrangler r2 bucket list)",
+      "Bash(git -C /Users/kumamon/Developer/super status --short)",
+      "Bash(git -C /Users/kumamon/Developer/super log --oneline -5)",
+      "Bash(git -C /Users/kumamon/Developer/super log --all --oneline -- \"src/data/galleryItems.ts\" \"src/components/content/ArticleFooterNav.tsx\" \"src/components/content/BackToTop.tsx\" \"src/components/content/DocHeader.tsx\" \"src/components/home/ProjectModal.tsx\")",
+      "Bash(git -C /Users/kumamon/Developer/super show 3a9c5f6 --name-only)",
+      "Bash(git -C /Users/kumamon/Developer/super log --all --oneline --diff-filter=D -- \"src/data/galleryItems.ts\" \"src/components/content/ArticleFooterNav.tsx\" \"src/components/home/ProjectModal.tsx\")",
+      "Bash(git -C /Users/kumamon/Developer/super ls-files --deleted)",
+      "Bash(git -C /Users/kumamon/Developer/super show 3a9c5f6:src/data/galleryItems.ts)",
+      "Bash(git -C /Users/kumamon/Developer/super show 3a9c5f6:src/components/content/ArticleFooterNav.tsx)",
+      "Bash(git -C /Users/kumamon/Developer/super checkout 3a9c5f6 -- src/components/home/BlogPreviewSection.tsx src/components/home/GalleryPreviewSection.tsx src/components/home/LearnPreviewSection.tsx src/lib/content-d1.ts)"
     ]
   },
   "hooks": {
