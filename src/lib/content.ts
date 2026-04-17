@@ -374,7 +374,8 @@ export async function getBlogPosts(): Promise<BlogPost[]> {
     const db = await getContentDb();
     if (db) {
         const { getBlogPostsD1 } = await import("./content-d1");
-        return getBlogPostsD1(db);
+        const posts = await getBlogPostsD1(db);
+        if (posts.length > 0) return posts;
     }
     return getBlogPostsFs();
 }
