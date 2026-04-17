@@ -329,13 +329,14 @@ export async function getAllSlugs(
         if (superbrainEnv) {
             const { getBlogPostsApi } = await import("./content-api");
             const posts = await getBlogPostsApi(superbrainEnv);
-            if (posts) return posts.map((p) => [p.slug]);
+            if (posts && posts.length > 0) return posts.map((p) => [p.slug]);
         }
     }
     const db = await getContentDb();
     if (db) {
         const { getAllSlugsD1 } = await import("./content-d1");
-        return getAllSlugsD1(db, section);
+        const slugs = await getAllSlugsD1(db, section);
+        if (slugs.length > 0) return slugs;
     }
     return getAllSlugsFs(section);
 }
@@ -369,12 +370,13 @@ export async function getBlogPosts(): Promise<BlogPost[]> {
     if (superbrainEnv) {
         const { getBlogPostsApi } = await import("./content-api");
         const posts = await getBlogPostsApi(superbrainEnv);
-        if (posts) return posts;
+        if (posts && posts.length > 0) return posts;
     }
     const db = await getContentDb();
     if (db) {
         const { getBlogPostsD1 } = await import("./content-d1");
-        return getBlogPostsD1(db);
+        const posts = await getBlogPostsD1(db);
+        if (posts.length > 0) return posts;
     }
     return getBlogPostsFs();
 }

@@ -150,7 +150,26 @@
       "Bash(CLOUDFLARE_ACCOUNT_ID=9124272a5c3e327f2e943bf27c0910c4 npx wrangler d1 execute super-content --remote --command=\"SELECT section, sub_path FROM sidebar_trees WHERE section='learn'\")",
       "Bash(git -C /Users/kumamon/Developer/super/.claude/worktrees/agent-aa367041 diff src/locales/zh/metadata.json src/locales/zh/docs.json)",
       "Bash(CLOUDFLARE_ACCOUNT_ID=9124272a5c3e327f2e943bf27c0910c4 npx wrangler r2 object list super-cache)",
-      "Bash(CLOUDFLARE_ACCOUNT_ID=9124272a5c3e327f2e943bf27c0910c4 npx wrangler r2 bucket list)"
+      "Bash(CLOUDFLARE_ACCOUNT_ID=9124272a5c3e327f2e943bf27c0910c4 npx wrangler r2 bucket list)",
+      "Bash(curl -s http://localhost:3000/)",
+      "Bash(curl -s http://localhost:3000/en/)",
+      "Bash(curl -s http://localhost:3000/th/)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code} %{redirect_url}\" http://localhost:3000/)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3000/th)",
+      "Bash(curl -s http://localhost:3000/en)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3000/zh)",
+      "Bash(/usr/bin/curl -s -o /dev/null -w '%{http_code}' http://localhost:3000__TRACKED_VAR__)",
+      "Bash(CLOUDFLARE_ACCOUNT_ID=9124272a5c3e327f2e943bf27c0910c4 npx wrangler deploy .open-next/worker.js --config wrangler.jsonc)",
+      "Bash(git -C /Users/kumamon/Developer/super diff HEAD -- src/components/content/MdxRenderer.tsx)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" \"https://sagelga.com/en/learn/git\")",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" \"https://sagelga.com/learn/git\")",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" \"https://sagelga.com/en/learn/git/branch/README\")",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" \"https://sagelga.com/en/learn/python\")",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" \"https://sagelga.com/en/docs/byteside\")",
+      "Bash(curl -s \"https://sagelga.com/en/learn/git\")",
+      "Bash(curl -s \"https://sagelga.com/en/blog/super-development-process\")",
+      "Bash(curl -sv \"https://sagelga.com/en/blog/super-development-process\")",
+      "Bash(git pull *)"
     ]
   },
   "hooks": {
