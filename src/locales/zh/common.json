@@ -62,7 +62,10 @@
     },
     "language": {
         "title": "语言设置",
-        "label": "切换语言"
+        "label": "设置"
+    },
+    "settings": {
+        "hint_description": "在此点击可更改语言、主题和 Cookie 设置。"
     },
     "contact": {
         "eyebrow": "联系我",
