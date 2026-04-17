@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react";
 import { useTranslations } from "next-intl";
-import { X } from "lucide-react";
 
 function SettingsHint() {
     const t = useTranslations("common");
@@ -39,7 +38,10 @@ function SettingsHint() {
                 className="hover:text-cream absolute top-2 right-2 text-muted transition-colors duration-150"
                 aria-label="Dismiss"
             >
-                <X width={12} height={12} />
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18" />
+                    <line x1="6" y1="6" x2="18" y2="18" />
+                </svg>
             </button>
             <p className="text-cream mb-1 text-xs font-medium tracking-wide">
                 {t("language.label")}
