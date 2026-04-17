@@ -146,7 +146,7 @@ export default function GalleryPage() {
                                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                                 />
                                 {/* Hover overlay */}
-                                <div className="from-canvas/80 absolute inset-0 flex flex-col justify-end bg-gradient-to-t via-transparent to-transparent p-4 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                                <div className="from-canvas/80 absolute inset-0 flex flex-col justify-end bg-gradient-to-t via-canvas/40 to-transparent p-4 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                                     <p className="text-cream truncate font-sans text-sm font-medium">
                                         {item.title}
                                     </p>

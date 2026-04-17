@@ -14,7 +14,7 @@ import "./globals.css";
 import Layout from "../components/Layout";
 import DeviconsLoader from "../components/DeviconsLoader";
 import { NextIntlClientProvider } from "next-intl";
-import { getMessages, getTranslations } from "next-intl/server";
+import { getLocale, getMessages, getTranslations } from "next-intl/server";
 
 // Configure the sans-serif font
 const sans = IBM_Plex_Sans_Thai({
@@ -57,14 +57,8 @@ const serifZh = Noto_Serif_SC({
 });
 
 // Define the metadata for the website
-export async function generateMetadata({
-    params,
-}: {
-    params: Promise<{ lang?: string }>;
-}): Promise<Metadata> {
-    const { lang } = await params;
-    // Thai is default (no prefix), English and Chinese have prefixes
-    const currentLang = lang ?? "th";
+export async function generateMetadata(): Promise<Metadata> {
+    const currentLang = await getLocale();
     const t = await getTranslations({
         locale: currentLang,
         namespace: "metadata",

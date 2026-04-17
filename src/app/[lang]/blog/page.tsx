@@ -1,6 +1,6 @@
 import { getBlogPosts } from "@/lib/content";
 import { generateCollectionPageJsonLd } from "@/lib/seo";
-import { BASE_URL, SITE_NAME } from "@/lib/config";
+import { BASE_URL } from "@/lib/config";
 import BlogCard from "@/components/blog/BlogCard";
 import Link from "next/link";
 import type { Metadata } from "next";
@@ -28,7 +28,7 @@ export async function generateMetadata({
 
     const canonical =
         lang === "th" ? `${BASE_URL}/blog` : `${BASE_URL}/${lang}/blog`;
-    const title = `${t("nav.blog")} | ${SITE_NAME}`;
+    const title = t("nav.blog");
     const description = tMeta("description");
 
     return {

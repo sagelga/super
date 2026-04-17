@@ -1,12 +1,16 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useLocale, useTranslations } from "next-intl";
 import { usePathname } from "next/navigation";
+import { Languages, X, Menu } from "lucide-react";
 import ConnectModal from "./ConnectModal";
 import NavbarMobileMenu from "./NavbarMobileMenu";
 import NavbarReadingProgress from "./NavbarReadingProgress";
+import LanguageSwitcherModal from "./LanguageSwitcherModal";
+import SettingsHint from "./SettingsHint";
+import "./Navbar.style.css";
 
 function Navbar() {
     const t = useTranslations("common");
@@ -16,6 +20,26 @@ function Navbar() {
     const [isHomeMenuOpen, setIsHomeMenuOpen] = useState(false);
     const [showConnect, setShowConnect] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const [showLanguageSwitcher, setShowLanguageSwitcher] = useState(false);
+    const [globePulsing, setGlobePulsing] = useState(false);
+
+    useEffect(() => {
+        if (typeof window === "undefined") return;
+        const pulseTimer = setTimeout(() => setGlobePulsing(true), 2000);
+        const hideTimer = setTimeout(() => setGlobePulsing(false), 3000);
+        return () => {
+            clearTimeout(pulseTimer);
+            clearTimeout(hideTimer);
+        };
+    }, []);
+
+    const handleLanguageSelect = (newLang: string) => {
+        const localeFree = pathname.startsWith(`/${lang}`)
+            ? pathname.slice(`/${lang}`.length) || "/"
+            : pathname;
+        window.location.href =
+            newLang === "th" ? localeFree : `/${newLang}${localeFree}`;
+    };
 
     // Determine active nav link based on pathname
     const isHomeActive = pathname === p("/") || pathname === `/${lang}`;
@@ -134,12 +158,25 @@ function Navbar() {
                     >
                         {t("nav.docs")}
                     </Link>
+
                     <button
                         disabled
                         className="text-canvas cursor-not-allowed bg-accent px-3 py-1 text-sm tracking-wide opacity-60"
                     >
                         {t("nav.contact")}
                     </button>
+
+                    <div className="relative">
+                        <button
+                            onClick={() => setShowLanguageSwitcher(true)}
+                            aria-label="Change language"
+                            className={`hover:text-cream flex h-8 w-8 items-center justify-center text-muted transition-colors duration-200 ${globePulsing ? "navbar-globe-pulsing" : ""}`}
+                        >
+                            <Languages width={16} height={16} />
+                        </button>
+
+                        <SettingsHint />
+                    </div>
                 </div>
 
                 {/* Hamburger button — mobile only */}
@@ -150,34 +187,9 @@ function Navbar() {
                     onClick={() => setIsMobileMenuOpen((prev) => !prev)}
                 >
                     {isMobileMenuOpen ? (
-                        <svg
-                            width="20"
-                            height="20"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                        >
-                            <line x1="18" y1="6" x2="6" y2="18" />
-                            <line x1="6" y1="6" x2="18" y2="18" />
-                        </svg>
+                        <X width={20} height={20} />
                     ) : (
-                        <svg
-                            width="20"
-                            height="20"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                        >
-                            <line x1="3" y1="6" x2="21" y2="6" />
-                            <line x1="3" y1="12" x2="21" y2="12" />
-                            <line x1="3" y1="18" x2="21" y2="18" />
-                        </svg>
+                        <Menu width={20} height={20} />
                     )}
                 </button>
             </div>
@@ -194,6 +206,13 @@ function Navbar() {
             <ConnectModal
                 isOpen={showConnect}
                 onClose={() => setShowConnect(false)}
+            />
+
+            <LanguageSwitcherModal
+                isOpen={showLanguageSwitcher}
+                currentLang={lang}
+                onClose={() => setShowLanguageSwitcher(false)}
+                onLanguageSelect={handleLanguageSelect}
             />
         </nav>
     );
