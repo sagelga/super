@@ -51,3 +51,25 @@
 4. **Scannable depth** — Parseable at a glance for recruiters, rewarding to linger for engineers. Use visual hierarchy to layer: headline → summary → detail.
 
 5. **Personal, not performative** — Kunanon's personality (travels to Kumamoto, confident humility, creativity) should be woven into the voice and visual texture throughout the interface.
+
+## GitHub PR Convention
+
+All pull request titles must follow Conventional Commits format:
+
+```
+<type>(<optional scope>): <lowercase description>
+```
+
+**Types**: `feat`, `fix`, `refactor`, `docs`, `test`, `chore`, `perf`, `ci`
+
+**Examples**:
+- `feat: add dark mode support`
+- `fix(navbar): resolve responsive alignment on mobile`
+- `perf: optimize image loading with lazy loading`
+- `docs: update setup instructions`
+
+**Guidelines**:
+- Use imperative mood ("add", not "added")
+- Keep titles under 72 characters
+- Start description lowercase after the colon
+- Use scope (in parentheses) only when the change affects a specific component or area
