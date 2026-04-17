@@ -85,7 +85,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
         `${langPrefix}/blog${n > 1 ? `?page=${n}` : ""}`;
 
     const paginationLinkClass =
-        "text-cream flex min-h-[44px] min-w-[44px] touch-manipulation items-center gap-2 border border-rim bg-surface px-5 py-2.5 text-sm tracking-wide transition-colors duration-200 hover:border-accent hover:text-accent";
+        "text-text flex min-h-[44px] min-w-[44px] touch-manipulation items-center gap-2 border border-rim bg-surface px-5 py-2.5 text-sm tracking-wide transition-colors duration-200 hover:border-accent hover:text-accent";
 
     return (
         <>
@@ -98,7 +98,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
                     <p className="mb-2 font-sans text-xs font-semibold tracking-widest text-accent uppercase">
                         {t("blog.eyebrow")}
                     </p>
-                    <h1 className="text-cream font-serif text-4xl font-semibold">
+                    <h1 className="text-text font-serif text-4xl font-semibold">
                         {t("nav.blog")}
                     </h1>
                     <p className="mt-3 text-muted">

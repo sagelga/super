@@ -56,7 +56,7 @@ const PrivacyPolicyPage: React.FC = () => {
 
     return (
         <div className="container mx-auto px-4 py-8">
-            <h1 className="text-cream mb-8 text-center text-4xl font-extrabold">
+            <h1 className="text-text mb-8 text-center text-4xl font-extrabold">
                 {t("title")}
             </h1>
 
@@ -65,7 +65,7 @@ const PrivacyPolicyPage: React.FC = () => {
                 <div className="grow lg:w-3/4">
                     {/* Introduction */}
                     <section id="introduction" className="mb-10">
-                        <h2 className="text-cream mb-5 text-3xl font-bold">
+                        <h2 className="text-text mb-5 text-3xl font-bold">
                             {sections[0].title}
                         </h2>
                         <p className="mb-4 leading-relaxed text-muted">
@@ -78,19 +78,19 @@ const PrivacyPolicyPage: React.FC = () => {
 
                     {/* Data We Collect */}
                     <section id="data-we-collect" className="mb-10">
-                        <h2 className="text-cream mb-5 text-3xl font-bold">
+                        <h2 className="text-text mb-5 text-3xl font-bold">
                             {sections[1].title}
                         </h2>
                         <p className="mb-4 leading-relaxed text-muted">
                             {t("sections.1.paragraphs.0")}
                         </p>
-                        <h3 className="text-cream mb-3 text-2xl font-semibold">
+                        <h3 className="text-text mb-3 text-2xl font-semibold">
                             {t("sections.1.subsections.0.title")}
                         </h3>
                         <p className="mb-4 leading-relaxed text-muted">
                             {t("sections.1.subsections.0.paragraph")}
                         </p>
-                        <h3 className="text-cream mb-3 text-2xl font-semibold">
+                        <h3 className="text-text mb-3 text-2xl font-semibold">
                             {t("sections.1.subsections.1.title")}
                         </h3>
                         <p className="mb-4 leading-relaxed text-muted">
@@ -99,7 +99,7 @@ const PrivacyPolicyPage: React.FC = () => {
                         <p className="mb-4 leading-relaxed text-muted">
                             {t("sections.1.subsections.1.additional_paragraph")}
                         </p>
-                        <h3 className="text-cream mb-3 text-2xl font-semibold">
+                        <h3 className="text-text mb-3 text-2xl font-semibold">
                             {t("sections.1.subsections.2.title")}
                         </h3>
                         <p className="mb-4 leading-relaxed text-muted">
@@ -109,7 +109,7 @@ const PrivacyPolicyPage: React.FC = () => {
 
                     {/* How We Use Your Information */}
                     <section id="how-we-use-your-information" className="mb-10">
-                        <h2 className="text-cream mb-5 text-3xl font-bold">
+                        <h2 className="text-text mb-5 text-3xl font-bold">
                             {sections[2].title}
                         </h2>
                         <p className="mb-4 leading-relaxed text-muted">
@@ -128,7 +128,7 @@ const PrivacyPolicyPage: React.FC = () => {
                         id="disclosure-of-your-information"
                         className="mb-10"
                     >
-                        <h2 className="text-cream mb-5 text-3xl font-bold">
+                        <h2 className="text-text mb-5 text-3xl font-bold">
                             {sections[3].title}
                         </h2>
                         <p className="mb-4 leading-relaxed text-muted">
@@ -137,13 +137,13 @@ const PrivacyPolicyPage: React.FC = () => {
                         <p className="mb-4 leading-relaxed text-muted">
                             {t("sections.3.paragraphs.1")}
                         </p>
-                        <h3 className="text-cream mb-3 text-2xl font-semibold">
+                        <h3 className="text-text mb-3 text-2xl font-semibold">
                             {t("sections.3.subsections.0.title")}
                         </h3>
                         <p className="mb-4 leading-relaxed text-muted">
                             {t("sections.3.subsections.0.paragraph")}
                         </p>
-                        <h3 className="text-cream mb-3 text-2xl font-semibold">
+                        <h3 className="text-text mb-3 text-2xl font-semibold">
                             {t("sections.3.subsections.1.title")}
                         </h3>
                         <p className="mb-4 leading-relaxed text-muted">
@@ -156,7 +156,7 @@ const PrivacyPolicyPage: React.FC = () => {
                         id="security-of-your-information"
                         className="mb-10"
                     >
-                        <h2 className="text-cream mb-5 text-3xl font-bold">
+                        <h2 className="text-text mb-5 text-3xl font-bold">
                             {sections[4].title}
                         </h2>
                         <p className="mb-4 leading-relaxed text-muted">
@@ -166,7 +166,7 @@ const PrivacyPolicyPage: React.FC = () => {
 
                     {/* Your Rights */}
                     <section id="your-rights" className="mb-10">
-                        <h2 className="text-cream mb-5 text-3xl font-bold">
+                        <h2 className="text-text mb-5 text-3xl font-bold">
                             {sections[5].title}
                         </h2>
                         <p className="mb-4 leading-relaxed text-muted">
@@ -188,7 +188,7 @@ const PrivacyPolicyPage: React.FC = () => {
 
                     {/* Contact */}
                     <section id="contact-us" className="mb-10">
-                        <h2 className="text-cream mb-5 text-3xl font-bold">
+                        <h2 className="text-text mb-5 text-3xl font-bold">
                             {sections[6].title}
                         </h2>
                         <p className="mb-4 leading-relaxed text-muted">
@@ -211,7 +211,7 @@ const PrivacyPolicyPage: React.FC = () => {
 
                 {/* Table of Contents */}
                 <nav className="h-fit rounded-lg bg-surface p-6 shadow-md lg:sticky lg:top-20 lg:w-1/4">
-                    <h2 className="text-cream mb-4 text-xl font-bold">
+                    <h2 className="text-text mb-4 text-xl font-bold">
                         {t("table_of_contents_title")}
                     </h2>
                     <ul className="list-none space-y-2 p-0">

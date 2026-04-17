@@ -9,7 +9,7 @@
 
 .cookie-category {
   background: var(--color-surface, #252219);
-  border: 1px solid var(--color-rim, #302C24);
+  border: 1px solid var(--color-border, #302C24);
   border-radius: 12px;
   padding: 1rem;
 }
@@ -33,7 +33,7 @@
   margin: 0;
   font-size: 0.9375rem;
   font-weight: 500;
-  color: var(--color-cream, #F0EAD6);
+  color: var(--color-text, #F0EAD6);
 }
 
 .cookie-category-badge {
@@ -49,7 +49,7 @@
 
 .cookie-category-description {
   margin: 0;
-  font-size: 0.8125rem;
+  font-size: 0.875rem;
   color: var(--color-muted, #9A9485);
   line-height: 1.5;
 }
@@ -98,13 +98,13 @@
 
 .cookie-settings-footer {
   padding: 1rem 0.25rem;
-  border-top: 1px solid var(--color-rim, #302C24);
+  border-top: 1px solid var(--color-border, #302C24);
   margin-top: 0.5rem;
 }
 
 .cookie-learn-more {
   margin: 0;
-  font-size: 0.8125rem;
+  font-size: 0.875rem;
   color: var(--color-muted, #9A9485);
 }
 
@@ -128,7 +128,7 @@
   width: 100%;
   padding: 0.875rem 1.5rem;
   font-size: 0.9375rem;
-  font-weight: 500;
+  font-weight: 600;
   background: var(--color-accent, #C9943A);
   color: var(--color-cream, #F0EAD6);
   border: 1px solid var(--color-accent, #C9943A);

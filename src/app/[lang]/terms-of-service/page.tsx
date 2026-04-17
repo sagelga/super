@@ -55,7 +55,7 @@ const TermsOfServicePage: React.FC = () => {
     // Render the TermsOfServicePage component
     return (
         <div className="container mx-auto px-4 py-8">
-            <h1 className="text-cream mb-8 text-center text-4xl font-extrabold">
+            <h1 className="text-text mb-8 text-center text-4xl font-extrabold">
                 {t("title")}
             </h1>
 
@@ -64,7 +64,7 @@ const TermsOfServicePage: React.FC = () => {
                 <div className="grow lg:w-3/4">
                     {/* Introduction Section */}
                     <section id="introduction" className="mb-10">
-                        <h2 className="text-cream mb-5 text-3xl font-bold">
+                        <h2 className="text-text mb-5 text-3xl font-bold">
                             {sections[0].title}
                         </h2>
                         <p className="mb-4 leading-relaxed text-muted">
@@ -74,7 +74,7 @@ const TermsOfServicePage: React.FC = () => {
 
                     {/* Acceptance of Terms Section */}
                     <section id="acceptance-of-terms" className="mb-10">
-                        <h2 className="text-cream mb-5 text-3xl font-bold">
+                        <h2 className="text-text mb-5 text-3xl font-bold">
                             {sections[1].title}
                         </h2>
                         <p className="mb-4 leading-relaxed text-muted">
@@ -84,7 +84,7 @@ const TermsOfServicePage: React.FC = () => {
 
                     {/* Changes to Terms Section */}
                     <section id="changes-to-terms" className="mb-10">
-                        <h2 className="text-cream mb-5 text-3xl font-bold">
+                        <h2 className="text-text mb-5 text-3xl font-bold">
                             {sections[2].title}
                         </h2>
                         <p className="mb-4 leading-relaxed text-muted">
@@ -94,7 +94,7 @@ const TermsOfServicePage: React.FC = () => {
 
                     {/* User Obligations Section */}
                     <section id="user-obligations" className="mb-10">
-                        <h2 className="text-cream mb-5 text-3xl font-bold">
+                        <h2 className="text-text mb-5 text-3xl font-bold">
                             {sections[3].title}
                         </h2>
                         <p className="mb-4 leading-relaxed text-muted">
@@ -113,7 +113,7 @@ const TermsOfServicePage: React.FC = () => {
 
                     {/* Intellectual Property Section */}
                     <section id="intellectual-property" className="mb-10">
-                        <h2 className="text-cream mb-5 text-3xl font-bold">
+                        <h2 className="text-text mb-5 text-3xl font-bold">
                             {sections[4].title}
                         </h2>
                         <p className="mb-4 leading-relaxed text-muted">
@@ -123,7 +123,7 @@ const TermsOfServicePage: React.FC = () => {
 
                     {/* Disclaimer of Warranties Section */}
                     <section id="disclaimer-of-warranties" className="mb-10">
-                        <h2 className="text-cream mb-5 text-3xl font-bold">
+                        <h2 className="text-text mb-5 text-3xl font-bold">
                             {sections[5].title}
                         </h2>
                         <p className="mb-4 leading-relaxed text-muted">
@@ -133,7 +133,7 @@ const TermsOfServicePage: React.FC = () => {
 
                     {/* Limitation of Liability Section */}
                     <section id="limitation-of-liability" className="mb-10">
-                        <h2 className="text-cream mb-5 text-3xl font-bold">
+                        <h2 className="text-text mb-5 text-3xl font-bold">
                             {sections[6].title}
                         </h2>
                         <p className="mb-4 leading-relaxed text-muted">
@@ -143,7 +143,7 @@ const TermsOfServicePage: React.FC = () => {
 
                     {/* Indemnification Section */}
                     <section id="indemnification" className="mb-10">
-                        <h2 className="text-cream mb-5 text-3xl font-bold">
+                        <h2 className="text-text mb-5 text-3xl font-bold">
                             {sections[7].title}
                         </h2>
                         <p className="mb-4 leading-relaxed text-muted">
@@ -153,7 +153,7 @@ const TermsOfServicePage: React.FC = () => {
 
                     {/* Governing Law Section */}
                     <section id="governing-law" className="mb-10">
-                        <h2 className="text-cream mb-5 text-3xl font-bold">
+                        <h2 className="text-text mb-5 text-3xl font-bold">
                             {sections[8].title}
                         </h2>
                         <p className="mb-4 leading-relaxed text-muted">
@@ -163,7 +163,7 @@ const TermsOfServicePage: React.FC = () => {
 
                     {/* Contact Us Section */}
                     <section id="contact-us" className="mb-10">
-                        <h2 className="text-cream mb-5 text-3xl font-bold">
+                        <h2 className="text-text mb-5 text-3xl font-bold">
                             {sections[9].title}
                         </h2>
                         <p className="mb-4 leading-relaxed text-muted">
@@ -190,7 +190,7 @@ const TermsOfServicePage: React.FC = () => {
 
                 {/* Table of Contents Area */}
                 <nav className="h-fit rounded-lg bg-surface p-6 shadow-md lg:sticky lg:top-20 lg:w-1/4">
-                    <h2 className="text-cream mb-4 text-xl font-bold">
+                    <h2 className="text-text mb-4 text-xl font-bold">
                         {t("table_of_contents_title")}
                     </h2>
                     <ul className="list-none space-y-2 p-0">

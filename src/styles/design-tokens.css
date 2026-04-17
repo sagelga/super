@@ -8,6 +8,7 @@
   --color-accent: #C9943A;
   --color-cream: #F0EAD6;
   --color-muted: #9A9485;
+  --color-muted-readable: #BDB5A6;
   --color-rim: #302C24;
   
   /* Semantic Colors */
@@ -42,6 +43,15 @@
   --text-5xl: 3rem;
   --text-6xl: 3.75rem;
   --text-7xl: 4.5rem;
+
+  --font-weight-body: 400;
+  --font-weight-ui: 500;
+  --font-weight-emphasis: 600;
+  --font-weight-heading: 700;
+
+  --text-min-body: 1rem;
+  --text-min-ui: 0.9375rem;
+  --text-min-description: 0.875rem;
 }
 
 /* === Spacing Scale === */

@@ -34,7 +34,7 @@ function SidebarNode({
                 {hasChildren && (
                     <button
                         onClick={() => setOpen((o) => !o)}
-                        className="p-0.5 text-muted transition-colors hover:text-cream"
+                        className="p-0.5 text-muted transition-colors hover:text-text"
                         aria-label={
                             open ? t("content.collapse") : t("content.expand")
                         }
@@ -61,14 +61,14 @@ function SidebarNode({
                         className={`block truncate py-1 text-sm transition-colors duration-150 ${
                             isActive
                                 ? "font-medium text-accent"
-                                : "text-muted hover:text-cream"
+                                : "text-muted hover:text-text"
                         }`}
                     >
                         {item.label}
                     </Link>
                 ) : (
                     <span
-                        className="block cursor-default py-1 text-sm font-medium text-cream/70"
+                        className="block cursor-default py-1 text-sm font-medium text-text/70"
                         onClick={() => setOpen((o) => !o)}
                     >
                         {item.label}
@@ -94,7 +94,7 @@ export default function Sidebar({ items, title }: SidebarProps) {
         <>
             {/* Mobile toggle */}
             <button
-                className="mb-4 flex w-full items-center justify-between border border-rim bg-surface px-4 py-2 text-sm text-cream lg:hidden"
+                className="mb-4 flex w-full items-center justify-between border border-rim bg-surface px-4 py-2 text-sm text-text lg:hidden"
                 onClick={() => setMobileOpen((o) => !o)}
             >
                 <span>{title ?? t("content.contents")}</span>

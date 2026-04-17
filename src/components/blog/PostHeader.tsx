@@ -59,7 +59,7 @@ export default function PostHeader({
                 </div>
             )}
 
-            <h1 className="mb-4 font-serif text-4xl leading-tight font-semibold text-cream sm:text-5xl">
+            <h1 className="mb-4 font-serif text-4xl leading-tight font-semibold text-text sm:text-5xl">
                 {title}
             </h1>
 

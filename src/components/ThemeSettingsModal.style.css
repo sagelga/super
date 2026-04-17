@@ -37,7 +37,7 @@
   justify-content: center;
   width: 40px;
   height: 40px;
-  background: var(--color-canvas, #1A1814);
+  background: var(--color-surface, #252219);
   border-radius: 10px;
   color: var(--color-muted, #9A9485);
   transition: all 0.15s ease;
@@ -62,15 +62,15 @@
 .theme-option-label {
   font-size: 0.9375rem;
   font-weight: 500;
-  color: var(--color-cream, #F0EAD6);
+  color: var(--color-text, #F0EAD6);
 }
 
 .theme-option.active .theme-option-label {
-  color: var(--color-cream, #F0EAD6);
+  color: var(--color-text, #F0EAD6);
 }
 
 .theme-option-description {
-  font-size: 0.8125rem;
+  font-size: 0.875rem;
   color: var(--color-muted, #9A9485);
 }
 
@@ -94,6 +94,6 @@
   }
 
   .theme-option-description {
-    font-size: 0.75rem;
+    font-size: 0.8125rem;
   }
 }

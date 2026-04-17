@@ -103,7 +103,7 @@ export default async function ContactPage() {
                 <p className="mb-3 font-sans text-xs font-semibold tracking-widest text-accent uppercase">
                     {t("contact.eyebrow")}
                 </p>
-                <h1 className="text-cream font-serif text-5xl font-semibold lg:text-6xl">
+                <h1 className="text-text font-serif text-5xl font-semibold lg:text-6xl">
                     {t("contact.title")}
                 </h1>
                 <p className="mt-4 max-w-lg text-lg text-muted">
@@ -133,7 +133,7 @@ export default async function ContactPage() {
                         </p>
                         <a
                             href={`mailto:${t("contact.email_cta")}`}
-                            className="group text-cream flex items-center gap-3 font-serif text-2xl transition-colors duration-200 hover:text-accent lg:text-3xl"
+                            className="group text-text flex items-center gap-3 font-serif text-2xl transition-colors duration-200 hover:text-accent lg:text-3xl"
                         >
                             {t("contact.email_cta")}
                             <svg
@@ -171,11 +171,11 @@ export default async function ContactPage() {
                                 rel="noopener noreferrer"
                                 className="group flex items-center gap-5 border border-transparent px-5 py-4 transition-all duration-150 hover:border-rim hover:bg-surface"
                             >
-                                <span className="group-hover:text-cream shrink-0 text-muted transition-colors duration-150">
+                                <span className="group-hover:text-text shrink-0 text-muted transition-colors duration-150">
                                     {s.icon}
                                 </span>
                                 <div className="min-w-0 flex-1">
-                                    <p className="text-cream text-sm font-medium">
+                                    <p className="text-text text-sm font-medium">
                                         {s.label}
                                     </p>
                                     <p className="font-sans text-xs text-muted">
@@ -183,7 +183,7 @@ export default async function ContactPage() {
                                     </p>
                                 </div>
                                 <svg
-                                    className="h-4 w-4 shrink-0 text-muted/30 transition-all duration-150 group-hover:translate-x-0.5 group-hover:text-accent"
+                                    className="h-4 w-4 shrink-0 text-muted/60 transition-all duration-150 group-hover:translate-x-0.5 group-hover:text-accent"
                                     fill="none"
                                     stroke="currentColor"
                                     viewBox="0 0 24 24"
