@@ -64,6 +64,9 @@
         "title": "Language Settings",
         "label": "Change Language"
     },
+    "settings": {
+        "hint_description": "Theme and cookie settings are also available in the footer."
+    },
     "contact": {
         "eyebrow": "Get in touch",
         "title": "Let's Connect",

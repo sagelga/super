@@ -64,6 +64,9 @@
         "title": "语言设置",
         "label": "切换语言"
     },
+    "settings": {
+        "hint_description": "主题和 Cookie 设置也可在页脚找到。"
+    },
     "contact": {
         "eyebrow": "联系我",
         "title": "一起合作吧",

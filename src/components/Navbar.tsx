@@ -1,12 +1,15 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useLocale, useTranslations } from "next-intl";
 import { usePathname } from "next/navigation";
 import ConnectModal from "./ConnectModal";
 import NavbarMobileMenu from "./NavbarMobileMenu";
 import NavbarReadingProgress from "./NavbarReadingProgress";
+import LanguageSwitcherModal from "./LanguageSwitcherModal";
+
+const HINT_KEY = "navbar-settings-hint-dismissed";
 
 function Navbar() {
     const t = useTranslations("common");
@@ -16,6 +19,35 @@ function Navbar() {
     const [isHomeMenuOpen, setIsHomeMenuOpen] = useState(false);
     const [showConnect, setShowConnect] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const [showLanguageSwitcher, setShowLanguageSwitcher] = useState(false);
+    const [showSettingsHint, setShowSettingsHint] = useState(false);
+
+    useEffect(() => {
+        if (typeof window === "undefined") return;
+        if (sessionStorage.getItem(HINT_KEY)) return;
+        const showTimer = setTimeout(() => setShowSettingsHint(true), 3000);
+        const hideTimer = setTimeout(() => {
+            setShowSettingsHint(false);
+            sessionStorage.setItem(HINT_KEY, "1");
+        }, 11000);
+        return () => {
+            clearTimeout(showTimer);
+            clearTimeout(hideTimer);
+        };
+    }, []);
+
+    const dismissHint = () => {
+        setShowSettingsHint(false);
+        sessionStorage.setItem(HINT_KEY, "1");
+    };
+
+    const handleLanguageSelect = (newLang: string) => {
+        const localeFree = pathname.startsWith(`/${lang}`)
+            ? pathname.slice(`/${lang}`.length) || "/"
+            : pathname;
+        window.location.href =
+            newLang === "th" ? localeFree : `/${newLang}${localeFree}`;
+    };
 
     // Determine active nav link based on pathname
     const isHomeActive = pathname === p("/") || pathname === `/${lang}`;
@@ -134,6 +166,50 @@ function Navbar() {
                     >
                         {t("nav.docs")}
                     </Link>
+                    <div className="relative">
+                        <button
+                            onClick={() => setShowLanguageSwitcher(true)}
+                            aria-label="Change language"
+                            className="hover:text-cream flex h-8 w-8 items-center justify-center text-muted transition-colors duration-200"
+                        >
+                            <svg
+                                width="16"
+                                height="16"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                strokeWidth="2"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                            >
+                                <circle cx="12" cy="12" r="10" />
+                                <line x1="2" y1="12" x2="22" y2="12" />
+                                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+                            </svg>
+                        </button>
+
+                        {showSettingsHint && (
+                            <div className="bg-surface border-rim absolute top-full right-0 z-50 mt-3 w-56 border p-3 shadow-xl">
+                                <button
+                                    onClick={dismissHint}
+                                    className="text-muted hover:text-cream absolute top-2 right-2 transition-colors"
+                                    aria-label="Dismiss"
+                                >
+                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                                        <line x1="18" y1="6" x2="6" y2="18" />
+                                        <line x1="6" y1="6" x2="18" y2="18" />
+                                    </svg>
+                                </button>
+                                <p className="text-cream mb-1 text-xs font-medium tracking-wide">
+                                    {t("language.label")}
+                                </p>
+                                <p className="text-muted text-xs leading-relaxed">
+                                    {t("settings.hint_description")}
+                                </p>
+                            </div>
+                        )}
+                    </div>
+
                     <button
                         disabled
                         className="text-canvas cursor-not-allowed bg-accent px-3 py-1 text-sm tracking-wide opacity-60"
@@ -194,6 +270,16 @@ function Navbar() {
             <ConnectModal
                 isOpen={showConnect}
                 onClose={() => setShowConnect(false)}
+            />
+
+            <LanguageSwitcherModal
+                isOpen={showLanguageSwitcher}
+                currentLang={lang}
+                onClose={() => setShowLanguageSwitcher(false)}
+                onLanguageSelect={(newLang) => {
+                    dismissHint();
+                    handleLanguageSelect(newLang);
+                }}
             />
         </nav>
     );
