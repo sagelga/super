@@ -119,6 +119,11 @@ jobs:
         env:
           NEXT_TELEMETRY_DISABLED: 1
 
+      - name: Apply local D1 migrations
+        run: |
+          npx wrangler d1 execute super-content --local --file migrations/001_content.sql
+          npx wrangler d1 execute super-auth --local --command "SELECT 1"
+
       - name: Install Playwright browsers
         run: npx playwright install --with-deps chromium
 

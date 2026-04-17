@@ -390,7 +390,8 @@ export async function getDocProjects(): Promise<
     const db = await getContentDb();
     if (db) {
         const { getDocProjectsD1 } = await import("./content-d1");
-        return getDocProjectsD1(db);
+        const projects = await getDocProjectsD1(db);
+        if (projects.length > 0) return projects;
     }
     return getDocProjectsFs();
 }
@@ -405,7 +406,8 @@ export async function getLearnTopics(): Promise<
     const db = await getContentDb();
     if (db) {
         const { getLearnTopicsD1 } = await import("./content-d1");
-        return getLearnTopicsD1(db);
+        const topics = await getLearnTopicsD1(db);
+        if (topics.length > 0) return topics;
     }
     return getLearnTopicsFs();
 }
