@@ -59,7 +59,7 @@ export default function TableOfContents({ items }: TableOfContentsProps) {
                                 className={`block py-0.5 text-sm transition-colors duration-150 ${
                                     isActive
                                         ? "font-medium text-accent"
-                                        : "hover:text-cream text-muted"
+                                        : "hover:text-text text-muted"
                                 }`}
                             >
                                 {item.text}

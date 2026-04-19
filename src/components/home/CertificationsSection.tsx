@@ -18,7 +18,7 @@ interface CertificationsSectionProps {
     certifications: CertificationItem[];
 }
 
-const CERT_TITLE_CLASS = "text-cream text-sm font-medium leading-snug";
+const CERT_TITLE_CLASS = "text-text text-sm font-medium leading-snug";
 
 const CertificationsSection: React.FC<CertificationsSectionProps> = ({
     certifications,

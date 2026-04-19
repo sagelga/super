@@ -11,7 +11,7 @@ export default function Error({ error, reset }: ErrorProps) {
             <p className="font-mono text-sm uppercase tracking-widest text-accent mb-4">
                 Error
             </p>
-            <h1 className="text-4xl font-bold text-cream mb-4">
+            <h1 className="text-4xl font-bold text-text mb-4">
                 Something went wrong
             </h1>
             <p className="text-muted mb-8 text-center max-w-md">
