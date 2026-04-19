@@ -65,7 +65,13 @@
         "label": "Settings"
     },
     "settings": {
-        "hint_description": "Change language, theme, and cookies by clicking here."
+        "title": "Settings",
+        "hint_description": "Change language, theme, and cookies by clicking here.",
+        "tabs": {
+            "appearance": "Appearance",
+            "language": "Language",
+            "privacy": "Privacy"
+        }
     },
     "contact": {
         "eyebrow": "Get in touch",

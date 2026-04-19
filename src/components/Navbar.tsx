@@ -8,8 +8,8 @@ import { Languages, X, Menu } from "lucide-react";
 import ConnectModal from "./ConnectModal";
 import NavbarMobileMenu from "./NavbarMobileMenu";
 import NavbarReadingProgress from "./NavbarReadingProgress";
-import LanguageSwitcherModal from "./LanguageSwitcherModal";
 import SettingsHint from "./SettingsHint";
+import { useSettings } from "./settings/SettingsProvider";
 import "./Navbar.style.css";
 
 function Navbar() {
@@ -20,8 +20,8 @@ function Navbar() {
     const [isHomeMenuOpen, setIsHomeMenuOpen] = useState(false);
     const [showConnect, setShowConnect] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-    const [showLanguageSwitcher, setShowLanguageSwitcher] = useState(false);
     const [globePulsing, setGlobePulsing] = useState(false);
+    const { openSettings } = useSettings();
 
     useEffect(() => {
         if (typeof window === "undefined") return;
@@ -32,14 +32,6 @@ function Navbar() {
             clearTimeout(hideTimer);
         };
     }, []);
-
-    const handleLanguageSelect = (newLang: string) => {
-        const localeFree = pathname.startsWith(`/${lang}`)
-            ? pathname.slice(`/${lang}`.length) || "/"
-            : pathname;
-        window.location.href =
-            newLang === "th" ? localeFree : `/${newLang}${localeFree}`;
-    };
 
     // Determine active nav link based on pathname
     const isHomeActive = pathname === p("/") || pathname === `/${lang}`;
@@ -168,8 +160,8 @@ function Navbar() {
 
                     <div className="relative">
                         <button
-                            onClick={() => setShowLanguageSwitcher(true)}
-                            aria-label="Change language"
+                            onClick={() => openSettings("language")}
+                            aria-label="Open settings"
                             className={`hover:text-cream flex h-8 w-8 items-center justify-center text-muted transition-colors duration-200 ${globePulsing ? "navbar-globe-pulsing" : ""}`}
                         >
                             <Languages width={16} height={16} />
@@ -206,13 +198,6 @@ function Navbar() {
             <ConnectModal
                 isOpen={showConnect}
                 onClose={() => setShowConnect(false)}
-            />
-
-            <LanguageSwitcherModal
-                isOpen={showLanguageSwitcher}
-                currentLang={lang}
-                onClose={() => setShowLanguageSwitcher(false)}
-                onLanguageSelect={handleLanguageSelect}
             />
         </nav>
     );
