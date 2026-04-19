@@ -247,7 +247,7 @@ const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({
                     <div className="mt-14 border-t border-rim/60 pt-10">
                         {/* Sub-section heading — can't nest <Section> inside <Section>, so we replicate its default heading markup here */}
                         <div className="mb-14">
-                            <p className="mb-3 font-sans text-sm tracking-[0.2em] text-accent uppercase">
+                            <p className="mb-3 font-sans text-sm font-bold tracking-[0.2em] text-accent uppercase">
                                 {tCommon("docs.sidebar_title")}
                             </p>
                             <div className="h-px w-12 bg-accent opacity-60" />
