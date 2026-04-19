@@ -99,6 +99,8 @@ export default async function PostPage({
         description?: string;
         image?: string;
         date?: string;
+        lastEditedTime?: string;
+        syncedAt?: string;
         tags?: string[];
         authors?: string[];
     };
@@ -142,6 +144,8 @@ export default async function PostPage({
                         <PostHeader
                             title={fm.title || slug}
                             date={fm.date || ""}
+                            lastEditedTime={fm.lastEditedTime}
+                            syncedAt={fm.syncedAt}
                             tags={fm.tags}
                             image={fm.image}
                             readingTime={readingTime}
