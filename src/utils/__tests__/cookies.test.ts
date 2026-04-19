@@ -5,6 +5,7 @@ import {
   hasAnalyticsConsent,
   clearCookiePreferences,
 } from '../cookies';
+import { CONSENT_VERSION } from '@/types';
 
 // Mock localStorage
 const localStorageMock = {
@@ -18,6 +19,14 @@ Object.defineProperty(global, 'localStorage', {
   value: localStorageMock,
 });
 
+const DEFAULT_PREFS = {
+  functional: true,
+  analytics: false,
+  consentGiven: false,
+  consentTimestamp: null,
+  consentVersion: null,
+};
+
 describe('Cookie Utilities', () => {
   beforeEach(() => {
     jest.clearAllMocks();
@@ -27,13 +36,7 @@ describe('Cookie Utilities', () => {
   describe('getCookiePreferences', () => {
     it('should return default preferences when no consent is given', () => {
       const preferences = getCookiePreferences();
-
-      expect(preferences).toEqual({
-        functional: true,
-        analytics: false,
-        consentGiven: false,
-        consentTimestamp: null,
-      });
+      expect(preferences).toEqual(DEFAULT_PREFS);
     });
 
     it('should return stored preferences when consent is given', () => {
@@ -42,6 +45,7 @@ describe('Cookie Utilities', () => {
         analytics: true,
         consentGiven: true,
         consentTimestamp: Date.now(),
+        consentVersion: CONSENT_VERSION,
       };
       localStorageMock.getItem.mockReturnValue(JSON.stringify(storedPreferences));
 
@@ -50,17 +54,45 @@ describe('Cookie Utilities', () => {
       expect(preferences).toEqual(storedPreferences);
     });
 
+    it('should invalidate and return defaults when consentVersion is outdated', () => {
+      const storedPreferences = {
+        functional: true,
+        analytics: true,
+        consentGiven: true,
+        consentTimestamp: Date.now(),
+        consentVersion: '2020-01-01',
+      };
+      localStorageMock.getItem.mockReturnValue(JSON.stringify(storedPreferences));
+
+      const preferences = getCookiePreferences();
+
+      expect(preferences).toEqual(DEFAULT_PREFS);
+      expect(localStorageMock.removeItem).toHaveBeenCalledWith('cookie_consent');
+    });
+
+    it('should invalidate and return defaults when consent is expired', () => {
+      const fourteenMonthsAgo = Date.now() - 14 * 30 * 24 * 60 * 60 * 1000;
+      const storedPreferences = {
+        functional: true,
+        analytics: true,
+        consentGiven: true,
+        consentTimestamp: fourteenMonthsAgo,
+        consentVersion: CONSENT_VERSION,
+      };
+      localStorageMock.getItem.mockReturnValue(JSON.stringify(storedPreferences));
+
+      const preferences = getCookiePreferences();
+
+      expect(preferences).toEqual(DEFAULT_PREFS);
+      expect(localStorageMock.removeItem).toHaveBeenCalledWith('cookie_consent');
+    });
+
     it('should handle invalid JSON in localStorage gracefully', () => {
       localStorageMock.getItem.mockReturnValue('invalid-json');
 
       const preferences = getCookiePreferences();
 
-      expect(preferences).toEqual({
-        functional: true,
-        analytics: false,
-        consentGiven: false,
-        consentTimestamp: null,
-      });
+      expect(preferences).toEqual(DEFAULT_PREFS);
     });
 
     it('should handle localStorage being undefined (SSR)', () => {
@@ -70,12 +102,7 @@ describe('Cookie Utilities', () => {
 
       const preferences = getCookiePreferences();
 
-      expect(preferences).toEqual({
-        functional: true,
-        analytics: false,
-        consentGiven: false,
-        consentTimestamp: null,
-      });
+      expect(preferences).toEqual(DEFAULT_PREFS);
 
       // @ts-expect-error - Restoring for other tests
       global.localStorage = originalLocalStorage;
@@ -89,6 +116,7 @@ describe('Cookie Utilities', () => {
         analytics: false,
         consentGiven: false,
         consentTimestamp: null,
+        consentVersion: null,
       };
 
       setCookiePreferences(preferences);
@@ -99,12 +127,13 @@ describe('Cookie Utilities', () => {
       );
     });
 
-    it('should set consentGiven and consentTimestamp when saving', () => {
+    it('should set consentGiven, consentTimestamp, and consentVersion when saving', () => {
       const preferences = {
         functional: true,
         analytics: false,
         consentGiven: false,
         consentTimestamp: null,
+        consentVersion: null,
       };
 
       setCookiePreferences(preferences);
@@ -114,6 +143,7 @@ describe('Cookie Utilities', () => {
       );
       expect(savedData.consentGiven).toBe(true);
       expect(savedData.consentTimestamp).toBeDefined();
+      expect(savedData.consentVersion).toBe(CONSENT_VERSION);
     });
 
     it('should handle localStorage errors gracefully', () => {
@@ -127,6 +157,7 @@ describe('Cookie Utilities', () => {
           analytics: false,
           consentGiven: false,
           consentTimestamp: null,
+          consentVersion: null,
         });
       }).not.toThrow();
     });
@@ -142,6 +173,7 @@ describe('Cookie Utilities', () => {
           analytics: false,
           consentGiven: false,
           consentTimestamp: null,
+          consentVersion: null,
         });
       }).not.toThrow();
 
@@ -164,6 +196,7 @@ describe('Cookie Utilities', () => {
           analytics: true,
           consentGiven: true,
           consentTimestamp: Date.now(),
+          consentVersion: CONSENT_VERSION,
         })
       );
 
@@ -185,6 +218,7 @@ describe('Cookie Utilities', () => {
           analytics: false,
           consentGiven: true,
           consentTimestamp: Date.now(),
+          consentVersion: CONSENT_VERSION,
         })
       );
 
@@ -198,6 +232,7 @@ describe('Cookie Utilities', () => {
           analytics: true,
           consentGiven: true,
           consentTimestamp: Date.now(),
+          consentVersion: CONSENT_VERSION,
         })
       );
 
