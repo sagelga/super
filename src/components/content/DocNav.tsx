@@ -41,9 +41,7 @@ function NavItem({
                     href={item.href}
                     onClick={onNavigate}
                     className={`mb-1.5 block text-sm font-medium transition-colors ${
-                        isActive
-                            ? "text-accent"
-                            : "text-text hover:text-accent"
+                        isActive ? "text-accent" : "text-text hover:text-accent"
                     }`}
                 >
                     {item.label}
@@ -55,8 +53,8 @@ function NavItem({
             )}
             {item.children && (
                 <ul className="space-y-0.5 border-l border-rim pl-3">
-                    {item.children.map((child, i) => (
-                        <li key={i}>
+                    {item.children.map((child) => (
+                        <li key={child.href ?? child.label}>
                             <Link
                                 href={child.href ?? "#"}
                                 onClick={onNavigate}
@@ -70,8 +68,13 @@ function NavItem({
                             </Link>
                             {child.children && (
                                 <ul className="mt-0.5 space-y-0.5 border-l border-rim/50 pl-3">
-                                    {child.children.map((grandchild, j) => (
-                                        <li key={j}>
+                                    {child.children.map((grandchild) => (
+                                        <li
+                                            key={
+                                                grandchild.href ??
+                                                grandchild.label
+                                            }
+                                        >
                                             <Link
                                                 href={grandchild.href ?? "#"}
                                                 onClick={onNavigate}
@@ -139,11 +142,11 @@ export default function DocNav({ items, title }: DocNavProps) {
 
             {/* Expanded panel */}
             {open && (
-                <div className="border border-t-0 border-rim bg-canvas p-5">
+                <div className="bg-canvas border border-t-0 border-rim p-5">
                     <div className="columns-2 gap-6 md:columns-3 lg:columns-4">
-                        {items.map((item, i) => (
+                        {items.map((item) => (
                             <NavItem
-                                key={i}
+                                key={item.href ?? item.label}
                                 item={item}
                                 onNavigate={() => setOpen(false)}
                             />

@@ -77,8 +77,12 @@ function SidebarNode({
             </div>
             {hasChildren && open && (
                 <ul className="mt-0.5">
-                    {item.children!.map((child, i) => (
-                        <SidebarNode key={i} item={child} depth={depth + 1} />
+                    {item.children!.map((child) => (
+                        <SidebarNode
+                            key={child.href ?? child.label}
+                            item={child}
+                            depth={depth + 1}
+                        />
                     ))}
                 </ul>
             )}
@@ -124,8 +128,11 @@ export default function Sidebar({ items, title }: SidebarProps) {
                     </p>
                 )}
                 <ul className="space-y-0.5">
-                    {items.map((item, i) => (
-                        <SidebarNode key={i} item={item} />
+                    {items.map((item) => (
+                        <SidebarNode
+                            key={item.href ?? item.label}
+                            item={item}
+                        />
                     ))}
                 </ul>
             </nav>
