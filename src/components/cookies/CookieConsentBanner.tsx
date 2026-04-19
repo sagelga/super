@@ -23,32 +23,63 @@ const CookieConsentBanner: React.FC = () => {
             setIsVisible(true);
         };
 
-        const interactionEvents = ["scroll", "pointerdown", "keydown", "touchstart"] as const;
+        const interactionEvents = [
+            "scroll",
+            "pointerdown",
+            "keydown",
+            "touchstart",
+        ] as const;
 
         const onInteraction = () => {
-            interactionEvents.forEach((e) => window.removeEventListener(e, onInteraction));
+            interactionEvents.forEach((e) =>
+                window.removeEventListener(e, onInteraction),
+            );
             if (idleId !== undefined) {
-                (window as Window & typeof globalThis & { cancelIdleCallback?: (id: number) => void }).cancelIdleCallback?.(idleId);
+                (
+                    window as Window &
+                        typeof globalThis & {
+                            cancelIdleCallback?: (id: number) => void;
+                        }
+                ).cancelIdleCallback?.(idleId);
             }
             show();
         };
 
         let idleId: number | undefined;
         if ("requestIdleCallback" in window) {
-            idleId = (window as Window & typeof globalThis & { requestIdleCallback: (cb: () => void) => number }).requestIdleCallback(show);
+            idleId = (
+                window as Window &
+                    typeof globalThis & {
+                        requestIdleCallback: (cb: () => void) => number;
+                    }
+            ).requestIdleCallback(show);
         } else {
-            idleId = window.setTimeout(show, 2000) as unknown as number;
+            idleId = setTimeout(show, 2000) as unknown as number;
         }
 
-        interactionEvents.forEach((e) => window.addEventListener(e, onInteraction, { once: true, passive: true }));
+        interactionEvents.forEach((e) =>
+            window.addEventListener(e, onInteraction, {
+                once: true,
+                passive: true,
+            }),
+        );
 
         return () => {
-            interactionEvents.forEach((e) => window.removeEventListener(e, onInteraction));
+            interactionEvents.forEach((e) =>
+                window.removeEventListener(e, onInteraction),
+            );
             if (idleId !== undefined) {
                 if ("cancelIdleCallback" in window) {
-                    (window as Window & typeof globalThis & { cancelIdleCallback: (id: number) => void }).cancelIdleCallback(idleId);
+                    (
+                        window as Window &
+                            typeof globalThis & {
+                                cancelIdleCallback: (id: number) => void;
+                            }
+                    ).cancelIdleCallback(idleId);
                 } else {
-                    clearTimeout(idleId as unknown as ReturnType<typeof setTimeout>);
+                    clearTimeout(
+                        idleId as unknown as ReturnType<typeof setTimeout>,
+                    );
                 }
             }
         };
@@ -96,7 +127,7 @@ const CookieConsentBanner: React.FC = () => {
                     <div className="mb-5 flex flex-wrap gap-3 text-sm">
                         <Link
                             href="/privacy-policy"
-                            className="text-accent underline hover:text-cream"
+                            className="hover:text-cream text-accent underline"
                             onClick={handleRejectAll}
                         >
                             {t("links.privacy_policy")}
@@ -104,7 +135,7 @@ const CookieConsentBanner: React.FC = () => {
                         <span className="text-muted">|</span>
                         <button
                             onClick={() => setShowSettings(true)}
-                            className="text-accent underline hover:text-cream"
+                            className="hover:text-cream text-accent underline"
                         >
                             {t("buttons.settings")}
                         </button>
@@ -113,7 +144,7 @@ const CookieConsentBanner: React.FC = () => {
                     <div className="flex flex-col gap-2">
                         <button
                             onClick={handleAcceptAll}
-                            className="w-full rounded-lg border border-accent bg-accent py-3 text-sm font-medium text-canvas transition-colors duration-200 hover:bg-accent/90"
+                            className="text-canvas w-full rounded-lg border border-accent bg-accent py-3 text-sm font-medium transition-colors duration-200 hover:bg-accent/90"
                         >
                             {t("buttons.accept_all")}
                         </button>
