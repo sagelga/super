@@ -1,3 +1,9 @@
+/**
+ * @jest-environment jsdom
+ */
+/**
+ * @jest-environment jsdom
+ */
 import {
   getCookiePreferences,
   setCookiePreferences,
