@@ -183,7 +183,8 @@
       "Bash(npm test:*)",
       "Bash(git -C /Users/kumamon/Developer/super stash list)",
       "Bash(git fetch:*)",
-      "Bash(git merge:*)"
+      "Bash(git merge:*)",
+      "Bash(xargs kill *)"
     ]
   },
   "hooks": {

@@ -104,10 +104,13 @@ function NavItem({
                                         {child.children.map((grandchild, j) => (
                                             <li key={j}>
                                                 <Link
-                                                    href={grandchild.href ?? "#"}
+                                                    href={
+                                                        grandchild.href ?? "#"
+                                                    }
                                                     onClick={onNavigate}
                                                     className={`block py-0.5 text-xs transition-colors ${
-                                                        pathname === grandchild.href
+                                                        pathname ===
+                                                        grandchild.href
                                                             ? "text-accent"
                                                             : "text-muted/75 hover:text-text"
                                                     }`}
@@ -170,20 +173,24 @@ export default function DocNav({ items, title }: DocNavProps) {
             </button>
 
             {/* Expanded panel */}
-            {open && (
-                <div className="border border-t-0 border-rim bg-canvas p-6 md:p-8">
-                    <div className="columns-2 gap-8 md:columns-3 md:gap-10 lg:columns-4">
-                        {items.map((item, i) => (
-                            <NavItem
-                                key={i}
-                                item={item}
-                                index={i}
-                                onNavigate={() => setOpen(false)}
-                            />
-                        ))}
+            <div
+                className={`grid transition-[grid-template-rows] duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] ${open ? "grid-rows-[1fr]" : "grid-rows-[0fr]"}`}
+            >
+                <div className="overflow-hidden">
+                    <div className="border border-t-0 border-rim bg-canvas p-6 md:p-8">
+                        <div className="columns-2 gap-8 md:columns-3 md:gap-10 lg:columns-4">
+                            {items.map((item, i) => (
+                                <NavItem
+                                    key={i}
+                                    item={item}
+                                    index={i}
+                                    onNavigate={() => setOpen(false)}
+                                />
+                            ))}
+                        </div>
                     </div>
                 </div>
-            )}
+            </div>
         </div>
     );
 }
