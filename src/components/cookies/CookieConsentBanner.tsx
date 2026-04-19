@@ -60,6 +60,7 @@ const CookieConsentBanner: React.FC = () => {
             analytics: true,
             consentGiven: true,
             consentTimestamp: Date.now(),
+            consentVersion: null,
         });
         setIsVisible(false);
     };
@@ -70,7 +71,14 @@ const CookieConsentBanner: React.FC = () => {
             analytics: false,
             consentGiven: true,
             consentTimestamp: Date.now(),
+            consentVersion: null,
         });
+        setIsVisible(false);
+    };
+
+    // Dismissing the banner without a choice — do NOT persist consent.
+    // The banner will reappear on the next visit.
+    const handleDismiss = () => {
         setIsVisible(false);
     };
 
@@ -85,7 +93,7 @@ const CookieConsentBanner: React.FC = () => {
         <>
             <BottomSheet
                 isOpen={isVisible}
-                onClose={handleRejectAll}
+                onClose={handleDismiss}
                 title={t("banner.title")}
             >
                 <div style={{ padding: "0.25rem" }}>
@@ -97,7 +105,6 @@ const CookieConsentBanner: React.FC = () => {
                         <Link
                             href="/privacy-policy"
                             className="text-accent underline hover:text-cream"
-                            onClick={handleRejectAll}
                         >
                             {t("links.privacy_policy")}
                         </Link>
@@ -119,7 +126,7 @@ const CookieConsentBanner: React.FC = () => {
                         </button>
                         <button
                             onClick={handleRejectAll}
-                            className="w-full rounded-lg border border-rim bg-transparent py-3 text-sm font-medium text-muted transition-colors duration-200 hover:border-accent hover:text-accent"
+                            className="w-full rounded-lg border border-accent bg-transparent py-3 text-sm font-medium text-accent transition-colors duration-200 hover:bg-accent/10"
                         >
                             {t("buttons.reject_all")}
                         </button>

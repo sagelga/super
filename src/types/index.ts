@@ -50,12 +50,22 @@ export interface CookiePreferences {
     analytics: boolean;
     consentGiven: boolean;
     consentTimestamp: number | null;
+    consentVersion: string | null;
 }
 
 /**
  * Storage key for cookie consent
  */
 export const COOKIE_STORAGE_KEY = "cookie_consent";
+
+/**
+ * Increment this when cookie categories or policy change to force re-consent.
+ * Format: "YYYY-MM-DD"
+ */
+export const CONSENT_VERSION = "2026-04-19";
+
+/** Re-prompt after 13 months (CNIL maximum) */
+export const CONSENT_EXPIRY_MS = 13 * 30 * 24 * 60 * 60 * 1000;
 
 // ============================================================================
 // Content Types
