@@ -15,6 +15,11 @@ const intlMiddleware = createMiddleware({
 export default function middleware(request: NextRequest) {
     const { pathname } = request.nextUrl;
 
+    // Home sub-pages live outside [lang] routing — bypass intl middleware
+    if (pathname.startsWith("/home/")) {
+        return NextResponse.next();
+    }
+
     // Strip locale prefix (e.g. /en/blog → /blog)
     const strippedPath = pathname.replace(/^\/(en|th|zh)/, "");
 

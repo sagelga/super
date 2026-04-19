@@ -1,0 +1,43 @@
+name: Stale PRs
+
+on:
+  schedule:
+    - cron: "0 7 * * *" # Daily at 07:00 UTC
+  workflow_dispatch:
+
+permissions:
+  issues: write
+  pull-requests: write
+
+jobs:
+  stale:
+    name: Mark and close stale PRs
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/stale@v9
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+
+          # Stale warning after 14 days of inactivity
+          days-before-pr-stale: 14
+          stale-pr-message: >
+            This PR has been inactive for 14 days. It will be closed in 7 days unless
+            there is new activity. Push a commit, leave a comment, or add the
+            `keep-open` label to prevent automatic closure.
+          stale-pr-label: "stale"
+
+          # Auto-close after 7 more days
+          days-before-pr-close: 7
+          close-pr-message: >
+            This PR has been automatically closed after 21 days of inactivity.
+            Re-open when you're ready to continue — the branch is preserved.
+
+          # Exemptions — never stale these
+          exempt-pr-labels: "keep-open,dependencies,WIP"
+
+          # Leave issues alone
+          days-before-issue-stale: -1
+          days-before-issue-close: -1
+
+          operations-per-run: 30
+          remove-stale-when-updated: true

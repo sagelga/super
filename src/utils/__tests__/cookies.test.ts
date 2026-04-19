@@ -1,3 +1,9 @@
+/**
+ * @jest-environment jsdom
+ */
+/**
+ * @jest-environment jsdom
+ */
 import {
   getCookiePreferences,
   setCookiePreferences,
@@ -77,7 +83,6 @@ describe('Cookie Utilities', () => {
         consentTimestamp: null,
       });
 
-      // @ts-expect-error - Restoring for other tests
       global.localStorage = originalLocalStorage;
     });
   });
@@ -145,7 +150,6 @@ describe('Cookie Utilities', () => {
         });
       }).not.toThrow();
 
-      // @ts-expect-error - Restoring for other tests
       global.localStorage = originalLocalStorage;
     });
   });
@@ -221,7 +225,6 @@ describe('Cookie Utilities', () => {
         clearCookiePreferences();
       }).not.toThrow();
 
-      // @ts-expect-error - Restoring for other tests
       global.localStorage = originalLocalStorage;
     });
   });

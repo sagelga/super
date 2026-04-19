@@ -1,0 +1,58 @@
+name-template: "v$RESOLVED_VERSION"
+tag-template: "v$RESOLVED_VERSION"
+
+categories:
+  - title: "New Features"
+    labels:
+      - "feat"
+  - title: "Bug Fixes"
+    labels:
+      - "fix"
+  - title: "Performance"
+    labels:
+      - "perf"
+  - title: "Content Updates"
+    labels:
+      - "content"
+  - title: "Documentation"
+    labels:
+      - "docs"
+  - title: "Maintenance"
+    labels:
+      - "chore"
+      - "ci"
+      - "dependencies"
+  - title: "Tests"
+    labels:
+      - "e2e"
+
+exclude-labels:
+  - "skip-changelog"
+
+change-template: "- $TITLE @$AUTHOR (#$NUMBER)"
+change-title-escapes: '\<*_&'
+
+version-resolver:
+  major:
+    labels:
+      - "breaking"
+  minor:
+    labels:
+      - "feat"
+  patch:
+    labels:
+      - "fix"
+      - "chore"
+      - "content"
+      - "docs"
+      - "perf"
+      - "e2e"
+      - "ci"
+  default: patch
+
+template: |
+  ## What's Changed
+
+  $CHANGES
+
+  **Full Changelog**: https://github.com/$OWNER/$REPOSITORY/compare/$PREVIOUS_TAG...v$RESOLVED_VERSION
