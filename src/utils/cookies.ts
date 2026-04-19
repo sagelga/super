@@ -1,10 +1,11 @@
-import { CookiePreferences, COOKIE_STORAGE_KEY } from '@/types';
+import { CookiePreferences, COOKIE_STORAGE_KEY, CONSENT_VERSION, CONSENT_EXPIRY_MS } from '@/types';
 
 const DEFAULT_PREFERENCES: CookiePreferences = {
   functional: true,
   analytics: false,
   consentGiven: false,
   consentTimestamp: null,
+  consentVersion: null,
 };
 
 export function getCookiePreferences(): CookiePreferences {
@@ -15,7 +16,21 @@ export function getCookiePreferences(): CookiePreferences {
   try {
     const stored = localStorage.getItem(COOKIE_STORAGE_KEY);
     if (stored) {
-      return JSON.parse(stored) as CookiePreferences;
+      const parsed = JSON.parse(stored) as CookiePreferences;
+
+      // Invalidate if policy version changed
+      if (parsed.consentVersion !== CONSENT_VERSION) {
+        localStorage.removeItem(COOKIE_STORAGE_KEY);
+        return DEFAULT_PREFERENCES;
+      }
+
+      // Invalidate if consent is older than 13 months
+      if (parsed.consentTimestamp !== null && Date.now() - parsed.consentTimestamp > CONSENT_EXPIRY_MS) {
+        localStorage.removeItem(COOKIE_STORAGE_KEY);
+        return DEFAULT_PREFERENCES;
+      }
+
+      return parsed;
     }
   } catch {
     console.warn('Failed to parse cookie preferences from localStorage');
@@ -33,6 +48,7 @@ export function setCookiePreferences(preferences: CookiePreferences): void {
     ...preferences,
     consentGiven: true,
     consentTimestamp: Date.now(),
+    consentVersion: CONSENT_VERSION,
   };
 
   try {
