@@ -3,30 +3,21 @@
 import React, { useState, useEffect } from "react";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
-import BottomSheet from "../ui/BottomSheet";
 import { getCookiePreferences, setCookiePreferences } from "@/utils/cookies";
-import "./CookieSettingsModal.style.css";
+import "./PrivacySection.style.css";
 
-interface CookieSettingsModalProps {
-    isOpen: boolean;
-    onClose: () => void;
-    onSave: () => void;
+interface PrivacySectionProps {
+    onSaved?: () => void;
 }
 
-const CookieSettingsModal: React.FC<CookieSettingsModalProps> = ({
-    isOpen,
-    onClose,
-    onSave,
-}) => {
+const PrivacySection: React.FC<PrivacySectionProps> = ({ onSaved }) => {
     const t = useTranslations("cookies");
     const [preferences, setPreferences] = useState({
         functional: true,
         analytics: false,
     });
-    const [mounted, setMounted] = useState(false);
 
     useEffect(() => {
-        setMounted(true);
         const currentPreferences = getCookiePreferences();
         setPreferences({
             functional: currentPreferences.functional,
@@ -35,7 +26,7 @@ const CookieSettingsModal: React.FC<CookieSettingsModalProps> = ({
     }, []);
 
     const handleToggle = (key: keyof typeof preferences) => {
-        if (key === "functional") return; // Can't toggle functional cookies
+        if (key === "functional") return;
         setPreferences((prev) => ({ ...prev, [key]: !prev[key] }));
     };
 
@@ -45,22 +36,12 @@ const CookieSettingsModal: React.FC<CookieSettingsModalProps> = ({
             consentGiven: true,
             consentTimestamp: Date.now(),
         });
-        onSave();
-        onClose();
+        onSaved?.();
     };
 
-    if (!mounted) {
-        return null;
-    }
-
     return (
-        <BottomSheet
-            isOpen={isOpen}
-            onClose={onClose}
-            title={t("settings.title")}
-        >
+        <>
             <div className="cookie-settings-list">
-                {/* Functional Cookies */}
                 <div className="cookie-category">
                     <div className="cookie-category-header">
                         <div className="cookie-category-info">
@@ -82,7 +63,6 @@ const CookieSettingsModal: React.FC<CookieSettingsModalProps> = ({
                     </p>
                 </div>
 
-                {/* Analytics Cookies */}
                 <div className="cookie-category">
                     <div className="cookie-category-header">
                         <div className="cookie-category-info">
@@ -110,28 +90,26 @@ const CookieSettingsModal: React.FC<CookieSettingsModalProps> = ({
                 </div>
             </div>
 
-            {/* Learn More Link */}
             <div className="cookie-settings-footer">
                 <p className="cookie-learn-more">
                     {t("settings.learn_more")}
                     <Link
                         href="/privacy-policy"
                         className="cookie-learn-more-link"
-                        onClick={onClose}
+                        onClick={() => onSaved?.()}
                     >
                         {t("links.privacy_policy")}
                     </Link>
                 </p>
             </div>
 
-            {/* Save Button */}
             <div className="cookie-settings-actions">
                 <button onClick={handleSave} className="cookie-save-btn">
                     {t("buttons.save_preferences")}
                 </button>
             </div>
-        </BottomSheet>
+        </>
     );
 };
 
-export default CookieSettingsModal;
+export default PrivacySection;

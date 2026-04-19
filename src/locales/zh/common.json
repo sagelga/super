@@ -65,7 +65,13 @@
         "label": "设置"
     },
     "settings": {
-        "hint_description": "在此点击可更改语言、主题和 Cookie 设置。"
+        "title": "设置",
+        "hint_description": "在此点击可更改语言、主题和 Cookie 设置。",
+        "tabs": {
+            "appearance": "主题",
+            "language": "语言",
+            "privacy": "隐私"
+        }
     },
     "contact": {
         "eyebrow": "联系我",
