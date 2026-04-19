@@ -29,33 +29,31 @@ const HeroSection: React.FC = () => {
 
             <div className="container mx-auto px-8 pt-24 pb-20 lg:px-16">
                 <div className="max-w-5xl">
-                    {/* Multilingual greeting with trailing rule */}
-                    <div className="enter enter-d1 mb-10 flex items-center gap-4">
-                        <p className="font-display text-lg italic text-accent sm:text-xl">
-                            {t("hero.greeting")}
-                        </p>
-                        <span className="grow-rule h-px w-16 flex-shrink-0 bg-accent/40" />
+                    {/* Eyebrow with signature amber rule growing in beside it */}
+                    <div className="enter enter-d1 mb-6 flex items-center gap-4">
+                        <span className="eyebrow tracking-[0.25em]">
+                            Portfolio
+                        </span>
+                        <span className="grow-rule h-px w-[60px] flex-shrink-0 bg-accent/60" />
                     </div>
 
-                    {/* Name — large display serif with amber terminator */}
-                    <h1 className="enter enter-d2 font-display mb-12 text-[clamp(3.5rem,9vw,7.5rem)] leading-[0.88] font-bold tracking-tight text-cream">
-                        {firstName}
-                        {lastName && (
-                            <>
-                                <br />
-                                {lastName}
-                            </>
-                        )}
+                    {/* Name — large display serif, with amber period flourish */}
+                    <h1 className="enter enter-d2 font-display mb-10 text-[clamp(3.5rem,9vw,7.5rem)] leading-[0.88] font-bold tracking-tight text-cream">
+                        {nameParts[0]}
+                        <br />
+                        <span className="text-muted">
+                            {nameParts.slice(1).join(" ")}
+                        </span>
                         <span className="text-accent">.</span>
                     </h1>
 
-                    {/* Italic serif tagline */}
-                    <p className="enter-fade enter-d3 font-display mb-10 max-w-2xl text-xl leading-relaxed italic text-cream/85 sm:text-2xl">
-                        {t("hero.tagline")}
+                    {/* Role — serif italic, muted-readable for AA contrast */}
+                    <p className="enter enter-d3 font-serif mb-4 text-xl italic text-muted-readable lg:text-2xl">
+                        {t("hero.title")}
                     </p>
 
-                    {/* Disciplines */}
-                    <p className="enter-fade enter-d4 mb-12 font-sans text-xs tracking-[0.32em] text-muted uppercase">
+                    {/* Disciplines — middot separators, tracked */}
+                    <p className="enter-fade enter-d4 mb-16 font-sans text-sm tracking-[0.2em] text-muted uppercase">
                         Salesforce · Full-Stack · Data · Teaching
                     </p>
 
