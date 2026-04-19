@@ -22,7 +22,7 @@ const AboutMe: React.FC = () => {
             >
                 {/* Introduction — spans 2 columns */}
                 <div className="lg:col-span-2">
-                    <p className="font-display text-cream border-l-2 border-accent pl-6 text-xl leading-relaxed">
+                    <p className="font-display text-text border-l-2 border-accent pl-6 text-xl leading-relaxed">
                         {t("about.introduction")}
                     </p>
                 </div>
@@ -32,7 +32,7 @@ const AboutMe: React.FC = () => {
                     <p className="mb-5 font-sans text-xs tracking-[0.25em] text-accent uppercase">
                         {t("about.education_title")}
                     </p>
-                    <p className="text-cream mb-2 leading-snug font-medium">
+                    <p className="text-text mb-2 leading-snug font-medium">
                         {t("about.university_name")}
                     </p>
                     <p className="mb-1 text-sm text-muted">

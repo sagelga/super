@@ -1,0 +1,16 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "dev",
+      "runtimeExecutable": "/opt/homebrew/bin/node",
+      "runtimeArgs": ["/opt/homebrew/lib/node_modules/npm/bin/npm-cli.js", "run", "dev"],
+      "port": 3000,
+      "autoPort": false,
+      "cwd": "/Users/kumamon/Developer/super",
+      "env": {
+        "PATH": "/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin"
+      }
+    }
+  ]
+}

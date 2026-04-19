@@ -29,7 +29,7 @@ export default function NavbarMobileMenu({
         <>
             {isOpen && (
                 <div
-                    className="bg-canvas/80 fixed inset-0 z-40 backdrop-blur-sm lg:hidden"
+                    className="bg-canvas/95 fixed inset-0 z-40 lg:hidden"
                     onClick={onClose}
                 />
             )}

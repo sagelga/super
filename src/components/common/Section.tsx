@@ -41,7 +41,7 @@ const Section: React.FC<SectionProps> = ({
                 )}
                 {title && headingVariant === "minimal" && (
                     <div className="mb-10">
-                        <p className="font-sans text-xs tracking-[0.2em] text-muted/50 uppercase">
+                        <p className="font-sans text-xs tracking-[0.2em] text-muted/70 uppercase">
                             {title}
                         </p>
                         <div className="mt-3 h-px w-6 bg-rim" />

@@ -64,8 +64,8 @@ const ExperienceSection: React.FC<ExperienceSectionProps> = ({
                                 <h3
                                     className={`font-sans text-lg transition-colors duration-200 ${
                                         expanded === index
-                                            ? "text-cream"
-                                            : "group-hover:text-cream text-muted"
+                                            ? "text-text"
+                                            : "group-hover:text-text text-muted"
                                     }`}
                                 >
                                     {exp.title}

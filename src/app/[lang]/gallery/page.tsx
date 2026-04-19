@@ -90,7 +90,7 @@ export default function GalleryPage() {
                     <p className="mb-2 font-sans text-xs font-semibold tracking-widest text-accent uppercase">
                         {t("gallery.eyebrow")}
                     </p>
-                    <h1 className="text-cream font-serif text-4xl font-semibold">
+                    <h1 className="text-text font-serif text-4xl font-semibold">
                         {t("gallery.title")}
                     </h1>
                     <p className="mt-3 text-muted">{t("gallery.subtitle")}</p>
@@ -105,7 +105,7 @@ export default function GalleryPage() {
                             className={`px-4 py-1.5 font-sans text-xs tracking-widest uppercase transition-colors duration-200 ${
                                 active === key
                                     ? "text-canvas bg-accent"
-                                    : "border-rim hover:text-cream border text-muted hover:border-accent/60"
+                                    : "border-rim hover:text-text border text-muted hover:border-accent/60"
                             }`}
                         >
                             {label}
@@ -146,7 +146,7 @@ export default function GalleryPage() {
                                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                                 />
                                 {/* Hover overlay */}
-                                <div className="from-canvas/80 absolute inset-0 flex flex-col justify-end bg-gradient-to-t via-transparent to-transparent p-4 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                                <div className="from-canvas/80 absolute inset-0 flex flex-col justify-end bg-gradient-to-t via-canvas/40 to-transparent p-4 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                                     <p className="text-cream truncate font-sans text-sm font-medium">
                                         {item.title}
                                     </p>

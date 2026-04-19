@@ -1,17 +1,20 @@
 'use client';
 
 import React from 'react';
+import dynamic from 'next/dynamic';
 import Navbar from './Navbar';
 import Footer from './Footer';
-import CookieConsentBanner from './cookies/CookieConsentBanner';
 import { ThemeProvider } from '../hooks/useTheme';
 
-// Define the props interface for the Layout component
+const CookieConsentBanner = dynamic(
+    () => import('./cookies/CookieConsentBanner'),
+    { ssr: false }
+);
+
 interface LayoutProps {
-    children: React.ReactNode; // The content to be rendered within the layout
+    children: React.ReactNode;
 }
 
-// Layout functional component that provides a consistent structure for pages
 const Layout: React.FC<LayoutProps> = ({ children }) => {
     return (
         <ThemeProvider>

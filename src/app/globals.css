@@ -34,6 +34,14 @@ html:not(.dark) {
   --color-text: #1A1814;
   --color-muted: #6B6458;
   --color-border: #D4CDB8;
+  --color-canvas: #F5F0E8;
+  --color-rim: #D4CDB8;
+  --color-cream: #1A1814;
+  --color-muted-readable: #7A7268;
+}
+
+html.dark, :root {
+  --color-muted-readable: #BDB5A6;
 }
 
 .font-display {
