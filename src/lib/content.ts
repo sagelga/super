@@ -14,6 +14,10 @@ export interface BlogFrontmatter {
     title: string;
     description: string;
     date: string;
+    // Notion's last_edited_time — only populated from Superbrain.
+    lastEditedTime?: string;
+    // When SuperEye synced this post into Superbrain's KV cache.
+    syncedAt?: string;
     authors: string[];
     tags: string[];
     image?: string;
