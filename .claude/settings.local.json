@@ -181,7 +181,10 @@
       "Bash(git pull *)",
       "Bash(npx eslint:*)",
       "Bash(npm test:*)",
-      "Bash(git -C /Users/kumamon/Developer/super stash list)"
+      "Bash(git -C /Users/kumamon/Developer/super stash list)",
+      "Bash(git fetch:*)",
+      "Bash(git merge:*)",
+      "Bash(xargs kill *)"
     ]
   },
   "hooks": {

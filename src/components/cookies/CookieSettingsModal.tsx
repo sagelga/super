@@ -44,6 +44,7 @@ const CookieSettingsModal: React.FC<CookieSettingsModalProps> = ({
             ...preferences,
             consentGiven: true,
             consentTimestamp: Date.now(),
+            consentVersion: null,
         });
         onSave();
         onClose();
