@@ -61,11 +61,7 @@ const GalleryPreviewSection: React.FC<GalleryPreviewSectionProps> = ({
                             sizes="(max-width: 768px) 50vw, 25vw"
                             className="object-cover transition-transform duration-500 group-hover:scale-105"
                         />
-<<<<<<< HEAD
-                        <div className="from-canvas/80 via-canvas/10 absolute inset-0 flex flex-col justify-end bg-gradient-to-t to-transparent p-4 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-=======
                         <div className="from-canvas/80 via-canvas/80 absolute inset-0 flex flex-col justify-end bg-gradient-to-t to-transparent p-4 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
->>>>>>> 7d051e8f704b3c08aed47ebcb311699fc2460525
                             <p className="text-cream truncate font-sans text-sm font-medium">
                                 {item.title}
                             </p>
