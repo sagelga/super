@@ -1,11 +1,12 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, lazy, Suspense } from "react";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { getCookiePreferences, setCookiePreferences } from "@/utils/cookies";
 import BottomSheet from "../ui/BottomSheet";
-import CookieSettingsModal from "./CookieSettingsModal";
+
+const CookieSettingsModal = lazy(() => import("./CookieSettingsModal"));
 
 const CookieConsentBanner: React.FC = () => {
     const t = useTranslations("cookies");
@@ -14,12 +15,43 @@ const CookieConsentBanner: React.FC = () => {
     const [mounted, setMounted] = useState(false);
 
     useEffect(() => {
-        setMounted(true);
         const preferences = getCookiePreferences();
-        if (!preferences.consentGiven) {
-            const timer = setTimeout(() => setIsVisible(true), 100);
-            return () => clearTimeout(timer);
+        if (preferences.consentGiven) return;
+
+        const show = () => {
+            setMounted(true);
+            setIsVisible(true);
+        };
+
+        const interactionEvents = ["scroll", "pointerdown", "keydown", "touchstart"] as const;
+
+        const onInteraction = () => {
+            interactionEvents.forEach((e) => window.removeEventListener(e, onInteraction));
+            if (idleId !== undefined) {
+                (window as Window & typeof globalThis & { cancelIdleCallback?: (id: number) => void }).cancelIdleCallback?.(idleId);
+            }
+            show();
+        };
+
+        let idleId: number | undefined;
+        if ("requestIdleCallback" in window) {
+            idleId = (window as Window & typeof globalThis & { requestIdleCallback: (cb: () => void) => number }).requestIdleCallback(show);
+        } else {
+            idleId = window.setTimeout(show, 2000) as unknown as number;
         }
+
+        interactionEvents.forEach((e) => window.addEventListener(e, onInteraction, { once: true, passive: true }));
+
+        return () => {
+            interactionEvents.forEach((e) => window.removeEventListener(e, onInteraction));
+            if (idleId !== undefined) {
+                if ("cancelIdleCallback" in window) {
+                    (window as Window & typeof globalThis & { cancelIdleCallback: (id: number) => void }).cancelIdleCallback(idleId);
+                } else {
+                    clearTimeout(idleId as unknown as ReturnType<typeof setTimeout>);
+                }
+            }
+        };
     }, []);
 
     const handleAcceptAll = () => {
@@ -95,11 +127,15 @@ const CookieConsentBanner: React.FC = () => {
                 </div>
             </BottomSheet>
 
-            <CookieSettingsModal
-                isOpen={showSettings}
-                onClose={() => setShowSettings(false)}
-                onSave={handleSavePreferences}
-            />
+            {showSettings && (
+                <Suspense fallback={null}>
+                    <CookieSettingsModal
+                        isOpen={showSettings}
+                        onClose={() => setShowSettings(false)}
+                        onSave={handleSavePreferences}
+                    />
+                </Suspense>
+            )}
         </>
     );
 };
