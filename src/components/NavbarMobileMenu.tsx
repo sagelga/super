@@ -155,20 +155,14 @@ export default function NavbarMobileMenu({
                 </nav>
 
                 {/* Bottom actions */}
-                <div className="flex-shrink-0 space-y-3 border-t border-rim px-8 py-6">
+                <div className="flex-shrink-0 border-t border-rim px-8 py-6">
                     <Link
                         href={p("/contact")}
-                        className="hover:text-cream block py-3 text-sm tracking-wide text-muted transition-colors duration-200"
+                        className="block border border-accent/60 px-4 py-2.5 text-center font-sans text-sm tracking-wide text-accent transition-colors duration-200 hover:border-accent hover:bg-accent hover:text-canvas"
                         onClick={onClose}
                     >
                         {t("nav.contact")}
                     </Link>
-                    <button
-                        disabled
-                        className="text-canvas w-full cursor-not-allowed bg-accent px-3 py-2 text-left text-sm tracking-wide opacity-60"
-                    >
-                        {t("nav.contact")}
-                    </button>
                 </div>
             </div>
         </>
