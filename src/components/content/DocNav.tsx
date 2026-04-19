@@ -26,72 +26,104 @@ function findActive(
 
 function NavItem({
     item,
+    index,
     onNavigate,
 }: {
     item: SidebarItem;
+    index: number;
     onNavigate: () => void;
 }) {
     const pathname = usePathname();
     const isActive = item.href === pathname;
+    const numLabel = String(index + 1).padStart(2, "0");
+
+    const heading = (
+        <span className="flex items-baseline gap-2.5">
+            <span className="font-mono text-[10px] tracking-wider text-accent/60 tabular-nums">
+                {numLabel}
+            </span>
+            <span className="font-display text-base leading-tight">
+                {item.label}
+            </span>
+        </span>
+    );
 
     return (
-        <div className="mb-4 break-inside-avoid">
-            {item.href ? (
-                <Link
-                    href={item.href}
-                    onClick={onNavigate}
-                    className={`mb-1.5 block text-sm font-medium transition-colors ${
-                        isActive ? "text-accent" : "text-text hover:text-accent"
+        <div className="mb-7 break-inside-avoid">
+            <div className="mb-2.5">
+                {item.href ? (
+                    <Link
+                        href={item.href}
+                        onClick={onNavigate}
+                        className={`group block transition-colors ${
+                            isActive
+                                ? "text-accent"
+                                : "text-text hover:text-accent"
+                        }`}
+                    >
+                        {heading}
+                    </Link>
+                ) : (
+                    <div className="text-text">{heading}</div>
+                )}
+                <div
+                    className={`mt-2 h-px w-8 bg-gradient-to-r to-transparent ${
+                        isActive ? "from-accent" : "from-accent/50"
                     }`}
-                >
-                    {item.label}
-                </Link>
-            ) : (
-                <p className="mb-1.5 font-sans text-xs tracking-widest text-muted uppercase">
-                    {item.label}
-                </p>
-            )}
+                />
+            </div>
             {item.children && (
-                <ul className="space-y-0.5 border-l border-rim pl-3">
-                    {item.children.map((child) => (
-                        <li key={child.href ?? child.label}>
-                            <Link
-                                href={child.href ?? "#"}
-                                onClick={onNavigate}
-                                className={`block py-0.5 text-sm transition-colors ${
-                                    pathname === child.href
-                                        ? "text-accent"
-                                        : "text-muted hover:text-text"
-                                }`}
-                            >
-                                {child.label}
-                            </Link>
-                            {child.children && (
-                                <ul className="mt-0.5 space-y-0.5 border-l border-rim/50 pl-3">
-                                    {child.children.map((grandchild) => (
-                                        <li
-                                            key={
-                                                grandchild.href ??
-                                                grandchild.label
-                                            }
-                                        >
-                                            <Link
-                                                href={grandchild.href ?? "#"}
-                                                onClick={onNavigate}
-                                                className={`block py-0.5 text-xs transition-colors ${
-                                                    pathname === grandchild.href
-                                                        ? "text-accent"
-                                                        : "text-muted hover:text-text"
-                                                }`}
-                                            >
-                                                {grandchild.label}
-                                            </Link>
-                                        </li>
-                                    ))}
-                                </ul>
-                            )}
-                        </li>
-                    ))}
+                <ul className="space-y-0.5">
+                    {item.children.map((child, i) => {
+                        const childActive = pathname === child.href;
+                        return (
+                            <li key={i}>
+                                <Link
+                                    href={child.href ?? "#"}
+                                    onClick={onNavigate}
+                                    className={`group flex items-baseline gap-2 py-0.5 text-sm transition-colors ${
+                                        childActive
+                                            ? "text-accent"
+                                            : "text-muted hover:text-text"
+                                    }`}
+                                >
+                                    <span
+                                        className={`text-xs transition-colors ${
+                                            childActive
+                                                ? "text-accent"
+                                                : "text-rim group-hover:text-accent/70"
+                                        }`}
+                                        aria-hidden
+                                    >
+                                        ·
+                                    </span>
+                                    <span>{child.label}</span>
+                                </Link>
+                                {child.children && (
+                                    <ul className="mt-0.5 ml-4 space-y-0.5">
+                                        {child.children.map((grandchild, j) => (
+                                            <li key={j}>
+                                                <Link
+                                                    href={
+                                                        grandchild.href ?? "#"
+                                                    }
+                                                    onClick={onNavigate}
+                                                    className={`block py-0.5 text-xs transition-colors ${
+                                                        pathname ===
+                                                        grandchild.href
+                                                            ? "text-accent"
+                                                            : "text-muted/75 hover:text-text"
+                                                    }`}
+                                                >
+                                                    {grandchild.label}
+                                                </Link>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                )}
+                            </li>
+                        );
+                    })}
                 </ul>
             )}
         </div>
@@ -141,19 +173,24 @@ export default function DocNav({ items, title }: DocNavProps) {
             </button>
 
             {/* Expanded panel */}
-            {open && (
-                <div className="bg-canvas border border-t-0 border-rim p-5">
-                    <div className="columns-2 gap-6 md:columns-3 lg:columns-4">
-                        {items.map((item) => (
-                            <NavItem
-                                key={item.href ?? item.label}
-                                item={item}
-                                onNavigate={() => setOpen(false)}
-                            />
-                        ))}
+            <div
+                className={`grid transition-[grid-template-rows] duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] ${open ? "grid-rows-[1fr]" : "grid-rows-[0fr]"}`}
+            >
+                <div className="overflow-hidden">
+                    <div className="border border-t-0 border-rim bg-canvas p-6 md:p-8">
+                        <div className="columns-2 gap-8 md:columns-3 md:gap-10 lg:columns-4">
+                            {items.map((item, i) => (
+                                <NavItem
+                                    key={i}
+                                    item={item}
+                                    index={i}
+                                    onNavigate={() => setOpen(false)}
+                                />
+                            ))}
+                        </div>
                     </div>
                 </div>
-            )}
+            </div>
         </div>
     );
 }

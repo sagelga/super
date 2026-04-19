@@ -1,0 +1,53 @@
+name: PR Title Check
+
+on:
+  pull_request:
+    types: [opened, edited, synchronize, reopened]
+    branches:
+      - main
+
+jobs:
+  validate-title:
+    name: Validate PR Title
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check PR title follows Conventional Commits
+        env:
+          PR_TITLE: ${{ github.event.pull_request.title }}
+        run: |
+          # Conventional Commits pattern:
+          # <type>(<optional scope>): <description>
+          # Types: feat, fix, docs, style, refactor, perf, test, build, ci, chore, revert, content
+          PATTERN="^(feat|fix|docs|style|refactor|perf|test|build|ci|chore|revert|content)(\([a-zA-Z0-9/_-]+\))?(!)?: .{1,100}$"
+
+          echo "PR Title: $PR_TITLE"
+
+          if echo "$PR_TITLE" | grep -qE "$PATTERN"; then
+            echo "PR title follows Conventional Commits format."
+          else
+            echo ""
+            echo "ERROR: PR title does not follow Conventional Commits format."
+            echo ""
+            echo "Expected format: <type>(<scope>): <description>"
+            echo ""
+            echo "Valid types:"
+            echo "  feat      - A new feature"
+            echo "  fix       - A bug fix"
+            echo "  docs      - Documentation changes"
+            echo "  style     - Code style changes (formatting, etc.)"
+            echo "  refactor  - Code refactoring"
+            echo "  perf      - Performance improvements"
+            echo "  test      - Adding or updating tests"
+            echo "  build     - Build system or dependency changes"
+            echo "  ci        - CI configuration changes"
+            echo "  chore     - Other changes (maintenance, etc.)"
+            echo "  revert    - Revert a previous commit"
+            echo "  content   - Content updates (blog posts, copy)"
+            echo ""
+            echo "Examples:"
+            echo "  feat(blog): add syntax highlighting for code blocks"
+            echo "  fix(nav): correct mobile menu z-index overlap"
+            echo "  chore: update Node.js to v22"
+            echo "  content: publish new blog post on Cloudflare Workers"
+            exit 1
+          fi

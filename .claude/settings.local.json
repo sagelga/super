@@ -178,7 +178,13 @@
       "Bash(curl -s \"https://sagelga.com/en/learn/git\")",
       "Bash(curl -s \"https://sagelga.com/en/blog/super-development-process\")",
       "Bash(curl -sv \"https://sagelga.com/en/blog/super-development-process\")",
-      "Bash(git pull *)"
+      "Bash(git pull *)",
+      "Bash(npx eslint:*)",
+      "Bash(npm test:*)",
+      "Bash(git -C /Users/kumamon/Developer/super stash list)",
+      "Bash(git fetch:*)",
+      "Bash(git merge:*)",
+      "Bash(xargs kill *)"
     ]
   },
   "hooks": {
