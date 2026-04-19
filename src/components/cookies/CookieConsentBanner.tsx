@@ -37,7 +37,7 @@ const CookieConsentBanner: React.FC = () => {
         if ("requestIdleCallback" in window) {
             idleId = (window as Window & typeof globalThis & { requestIdleCallback: (cb: () => void) => number }).requestIdleCallback(show);
         } else {
-            idleId = window.setTimeout(show, 2000) as unknown as number;
+            idleId = setTimeout(show, 2000) as unknown as number;
         }
 
         interactionEvents.forEach((e) => window.addEventListener(e, onInteraction, { once: true, passive: true }));
