@@ -3,13 +3,17 @@
 
 @theme {
   --color-background: #1A1814;
+  --color-canvas: #1A1814;
   --color-surface: #252219;
   --color-primary: #3B4A8C;
+  --color-brand: #3B4A8C;
   --color-accent: #C9943A;
   --color-secondary: var(--color-accent);    /* tailwind: secondary → accent */
   --color-text: #F0EAD6;
+  --color-cream: #F0EAD6;
   --color-text-primary: var(--color-text);   /* tailwind: text.primary → text */
   --color-muted: #9A9485;
+  --color-muted-readable: #BDB5A6;           /* muted text on canvas at AA */
   --color-text-secondary: var(--color-muted); /* tailwind: text.secondary → muted */
   --color-border: #302C24;
   --color-rim: var(--color-border);          /* tailwind: rim → border */
@@ -185,5 +189,51 @@ a:focus-visible,
 /* Remove default focus ring for mouse users */
 :focus:not(:focus-visible) {
   outline: none;
+}
+
+/* ============================================================
+   Signature design-system utilities
+   (mirror of colors_and_type.css semantic classes)
+   ============================================================ */
+
+/* Eyebrow — all-caps, tracked, amber. The signature typographic move. */
+.eyebrow {
+  font-family: var(--font-sans);
+  font-size: var(--text-xs);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  font-weight: 500;
+}
+
+/* Tighter caps label for micro chrome (e.g. SCROLL, tier labels) */
+.eyebrow-tight {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+  font-weight: 500;
+}
+
+/* Signature amber rule — 1px, 40px wide, 60% opacity. Used beside eyebrows
+   and titles to land like a flourish of the pen. */
+.rule-amber {
+  display: inline-block;
+  height: 1px;
+  width: 40px;
+  background: var(--color-accent);
+  opacity: 0.6;
+}
+
+/* Lamplight hover — signature card/CTA glow */
+.shadow-hover {
+  box-shadow: 0 4px 32px -8px rgba(201, 148, 58, 0.12);
+}
+
+/* Selection uses amber lamplight on canvas */
+::selection {
+  background: var(--color-accent);
+  color: var(--color-canvas);
 }
 

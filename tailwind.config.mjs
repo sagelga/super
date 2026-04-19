@@ -7,45 +7,47 @@ const config = {
   theme: {
     extend: {
       colors: {
-        // Brand Colors (Primary)
+        // Brand indigo — from Super Design System handoff bundle
         brand: {
           DEFAULT: '#3B4A8C',
-          50: '#E8ECF5',
-          100: '#C5CDE3',
-          200: '#9FAFD1',
-          300: '#7991BF',
-          400: '#5373AD',
+          50:  '#F0F2F8',
+          100: '#DDE1F0',
+          200: '#B8C0DC',
+          300: '#8E9BC4',
+          400: '#5E6DAA',
           500: '#3B4A8C',
-          600: '#2F3C70',
-          700: '#232E54',
-          800: '#172038',
-          900: '#0B121C',
+          600: '#2E3A70',
+          700: '#262F5A',
+          800: '#1E2548',
+          900: '#151A33',
         },
-        // Accent Colors
+        // Accent amber — from Super Design System handoff bundle
         accent: {
           DEFAULT: '#C9943A',
-          50: '#FDF6EC',
-          100: '#FAE8CF',
-          200: '#F5D7A1',
-          300: '#F0C673',
-          400: '#D4A84A',
+          50:  '#FBF6EC',
+          100: '#F5E8CB',
+          200: '#ECD395',
+          300: '#E0BB63',
+          400: '#D3A44A',
           500: '#C9943A',
-          600: '#A87730',
-          700: '#7D5924',
-          800: '#523B18',
-          900: '#271D0C',
+          600: '#A77A2F',
+          700: '#7D5B22',
+          800: '#5A4218',
+          900: '#3B2B10',
         },
-        // Canvas (Dark Background)
+        // Canvas (warm near-black body background)
         canvas: '#1A1814',
-        // Surface (Card Background)
+        // Surface (raised cards and sections)
         surface: '#252219',
-        // Cream (Light Text/Background)
+        // Cream (primary text — softer than white)
         cream: '#F0EAD6',
-        // Muted (Secondary Text)
+        // Muted (captions, dates, secondary info)
         muted: '#9A9485',
-        // Rim (Border)
+        // Muted-readable (muted text on canvas at AA contrast)
+        'muted-readable': '#BDB5A6',
+        // Rim (default 1px border)
         rim: '#302C24',
-        // Semantic Colors
+        // Semantic role aliases
         background: {
           dark: '#1A1814',
           light: '#F0EAD6',
@@ -58,7 +60,7 @@ const config = {
           dark: '#252219',
           light: '#FFFFFF',
         },
-        // Map standard colors to custom palette for consistency
+        // Grayscale mapped into the warm palette for consistency
         gray: {
           50: '#F0EAD6',
           100: '#E8E0CC',
@@ -76,6 +78,16 @@ const config = {
         sans: ['IBM Plex Sans Thai', 'system-ui', 'sans-serif'],
         mono: ['IBM Plex Mono', 'monospace'],
         serif: ['IBM Plex Serif', 'serif'],
+        display: ['IBM Plex Serif', 'Georgia', 'serif'],
+      },
+      boxShadow: {
+        // Signature lamplight hover — used on cards and CTAs
+        hover: '0 4px 32px -8px rgba(201, 148, 58, 0.12)',
+        'card-hover': '0 4px 24px -6px rgba(201, 148, 58, 0.10)',
+      },
+      transitionTimingFunction: {
+        'out-quart': 'cubic-bezier(0.25, 1, 0.5, 1)',
+        'out-expo':  'cubic-bezier(0.16, 1, 0.3, 1)',
       },
     },
   },
