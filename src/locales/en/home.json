@@ -64,6 +64,7 @@
         {
             "title": "Super",
             "description": "Personal portfolio website built with Next.js and Cloudflare Pages, integrating with Superbrain API. Orchestrated development using Gemini 2.5 Flash/Pro models for code generation and task execution.",
+            "context": "No standard portfolio template conveyed Kunanon's full technical depth — he needed a site that was both visually distinctive and developer-credible. He built this site from scratch with Next.js, Cloudflare Pages, and integration with his own Superbrain API, orchestrating development with Gemini 2.5 models. The result is the live portfolio at sagelga.com, serving as both a showcase and a working demonstration of his full-stack capabilities.",
             "githubLink": "https://github.com/sagelga/super",
             "demoLink": "https://sagelga.com",
             "stack": ["Next.js", "React", "TypeScript", "Cloudflare Pages"]
@@ -71,6 +72,7 @@
         {
             "title": "Superbrain",
             "description": "API for blog content, retrieving Notion changes and storing them in Cloudflare D2 for fast retrieval. Fully runs on Cloudflare Workers; orchestrated development using Gemini models.",
+            "context": "Serving blog content directly from Notion introduced latency and API rate-limit risk at any meaningful traffic scale. Kunanon designed a pipeline on Cloudflare Workers that listens for Notion changes, normalises the content, and stores it in Cloudflare D1 for millisecond reads. The outcome is a serverless backend that decouples the CMS from the delivery layer and scales to any traffic volume with zero infrastructure overhead.",
             "githubLink": "https://github.com/sagelga/superbrain",
             "demoLink": "",
             "stack": ["Cloudflare Worker", "Notion API", "Cloudflare D2", "TypeScript"]
@@ -78,6 +80,7 @@
         {
             "title": "Todoist Notion Sync",
             "description": "Utilizes Cloudflare Worker to listen to Webhook from Todoist and create a new task in Notion.",
+            "context": "Manually copying completed Todoist tasks into a Notion database for review was a daily friction point that broke focus. He deployed a lightweight Cloudflare Worker that subscribes to Todoist webhooks and automatically creates a matching entry in the target Notion database on every task event. This eliminated the manual step entirely, keeping both tools in sync without any recurring maintenance.",
             "githubLink": "https://github.com/sagelga/todoist-tagging",
             "demoLink": "",
             "imageUrl": "/images/placeholder-project.png",
@@ -86,6 +89,7 @@
         {
             "title": "Learn with sagelga",
             "description": "Rebuilt learn.sagelga.com with Docusaurus, React, and TypeScript, enhancing search and speed to empower Python and SQL learners.",
+            "context": "The original learn.sagelga.com had slow page loads and poor search, which undercut the learning experience for Python and SQL students. Kunanon rebuilt the site with Docusaurus, React, and TypeScript, applying performance tuning and improved search indexing throughout. Students now have a faster, more navigable reference — and Kunanon has a low-friction platform for publishing new lessons.",
             "githubLink": "https://github.com/sagelga/learn-with-sagelga",
             "demoLink": "https://learn.sagelga.com",
             "stack": ["Docusaurus", "React", "TypeScript"]
@@ -93,6 +97,7 @@
         {
             "title": "Byteside.one",
             "description": "Founded ByteSide.one, a tech, gadget, and gaming news publication, achieving 2.79 million Google Search impressions and 200k+ monthly Facebook impressions by Jan 2023.",
+            "context": "Thai-language tech and gaming audiences had few high-quality local publications they could trust for timely, well-researched coverage. Kunanon founded ByteSide.one and grew it to 2.79 million Google Search impressions and over 200,000 monthly Facebook impressions by January 2023. The publication proved that a small, focused editorial team could compete for organic search visibility with larger media brands.",
             "githubLink": "",
             "demoLink": "https://byteside.one/",
             "stack": ["Next.js", "React", "TypeScript", "SEO"]
@@ -100,6 +105,7 @@
         {
             "title": "The Sunny Side Publication",
             "description": "Pioneered 'The Sunny Side' publication on Medium, a precursor to ByteSide.one, showcasing early content creation and publishing expertise.",
+            "context": "Before ByteSide.one existed, Kunanon wanted a low-barrier outlet to develop a publishing voice and experiment with long-form tech content. He launched The Sunny Side on Medium as a personal publication, learning audience development, editorial rhythm, and SEO fundamentals along the way. That experience became the direct foundation for the editorial strategy later applied at ByteSide.one.",
             "githubLink": "",
             "demoLink": "https://medium.com/the-sunny-side",
             "stack": ["Medium", "Publishing", "Content Creation"]
@@ -107,6 +113,7 @@
         {
             "title": "Approval Workflow on Google Apps Script",
             "description": "Developed an automated approval workflow for IMST using Google Apps Script, streamlining IT, Requisition, and Procurement processes with automated email triggers and Google Forms integration.",
+            "context": "IMST's IT, Requisition, and Procurement approvals were handled manually via email chains, causing delays and lost requests. Kunanon built an automated approval workflow using Google Apps Script, Google Forms, and automated email triggers — keeping all parties notified without manual follow-up. The system standardised the process and reduced approval turnaround time across all three departments.",
             "githubLink": "https://github.com/sagelga/approval-workflow",
             "demoLink": "https://docs.sagelga.com/approval-workflow/",
             "stack": ["Google Apps Script", "Google Forms", "Workflow Automation"]
@@ -114,6 +121,7 @@
         {
             "title": "Essilor Asia Supplier Deduplication Report",
             "description": "Developed Oracle SQL and PL/SQL scripts for Essilor Asia and Europe, generating supplier deduplication reports to enhance data quality in production Oracle ERP, including similarity scoring and normalization.",
+            "context": "Essilor's Oracle ERP contained duplicate supplier records across Asia and Europe, inflating procurement costs and complicating spend analysis. Kunanon developed Oracle SQL and PL/SQL scripts that applied similarity scoring and name normalisation to surface likely duplicates, generating structured deduplication reports for the data stewardship team. The deliverable gave Essilor's procurement analysts a clear, prioritised list to action, directly improving master data quality in production.",
             "githubLink": "",
             "demoLink": "",
             "stack": ["Oracle SQL", "Oracle PL/SQL", "Oracle ERP"]
@@ -121,6 +129,7 @@
         {
             "title": "Data Analytics on Body Fat",
             "description": "Conducted multi-regression analysis on body fat and body part size relationships using IBM SPSS Statistics to create statistical models.",
+            "context": "Understanding which body measurements are the strongest predictors of body fat percentage has value for health and fitness applications, but few accessible analyses existed for non-specialist audiences. Kunanon conducted multi-variable regression analysis using IBM SPSS Statistics, examining relationships between body fat and multiple body-part measurements. The resulting statistical models quantified the predictive strength of each variable and served as a practical demonstration of applied regression methodology.",
             "githubLink": "https://github.com/sagelga/bodyfat-regression",
             "demoLink": "",
             "stack": ["IBM SPSS Statistics", "Regression Analysis", "Statistical Modeling"]
@@ -128,6 +137,7 @@
         {
             "title": "Lecture sharing System (Oh Sheet!)",
             "description": "Developed 'Oh Sheet!', a lecture sharing system using Vue, Parse, NodeJS, ExpressJS, and Digital Ocean Spaces, designed for easy sharing and discovery of educational content.",
+            "context": "University students had no centralised, searchable place to share or discover lecture notes and study materials. Kunanon and a team built Oh Sheet! — a full-stack web application using Vue, Parse, Node.js, Express.js, and Digital Ocean Spaces — that let users upload, tag, and search educational content. The platform provided a self-service hub for peer-to-peer academic resource sharing.",
             "githubLink": "https://github.com/sagelga/oh-sheet",
             "demoLink": "https://docs.sagelga.com/oh-sheet/",
             "stack": ["Vue", "Parse Platform", "Node.js", "Express.js", "Digital Ocean Spaces"]
@@ -135,6 +145,7 @@
         {
             "title": "Online Space Reservation System",
             "description": "Designed and implemented an online space reservation system with PostgreSQL, Scala, GraphQL, and NodeJS, managing user requirements and approvals for building administrators.",
+            "context": "A campus building lacked any digital way for occupants to book shared spaces, leading to double-bookings and administrator overhead. Kunanon's team designed and built a reservation system backed by PostgreSQL, Scala, and GraphQL, with a Node.js API layer and an approval workflow for building administrators. The system replaced ad-hoc booking with a structured, tracked, and auditable process.",
             "githubLink": "https://github.com/itforge-eros/panda-website",
             "demoLink": "https://docs.sagelga.com/project-panda/",
             "stack": ["PostgreSQL", "Scala", "GraphQL", "Node.js"]
@@ -142,6 +153,7 @@
         {
             "title": "Thai restaurant analysis",
             "description": "Analyzed the prevalence of Thai restaurants in the United States, investigating underlying causes and trends.",
+            "context": "The question of why Thai restaurants are disproportionately prevalent in the United States compared to other cuisines had been noted anecdotally but rarely quantified. Kunanon gathered and analysed restaurant data using Python, investigating regional distribution patterns and the historical and policy factors that may have influenced them. The analysis surfaced concrete trends and offered data-backed context for a culturally interesting question.",
             "githubLink": "https://github.com/sagelga/data-journal",
             "demoLink": "",
             "stack": ["Python", "Data Analysis"]
@@ -149,6 +161,7 @@
         {
             "title": "Trash Melody",
             "description": "Developed 'Trash Melody', a fast-paced OSU!-inspired Java game, combining entertainment with education on trash categorization.",
+            "context": "Teaching people to correctly sort waste categories is difficult when the information feels abstract or boring. Kunanon built Trash Melody, an OSU!-inspired rhythm game in Java where players sort falling items into the correct trash bin under time pressure. The game paired genuine educational content with fast-paced mechanics, making waste categorisation memorable and engaging.",
             "githubLink": "https://github.com/sagelga/trashmelody",
             "demoLink": "https://docs.sagelga.com/trash-melody/",
             "stack": ["Java", "Game Development"]
@@ -156,6 +169,7 @@
         {
             "title": "Point of Sales (POS) System",
             "description": "Engineered a comprehensive Point-of-Sale (POS) system in C, featuring analytics, stock/profit management, sales forecasting (Linear Regression), customer loyalty, and barcode scanner support, with data stored in CSV format.",
+            "context": "Small vendors often rely on spreadsheets or pen-and-paper for sales tracking, missing out on inventory control and business intelligence. Kunanon engineered a full POS system in C with modules for sales analytics, stock management, profit tracking, sales forecasting via Linear Regression, customer loyalty points, and barcode scanner support — storing all data in CSV files for portability. The system delivered enterprise-level reporting features in a dependency-free, offline-capable tool.",
             "githubLink": "https://github.com/sagelga/ComPro_Project",
             "demoLink": "https://docs.sagelga.com/compro-project/",
             "stack": ["C (Programming Language)", "CSV", "POS Systems"]

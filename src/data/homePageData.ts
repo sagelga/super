@@ -3,6 +3,7 @@ import { useTranslations } from "next-intl";
 interface Project {
     title: string;
     description: string;
+    context?: string;
     stack?: string[];
     githubLink?: string;
     demoLink?: string;

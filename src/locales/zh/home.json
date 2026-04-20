@@ -64,6 +64,7 @@
         {
             "title": "Super",
             "description": "基于 Next.js 和 Cloudflare Pages 构建的个人作品集网站，集成 Superbrain API，并借助 Gemini 2.5 Flash/Pro 模型辅助开发，提升编码效率。",
+            "context": "市面上的作品集模板要么空洞，要么无法展现技术深度。Kunanon 从零开始，用 Next.js、Cloudflare Pages 和自己的 Superbrain API 搭建了这个网站，并借助 Gemini 2.5 模型加速开发流程。最终成品 sagelga.com 既是个人品牌展示，也是全栈能力的真实演示。",
             "githubLink": "https://github.com/sagelga/super",
             "demoLink": "https://sagelga.com",
             "stack": ["Next.js", "React", "TypeScript", "Cloudflare Pages"]
@@ -71,6 +72,7 @@
         {
             "title": "Superbrain",
             "description": "博客内容 API，从 Notion 同步数据并缓存至 Cloudflare D1，便于快速检索。完全部署在 Cloudflare Workers 上，借助 Gemini 模型辅助开发。",
+            "context": "Notion 作为 CMS 虽然灵活，但直接读取会带来网络延迟和 API 限流风险。Kunanon 设计了一个 Cloudflare Workers 管道，通过 Webhook 监听 Notion 变更，规范化数据后持久化到 Cloudflare D1。这套无服务架构彻底解耦了编辑系统和内容分发，无论流量多大都能毫秒级响应，零基础设施维护。",
             "githubLink": "https://github.com/sagelga/superbrain",
             "demoLink": "",
             "stack": ["Cloudflare Worker", "Notion API", "Cloudflare D2", "TypeScript"]
@@ -78,6 +80,7 @@
         {
             "title": "Todoist Notion Sync",
             "description": "利用 Cloudflare Worker 侦听来自 Todoist 的 Webhook，并在 Notion 中创建新任务。",
+            "context": "每天手工复制 Todoist 完成的任务到 Notion 库中是个日常干扰，打乱了工作流。Kunanon 部署了一个 Cloudflare Worker，订阅 Todoist 的事件流，每当任务变动时自动在 Notion 中创建对应记录。从此两个工具完全同步，无需任何人工操作或维护。",
             "githubLink": "https://github.com/sagelga/todoist-tagging",
             "demoLink": "",
             "imageUrl": "/images/placeholder-project.png",
@@ -86,6 +89,7 @@
         {
             "title": "Learn with sagelga",
             "description": "使用 Docusaurus、React 和 TypeScript 重建 learn.sagelga.com，增强搜索和速度，为 Python 和 SQL 学习者赋能。",
+            "context": "原有的 learn.sagelga.com 页面加载缓慢，搜索体验糟糕，严重影响了学生的学习效果。Kunanon 用 Docusaurus、React 和 TypeScript 重建了整个平台，进行了系统性的性能优化和搜索改进。现在 Python 和 SQL 学生拥有了一个更快、更易导航的学习参考，Kunanon 也获得了一个低摩擦的内容发布渠道。",
             "githubLink": "https://github.com/sagelga/learn-with-sagelga",
             "demoLink": "https://learn.sagelga.com",
             "stack": ["Docusaurus", "React", "TypeScript"]
@@ -93,6 +97,7 @@
         {
             "title": "Byteside.one",
             "description": "创立了 ByteSide.one，一个科技、小工具和游戏新闻发布平台，到 2023 年 1 月实现了 279 万次 Google 搜索展示和 20 万+ 月度 Facebook 展示。",
+            "context": "泰国科技及游戏受众缺少本地优质、可信的媒体渠道。Kunanon 创办了 ByteSide.one，通过扎实的编辑团队和有针对性的内容策略，到 2023 年 1 月实现了 279 万次谷歌搜索展示和超过 20 万的月度 Facebook 触及。这个项目证明了小团队也能在有机搜索竞争中打败大型媒体品牌。",
             "githubLink": "",
             "demoLink": "https://byteside.one/",
             "stack": ["Next.js", "React", "TypeScript", "SEO"]
@@ -100,6 +105,7 @@
         {
             "title": "The Sunny Side Publication",
             "description": "在 Medium 上创办了《The Sunny Side》出版物，作为 ByteSide.one 的前身，积累了早期内容创作与发布运营经验。",
+            "context": "ByteSide.one 成立前，Kunanon 想找一个低门槛的长篇内容实验阵地。他在 Medium 开办了《The Sunny Side》，在这里探索读者运营、内容节奏和 SEO 基础。这段创作经历直接成为了后来 ByteSide.one 编辑策略的基石。",
             "githubLink": "",
             "demoLink": "https://medium.com/the-sunny-side",
             "stack": ["Medium", "Publishing", "Content Creation"]
@@ -107,6 +113,7 @@
         {
             "title": "Approval Workflow on Google Apps Script",
             "description": "使用 Google Apps Script 为 IMST 开发了自动审批工作流，通过自动化电子邮件触发和 Google Forms 集成来简化 IT、采购申请和采购流程。",
+            "context": "IMST 的 IT、申购和采购审批依赖于邮件链，导致流程混乱、需求丢失。Kunanon 用 Google Apps Script、Google Forms 和自动化邮件触发器搭建了一个工作流系统，确保相关方始终保持通知，无需人工跟踪。系统规范了审批流程，显著缩短了各部门的审批周期。",
             "githubLink": "https://github.com/sagelga/approval-workflow",
             "demoLink": "https://docs.sagelga.com/approval-workflow/",
             "stack": ["Google Apps Script", "Google Forms", "Workflow Automation"]
@@ -114,6 +121,7 @@
         {
             "title": "Essilor Asia 供应商重复数据删除报告",
             "description": "为 Essilor 亚洲和欧洲开发了 Oracle SQL 和 PL/SQL 脚本，生成供应商重复数据删除报告以增强生产 Oracle ERP 中的数据质量，包括相似性评分和规范化。",
+            "context": "Essilor 的 Oracle ERP 中存在大量重复的供应商记录，导致采购成本虚高、支出分析困难。Kunanon 编写了 Oracle SQL 和 PL/SQL 脚本，应用相似度评分和名称规范化算法来识别可能重复的记录，生成结构化报告供数据治理团队审核。这套工具为采购部门提供了清晰的优先级处理清单，直接提升了生产系统中的主数据质量。",
             "githubLink": "",
             "demoLink": "",
             "stack": ["Oracle SQL", "Oracle PL/SQL", "Oracle ERP"]
@@ -121,6 +129,7 @@
         {
             "title": "身体脂肪数据分析",
             "description": "使用 IBM SPSS Statistics 对身体脂肪与身体部位大小之间的关系进行多元回归分析，以创建统计模型。",
+            "context": "身体脂肪比例与哪些身体部位测量值关系最强是一个健身和医疗领域的实用问题，但大众可得的分析稀缺。Kunanon 用 IBM SPSS Statistics 进行多元回归分析，量化了身体各部位测量值对脂肪比例的预测强度。这套统计模型既展示了回归分析的实际应用，也为健身应用提供了科学依据。",
             "githubLink": "https://github.com/sagelga/bodyfat-regression",
             "demoLink": "",
             "stack": ["IBM SPSS Statistics", "Regression Analysis", "Statistical Modeling"]
@@ -128,6 +137,7 @@
         {
             "title": "讲座分享系统（Oh Sheet!）",
             "description": "使用 Vue、Parse、NodeJS、ExpressJS 和 Digital Ocean Spaces 开发了《Oh Sheet!》讲座分享系统，旨在轻松分享和发现教育内容。",
+            "context": "大学校园缺少一个集中、可搜索的讲座笔记和学习资源共享平台。Kunanon 和团队搭建了 Oh Sheet!，用 Vue、Parse、Node.js、Express.js 和 Digital Ocean Spaces 实现了一个全栈应用，让学生能上传、标记和搜索教学资料。这个平台成为了同学之间互助分享学术资源的自服务枢纽。",
             "githubLink": "https://github.com/sagelga/oh-sheet",
             "demoLink": "https://docs.sagelga.com/oh-sheet/",
             "stack": ["Vue", "Parse Platform", "Node.js", "Express.js", "Digital Ocean Spaces"]
@@ -135,6 +145,7 @@
         {
             "title": "在线空间预订系统",
             "description": "使用 PostgreSQL、Scala、GraphQL 和 NodeJS 设计并实施了在线空间预订系统，为建筑管理员管理用户需求和批准。",
+            "context": "校园建筑没有数字化预订方式，导致重复预订和管理员工作量大。Kunanon 的团队用 PostgreSQL、Scala、GraphQL 和 Node.js 设计搭建了一套预订系统，包含用户预订和管理员审批的完整流程。这套系统用结构化、可审计的流程替代了临时性的人工记录。",
             "githubLink": "https://github.com/itforge-eros/panda-website",
             "demoLink": "https://docs.sagelga.com/project-panda/",
             "stack": ["PostgreSQL", "Scala", "GraphQL", "Node.js"]
@@ -142,6 +153,7 @@
         {
             "title": "泰国餐厅分析",
             "description": "分析了美国泰国餐厅的流行情况，调查了潜在原因和趋势。",
+            "context": "为什么泰国餐厅在美国的密度特别高这个问题曾被人口头议论，但缺乏数据支撑。Kunanon 使用 Python 收集和分析了美国各地区的餐厅数据，调查了地域分布模式以及可能推动这一现象的历史和政策因素。分析揭示了明确的趋势，为这个有趣的文化问题提供了数据背景。",
             "githubLink": "https://github.com/sagelga/data-journal",
             "demoLink": "",
             "stack": ["Python", "Data Analysis"]
@@ -149,6 +161,7 @@
         {
             "title": "Trash Melody",
             "description": "开发了《Trash Melody》，一款快节奏的 OSU! 启发式 Java 游戏，将娱乐与垃圾分类教育相结合。",
+            "context": "垃圾分类教育很难有吸引力，因为标准和规则本身就显得枯燥。Kunanon 用 Java 开发了 Trash Melody，模仿音乐游戏 osu! 的玩法，玩家需要在时间压力下把掉落的物品扔进正确的垃圾桶。这款游戏用快节奏的机制将垃圾分类知识变得可记忆、可乐。",
             "githubLink": "https://github.com/sagelga/trashmelody",
             "demoLink": "https://docs.sagelga.com/trash-melody/",
             "stack": ["Java", "Game Development"]
@@ -156,6 +169,7 @@
         {
             "title": "销售点（POS）系统",
             "description": "使用 C 语言设计了一套功能完善的销售点（POS）系统，涵盖数据分析、库存与利润管理、销售预测（线性回归）、客户忠诚度及条形码扫描支持，数据以 CSV 格式存储。",
+            "context": "小商贩通常依赖电子表格或纸笔来记录销售，无法掌握库存和业务趋势。Kunanon 用 C 语言从零开发了一套完整的 POS 系统，包含销售分析、库存管理、利润追踪、线性回归销售预测、客户积分和条码扫描，所有数据存储在 CSV 文件中，无需任何外部依赖，离线也能运行。这套工具为小商家带来了企业级的数据洞察。",
             "githubLink": "https://github.com/sagelga/ComPro_Project",
             "demoLink": "https://docs.sagelga.com/compro-project/",
             "stack": ["C (Programming Language)", "CSV", "POS Systems"]
