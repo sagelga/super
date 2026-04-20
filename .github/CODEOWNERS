@@ -1,0 +1,36 @@
+# Global fallback — sagelga owns everything
+*                               @sagelga
+
+# === Source ===
+/src/app/**                     @sagelga
+/src/components/**              @sagelga
+/src/lib/**                     @sagelga
+/src/hooks/**                   @sagelga
+/src/styles/**                  @sagelga
+/src/types/**                   @sagelga
+/src/utils/**                   @sagelga
+/src/config/**                  @sagelga
+/src/locales/**                 @sagelga
+
+# === Content ===
+/content/blog/**                @sagelga
+/content/docs/**                @sagelga
+/content/learn/**               @sagelga
+
+# === Infrastructure ===
+/wrangler.jsonc                 @sagelga
+/open-next.config.ts            @sagelga
+/.github/**                     @sagelga
+/next.config.mjs                @sagelga
+/tailwind.config.mjs            @sagelga
+
+# === Tests ===
+/e2e/**                         @sagelga
+/src/__tests__/**               @sagelga
+
+# === Audit Reports ===
+/audit-reports/**               @sagelga
+
+# === Dependencies ===
+/package.json                   @sagelga
+/package-lock.json              @sagelga

@@ -1,10 +1,13 @@
 import Image from "next/image";
 import React from "react";
 import type { AuthorInfo } from "@/lib/content";
+import Tooltip from "@/components/ui/Tooltip";
 
 interface PostHeaderProps {
     title: string;
     date: string;
+    lastEditedTime?: string;
+    syncedAt?: string;
     tags?: string[];
     image?: string;
     readingTime?: string;
@@ -13,9 +16,47 @@ interface PostHeaderProps {
     locale?: string;
 }
 
+function formatDate(value: string | undefined, locale?: string): string {
+    if (!value) return "";
+    const d = new Date(value);
+    if (Number.isNaN(d.getTime())) return "";
+    return d.toLocaleDateString(locale, {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+    });
+}
+
+function formatDateTime(value: string | undefined, locale?: string): string {
+    if (!value) return "";
+    const d = new Date(value);
+    if (Number.isNaN(d.getTime())) return "";
+    return d.toLocaleString(locale, {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+    });
+}
+
+function sameDay(a?: string, b?: string): boolean {
+    if (!a || !b) return false;
+    const da = new Date(a);
+    const db = new Date(b);
+    if (Number.isNaN(da.getTime()) || Number.isNaN(db.getTime())) return false;
+    return (
+        da.getFullYear() === db.getFullYear() &&
+        da.getMonth() === db.getMonth() &&
+        da.getDate() === db.getDate()
+    );
+}
+
 export default function PostHeader({
     title,
     date,
+    lastEditedTime,
+    syncedAt,
     tags,
     image,
     readingTime,
@@ -23,13 +64,12 @@ export default function PostHeader({
     authorData,
     locale,
 }: PostHeaderProps) {
-    const formattedDate = date
-        ? new Date(date).toLocaleDateString(locale, {
-              year: "numeric",
-              month: "long",
-              day: "numeric",
-          })
-        : "";
+    const publishedDate = formatDate(date, locale);
+    const editedDate =
+        lastEditedTime && !sameDay(lastEditedTime, date)
+            ? formatDate(lastEditedTime, locale)
+            : "";
+    const fetchedDate = formatDateTime(syncedAt, locale);
 
     return (
         <header className="mb-10">
@@ -63,9 +103,48 @@ export default function PostHeader({
                 {title}
             </h1>
 
-            <div className="flex flex-wrap items-center gap-4 text-sm text-muted">
-                {formattedDate && (
-                    <span className="font-sans">{formattedDate}</span>
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-muted">
+                {publishedDate && (
+                    <span className="font-sans">
+                        {editedDate || fetchedDate ? (
+                            <>
+                                <span className="text-muted/70">Published </span>
+                                {publishedDate}
+                            </>
+                        ) : (
+                            publishedDate
+                        )}
+                    </span>
+                )}
+                {editedDate && (
+                    <>
+                        <span className="text-rim">·</span>
+                        <span className="font-sans">
+                            <span className="text-muted/70">Edited </span>
+                            {editedDate}
+                        </span>
+                    </>
+                )}
+                {fetchedDate && (
+                    <>
+                        <span className="text-rim">·</span>
+                        <span className="font-sans">
+                            <span className="text-muted/70">Fetched </span>
+                            <Tooltip
+                                content={
+                                    <>
+                                        Synced from Notion by{" "}
+                                        <span className="text-accent">SuperEye</span>
+                                        , served via{" "}
+                                        <span className="text-accent">Superbrain</span>{" "}
+                                        — my Cloudflare Workers that cache blog content every 15&nbsp;minutes.
+                                    </>
+                                }
+                            >
+                                {fetchedDate}
+                            </Tooltip>
+                        </span>
+                    </>
                 )}
                 {readingTime && (
                     <>

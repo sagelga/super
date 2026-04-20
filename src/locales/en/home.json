@@ -2,7 +2,11 @@
     "hero": {
         "name": "Kunanon Srisuntiroj",
         "title": "IT Professional",
-        "alt_image": "Kunanon Srisuntiroj"
+        "alt_image": "Kunanon Srisuntiroj",
+        "greeting": "こんにちは, สวัสดี, Hello.",
+        "tagline": "A developer, teacher, and quiet tinkerer. I build tools I trust, teach what I learn, and leave room for the human in between.",
+        "primary_cta": "See my work",
+        "secondary_cta": "About me"
     },
     "about": {
         "title": "About Me",

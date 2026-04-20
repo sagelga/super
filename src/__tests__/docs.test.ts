@@ -16,12 +16,13 @@ describe('Docs Projects Configuration', () => {
     describe('English Docs', () => {
         it('should have all expected projects in English docs', async () => {
             const enDocs = await import('../locales/en/docs.json');
-            
+
             expectedProjects.forEach((projectSlug) => {
                 const project = enDocs.projects.find(
                     (p) => p.docsLink === '/docs/' + projectSlug
                 );
                 expect(project).toBeDefined();
+                if (!project) return;
                 expect(project.title).toBeDefined();
                 expect(project.description).toBeDefined();
                 expect(project.docsLink).toBe('/docs/' + projectSlug);
@@ -38,12 +39,13 @@ describe('Docs Projects Configuration', () => {
     describe('Thai Docs', () => {
         it('should have all expected projects in Thai docs', async () => {
             const thDocs = await import('../locales/th/docs.json');
-            
+
             expectedProjects.forEach((projectSlug) => {
                 const project = thDocs.projects.find(
                     (p) => p.docsLink === '/docs/' + projectSlug
                 );
                 expect(project).toBeDefined();
+                if (!project) return;
                 expect(project.title).toBeDefined();
                 expect(project.description).toBeDefined();
                 expect(project.docsLink).toBe('/docs/' + projectSlug);
@@ -59,12 +61,13 @@ describe('Docs Projects Configuration', () => {
     describe('Chinese Docs', () => {
         it('should have all expected projects in Chinese docs', async () => {
             const zhDocs = await import('../locales/zh/docs.json');
-            
+
             expectedProjects.forEach((projectSlug) => {
                 const project = zhDocs.projects.find(
                     (p) => p.docsLink === '/docs/' + projectSlug
                 );
                 expect(project).toBeDefined();
+                if (!project) return;
                 expect(project.title).toBeDefined();
                 expect(project.description).toBeDefined();
                 expect(project.docsLink).toBe('/docs/' + projectSlug);
@@ -80,7 +83,7 @@ describe('Docs Projects Configuration', () => {
     describe('Project Data Structure', () => {
         it('should have all required fields for each project', async () => {
             const enDocs = await import('../locales/en/docs.json');
-            
+
             enDocs.projects.forEach((project) => {
                 expect(typeof project.title).toBe('string');
                 expect(project.title.length).toBeGreaterThan(0);
@@ -105,6 +108,8 @@ describe('Docs Projects Configuration', () => {
             const project = enDocs.projects.find(
                 (p) => p.docsLink === '/docs/statuspage-pulse'
             );
+            expect(project).toBeDefined();
+            if (!project) return;
             expect(project.title).toBe('Statuspage Pulse');
             expect(project.description).toContain('status page');
         });
@@ -114,6 +119,8 @@ describe('Docs Projects Configuration', () => {
             const project = enDocs.projects.find(
                 (p) => p.docsLink === '/docs/mahjong-hands'
             );
+            expect(project).toBeDefined();
+            if (!project) return;
             expect(project.title).toBe('Mahjong Hands');
             expect(project.description).toContain('mahjong');
         });
@@ -123,6 +130,8 @@ describe('Docs Projects Configuration', () => {
             const project = enDocs.projects.find(
                 (p) => p.docsLink === '/docs/todoist-to-cloudflarekv'
             );
+            expect(project).toBeDefined();
+            if (!project) return;
             expect(project.title).toBe('Todoist to Cloudflare KV');
             expect(project.description).toContain('Cloudflare');
         });
@@ -132,6 +141,8 @@ describe('Docs Projects Configuration', () => {
             const project = enDocs.projects.find(
                 (p) => p.docsLink === '/docs/cloudflarekv-to-notion'
             );
+            expect(project).toBeDefined();
+            if (!project) return;
             expect(project.title).toBe('Cloudflare KV to Notion');
             expect(project.description).toContain('Notion');
         });
@@ -141,6 +152,8 @@ describe('Docs Projects Configuration', () => {
             const project = enDocs.projects.find(
                 (p) => p.docsLink === '/docs/byteside-fetcher'
             );
+            expect(project).toBeDefined();
+            if (!project) return;
             expect(project.title).toBe('Byteside Fetcher');
             expect(project.description).toContain('Notion');
         });

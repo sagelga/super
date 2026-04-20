@@ -1,0 +1,7 @@
+[allowlist]
+  description = "Allow known non-secret resource identifiers"
+  paths = [
+    "wrangler.jsonc",
+    "src/config/site.ts",
+    "src/config/site.js",
+  ]

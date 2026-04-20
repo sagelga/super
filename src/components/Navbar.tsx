@@ -5,12 +5,26 @@ import Link from "next/link";
 import { useLocale, useTranslations } from "next-intl";
 import { usePathname } from "next/navigation";
 import { Languages, X, Menu } from "lucide-react";
-import ConnectModal from "./ConnectModal";
 import NavbarMobileMenu from "./NavbarMobileMenu";
 import NavbarReadingProgress from "./NavbarReadingProgress";
 import SettingsHint from "./SettingsHint";
 import { useSettings } from "./settings/SettingsProvider";
 import "./Navbar.style.css";
+
+function NavSparkle() {
+    return (
+        <svg
+            width="8"
+            height="8"
+            viewBox="0 0 10 10"
+            fill="currentColor"
+            aria-hidden="true"
+            className="shrink-0 text-accent/70"
+        >
+            <path d="M5 0 L5.8 4.2 L10 5 L5.8 5.8 L5 10 L4.2 5.8 L0 5 L4.2 4.2 Z" />
+        </svg>
+    );
+}
 
 function Navbar() {
     const t = useTranslations("common");
@@ -18,7 +32,6 @@ function Navbar() {
     const pathname = usePathname();
     const p = (path: string) => (lang === "th" ? path : `/${lang}${path}`);
     const [isHomeMenuOpen, setIsHomeMenuOpen] = useState(false);
-    const [showConnect, setShowConnect] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [globePulsing, setGlobePulsing] = useState(false);
     const { openSettings } = useSettings();
@@ -57,9 +70,9 @@ function Navbar() {
                 </Link>
 
                 {/* Nav links — desktop only */}
-                <div className="hidden items-center gap-8 lg:flex">
+                <div className="hidden items-center gap-6 lg:flex">
                     <div
-                        className="relative"
+                        className="relative flex items-center gap-2"
                         onMouseEnter={() => setIsHomeMenuOpen(true)}
                         onMouseLeave={() => setIsHomeMenuOpen(false)}
                         onFocus={() => setIsHomeMenuOpen(true)}
@@ -69,15 +82,15 @@ function Navbar() {
                             }
                         }}
                     >
+                        <NavSparkle />
                         <Link
                             href={p("/")}
                             aria-haspopup="true"
                             aria-expanded={isHomeMenuOpen}
-                            className={`text-sm tracking-wide transition-colors duration-200 ${
-                                isHomeActive
+                            className={`text-sm tracking-wide transition-colors duration-200 ${isHomeActive
                                     ? "text-cream border-b border-accent"
                                     : "hover:text-cream text-muted"
-                            }`}
+                                }`}
                         >
                             {t("nav.home")}
                         </Link>
@@ -110,55 +123,56 @@ function Navbar() {
                             </div>
                         )}
                     </div>
-                    <Link
-                        href={p("/blog")}
-                        className={`text-sm tracking-wide transition-colors duration-200 ${
-                            isBlogActive
-                                ? "text-cream border-b border-accent"
-                                : "hover:text-cream text-muted"
-                        }`}
-                    >
-                        {t("nav.blog")}
-                    </Link>
-                    <Link
-                        href={p("/gallery")}
-                        className={`text-sm tracking-wide transition-colors duration-200 ${
-                            isGalleryActive
-                                ? "text-cream border-b border-accent"
-                                : "hover:text-cream text-muted"
-                        }`}
-                    >
-                        {t("nav.gallery")}
-                    </Link>
-                    <Link
-                        href={p("/learn")}
-                        className={`text-sm tracking-wide transition-colors duration-200 ${
-                            isLearnActive
-                                ? "text-cream border-b border-accent"
-                                : "hover:text-cream text-muted"
-                        }`}
-                    >
-                        {t("nav.learn")}
-                    </Link>
-                    <Link
-                        href={p("/docs")}
-                        className={`text-sm tracking-wide transition-colors duration-200 ${
-                            isDocsActive
-                                ? "text-cream border-b border-accent"
-                                : "hover:text-cream text-muted"
-                        }`}
-                    >
-                        {t("nav.docs")}
-                    </Link>
+                    <div className="flex items-center gap-2">
+                        <NavSparkle />
+                        <Link
+                            href={p("/blog")}
+                            className={`text-sm tracking-wide transition-colors duration-200 ${isBlogActive
+                                    ? "text-cream border-b border-accent"
+                                    : "hover:text-cream text-muted"
+                                }`}
+                        >
+                            {t("nav.blog")}
+                        </Link>
+                    </div>
+                    <div className="flex items-center gap-2">
+                        <NavSparkle />
+                        <Link
+                            href={p("/gallery")}
+                            className={`text-sm tracking-wide transition-colors duration-200 ${isGalleryActive
+                                    ? "text-cream border-b border-accent"
+                                    : "hover:text-cream text-muted"
+                                }`}
+                        >
+                            {t("nav.gallery")}
+                        </Link>
+                    </div>
+                    <div className="flex items-center gap-2">
+                        <NavSparkle />
+                        <Link
+                            href={p("/learn")}
+                            className={`text-sm tracking-wide transition-colors duration-200 ${isLearnActive
+                                    ? "text-cream border-b border-accent"
+                                    : "hover:text-cream text-muted"
+                                }`}
+                        >
+                            {t("nav.learn")}
+                        </Link>
+                    </div>
+                    <div className="flex items-center gap-2">
+                        <NavSparkle />
+                        <Link
+                            href={p("/docs")}
+                            className={`text-sm tracking-wide transition-colors duration-200 ${isDocsActive
+                                    ? "text-cream border-b border-accent"
+                                    : "hover:text-cream text-muted"
+                                }`}
+                        >
+                            {t("nav.docs")}
+                        </Link>
+                    </div>
 
-                    <button
-                        disabled
-                        className="text-canvas cursor-not-allowed bg-accent px-3 py-1 text-sm tracking-wide opacity-60"
-                    >
-                        {t("nav.contact")}
-                    </button>
-
-                    <div className="relative">
+                    <div className="relative ml-2">
                         <button
                             onClick={() => openSettings("language")}
                             aria-label="Open settings"
@@ -169,6 +183,13 @@ function Navbar() {
 
                         <SettingsHint />
                     </div>
+
+                    <Link
+                        href={p("/contact")}
+                        className="border border-accent/60 px-4 py-1.5 font-sans text-sm tracking-wide text-accent transition-colors duration-200 hover:border-accent hover:bg-accent hover:text-canvas"
+                    >
+                        {t("nav.contact")}
+                    </Link>
                 </div>
 
                 {/* Hamburger button — mobile only */}
@@ -195,9 +216,11 @@ function Navbar() {
 
             <NavbarReadingProgress showProgress={showProgress} />
 
-            <ConnectModal
-                isOpen={showConnect}
-                onClose={() => setShowConnect(false)}
+            <LanguageSwitcherModal
+                isOpen={showLanguageSwitcher}
+                currentLang={lang}
+                onClose={() => setShowLanguageSwitcher(false)}
+                onLanguageSelect={handleLanguageSelect}
             />
         </nav>
     );

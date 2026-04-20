@@ -35,6 +35,7 @@ const PrivacySection: React.FC<PrivacySectionProps> = ({ onSaved }) => {
             ...preferences,
             consentGiven: true,
             consentTimestamp: Date.now(),
+            consentVersion: null,
         });
         onSaved?.();
     };

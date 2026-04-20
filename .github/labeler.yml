@@ -1,0 +1,64 @@
+feat:
+  - changed-files:
+    - any-glob-to-any-file:
+      - "src/components/**"
+      - "src/app/**"
+      - "src/hooks/**"
+
+fix:
+  - changed-files:
+    - any-glob-to-any-file:
+      - "src/**"
+    - all-globs-to-all-files:
+      - "!src/__tests__/**"
+      - "!e2e/**"
+
+docs:
+  - changed-files:
+    - any-glob-to-any-file:
+      - "README.md"
+      - "CLAUDE.md"
+      - "content/docs/**"
+
+content:
+  - changed-files:
+    - any-glob-to-any-file:
+      - "content/blog/**"
+      - "content/learn/**"
+      - "src/locales/**"
+
+e2e:
+  - changed-files:
+    - any-glob-to-any-file:
+      - "e2e/**"
+      - "src/__tests__/**"
+      - "playwright.config.ts"
+      - "jest.config.ts"
+
+ci:
+  - changed-files:
+    - any-glob-to-any-file:
+      - ".github/**"
+
+chore:
+  - changed-files:
+    - any-glob-to-any-file:
+      - "package.json"
+      - "package-lock.json"
+      - "tsconfig.json"
+      - "eslint.config.mjs"
+      - "tailwind.config.mjs"
+      - "postcss.config.mjs"
+      - "wrangler.jsonc"
+      - "open-next.config.ts"
+
+audit:
+  - changed-files:
+    - any-glob-to-any-file:
+      - "audit-reports/**"
+
+dependencies:
+  - changed-files:
+    - any-glob-to-any-file:
+      - "package.json"
+      - "package-lock.json"

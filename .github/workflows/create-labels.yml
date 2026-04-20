@@ -1,0 +1,73 @@
+name: Create Labels
+
+on:
+  workflow_dispatch:
+
+permissions:
+  issues: write
+
+jobs:
+  create-labels:
+    name: Create all PR automation labels
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/github-script@v7
+        with:
+          script: |
+            const labels = [
+              { name: "feat",            color: "0075ca", description: "New feature" },
+              { name: "fix",             color: "e4e669", description: "Bug fix" },
+              { name: "docs",            color: "0052cc", description: "Documentation only" },
+              { name: "content",         color: "bfd4f2", description: "Blog/docs/learn content update" },
+              { name: "e2e",             color: "c5def5", description: "E2E or unit test changes" },
+              { name: "ci",              color: "f9d0c4", description: "CI/CD configuration" },
+              { name: "chore",           color: "ededed", description: "Maintenance, no behavior change" },
+              { name: "perf",            color: "0e8a16", description: "Performance improvement" },
+              { name: "audit",           color: "fef2c0", description: "Audit report updates" },
+              { name: "dependencies",    color: "0075ca", description: "Dependency updates" },
+              { name: "stale",           color: "cfd3d7", description: "No recent activity" },
+              { name: "keep-open",       color: "0e8a16", description: "Exempt from stale auto-close" },
+              { name: "WIP",             color: "fbca04", description: "Work in progress" },
+              { name: "breaking",        color: "b60205", description: "Breaking change (major version bump)" },
+              { name: "skip-changelog",  color: "ededed", description: "Exclude from release notes" },
+              { name: "size/XS",         color: "3cbf00", description: "≤50 lines changed" },
+              { name: "size/S",          color: "5d9801", description: "51–200 lines changed" },
+              { name: "size/M",          color: "e4e669", description: "201–500 lines changed" },
+              { name: "size/L",          color: "ee9900", description: "501–1000 lines changed" },
+              { name: "size/XL",         color: "ee0701", description: ">1000 lines changed" },
+            ];
+
+            let created = 0;
+            let skipped = 0;
+
+            for (const label of labels) {
+              try {
+                await github.rest.issues.createLabel({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  name: label.name,
+                  color: label.color,
+                  description: label.description,
+                });
+                core.info(`✓ Created: ${label.name}`);
+                created++;
+              } catch (e) {
+                if (e.status === 422) {
+                  // Label already exists — update color/description
+                  await github.rest.issues.updateLabel({
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    name: label.name,
+                    color: label.color,
+                    description: label.description,
+                  });
+                  core.info(`↺ Updated: ${label.name}`);
+                  skipped++;
+                } else {
+                  core.error(`✗ Failed: ${label.name} — ${e.message}`);
+                }
+              }
+            }
+
+            core.info('');
+            core.info(`Done: ${created} created, ${skipped} already existed (updated).`);

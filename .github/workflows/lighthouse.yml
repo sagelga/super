@@ -1,0 +1,76 @@
+name: Lighthouse CI
+
+on:
+  # Lighthouse CI is not triggered on pull_request because next start uses
+  # @opennextjs/cloudflare (workerd) for local D1 emulation, and the workerd
+  # SQLite process is unstable under Lighthouse's parallel scanning load in CI.
+  # Run manually or wire up against a real staging URL post-deployment.
+  workflow_dispatch:
+    inputs:
+      base_url:
+        description: "Base URL to test (default: http://localhost:3000)"
+        required: false
+        default: "http://localhost:3000"
+
+jobs:
+  lighthouse:
+    name: Lighthouse CI
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Apply local D1 migrations
+        # next start uses @opennextjs/cloudflare to emulate Cloudflare bindings
+        # locally. Without migrations, D1 queries return "no such table" → HTTP 500.
+        run: |
+          npx wrangler d1 execute super-content --local --file migrations/001_content.sql
+          npx wrangler d1 execute super-auth --local --command "SELECT 1"
+
+      - name: Build
+        run: npm run build
+        env:
+          NEXT_TELEMETRY_DISABLED: 1
+
+      - name: Start production server
+        run: npm run start > /tmp/nextserver.log 2>&1 &
+
+      - name: Wait for server
+        run: |
+          echo "Waiting for server on http://localhost:3000..."
+          for i in $(seq 1 30); do
+            CODE=$(curl -s -o /dev/null -w "%{http_code}" --max-time 3 http://localhost:3000/ 2>/dev/null)
+            echo "  attempt $i: HTTP $CODE"
+            if echo "$CODE" | grep -qE '^[23]'; then
+              echo "Server ready!"
+              exit 0
+            fi
+            sleep 2
+          done
+          echo "Server failed to become ready. Logs:"
+          cat /tmp/nextserver.log
+          exit 1
+
+      - name: Run Lighthouse CI
+        uses: treosh/lighthouse-ci-action@v12
+        with:
+          urls: |
+            http://localhost:3000/
+            http://localhost:3000/en/blog
+            http://localhost:3000/en/gallery
+            http://localhost:3000/en/docs
+            http://localhost:3000/en/contact
+          uploadArtifacts: true
+          temporaryPublicStorage: true
+          configPath: .lighthouserc.json
+
+      - name: Print server logs on failure
+        if: failure()
+        run: cat /tmp/nextserver.log || true

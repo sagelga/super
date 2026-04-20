@@ -24,6 +24,9 @@ interface SuperbrainPost {
     content?: string;
     datePublished?: string;
     lastEditedTime?: string;
+    // Timestamp SuperEye wrote this post into Superbrain's KV cache.
+    // Optional — older Superbrain responses won't include it.
+    syncedAt?: string;
     coverImage?: string;
     writtenBy?: string[];
     category?: string[];
@@ -86,6 +89,8 @@ function superbrainPostToBlogPost(post: SuperbrainPost): BlogPost {
         title: post.title,
         description: post.excerpt ?? "",
         date: post.datePublished ?? "",
+        lastEditedTime: post.lastEditedTime,
+        syncedAt: post.syncedAt,
         authors: post.writtenBy ?? [],
         tags: post.category ?? [],
         image: post.coverImage ?? undefined,
@@ -142,6 +147,8 @@ export async function getBlogPostBySlugApi(
                 title: post.title,
                 description: post.excerpt ?? "",
                 date: post.datePublished ?? "",
+                lastEditedTime: post.lastEditedTime,
+                syncedAt: post.syncedAt,
                 authors: post.writtenBy ?? [],
                 tags: post.category ?? [],
                 image: post.coverImage ?? undefined,
