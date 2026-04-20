@@ -14,7 +14,11 @@
         "test:e2e:ui": "playwright test --ui",
         "test:e2e:headed": "playwright test --headed",
         "test:e2e:chromium": "playwright test --project=chromium",
-        "test:e2e:report": "playwright show-report"
+        "test:e2e:report": "playwright show-report",
+        "lighthouse:mobile": "lhci autorun --config=.lighthouserc.mobile.json",
+        "lighthouse:tablet": "lhci autorun --config=.lighthouserc.tablet.json",
+        "lighthouse:desktop": "lhci autorun --config=.lighthouserc.json",
+        "lighthouse:all": "npm run lighthouse:mobile && npm run lighthouse:tablet && npm run lighthouse:desktop"
     },
     "dependencies": {
         "@oslojs/encoding": "^1.1.0",
@@ -39,6 +43,7 @@
     "devDependencies": {
         "@cloudflare/workers-types": "^4.20260403.1",
         "@eslint/eslintrc": "^3",
+        "@lhci/cli": "^0.15.0",
         "@next/bundle-analyzer": "^16.2.4",
         "@opennextjs/cloudflare": "^1.18.0",
         "@playwright/test": "^1.58.2",
