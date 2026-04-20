@@ -184,7 +184,9 @@
       "Bash(git -C /Users/kumamon/Developer/super stash list)",
       "Bash(git fetch:*)",
       "Bash(git merge:*)",
-      "Bash(xargs kill *)"
+      "Bash(xargs kill *)",
+      "Bash(npm info:*)",
+      "Bash(curl -s \"http://localhost:3000/_next/static/chunks/%5Broot-of-the-server%5D__dcb6f003._.css?t=$\\(date +%s%N\\)\")"
     ]
   },
   "hooks": {
