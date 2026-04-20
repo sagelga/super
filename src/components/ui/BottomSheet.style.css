@@ -5,8 +5,8 @@
   inset: 0;
   background: rgba(0, 0, 0, 0.5);
   z-index: 1000;
-  backdrop-filter: blur(4px);
-  animation: fade-in 0.2s ease-out;
+  backdrop-filter: blur(0px);
+  animation: overlay-blur-in 0.32s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .bottom-sheet {
@@ -23,25 +23,40 @@
   margin: 0 auto;
   box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.4);
   overflow: hidden;
-  animation: slide-up 0.3s ease-out;
+  animation: sheet-rise 0.42s cubic-bezier(0.22, 1, 0.36, 1) both;
   padding-bottom: env(safe-area-inset-bottom);
 }
 
-@keyframes fade-in {
+@keyframes overlay-blur-in {
   from {
     opacity: 0;
+    backdrop-filter: blur(0px);
   }
   to {
     opacity: 1;
+    backdrop-filter: blur(6px);
   }
 }
 
-@keyframes slide-up {
+@keyframes sheet-rise {
   from {
-    transform: translateY(100%);
+    opacity: 0;
+    transform: translateY(40px) scale(0.98);
   }
   to {
-    transform: translateY(0);
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Reduced motion — keep instant appearance, no slide */
+@media (prefers-reduced-motion: reduce) {
+  .bottom-sheet-overlay,
+  .bottom-sheet {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    backdrop-filter: blur(6px);
   }
 }
 

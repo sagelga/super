@@ -34,15 +34,13 @@ const GalleryPreviewSection: React.FC<GalleryPreviewSectionProps> = ({
     const { ref, isVisible } = useScrollReveal<HTMLDivElement>();
 
     return (
-        <Section variant="canvas" spacing="generous">
-            {/* Eyebrow */}
-            <div className="mb-8">
-                <p className="font-sans text-xs tracking-[0.25em] text-accent uppercase">
-                    {t("gallery.eyebrow")}
-                </p>
-                <div className="mt-3 h-px w-12 bg-accent opacity-60" />
-            </div>
-
+        <Section
+            variant="canvas"
+            spacing="generous"
+            title={t("gallery.eyebrow")}
+            headingVariant="display"
+            sectionNumber="08"
+        >
             {/* Bento grid — 4 cols, 3 implicit rows with fixed heights */}
             <div
                 ref={ref}

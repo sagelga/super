@@ -1,13 +1,13 @@
-@import "../styles/design-tokens.css";
+@import "../../styles/design-tokens.css";
 
-.theme-settings-list {
+.settings-option-list {
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
   padding: 0.25rem;
 }
 
-.theme-option {
+.settings-option {
   display: flex;
   align-items: center;
   gap: 0.875rem;
@@ -19,19 +19,30 @@
   cursor: pointer;
   transition: all 0.15s ease;
   text-align: left;
+  font-family: inherit;
 }
 
-.theme-option:hover {
+.settings-option:hover {
   background: var(--color-surface, #252219);
   border-color: var(--color-rim, #302C24);
 }
 
-.theme-option.active {
+.settings-option.active {
   background: var(--color-surface, #252219);
   border-color: var(--color-accent, #C9943A);
 }
 
-.theme-option-icon {
+.settings-option.disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.settings-option.disabled:hover {
+  background: transparent;
+  border-color: transparent;
+}
+
+.settings-option-leading {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -41,59 +52,61 @@
   border-radius: 10px;
   color: var(--color-muted, #9A9485);
   transition: all 0.15s ease;
+  flex-shrink: 0;
 }
 
-.theme-option:hover .theme-option-icon {
+.settings-option:hover .settings-option-leading {
   color: var(--color-accent, #C9943A);
 }
 
-.theme-option.active .theme-option-icon {
+.settings-option.active .settings-option-leading {
   background: var(--color-accent, #C9943A);
   color: var(--color-cream, #F0EAD6);
 }
 
-.theme-option-content {
+.settings-option-content {
   flex: 1;
   display: flex;
   flex-direction: column;
   gap: 0.125rem;
 }
 
-.theme-option-label {
+.settings-option-label {
+  display: block;
   font-size: 0.9375rem;
   font-weight: 500;
   color: var(--color-text, #F0EAD6);
 }
 
-.theme-option.active .theme-option-label {
-  color: var(--color-text, #F0EAD6);
-}
-
-.theme-option-description {
+.settings-option-description {
+  display: block;
   font-size: 0.875rem;
   color: var(--color-muted, #9A9485);
 }
 
-.theme-option-check {
+.settings-option-trailing {
   color: var(--color-accent, #C9943A);
   flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 @media (max-width: 480px) {
-  .theme-option {
+  .settings-option {
     padding: 0.875rem;
   }
 
-  .theme-option-icon {
+  .settings-option-leading {
     width: 36px;
     height: 36px;
   }
 
-  .theme-option-label {
+  .settings-option-label {
     font-size: 0.875rem;
   }
 
-  .theme-option-description {
+  .settings-option-description {
     font-size: 0.8125rem;
   }
 }

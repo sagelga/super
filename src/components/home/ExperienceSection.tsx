@@ -29,7 +29,8 @@ const ExperienceSection: React.FC<ExperienceSectionProps> = ({
         <Section
             id="experience"
             title={t("experience_section_title")}
-            subtitle={`${experiences.length}`}
+            headingVariant="display"
+            sectionNumber="04"
             variant="canvas"
         >
             <div
@@ -40,15 +41,19 @@ const ExperienceSection: React.FC<ExperienceSectionProps> = ({
                     <div key={index} className="relative pb-10 pl-8 last:pb-0">
                         {/* Timeline line */}
                         {index < experiences.length - 1 && (
-                            <div className="absolute top-3 bottom-0 left-[7px] w-px bg-rim" />
+                            <div
+                                className="timeline-line absolute top-3 bottom-0 left-[7px] w-px bg-rim"
+                                style={{ transitionDelay: `${index * 120}ms` }}
+                            />
                         )}
                         {/* Timeline dot */}
                         <div
                             className={`absolute top-1.5 left-0 h-3.5 w-3.5 rounded-full border-2 transition-colors duration-300 ${
                                 expanded === index
-                                    ? "border-accent bg-accent"
+                                    ? "timeline-dot-active border-accent bg-accent"
                                     : "bg-canvas border-muted"
                             }`}
+                            key={`dot-${index}-${expanded === index ? "active" : "idle"}`}
                         />
 
                         {/* Header — clickable to expand */}
@@ -65,7 +70,7 @@ const ExperienceSection: React.FC<ExperienceSectionProps> = ({
                                     className={`font-sans text-lg transition-colors duration-200 ${
                                         expanded === index
                                             ? "text-text"
-                                            : "group-hover:text-text text-muted"
+                                            : "text-muted group-hover:text-text"
                                     }`}
                                 >
                                     {exp.title}
@@ -76,9 +81,9 @@ const ExperienceSection: React.FC<ExperienceSectionProps> = ({
                                     </span>
                                     {/* Chevron indicator */}
                                     <svg
-                                        className={`h-3.5 w-3.5 shrink-0 text-muted transition-transform duration-300 ${
+                                        className={`h-3.5 w-3.5 shrink-0 text-muted transition-all duration-400 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:text-accent ${
                                             expanded === index
-                                                ? "rotate-180"
+                                                ? "rotate-180 text-accent"
                                                 : ""
                                         }`}
                                         fill="none"

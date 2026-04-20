@@ -12,7 +12,6 @@ import "./globals.css";
 
 // Import the main layout component
 import Layout from "../components/Layout";
-import DeviconsLoader from "../components/DeviconsLoader";
 import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getMessages, getTranslations } from "next-intl/server";
 
@@ -211,6 +210,15 @@ export default async function RootLayout({
                         __html: `(function(){try{var s=localStorage.getItem('theme-preference');var prefersDark=window.matchMedia('(prefers-color-scheme: dark)').matches;var dark=s==='dark'||(s!=='light'&&prefersDark)||!s;document.documentElement.classList.toggle('dark',dark);}catch(e){}})();`,
                     }}
                 />
+                <link
+                    rel="preload"
+                    href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css"
+                    as="style"
+                />
+                <link
+                    rel="stylesheet"
+                    href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css"
+                />
                 <link rel="dns-prefetch" href="https://cdn.jsdelivr.net" />
                 <link rel="dns-prefetch" href="https://res.cloudinary.com" />
                 <link rel="dns-prefetch" href="https://images.unsplash.com" />
@@ -256,7 +264,6 @@ export default async function RootLayout({
             >
                 <NextIntlClientProvider messages={messages}>
                     <Layout>{children}</Layout>
-                    <DeviconsLoader />
                 </NextIntlClientProvider>
             </body>
         </html>

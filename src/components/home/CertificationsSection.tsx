@@ -30,8 +30,8 @@ const CertificationsSection: React.FC<CertificationsSectionProps> = ({
         <Section
             id="certifications"
             title={t("certifications_section_title")}
-            subtitle={`${certifications.length}`}
-            headingVariant="minimal"
+            headingVariant="display"
+            sectionNumber="05"
             spacing="compact"
         >
             <div

@@ -6,8 +6,9 @@ import { useTranslations, useLocale } from "next-intl";
 import Section from "../common/Section";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { useScrollShadow } from "@/hooks/useScrollShadow";
-import { getIconClass } from "@/utils/iconMapping";
 import ProjectModal from "./ProjectModal";
+import { ProjectCard } from "./ProjectCard";
+import { DocCard } from "./DocCard";
 
 interface Project {
     title: string;
@@ -30,121 +31,10 @@ interface ProjectShowcaseProps {
     docProjects?: DocProject[];
 }
 
-// Positions for scattered decorative icons in the card background
-const ICON_POSITIONS = [
-    "absolute right-[-12px] top-[-12px] text-[140px] opacity-[0.06]",
-    "absolute left-4 bottom-[140px] text-[48px] opacity-[0.12]",
-    "absolute right-8 bottom-[160px] text-[36px] opacity-[0.10]",
-    "absolute left-[-8px] top-[60px] text-[60px] opacity-[0.08]",
-    "absolute right-4 top-[80px] text-[28px] opacity-[0.09]",
-];
-
-const CARD_CLASSES =
-    "group flex-none w-[240px] h-[380px] relative overflow-hidden bg-canvas border border-rim transition-all duration-300 hover:border-accent/60 hover:shadow-[0_4px_32px_-8px_rgba(201,148,58,0.12)] cursor-pointer text-left";
-
 const SCROLL_AMOUNT = 600;
 
 const SCROLL_BTN =
     "w-8 h-8 flex items-center justify-center border border-rim bg-surface font-sans text-sm text-muted transition-all duration-200 hover:border-accent/60 hover:text-accent disabled:opacity-20 disabled:pointer-events-none";
-
-// ── Sub-components ────────────────────────────────────────────────────────────
-
-interface ProjectCardProps {
-    project: Project;
-    onSelect: (project: Project) => void;
-    statusLabel: string;
-}
-
-function ProjectCard({ project, onSelect, statusLabel }: ProjectCardProps) {
-    const icons = (project.stack ?? [])
-        .map(getIconClass)
-        .filter(Boolean) as string[];
-
-    return (
-        <div
-            role="button"
-            tabIndex={0}
-            onClick={() => onSelect(project)}
-            onKeyDown={(e) => {
-                if (e.key === "Enter" || e.key === " ") {
-                    e.preventDefault();
-                    onSelect(project);
-                }
-            }}
-            className={CARD_CLASSES}
-        >
-            {icons.slice(0, ICON_POSITIONS.length).map((ic, i) => (
-                <i
-                    key={i}
-                    className={`${ic} ${ICON_POSITIONS[i]} colored pointer-events-none select-none`}
-                />
-            ))}
-
-            <div className="from-canvas via-canvas/85 pointer-events-none absolute inset-0 bg-gradient-to-t via-50% to-transparent" />
-
-            <div className="absolute right-0 bottom-0 left-0 p-5">
-                <p className="mb-2 font-sans text-[10px] tracking-widest text-accent/60 uppercase">
-                    {statusLabel}
-                </p>
-                <h3 className="text-cream mb-2 font-serif text-lg leading-snug transition-colors duration-200 group-hover:text-accent">
-                    {project.title}
-                </h3>
-                <p className="mb-3 line-clamp-2 font-sans text-xs leading-relaxed text-muted">
-                    {project.description}
-                </p>
-                {project.stack && project.stack.length > 0 && (
-                    <div className="flex flex-wrap gap-1">
-                        {project.stack.slice(0, 3).map((tech) => (
-                            <span
-                                key={tech}
-                                className="border border-rim px-1.5 py-[3px] font-sans text-[10px] leading-none text-muted/70"
-                            >
-                                {tech}
-                            </span>
-                        ))}
-                    </div>
-                )}
-            </div>
-        </div>
-    );
-}
-
-interface DocCardProps {
-    project: DocProject;
-    href: string;
-    pagesLabel: string;
-}
-
-function DocCard({ project, href, pagesLabel }: DocCardProps) {
-    return (
-        <Link
-            href={href}
-            className="group bg-canvas relative h-[280px] w-[240px] flex-none overflow-hidden border border-rim transition-all duration-300 hover:border-accent/60 hover:shadow-[0_4px_32px_-8px_rgba(201,148,58,0.12)]"
-        >
-            <span className="pointer-events-none absolute top-[-16px] right-[-8px] font-serif text-[160px] leading-none text-muted/[0.04] select-none">
-                →
-            </span>
-
-            <div className="from-canvas via-canvas/80 pointer-events-none absolute inset-0 bg-gradient-to-t via-50% to-transparent" />
-
-            <div className="absolute right-0 bottom-0 left-0 p-5">
-                <p className="mb-2 font-sans text-xs text-accent/50">
-                    {pagesLabel}
-                </p>
-                <h3 className="text-cream mb-2 font-serif text-lg leading-snug transition-colors duration-200 group-hover:text-accent">
-                    {project.title}
-                </h3>
-                {project.description && (
-                    <p className="line-clamp-2 font-sans text-xs leading-relaxed text-muted">
-                        {project.description}
-                    </p>
-                )}
-            </div>
-        </Link>
-    );
-}
-
-// ── Main component ────────────────────────────────────────────────────────────
 
 const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({
     projects,
@@ -189,6 +79,8 @@ const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({
                 subtitle={t("projects_section_subtitle", {
                     count: projects.length,
                 })}
+                headingVariant="display"
+                sectionNumber="03"
                 spacing="generous"
             >
                 {/* Projects horizontal scroller */}
@@ -247,10 +139,15 @@ const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({
                     <div className="mt-14 border-t border-rim/60 pt-10">
                         {/* Sub-section heading — can't nest <Section> inside <Section>, so we replicate its default heading markup here */}
                         <div className="mb-14">
-                            <p className="mb-3 font-sans text-sm font-bold tracking-[0.2em] text-accent uppercase">
-                                {tCommon("docs.sidebar_title")}
-                            </p>
-                            <div className="h-px w-12 bg-accent opacity-60" />
+                            <div className="flex items-center gap-3">
+                                <div className="h-px w-8 flex-shrink-0 bg-accent" />
+                                <span className="text-xs leading-none text-accent">
+                                    ✦
+                                </span>
+                                <h3 className="text-cream font-serif text-3xl font-bold">
+                                    {tCommon("docs.sidebar_title")}
+                                </h3>
+                            </div>
                         </div>
 
                         {/* Docs horizontal scroller */}

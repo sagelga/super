@@ -28,7 +28,8 @@ const VolunteeringSection: React.FC<VolunteeringSectionProps> = ({
         <Section
             id="volunteering"
             title={t("volunteering_section_title")}
-            headingVariant="minimal"
+            headingVariant="display"
+            sectionNumber="06"
             variant="canvas"
             spacing="generous"
         >

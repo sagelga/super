@@ -2,35 +2,16 @@
 
 import { useState, useCallback } from "react";
 import { useTranslations } from "next-intl";
-
-const SYMBOLS = ["✦", "◈", "⬡", "⟐", "◆", "✿", "⊕", "◉"] as const;
-
-interface Card {
-    id: number;
-    symbol: string;
-    flipped: boolean;
-    matched: boolean;
-}
-
-function shuffle<T>(arr: T[]): T[] {
-    const a = [...arr];
-    for (let i = a.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [a[i], a[j]] = [a[j], a[i]];
-    }
-    return a;
-}
-
-function createDeck(): Card[] {
-    return shuffle(
-        [...SYMBOLS, ...SYMBOLS].map((symbol, idx) => ({
-            id: idx,
-            symbol,
-            flipped: false,
-            matched: false,
-        }))
-    );
-}
+import {
+    type Card,
+    createDeck,
+    calculateMatchedCount,
+    isGameWon,
+    flipCard,
+    matchCards,
+    unflipCards,
+    MISMATCH_DELAY,
+} from "@/lib/games/memoryMatchLogic";
 
 export default function MemoryMatch() {
     const t = useTranslations("common.games");
@@ -38,24 +19,25 @@ export default function MemoryMatch() {
     const [selected, setSelected] = useState<number[]>([]);
     const [moves, setMoves] = useState(0);
     const [locked, setLocked] = useState(false);
+    // Bumped on reset so deal-in animation replays
+    const [dealId, setDealId] = useState(0);
 
-    const matchedCount = cards.filter((c) => c.matched).length / 2;
-    const won = matchedCount === SYMBOLS.length;
+    const matchedCount = calculateMatchedCount(cards);
+    const won = isGameWon(matchedCount);
 
     const reset = useCallback(() => {
         setCards(createDeck());
         setSelected([]);
         setMoves(0);
         setLocked(false);
+        setDealId((n) => n + 1);
     }, []);
 
     const handleClick = useCallback(
         (card: Card) => {
             if (locked || card.flipped || card.matched) return;
 
-            const withFlipped = cards.map((c) =>
-                c.id === card.id ? { ...c, flipped: true } : c
-            );
+            const withFlipped = flipCard(cards, card.id);
 
             if (selected.length === 0) {
                 setCards(withFlipped);
@@ -67,30 +49,20 @@ export default function MemoryMatch() {
                 setSelected([]);
 
                 if (firstCard.symbol === card.symbol) {
-                    setCards(
-                        withFlipped.map((c) =>
-                            c.id === firstId || c.id === card.id
-                                ? { ...c, matched: true }
-                                : c
-                        )
-                    );
+                    setCards(matchCards(withFlipped, firstId, card.id));
                 } else {
                     setCards(withFlipped);
                     setLocked(true);
                     setTimeout(() => {
                         setCards((prev) =>
-                            prev.map((c) =>
-                                c.id === firstId || c.id === card.id
-                                    ? { ...c, flipped: false }
-                                    : c
-                            )
+                            unflipCards(prev, [firstId, card.id]),
                         );
                         setLocked(false);
-                    }, 850);
+                    }, MISMATCH_DELAY);
                 }
             }
         },
-        [cards, selected, locked]
+        [cards, selected, locked],
     );
 
     return (
@@ -110,20 +82,19 @@ export default function MemoryMatch() {
 
             {/* 4×4 grid with 3D flip */}
             <div className="grid grid-cols-4 gap-2">
-                {cards.map((card) => (
+                {cards.map((card, idx) => (
                     <div
-                        key={card.id}
-                        className="aspect-square [perspective:800px]"
+                        key={`${dealId}-${card.id}`}
+                        className="card-deal-in aspect-square [perspective:800px]"
+                        style={
+                            {
+                                ["--deal-delay" as string]: `${idx * 45}ms`,
+                            } as React.CSSProperties
+                        }
                     >
                         <button
                             onClick={() => handleClick(card)}
-                            className={`
-                                relative h-full w-full
-                                [transform-style:preserve-3d]
-                                transition-[transform] duration-[420ms]
-                                [transition-timing-function:cubic-bezier(0.25,1,0.5,1)]
-                                ${card.flipped || card.matched ? "[transform:rotateY(180deg)]" : ""}
-                            `}
+                            className={`relative h-full w-full transition-[transform] duration-[420ms] [transition-timing-function:cubic-bezier(0.25,1,0.5,1)] [transform-style:preserve-3d] ${card.flipped || card.matched ? "[transform:rotateY(180deg)]" : ""} `}
                             aria-label={
                                 card.flipped || card.matched
                                     ? card.symbol
@@ -131,22 +102,18 @@ export default function MemoryMatch() {
                             }
                         >
                             {/* Back face */}
-                            <div className="absolute inset-0 [backface-visibility:hidden] flex items-center justify-center rounded-sm border border-rim bg-surface">
-                                <span className="select-none font-serif text-base text-rim">
+                            <div className="absolute inset-0 flex items-center justify-center rounded-sm border border-rim bg-surface [backface-visibility:hidden]">
+                                <span className="font-serif text-base text-rim select-none">
                                     ◦
                                 </span>
                             </div>
 
                             {/* Front face */}
                             <div
-                                className={`
-                                    absolute inset-0 [backface-visibility:hidden] [transform:rotateY(180deg)]
-                                    flex items-center justify-center rounded-sm border
-                                    ${card.matched ? "border-accent bg-accent/10" : "border-cream/15 bg-surface"}
-                                `}
+                                className={`absolute inset-0 flex [transform:rotateY(180deg)] items-center justify-center rounded-sm border transition-colors duration-300 [backface-visibility:hidden] ${card.matched ? "match-pulse border-accent bg-accent/10" : "border-cream/15 bg-surface"} `}
                             >
                                 <span
-                                    className={`select-none font-serif text-2xl ${card.matched ? "text-accent" : "text-cream"}`}
+                                    className={`font-serif text-2xl transition-colors duration-300 select-none ${card.matched ? "text-accent" : "text-cream"}`}
                                 >
                                     {card.symbol}
                                 </span>
@@ -167,7 +134,7 @@ export default function MemoryMatch() {
                     </p>
                     <button
                         onClick={reset}
-                        className="mt-4 inline-block border border-accent/60 px-5 py-2 font-sans text-xs font-semibold tracking-wide text-accent transition-colors hover:border-accent hover:bg-accent hover:text-canvas"
+                        className="hover:text-canvas mt-4 inline-block border border-accent/60 px-5 py-2 font-sans text-xs font-semibold tracking-wide text-accent transition-colors hover:border-accent hover:bg-accent"
                     >
                         {t("play_again")}
                     </button>

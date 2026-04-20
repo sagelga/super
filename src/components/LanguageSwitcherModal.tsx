@@ -2,20 +2,8 @@
 
 import React from "react";
 import BottomSheet from "./ui/BottomSheet";
+import SettingsOptionList, { SettingsOption } from "./ui/SettingsOptionList";
 import { useTranslations } from "next-intl";
-import "./LanguageSwitcherModal.style.css";
-
-interface LanguageOption {
-    code: string;
-    label: string;
-    flag: string;
-}
-
-const languageOptions: LanguageOption[] = [
-    { code: "en", label: "English", flag: "🇬🇧" },
-    { code: "th", label: "ไทย", flag: "🇹🇭" },
-    { code: "zh", label: "中文", flag: "🇨🇳" },
-];
 
 interface LanguageSwitcherModalProps {
     isOpen: boolean;
@@ -32,9 +20,47 @@ const LanguageSwitcherModal: React.FC<LanguageSwitcherModalProps> = ({
 }) => {
     const t = useTranslations("common");
 
-    const handleSelect = (code: string) => {
-        onLanguageSelect(code);
-    };
+    const checkmarkIcon = (
+        <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+        >
+            <polyline points="20 6 9 17 4 12" />
+        </svg>
+    );
+
+    const languageOptions: SettingsOption[] = [
+        {
+            id: "en",
+            label: "English",
+            leading: "🇬🇧",
+            trailing: currentLang === "en" ? checkmarkIcon : undefined,
+            isActive: currentLang === "en",
+            onClick: () => onLanguageSelect("en"),
+        },
+        {
+            id: "th",
+            label: "ไทย",
+            leading: "🇹🇭",
+            trailing: currentLang === "th" ? checkmarkIcon : undefined,
+            isActive: currentLang === "th",
+            onClick: () => onLanguageSelect("th"),
+        },
+        {
+            id: "zh",
+            label: "中文",
+            leading: "🇨🇳",
+            trailing: currentLang === "zh" ? checkmarkIcon : undefined,
+            isActive: currentLang === "zh",
+            onClick: () => onLanguageSelect("zh"),
+        },
+    ];
 
     return (
         <BottomSheet
@@ -42,33 +68,7 @@ const LanguageSwitcherModal: React.FC<LanguageSwitcherModalProps> = ({
             onClose={onClose}
             title={t("language.title")}
         >
-            <div className="language-switcher-list">
-                {languageOptions.map((option) => (
-                    <button
-                        key={option.code}
-                        className={`language-option ${currentLang === option.code ? "active" : ""}`}
-                        onClick={() => handleSelect(option.code)}
-                    >
-                        <span className="language-flag">{option.flag}</span>
-                        <span className="language-label">{option.label}</span>
-                        {currentLang === option.code && (
-                            <svg
-                                className="language-check"
-                                width="20"
-                                height="20"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                strokeWidth="2.5"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                            >
-                                <polyline points="20 6 9 17 4 12" />
-                            </svg>
-                        )}
-                    </button>
-                ))}
-            </div>
+            <SettingsOptionList options={languageOptions} />
         </BottomSheet>
     );
 };

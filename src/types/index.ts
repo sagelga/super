@@ -11,8 +11,10 @@ export interface SectionProps {
     title?: string;
     /** Small muted text shown inline next to the amber label, e.g. a count or year range */
     subtitle?: string;
-    /** "default" = amber label + 1px rule; "minimal" = muted label, no rule */
-    headingVariant?: "default" | "minimal";
+    /** "default" = amber label + 1px rule; "minimal" = muted label, no rule; "display" = large serif heading with amber rule + sparkle */
+    headingVariant?: "default" | "minimal" | "display";
+    /** Section index shown in muted text beside the display heading (e.g. "03") */
+    sectionNumber?: string;
     children: ReactNode;
     className?: string;
     id?: string;

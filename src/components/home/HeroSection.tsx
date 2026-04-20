@@ -7,7 +7,7 @@ const HeroSection: React.FC = () => {
     const nameParts = t("hero.name").split(" ");
 
     return (
-        <section className="relative flex min-h-screen items-center overflow-hidden bg-canvas">
+        <section className="bg-canvas relative flex min-h-screen items-center overflow-hidden">
             {/* Decorative dot grid — right side */}
             <div
                 className="pointer-events-none absolute top-0 right-0 h-full w-[55%]"
@@ -18,7 +18,7 @@ const HeroSection: React.FC = () => {
                 }}
             />
             {/* Decorative rings */}
-            <div className="absolute top-1/2 right-20 hidden h-72 w-72 -translate-y-1/2 rounded-full border border-brand/20 lg:block" />
+            <div className="border-brand/20 absolute top-1/2 right-20 hidden h-72 w-72 -translate-y-1/2 rounded-full border lg:block" />
             <div className="absolute top-1/2 right-32 hidden h-48 w-48 -translate-y-1/2 rounded-full border border-accent/10 lg:block" />
 
             <div className="container mx-auto px-8 pt-24 pb-20 lg:px-16">
@@ -29,7 +29,7 @@ const HeroSection: React.FC = () => {
                     </p>
 
                     {/* Name — large display serif */}
-                    <h1 className="enter enter-d2 font-display mb-14 text-[clamp(3.5rem,9vw,7.5rem)] leading-[0.88] font-bold tracking-tight text-cream">
+                    <h1 className="enter font-display text-cream mb-14 text-[clamp(3.5rem,9vw,7.5rem)] leading-[0.88] font-bold tracking-tight">
                         {nameParts[0]}
                         <br />
                         <span className="text-muted">
@@ -39,8 +39,8 @@ const HeroSection: React.FC = () => {
 
                     {/* Role with amber rule */}
                     <div className="enter enter-d3 mb-5 flex items-center gap-4">
-                        <span className="grow-rule h-px w-10 flex-shrink-0 bg-accent" />
-                        <p className="text-lg tracking-wide text-cream">
+                        <span className="grow-rule-breathing h-px w-10 flex-shrink-0 bg-accent" />
+                        <p className="text-cream text-lg tracking-wide">
                             {t("hero.title")}
                         </p>
                     </div>
@@ -58,9 +58,9 @@ const HeroSection: React.FC = () => {
                             rel="noopener noreferrer"
                             className="group flex items-center gap-2 text-sm text-muted transition-colors duration-200 hover:text-accent"
                         >
-                            <i className="devicon-linkedin-plain text-base transition-colors group-hover:text-accent" />
+                            <i className="devicon-linkedin-plain text-base transition-all duration-300 group-hover:-translate-y-0.5 group-hover:scale-110 group-hover:text-accent" />
                             LinkedIn
-                            <span className="text-xs opacity-50 transition-opacity group-hover:opacity-100">
+                            <span className="text-xs opacity-50 transition-all duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:opacity-100">
                                 ↗
                             </span>
                         </Link>
@@ -70,9 +70,9 @@ const HeroSection: React.FC = () => {
                             rel="noopener noreferrer"
                             className="group flex items-center gap-2 text-sm text-muted transition-colors duration-200 hover:text-accent"
                         >
-                            <i className="devicon-github-plain text-base transition-colors group-hover:text-accent" />
+                            <i className="devicon-github-plain text-base transition-all duration-300 group-hover:-translate-y-0.5 group-hover:scale-110 group-hover:text-accent" />
                             GitHub
-                            <span className="text-xs opacity-50 transition-opacity group-hover:opacity-100">
+                            <span className="text-xs opacity-50 transition-all duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:opacity-100">
                                 ↗
                             </span>
                         </Link>
@@ -82,9 +82,9 @@ const HeroSection: React.FC = () => {
                             rel="noopener noreferrer"
                             className="group flex items-center gap-2 text-sm text-muted transition-colors duration-200 hover:text-accent"
                         >
-                            <i className="devicon-salesforce-plain text-base transition-colors group-hover:text-accent" />
+                            <i className="devicon-salesforce-plain text-base transition-all duration-300 group-hover:-translate-y-0.5 group-hover:scale-110 group-hover:text-accent" />
                             Trailblazer
-                            <span className="text-xs opacity-50 transition-opacity group-hover:opacity-100">
+                            <span className="text-xs opacity-50 transition-all duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:opacity-100">
                                 ↗
                             </span>
                         </Link>
@@ -93,7 +93,7 @@ const HeroSection: React.FC = () => {
             </div>
 
             {/* Scroll indicator */}
-            <div className="enter-fade enter-d6 absolute bottom-10 left-8 flex items-center gap-3 lg:left-16">
+            <div className="enter-fade enter-d6 scroll-pulse absolute bottom-10 left-8 flex items-center gap-3 lg:left-16">
                 <div className="h-14 w-px bg-gradient-to-b from-muted/60 to-transparent" />
                 <span className="text-xs tracking-[0.3em] text-muted uppercase [writing-mode:vertical-rl]">
                     Scroll

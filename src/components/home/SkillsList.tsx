@@ -55,7 +55,8 @@ const SkillsList: React.FC<SkillsListProps> = ({ skills }) => {
         <Section
             id="skills"
             title={t("skills_section_title")}
-            headingVariant="minimal"
+            headingVariant="display"
+            sectionNumber="02"
             variant="canvas"
             spacing="compact"
         >
