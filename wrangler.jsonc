@@ -2,6 +2,9 @@
     "$schema": "./node_modules/wrangler/config-schema.json",
     "name": "super",
     "compatibility_date": "2026-03-18",
+    "build": {
+        "command": "npm run build && npx @opennextjs/cloudflare build"
+    },
     "account_id": "9124272a5c3e327f2e943bf27c0910c4",
     "compatibility_flags": ["nodejs_compat"],
     "main": ".open-next/worker.js",
