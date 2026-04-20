@@ -33,6 +33,9 @@
         "react-dom": "^19.0.0",
         "reading-time": "^1.5.0"
     },
+    "overrides": {
+        "@swc/helpers": "0.5.21"
+    },
     "devDependencies": {
         "@cloudflare/workers-types": "^4.20260403.1",
         "@eslint/eslintrc": "^3",
