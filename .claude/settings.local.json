@@ -178,7 +178,13 @@
       "Bash(curl -s \"https://sagelga.com/en/learn/git\")",
       "Bash(curl -s \"https://sagelga.com/en/blog/super-development-process\")",
       "Bash(curl -sv \"https://sagelga.com/en/blog/super-development-process\")",
-      "Bash(git pull *)"
+      "Bash(git pull *)",
+      "Bash(git fetch:*)",
+      "Bash(git worktree:*)",
+      "Bash(xargs git:*)",
+      "Bash(xargs basename *)",
+      "Bash(cat)",
+      "Bash(bash /tmp/check_styles.sh)"
     ]
   },
   "hooks": {
