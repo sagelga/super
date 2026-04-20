@@ -1,17 +1,16 @@
 "use client";
 
-import React, { useState, useEffect, lazy, Suspense } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { getCookiePreferences, setCookiePreferences } from "@/utils/cookies";
 import BottomSheet from "../ui/BottomSheet";
-
-const CookieSettingsModal = lazy(() => import("./CookieSettingsModal"));
+import { useSettings } from "../settings/SettingsProvider";
 
 const CookieConsentBanner: React.FC = () => {
     const t = useTranslations("cookies");
+    const { openSettings } = useSettings();
     const [isVisible, setIsVisible] = useState(false);
-    const [showSettings, setShowSettings] = useState(false);
     const [mounted, setMounted] = useState(false);
 
     useEffect(() => {
@@ -37,7 +36,7 @@ const CookieConsentBanner: React.FC = () => {
         if ("requestIdleCallback" in window) {
             idleId = (window as Window & typeof globalThis & { requestIdleCallback: (cb: () => void) => number }).requestIdleCallback(show);
         } else {
-            idleId = setTimeout(show, 2000) as unknown as number;
+            idleId = window.setTimeout(show, 2000) as unknown as number;
         }
 
         interactionEvents.forEach((e) => window.addEventListener(e, onInteraction, { once: true, passive: true }));
@@ -82,9 +81,9 @@ const CookieConsentBanner: React.FC = () => {
         setIsVisible(false);
     };
 
-    const handleSavePreferences = () => {
-        setShowSettings(false);
+    const handleOpenSettings = () => {
         setIsVisible(false);
+        openSettings("privacy");
     };
 
     if (!mounted) return null;
@@ -93,7 +92,7 @@ const CookieConsentBanner: React.FC = () => {
         <>
             <BottomSheet
                 isOpen={isVisible}
-                onClose={handleDismiss}
+                onClose={handleRejectAll}
                 title={t("banner.title")}
             >
                 <div style={{ padding: "0.25rem" }}>
@@ -105,6 +104,7 @@ const CookieConsentBanner: React.FC = () => {
                         <Link
                             href="/privacy-policy"
                             className="text-accent underline hover:text-cream"
+                            onClick={handleRejectAll}
                         >
                             {t("links.privacy_policy")}
                         </Link>
@@ -126,7 +126,7 @@ const CookieConsentBanner: React.FC = () => {
                         </button>
                         <button
                             onClick={handleRejectAll}
-                            className="w-full rounded-lg border border-accent bg-transparent py-3 text-sm font-medium text-accent transition-colors duration-200 hover:bg-accent/10"
+                            className="w-full rounded-lg border border-rim bg-transparent py-3 text-sm font-medium text-muted transition-colors duration-200 hover:border-accent hover:text-accent"
                         >
                             {t("buttons.reject_all")}
                         </button>

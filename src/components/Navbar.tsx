@@ -7,8 +7,8 @@ import { usePathname } from "next/navigation";
 import { Languages, X, Menu } from "lucide-react";
 import NavbarMobileMenu from "./NavbarMobileMenu";
 import NavbarReadingProgress from "./NavbarReadingProgress";
-import LanguageSwitcherModal from "./LanguageSwitcherModal";
 import SettingsHint from "./SettingsHint";
+import { useSettings } from "./settings/SettingsProvider";
 import "./Navbar.style.css";
 
 function NavSparkle() {
@@ -33,8 +33,8 @@ function Navbar() {
     const p = (path: string) => (lang === "th" ? path : `/${lang}${path}`);
     const [isHomeMenuOpen, setIsHomeMenuOpen] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-    const [showLanguageSwitcher, setShowLanguageSwitcher] = useState(false);
     const [globePulsing, setGlobePulsing] = useState(false);
+    const { openSettings } = useSettings();
 
     useEffect(() => {
         if (typeof window === "undefined") return;
@@ -45,14 +45,6 @@ function Navbar() {
             clearTimeout(hideTimer);
         };
     }, []);
-
-    const handleLanguageSelect = (newLang: string) => {
-        const localeFree = pathname.startsWith(`/${lang}`)
-            ? pathname.slice(`/${lang}`.length) || "/"
-            : pathname;
-        window.location.href =
-            newLang === "th" ? localeFree : `/${newLang}${localeFree}`;
-    };
 
     // Determine active nav link based on pathname
     const isHomeActive = pathname === p("/") || pathname === `/${lang}`;
@@ -95,11 +87,10 @@ function Navbar() {
                             href={p("/")}
                             aria-haspopup="true"
                             aria-expanded={isHomeMenuOpen}
-                            className={`text-sm tracking-wide transition-colors duration-200 ${
-                                isHomeActive
+                            className={`text-sm tracking-wide transition-colors duration-200 ${isHomeActive
                                     ? "text-cream border-b border-accent"
                                     : "hover:text-cream text-muted"
-                            }`}
+                                }`}
                         >
                             {t("nav.home")}
                         </Link>
@@ -136,11 +127,10 @@ function Navbar() {
                         <NavSparkle />
                         <Link
                             href={p("/blog")}
-                            className={`text-sm tracking-wide transition-colors duration-200 ${
-                                isBlogActive
+                            className={`text-sm tracking-wide transition-colors duration-200 ${isBlogActive
                                     ? "text-cream border-b border-accent"
                                     : "hover:text-cream text-muted"
-                            }`}
+                                }`}
                         >
                             {t("nav.blog")}
                         </Link>
@@ -149,11 +139,10 @@ function Navbar() {
                         <NavSparkle />
                         <Link
                             href={p("/gallery")}
-                            className={`text-sm tracking-wide transition-colors duration-200 ${
-                                isGalleryActive
+                            className={`text-sm tracking-wide transition-colors duration-200 ${isGalleryActive
                                     ? "text-cream border-b border-accent"
                                     : "hover:text-cream text-muted"
-                            }`}
+                                }`}
                         >
                             {t("nav.gallery")}
                         </Link>
@@ -162,11 +151,10 @@ function Navbar() {
                         <NavSparkle />
                         <Link
                             href={p("/learn")}
-                            className={`text-sm tracking-wide transition-colors duration-200 ${
-                                isLearnActive
+                            className={`text-sm tracking-wide transition-colors duration-200 ${isLearnActive
                                     ? "text-cream border-b border-accent"
                                     : "hover:text-cream text-muted"
-                            }`}
+                                }`}
                         >
                             {t("nav.learn")}
                         </Link>
@@ -175,11 +163,10 @@ function Navbar() {
                         <NavSparkle />
                         <Link
                             href={p("/docs")}
-                            className={`text-sm tracking-wide transition-colors duration-200 ${
-                                isDocsActive
+                            className={`text-sm tracking-wide transition-colors duration-200 ${isDocsActive
                                     ? "text-cream border-b border-accent"
                                     : "hover:text-cream text-muted"
-                            }`}
+                                }`}
                         >
                             {t("nav.docs")}
                         </Link>
@@ -187,8 +174,8 @@ function Navbar() {
 
                     <div className="relative ml-2">
                         <button
-                            onClick={() => setShowLanguageSwitcher(true)}
-                            aria-label="Change language"
+                            onClick={() => openSettings("language")}
+                            aria-label="Open settings"
                             className={`hover:text-cream flex h-8 w-8 items-center justify-center text-muted transition-colors duration-200 ${globePulsing ? "navbar-globe-pulsing" : ""}`}
                         >
                             <Languages width={16} height={16} />

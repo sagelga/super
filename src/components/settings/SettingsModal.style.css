@@ -1,0 +1,50 @@
+@import "../../styles/design-tokens.css";
+
+.settings-tabs {
+  display: flex;
+  gap: 0.25rem;
+  padding: 0.25rem;
+  margin-bottom: 0.5rem;
+  border-bottom: 1px solid var(--color-border, #302C24);
+}
+
+.settings-tab {
+  flex: 1;
+  padding: 0.625rem 0.75rem;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--color-muted, #9A9485);
+  cursor: pointer;
+  transition: color 0.15s ease, border-color 0.15s ease;
+  letter-spacing: 0.02em;
+}
+
+.settings-tab:hover {
+  color: var(--color-text, #F0EAD6);
+}
+
+.settings-tab.active {
+  color: var(--color-accent, #C9943A);
+  border-bottom-color: var(--color-accent, #C9943A);
+}
+
+.settings-tab:focus-visible {
+  outline: 2px solid var(--color-accent, #C9943A);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+.settings-panel {
+  outline: none;
+}
+
+@media (max-width: 480px) {
+  .settings-tab {
+    padding: 0.5rem 0.5rem;
+    font-size: 0.8125rem;
+  }
+}

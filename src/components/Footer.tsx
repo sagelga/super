@@ -1,13 +1,10 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import Link from "next/link";
 import { useLocale, useTranslations } from "next-intl";
-import { usePathname } from "next/navigation";
 import Breadcrumb from "./Breadcrumb";
-import CookieSettingsModal from "./cookies/CookieSettingsModal";
-import LanguageSwitcherModal from "./LanguageSwitcherModal";
-import ThemeSettingsModal from "./ThemeSettingsModal";
+import { useSettings } from "./settings/SettingsProvider";
 import "./Footer.style.css";
 
 interface LinkItem {
@@ -24,19 +21,8 @@ interface LinkColumn {
 const Footer: React.FC = () => {
     const t = useTranslations("common");
     const tCookies = useTranslations("cookies");
-    const pathname = usePathname();
     const lang = useLocale();
-    const [showCookieSettings, setShowCookieSettings] = useState(false);
-    const [showLanguageSwitcher, setShowLanguageSwitcher] = useState(false);
-    const [showThemeSettings, setShowThemeSettings] = useState(false);
-
-    const handleLanguageSelect = (newLang: string) => {
-        const localeFree = pathname.startsWith(`/${lang}`)
-            ? pathname.slice(`/${lang}`.length) || "/"
-            : pathname;
-        window.location.href =
-            newLang === "th" ? localeFree : `/${newLang}${localeFree}`;
-    };
+    const { openSettings } = useSettings();
 
     const langPrefix = lang === "th" ? "" : `/${lang}`;
 
@@ -182,7 +168,7 @@ const Footer: React.FC = () => {
                                 />
                             </a>
                             <button
-                                onClick={() => setShowLanguageSwitcher(true)}
+                                onClick={() => openSettings("language")}
                                 className="footer-toggle-btn"
                             >
                                 <svg
@@ -203,7 +189,7 @@ const Footer: React.FC = () => {
                                 <span>{t("language.label")}</span>
                             </button>
                             <button
-                                onClick={() => setShowCookieSettings(true)}
+                                onClick={() => openSettings("privacy")}
                                 className="footer-toggle-btn"
                             >
                                 <svg
@@ -225,7 +211,7 @@ const Footer: React.FC = () => {
                                 </span>
                             </button>
                             <button
-                                onClick={() => setShowThemeSettings(true)}
+                                onClick={() => openSettings("appearance")}
                                 className="footer-toggle-btn"
                             >
                                 <svg
@@ -275,26 +261,6 @@ const Footer: React.FC = () => {
                     </div>
                 </div>
             </footer>
-
-            {showCookieSettings && (
-                <CookieSettingsModal
-                    isOpen={showCookieSettings}
-                    onClose={() => setShowCookieSettings(false)}
-                    onSave={() => setShowCookieSettings(false)}
-                />
-            )}
-
-            <LanguageSwitcherModal
-                isOpen={showLanguageSwitcher}
-                currentLang={lang}
-                onClose={() => setShowLanguageSwitcher(false)}
-                onLanguageSelect={handleLanguageSelect}
-            />
-
-            <ThemeSettingsModal
-                isOpen={showThemeSettings}
-                onClose={() => setShowThemeSettings(false)}
-            />
         </div>
     );
 };

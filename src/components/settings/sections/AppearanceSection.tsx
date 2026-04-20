@@ -1,10 +1,9 @@
 "use client";
 
 import React from "react";
-import BottomSheet from "./ui/BottomSheet";
-import { useTheme } from "../hooks/useTheme";
 import { useTranslations } from "next-intl";
-import "./ThemeSettingsModal.style.css";
+import { useTheme } from "../../../hooks/useTheme";
+import "./AppearanceSection.style.css";
 
 interface ThemeOption {
     value: "light" | "dark" | "system";
@@ -13,21 +12,17 @@ interface ThemeOption {
     icon: React.ReactNode;
 }
 
-interface ThemeSettingsModalProps {
-    isOpen: boolean;
-    onClose: () => void;
+interface AppearanceSectionProps {
+    onSelected?: () => void;
 }
 
-const ThemeSettingsModal: React.FC<ThemeSettingsModalProps> = ({
-    isOpen,
-    onClose,
-}) => {
+const AppearanceSection: React.FC<AppearanceSectionProps> = ({ onSelected }) => {
     const { theme, setTheme } = useTheme();
     const t = useTranslations("common");
 
     const handleSelect = (value: "light" | "dark" | "system") => {
         setTheme(value);
-        onClose();
+        onSelected?.();
     };
 
     const themeOptions: ThemeOption[] = [
@@ -101,43 +96,41 @@ const ThemeSettingsModal: React.FC<ThemeSettingsModalProps> = ({
     ];
 
     return (
-        <BottomSheet isOpen={isOpen} onClose={onClose} title={t("theme.title")}>
-            <div className="theme-settings-list">
-                {themeOptions.map((option) => (
-                    <button
-                        key={option.value}
-                        className={`theme-option ${theme === option.value ? "active" : ""}`}
-                        onClick={() => handleSelect(option.value)}
-                    >
-                        <span className="theme-option-icon">{option.icon}</span>
-                        <span className="theme-option-content">
-                            <span className="theme-option-label">
-                                {option.label}
-                            </span>
-                            <span className="theme-option-description">
-                                {option.description}
-                            </span>
+        <div className="theme-settings-list">
+            {themeOptions.map((option) => (
+                <button
+                    key={option.value}
+                    className={`theme-option ${theme === option.value ? "active" : ""}`}
+                    onClick={() => handleSelect(option.value)}
+                >
+                    <span className="theme-option-icon">{option.icon}</span>
+                    <span className="theme-option-content">
+                        <span className="theme-option-label">
+                            {option.label}
                         </span>
-                        {theme === option.value && (
-                            <svg
-                                className="theme-option-check"
-                                width="20"
-                                height="20"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                strokeWidth="2.5"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                            >
-                                <polyline points="20 6 9 17 4 12" />
-                            </svg>
-                        )}
-                    </button>
-                ))}
-            </div>
-        </BottomSheet>
+                        <span className="theme-option-description">
+                            {option.description}
+                        </span>
+                    </span>
+                    {theme === option.value && (
+                        <svg
+                            className="theme-option-check"
+                            width="20"
+                            height="20"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2.5"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                        >
+                            <polyline points="20 6 9 17 4 12" />
+                        </svg>
+                    )}
+                </button>
+            ))}
+        </div>
     );
 };
 
-export default ThemeSettingsModal;
+export default AppearanceSection;

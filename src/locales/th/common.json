@@ -65,7 +65,13 @@
         "label": "ตั้งค่า"
     },
     "settings": {
-        "hint_description": "ตั้งค่าภาษา ธีม และคุกกี้ได้ด้วยการกดที่นี่"
+        "title": "ตั้งค่า",
+        "hint_description": "ตั้งค่าภาษา ธีม และคุกกี้ได้ด้วยการกดที่นี่",
+        "tabs": {
+            "appearance": "ธีม",
+            "language": "ภาษา",
+            "privacy": "ความเป็นส่วนตัว"
+        }
     },
     "contact": {
         "eyebrow": "ติดต่อ",
