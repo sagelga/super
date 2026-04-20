@@ -107,7 +107,7 @@ function ProjectHeroCard({
             {/* Content */}
             <div className="relative flex flex-1 flex-col justify-between gap-6 p-8 lg:p-10">
                 <div className="flex justify-end">
-                    <span className="font-sans text-[10px] tracking-[0.2em] text-muted/60 uppercase">
+                    <span className="font-sans text-[10px] tracking-[0.2em] text-muted-readable uppercase">
                         Featured
                     </span>
                 </div>
@@ -126,7 +126,7 @@ function ProjectHeroCard({
                         {project.stack.slice(0, 6).map((tech) => (
                             <span
                                 key={tech}
-                                className="border border-rim px-2 py-1 font-sans text-[11px] leading-none text-muted/80"
+                                className="border border-rim px-2 py-1 font-sans text-[11px] leading-none text-muted"
                             >
                                 {tech}
                             </span>
@@ -213,7 +213,7 @@ function ProjectCard({ project, onSelect, visitLabel }: ProjectCardProps) {
                             {project.stack.slice(0, 3).map((tech) => (
                                 <span
                                     key={tech}
-                                    className="border border-rim px-1.5 py-[3px] font-sans text-[10px] leading-none text-muted/70"
+                                    className="border border-rim px-1.5 py-[3px] font-sans text-[10px] leading-none text-muted"
                                 >
                                     {tech}
                                 </span>
@@ -236,7 +236,7 @@ function ProjectCard({ project, onSelect, visitLabel }: ProjectCardProps) {
                                 </span>
                             </a>
                         ) : (
-                            <span className="font-sans text-xs text-muted/50">
+                            <span className="font-sans text-xs text-muted-readable">
                                 →
                             </span>
                         )}
@@ -409,14 +409,14 @@ const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({
                                 </button>
                             </div>
                             <div className="flex items-center gap-6">
-                                <p className="font-sans text-xs text-muted/70">
+                                <p className="font-sans text-xs text-muted">
                                     {tCommon("docs.documented_projects", {
                                         count: docProjects.length,
                                     })}
                                 </p>
                                 <Link
                                     href={`${langPrefix}/docs`}
-                                    className="group flex items-center gap-2 font-sans text-sm text-muted/70 transition-colors duration-200 hover:text-accent"
+                                    className="group flex items-center gap-2 font-sans text-sm text-muted transition-colors duration-200 hover:text-accent"
                                 >
                                     {tCommon("docs.all_projects_title")}
                                     <span className="inline-block transition-transform duration-300 group-hover:translate-x-1">

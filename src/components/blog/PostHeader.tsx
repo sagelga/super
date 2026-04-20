@@ -108,7 +108,7 @@ export default function PostHeader({
                     <span className="font-sans">
                         {editedDate || fetchedDate ? (
                             <>
-                                <span className="text-muted/70">Published </span>
+                                <span className="text-muted">Published </span>
                                 {publishedDate}
                             </>
                         ) : (
@@ -120,7 +120,7 @@ export default function PostHeader({
                     <>
                         <span className="text-rim">·</span>
                         <span className="font-sans">
-                            <span className="text-muted/70">Edited </span>
+                            <span className="text-muted">Edited </span>
                             {editedDate}
                         </span>
                     </>
@@ -129,15 +129,20 @@ export default function PostHeader({
                     <>
                         <span className="text-rim">·</span>
                         <span className="font-sans">
-                            <span className="text-muted/70">Fetched </span>
+                            <span className="text-muted">Fetched </span>
                             <Tooltip
                                 content={
                                     <>
                                         Synced from Notion by{" "}
-                                        <span className="text-accent">SuperEye</span>
+                                        <span className="text-accent">
+                                            SuperEye
+                                        </span>
                                         , served via{" "}
-                                        <span className="text-accent">Superbrain</span>{" "}
-                                        — my Cloudflare Workers that cache blog content every 15&nbsp;minutes.
+                                        <span className="text-accent">
+                                            Superbrain
+                                        </span>{" "}
+                                        — my Cloudflare Workers that cache blog
+                                        content every 15&nbsp;minutes.
                                     </>
                                 }
                             >

@@ -31,15 +31,22 @@
   border-color: var(--color-accent, #C9943A);
 }
 
-.language-option.active .language-label {
-  color: var(--color-text, #F0EAD6);
-  font-weight: 600;
-  opacity: 1;
+.language-option-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: var(--color-surface, #252219);
+  border-radius: 10px;
+  font-size: 1.375rem;
+  line-height: 1;
+  flex-shrink: 0;
+  transition: background 0.15s ease;
 }
 
-.language-flag {
-  font-size: 1.5rem;
-  line-height: 1;
+.language-option.active .language-option-icon {
+  background: color-mix(in srgb, var(--color-accent, #C9943A) 20%, transparent);
 }
 
 .language-label {
@@ -47,12 +54,18 @@
   font-size: 0.9375rem;
   font-weight: 500;
   color: var(--color-text, #F0EAD6);
-  opacity: 0.65;
-  transition: color 0.15s ease, opacity 0.15s ease;
 }
 
-.language-option:hover .language-label {
-  opacity: 1;
+.language-option-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+}
+
+.language-description {
+  font-size: 0.875rem;
+  color: var(--color-muted-readable, #BDB5A6);
 }
 
 .language-check {
@@ -65,7 +78,9 @@
     padding: 0.875rem;
   }
 
-  .language-flag {
+  .language-option-icon {
+    width: 36px;
+    height: 36px;
     font-size: 1.25rem;
   }
 

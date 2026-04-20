@@ -1,35 +1,69 @@
 @import "../../styles/design-tokens.css";
 
+.settings-layout {
+  display: flex;
+  flex-direction: row;
+  gap: 0;
+  min-height: 0;
+  flex: 1;
+}
+
 .settings-tabs {
   display: flex;
+  flex-direction: column;
   gap: 0.25rem;
   padding: 0.25rem;
-  margin-bottom: 0.5rem;
-  border-bottom: 1px solid var(--color-border, #302C24);
+  border-right: 1px solid var(--color-border, #302C24);
+  flex-shrink: 0;
+  width: 90px;
 }
 
 .settings-tab {
-  flex: 1;
-  padding: 0.625rem 0.75rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  width: 100%;
+  padding: 0.75rem 0.5rem;
   background: transparent;
   border: none;
-  border-bottom: 2px solid transparent;
-  margin-bottom: -1px;
-  font-size: 0.875rem;
+  border-right: 2px solid transparent;
+  margin-right: -1px;
+  font-size: 0.75rem;
   font-weight: 500;
-  color: var(--color-muted, #9A9485);
+  color: var(--color-muted-readable, #BDB5A6);
   cursor: pointer;
-  transition: color 0.15s ease, border-color 0.15s ease;
+  transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
   letter-spacing: 0.02em;
+  border-radius: 8px 0 0 8px;
+  text-align: center;
+}
+
+.settings-tab-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.7;
+  transition: opacity 0.15s ease;
 }
 
 .settings-tab:hover {
   color: var(--color-text, #F0EAD6);
+  background: color-mix(in srgb, var(--color-surface, #252219) 60%, transparent);
+}
+
+.settings-tab:hover .settings-tab-icon {
+  opacity: 1;
 }
 
 .settings-tab.active {
   color: var(--color-accent, #C9943A);
-  border-bottom-color: var(--color-accent, #C9943A);
+  border-right-color: var(--color-accent, #C9943A);
+  background: color-mix(in srgb, var(--color-accent, #C9943A) 8%, transparent);
+}
+
+.settings-tab.active .settings-tab-icon {
+  opacity: 1;
 }
 
 .settings-tab:focus-visible {
@@ -40,11 +74,18 @@
 
 .settings-panel {
   outline: none;
+  flex: 1;
+  min-width: 0;
+  overflow-y: auto;
 }
 
 @media (max-width: 480px) {
+  .settings-tabs {
+    width: 72px;
+  }
+
   .settings-tab {
-    padding: 0.5rem 0.5rem;
-    font-size: 0.8125rem;
+    padding: 0.625rem 0.25rem;
+    font-size: 0.6875rem;
   }
 }

@@ -81,7 +81,10 @@
         "email_label": "ส่งอีเมล",
         "email_cta": "hello@sagelga.com",
         "socials_heading": "ช่องทางอื่นๆ",
-        "response_note": "โดยปกติฉันจะตอบกลับภายใน 48 ชั่วโมง"
+        "response_note": "โดยปกติฉันจะตอบกลับภายใน 48 ชั่วโมง",
+        "location": "กรุงเทพฯ ประเทศไทย",
+        "timezone": "GMT+7",
+        "elsewhere_eyebrow": "ที่อื่น"
     },
     "nav": {
         "home": "หน้าแรก",

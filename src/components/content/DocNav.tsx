@@ -112,7 +112,7 @@ function NavItem({
                                                         pathname ===
                                                         grandchild.href
                                                             ? "text-accent"
-                                                            : "text-muted/75 hover:text-text"
+                                                            : "text-muted hover:text-text"
                                                     }`}
                                                 >
                                                     {grandchild.label}

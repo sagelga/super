@@ -63,14 +63,14 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
         >
             {/* Backdrop */}
             <div
-                className="bg-canvas/85 absolute inset-0 backdrop-blur-sm"
+                className="absolute inset-0 bg-canvas/85 backdrop-blur-sm"
                 style={{ animation: "fade-in 0.15s ease-out both" }}
                 onClick={onClose}
             />
 
             {/* Panel */}
             <div
-                className="border-rim relative z-10 flex max-h-[85vh] w-full max-w-2xl flex-col border bg-surface"
+                className="relative z-10 flex max-h-[85vh] w-full max-w-2xl flex-col border border-rim bg-surface"
                 style={{
                     animation: "fade-up 0.2s cubic-bezier(0.25,1,0.5,1) both",
                 }}
@@ -81,13 +81,13 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
                         <p className="mb-2 font-sans text-[10px] tracking-widest text-accent/60 uppercase">
                             {statusLabel}
                         </p>
-                        <h2 className="text-cream font-serif text-2xl leading-snug">
+                        <h2 className="font-serif text-2xl leading-snug text-cream">
                             {project.title}
                         </h2>
                     </div>
                     <button
                         onClick={onClose}
-                        className="hover:text-cream -mr-1 flex-none p-1 text-muted/50 transition-colors duration-200"
+                        className="-mr-1 flex-none p-1 text-muted-readable transition-colors duration-200 hover:text-cream"
                         aria-label="Close"
                     >
                         <svg
@@ -103,7 +103,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
                     </button>
                 </div>
 
-                <div className="bg-rim mx-6 h-px" />
+                <div className="mx-6 h-px bg-rim" />
 
                 {/* Scrollable body */}
                 <div className="flex-1 space-y-5 overflow-y-auto p-6">
@@ -115,14 +115,14 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
                     {/* Tech stack — all chips */}
                     {project.stack && project.stack.length > 0 && (
                         <div>
-                            <p className="mb-2 font-sans text-[10px] tracking-[0.2em] text-muted/40 uppercase">
+                            <p className="mb-2 font-sans text-[10px] tracking-[0.2em] text-muted-readable uppercase">
                                 Stack
                             </p>
                             <div className="flex flex-wrap gap-1.5">
                                 {project.stack.map((tech) => (
                                     <span
                                         key={tech}
-                                        className="border-rim border px-2 py-1 font-sans text-[11px] leading-none text-muted/70"
+                                        className="border border-rim px-2 py-1 font-sans text-[11px] leading-none text-muted"
                                     >
                                         {tech}
                                     </span>
@@ -132,7 +132,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
                     )}
                 </div>
 
-                <div className="bg-rim mx-6 h-px" />
+                <div className="mx-6 h-px bg-rim" />
 
                 {/* Action footer */}
                 <div className="flex flex-wrap gap-3 p-6 pt-5">
@@ -141,7 +141,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
                             href={project.demoLink}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-canvas bg-accent px-4 py-2 font-sans text-sm transition-colors duration-200 hover:bg-accent/90"
+                            className="bg-accent px-4 py-2 font-sans text-sm text-canvas transition-colors duration-200 hover:bg-accent/90"
                         >
                             {t("project_link_demo")} ↗
                         </a>
@@ -151,7 +151,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
                             href={project.githubLink}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="border-rim hover:text-cream border px-4 py-2 font-sans text-sm text-muted transition-colors duration-200 hover:border-accent/50"
+                            className="border border-rim px-4 py-2 font-sans text-sm text-muted transition-colors duration-200 hover:border-accent/50 hover:text-cream"
                         >
                             GitHub ↗
                         </a>
@@ -160,7 +160,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
                         <Link
                             href={`${langPrefix}/docs/${project.docsSlug}`}
                             onClick={onClose}
-                            className="border-rim hover:text-cream flex items-center gap-1.5 border px-4 py-2 font-sans text-sm text-muted transition-colors duration-200 hover:border-accent/50"
+                            className="flex items-center gap-1.5 border border-rim px-4 py-2 font-sans text-sm text-muted transition-colors duration-200 hover:border-accent/50 hover:text-cream"
                         >
                             {t("project_link_docs")}
                             <span className="text-xs">→</span>

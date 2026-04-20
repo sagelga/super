@@ -81,7 +81,10 @@
         "email_label": "Send an email",
         "email_cta": "hello@sagelga.com",
         "socials_heading": "Find me on",
-        "response_note": "I typically respond within 48 hours."
+        "response_note": "I typically respond within 48 hours.",
+        "location": "Bangkok, Thailand",
+        "timezone": "GMT+7",
+        "elsewhere_eyebrow": "Elsewhere"
     },
     "nav": {
         "home": "Home",

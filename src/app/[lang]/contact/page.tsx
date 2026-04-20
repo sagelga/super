@@ -39,7 +39,15 @@ export async function generateMetadata({
     };
 }
 
-const socials = [
+type Social = {
+    key: string;
+    label: string;
+    handle: string;
+    href: string;
+    icon: React.ReactNode;
+};
+
+const socials: Social[] = [
     {
         key: "github",
         label: "GitHub",
@@ -47,8 +55,8 @@ const socials = [
         href: "https://github.com/sagelga",
         icon: (
             <svg
-                width="22"
-                height="22"
+                width="20"
+                height="20"
                 viewBox="0 0 24 24"
                 fill="currentColor"
                 aria-hidden="true"
@@ -64,8 +72,8 @@ const socials = [
         href: "https://www.linkedin.com/in/kunanon/",
         icon: (
             <svg
-                width="22"
-                height="22"
+                width="20"
+                height="20"
                 viewBox="0 0 24 24"
                 fill="currentColor"
                 aria-hidden="true"
@@ -81,8 +89,8 @@ const socials = [
         href: "https://www.salesforce.com/trailblazer/sagelga",
         icon: (
             <svg
-                width="22"
-                height="22"
+                width="20"
+                height="20"
                 viewBox="0 0 24 24"
                 fill="currentColor"
                 aria-hidden="true"
@@ -95,112 +103,146 @@ const socials = [
 
 export default async function ContactPage() {
     const t = await getTranslations("common");
+    const email = t("contact.email_cta");
 
     return (
-        <div className="container mx-auto px-8 py-20 lg:px-16">
-            {/* Header */}
-            <header className="mb-16">
-                <p className="mb-3 font-sans text-xs font-semibold tracking-widest text-accent uppercase">
-                    {t("contact.eyebrow")}
-                </p>
-                <h1 className="text-text font-serif text-5xl font-semibold lg:text-6xl">
-                    {t("contact.title")}
-                </h1>
-                <p className="mt-4 max-w-lg text-lg text-muted">
-                    {t("contact.subtitle")}
-                </p>
-            </header>
+        <section className="relative overflow-hidden bg-canvas">
+            {/* Decorative dot grid — bottom-right, echoes hero */}
+            <div
+                aria-hidden="true"
+                className="pointer-events-none absolute right-0 bottom-0 hidden h-[60%] w-[45%] opacity-60 lg:block"
+                style={{
+                    backgroundImage:
+                        "radial-gradient(circle, rgba(201,148,58,0.10) 1px, transparent 1px)",
+                    backgroundSize: "32px 32px",
+                    maskImage:
+                        "radial-gradient(ellipse at bottom right, black 30%, transparent 75%)",
+                }}
+            />
 
-            {/* Two-column layout */}
-            <div className="grid gap-16 lg:grid-cols-2 lg:gap-24">
-                {/* Left: Email CTA */}
-                <div className="flex flex-col gap-8">
-                    {/* Availability badge */}
-                    <div className="flex items-center gap-2">
-                        <span className="relative flex h-2.5 w-2.5">
-                            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-60" />
-                            <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-accent" />
+            <div className="container mx-auto px-8 pt-24 pb-28 lg:px-16 lg:pt-32 lg:pb-36">
+                {/* === Opening — editorial hero === */}
+                <div className="max-w-4xl">
+                    <div className="enter enter-d1 mb-6 flex items-center gap-4">
+                        <span className="font-sans text-xs font-semibold tracking-[0.25em] text-accent uppercase">
+                            {t("contact.eyebrow")}
                         </span>
-                        <span className="font-sans text-sm text-accent">
+                        <span className="grow-rule h-px w-[60px] flex-shrink-0 bg-accent/60" />
+                    </div>
+
+                    <h1 className="enter enter-d2 font-display text-[clamp(3rem,8vw,6.5rem)] leading-[0.92] font-semibold tracking-tight text-cream">
+                        {t("contact.title")}
+                        <span className="text-accent">.</span>
+                    </h1>
+
+                    <p className="enter enter-d3 mt-8 max-w-2xl font-serif text-xl leading-relaxed text-muted-readable italic lg:text-2xl">
+                        {t("contact.subtitle")}
+                    </p>
+
+                    {/* Meta row — availability + location + timezone */}
+                    <div className="enter-fade enter-d4 mt-10 flex flex-wrap items-center gap-x-6 gap-y-3 font-sans text-sm tracking-wide text-muted">
+                        <span className="flex items-center gap-2.5 text-accent">
+                            <span className="relative flex h-2 w-2">
+                                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-60" />
+                                <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
+                            </span>
                             {t("contact.available_label")}
                         </span>
-                    </div>
-
-                    {/* Email block */}
-                    <div className="border border-rim bg-surface p-8">
-                        <p className="mb-2 font-sans text-xs font-semibold tracking-widest text-muted uppercase">
-                            {t("contact.email_label")}
-                        </p>
-                        <a
-                            href={`mailto:${t("contact.email_cta")}`}
-                            className="group text-text flex items-center gap-3 font-serif text-2xl transition-colors duration-200 hover:text-accent lg:text-3xl"
-                        >
-                            {t("contact.email_cta")}
-                            <svg
-                                className="h-5 w-5 shrink-0 translate-x-0 text-accent opacity-0 transition-all duration-200 group-hover:translate-x-1 group-hover:opacity-100"
-                                fill="none"
-                                stroke="currentColor"
-                                strokeWidth="2"
-                                viewBox="0 0 24 24"
-                                aria-hidden="true"
-                            >
-                                <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    d="M17 8l4 4m0 0l-4 4m4-4H3"
-                                />
-                            </svg>
-                        </a>
-                        <p className="mt-4 font-sans text-sm text-muted/70">
-                            {t("contact.response_note")}
-                        </p>
+                        <span aria-hidden="true" className="text-muted/40">
+                            ·
+                        </span>
+                        <span>{t("contact.location")}</span>
+                        <span aria-hidden="true" className="text-muted/40">
+                            ·
+                        </span>
+                        <span className="tabular-nums">
+                            {t("contact.timezone")}
+                        </span>
                     </div>
                 </div>
 
-                {/* Right: Social profiles */}
-                <div>
-                    <p className="mb-6 font-sans text-xs font-semibold tracking-widest text-muted uppercase">
-                        {t("contact.socials_heading")}
+                {/* === Email — the statement === */}
+                <div className="enter enter-d5 mt-24 lg:mt-32">
+                    <p className="mb-6 font-sans text-xs font-semibold tracking-[0.25em] text-muted uppercase">
+                        {t("contact.email_label")}
                     </p>
-                    <div className="flex flex-col gap-1">
-                        {socials.map((s) => (
-                            <a
-                                key={s.key}
-                                href={s.href}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="group flex items-center gap-5 border border-transparent px-5 py-4 transition-all duration-150 hover:border-rim hover:bg-surface"
-                            >
-                                <span className="group-hover:text-text shrink-0 text-muted transition-colors duration-150">
-                                    {s.icon}
-                                </span>
-                                <div className="min-w-0 flex-1">
-                                    <p className="text-text text-sm font-medium">
-                                        {s.label}
-                                    </p>
-                                    <p className="font-sans text-xs text-muted">
-                                        {s.handle}
-                                    </p>
-                                </div>
-                                <svg
-                                    className="h-4 w-4 shrink-0 text-muted/60 transition-all duration-150 group-hover:translate-x-0.5 group-hover:text-accent"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    viewBox="0 0 24 24"
-                                    aria-hidden="true"
+                    <a
+                        href={`mailto:${email}`}
+                        className="group inline-flex flex-wrap items-baseline gap-x-5 gap-y-2 font-display text-[clamp(2rem,5.5vw,4.25rem)] leading-[1] font-semibold tracking-tight text-cream transition-colors duration-200 hover:text-accent focus-visible:rounded-sm focus-visible:text-accent focus-visible:outline-2 focus-visible:outline-offset-8 focus-visible:outline-accent"
+                    >
+                        <span className="break-all">{email}</span>
+                        <svg
+                            className="h-8 w-8 shrink-0 translate-x-0 text-accent/70 transition-all duration-200 group-hover:translate-x-2 group-hover:text-accent lg:h-10 lg:w-10"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="1.5"
+                            viewBox="0 0 24 24"
+                            aria-hidden="true"
+                        >
+                            <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                d="M17 8l4 4m0 0l-4 4m4-4H3"
+                            />
+                        </svg>
+                    </a>
+                    <p className="mt-6 max-w-md font-serif text-base text-muted italic">
+                        {t("contact.response_note")}
+                    </p>
+                </div>
+
+                {/* === Amber rule divider === */}
+                <div
+                    aria-hidden="true"
+                    className="mt-24 mb-16 h-px w-24 bg-accent/40 lg:mt-32 lg:mb-20"
+                />
+
+                {/* === Socials — numbered editorial list === */}
+                <div>
+                    <p className="mb-10 font-sans text-xs font-semibold tracking-[0.25em] text-muted uppercase">
+                        {t("contact.elsewhere_eyebrow")}
+                    </p>
+                    <ul className="border-t border-rim">
+                        {socials.map((s, idx) => (
+                            <li key={s.key} className="border-b border-rim">
+                                <a
+                                    href={s.href}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="group grid grid-cols-[auto_1fr_auto] items-center gap-4 py-5 transition-colors duration-200 sm:grid-cols-[3rem_10rem_1fr_auto] sm:gap-6 sm:py-6"
                                 >
-                                    <path
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        strokeWidth={2}
-                                        d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6m0 0v6m0-6L10 14"
-                                    />
-                                </svg>
-                            </a>
+                                    <span className="font-sans text-xs text-muted tabular-nums group-hover:text-accent">
+                                        {String(idx + 1).padStart(2, "0")}
+                                    </span>
+                                    <span className="flex items-center gap-4 font-serif text-xl text-cream transition-colors duration-200 group-hover:text-accent sm:text-2xl">
+                                        <span className="shrink-0 text-muted transition-colors duration-200 group-hover:text-accent">
+                                            {s.icon}
+                                        </span>
+                                        {s.label}
+                                    </span>
+                                    <span className="hidden font-sans text-sm text-muted transition-colors duration-200 group-hover:text-muted-readable sm:inline">
+                                        {s.handle}
+                                    </span>
+                                    <svg
+                                        className="h-4 w-4 shrink-0 text-muted/60 transition-all duration-200 group-hover:translate-x-1 group-hover:text-accent"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        strokeWidth="1.75"
+                                        viewBox="0 0 24 24"
+                                        aria-hidden="true"
+                                    >
+                                        <path
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6m0 0v6m0-6L10 14"
+                                        />
+                                    </svg>
+                                </a>
+                            </li>
                         ))}
-                    </div>
+                    </ul>
                 </div>
             </div>
-        </div>
+        </section>
     );
 }

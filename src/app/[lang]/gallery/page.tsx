@@ -90,7 +90,7 @@ export default function GalleryPage() {
                     <p className="mb-2 font-sans text-xs font-semibold tracking-widest text-accent uppercase">
                         {t("gallery.eyebrow")}
                     </p>
-                    <h1 className="text-text font-serif text-4xl font-semibold">
+                    <h1 className="font-serif text-4xl font-semibold text-text">
                         {t("gallery.title")}
                     </h1>
                     <p className="mt-3 text-muted">{t("gallery.subtitle")}</p>
@@ -104,8 +104,8 @@ export default function GalleryPage() {
                             onClick={() => setActive(key)}
                             className={`px-4 py-1.5 font-sans text-xs tracking-widest uppercase transition-colors duration-200 ${
                                 active === key
-                                    ? "text-canvas bg-accent"
-                                    : "border-rim hover:text-text border text-muted hover:border-accent/60"
+                                    ? "bg-accent text-canvas"
+                                    : "border border-rim text-muted hover:border-accent/60 hover:text-text"
                             }`}
                         >
                             {label}
@@ -146,8 +146,8 @@ export default function GalleryPage() {
                                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                                 />
                                 {/* Hover overlay */}
-                                <div className="from-canvas/80 absolute inset-0 flex flex-col justify-end bg-gradient-to-t via-canvas/40 to-transparent p-4 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                                    <p className="text-cream truncate font-sans text-sm font-medium">
+                                <div className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-canvas/80 via-canvas/40 to-transparent p-4 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                                    <p className="truncate font-sans text-sm font-medium text-cream">
                                         {item.title}
                                     </p>
                                     <p className="font-sans text-xs tracking-widest text-accent uppercase">
@@ -163,12 +163,12 @@ export default function GalleryPage() {
             {/* Lightbox */}
             {lightbox && (
                 <div
-                    className="bg-canvas/95 fixed inset-0 z-50 flex items-center justify-center backdrop-blur-sm"
+                    className="fixed inset-0 z-50 flex items-center justify-center bg-canvas/95 backdrop-blur-sm"
                     onClick={() => setLightbox(null)}
                 >
                     {/* Prev */}
                     <button
-                        className="hover:text-cream absolute top-1/2 left-4 -translate-y-1/2 p-3 text-muted transition-colors"
+                        className="absolute top-1/2 left-4 -translate-y-1/2 p-3 text-muted transition-colors hover:text-cream"
                         onClick={(e) => {
                             e.stopPropagation();
                             navigate(-1);
@@ -180,7 +180,7 @@ export default function GalleryPage() {
 
                     {/* Image */}
                     <div
-                        className="relative max-h-[85vh] max-w-5xl px-16"
+                        className="relative max-h-[85vh] max-w-5xl px-4 sm:px-8 md:px-16"
                         onClick={(e) => e.stopPropagation()}
                     >
                         <Image
@@ -197,7 +197,7 @@ export default function GalleryPage() {
                         />
                         <div className="mt-3 flex items-center justify-between">
                             <div>
-                                <p className="text-cream font-sans text-sm font-medium">
+                                <p className="font-sans text-sm font-medium text-cream">
                                     {lightbox.title}
                                 </p>
                                 <p className="font-sans text-xs tracking-widest text-accent uppercase">
@@ -215,7 +215,7 @@ export default function GalleryPage() {
 
                     {/* Next */}
                     <button
-                        className="hover:text-cream absolute top-1/2 right-4 -translate-y-1/2 p-3 text-muted transition-colors"
+                        className="absolute top-1/2 right-4 -translate-y-1/2 p-3 text-muted transition-colors hover:text-cream"
                         onClick={(e) => {
                             e.stopPropagation();
                             navigate(1);
@@ -227,7 +227,7 @@ export default function GalleryPage() {
 
                     {/* Close */}
                     <button
-                        className="hover:text-cream absolute top-4 right-4 p-2 text-muted transition-colors"
+                        className="absolute top-4 right-4 p-3 text-muted transition-colors hover:text-cream sm:p-2"
                         onClick={() => setLightbox(null)}
                         aria-label="Close"
                     >

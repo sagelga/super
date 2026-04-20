@@ -65,11 +65,9 @@ const Breadcrumb: React.FC = () => {
                             className="flex items-center gap-1"
                             aria-current={isLast ? "page" : undefined}
                         >
-                            <span className="text-muted/60">›</span>
+                            <span className="text-muted-readable">›</span>
                             {isLast ? (
-                                <span className="text-text">
-                                    {displayName}
-                                </span>
+                                <span className="text-text">{displayName}</span>
                             ) : (
                                 <Link
                                     href={href}

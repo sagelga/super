@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { Settings } from "lucide-react";
+import { Settings, X, ArrowUpRight, ChevronDown } from "lucide-react";
 import { useSettings } from "./settings/SettingsProvider";
 
 interface NavbarMobileMenuProps {
@@ -10,6 +10,58 @@ interface NavbarMobileMenuProps {
     onClose: () => void;
     p: (path: string) => string;
     t: (key: string) => string;
+    pathname: string;
+    lang: string;
+}
+
+interface MobileNavRowProps {
+    href: string;
+    label: string;
+    index: string;
+    active: boolean;
+    onClick: () => void;
+}
+
+function MobileNavRow({
+    href,
+    label,
+    index,
+    active,
+    onClick,
+}: MobileNavRowProps) {
+    return (
+        <Link
+            href={href}
+            className={`group flex items-baseline justify-between border-b border-rim/60 py-4 transition-colors duration-200 ${
+                active ? "text-cream" : "text-muted-readable hover:text-cream"
+            }`}
+            onClick={onClick}
+        >
+            <div className="flex items-baseline gap-4">
+                <span
+                    className={`font-mono text-[11px] tracking-[0.2em] tabular-nums ${
+                        active ? "text-accent" : "text-muted/70"
+                    }`}
+                    aria-hidden="true"
+                >
+                    {index}
+                </span>
+                <span className="font-display text-2xl font-semibold tracking-tight">
+                    {label}
+                </span>
+            </div>
+            <ArrowUpRight
+                width={16}
+                height={16}
+                aria-hidden="true"
+                className={`shrink-0 transition-all duration-200 ${
+                    active
+                        ? "text-accent"
+                        : "text-muted/50 group-hover:text-accent"
+                } group-hover:-translate-y-0.5 group-hover:translate-x-0.5`}
+            />
+        </Link>
+    );
 }
 
 export default function NavbarMobileMenu({
@@ -17,6 +69,8 @@ export default function NavbarMobileMenu({
     onClose,
     p,
     t,
+    pathname,
+    lang,
 }: NavbarMobileMenuProps) {
     const [isHomeMenuOpen, setIsHomeMenuOpen] = useState(false);
     const { openSettings } = useSettings();
@@ -28,143 +82,195 @@ export default function NavbarMobileMenu({
         };
     }, [isOpen]);
 
+    const isHomeActive = pathname === p("/") || pathname === `/${lang}`;
+    const isBlogActive = pathname.includes("/blog");
+    const isGalleryActive = pathname.includes("/gallery");
+    const isLearnActive = pathname.includes("/learn");
+    const isDocsActive = pathname.includes("/docs");
+
     return (
         <>
             {isOpen && (
                 <div
-                    className="fixed inset-0 z-40 bg-canvas/95 lg:hidden"
+                    className="fixed inset-0 z-40 bg-canvas/95 backdrop-blur-sm lg:hidden"
                     onClick={onClose}
                 />
             )}
 
             <div
-                className={`fixed top-0 right-0 bottom-0 z-50 flex w-72 flex-col border-l border-rim bg-canvas transition-transform duration-300 ease-in-out lg:hidden ${
+                className={`fixed top-0 right-0 bottom-0 z-50 flex w-[88%] max-w-sm flex-col border-l border-rim bg-canvas transition-transform duration-300 ease-out lg:hidden ${
                     isOpen ? "translate-x-0" : "translate-x-full"
                 }`}
             >
-                <div className="flex h-16 flex-shrink-0 items-center justify-between border-b border-rim px-8">
+                {/* Decorative amber dot-grid — top-right corner */}
+                <div
+                    className="pointer-events-none absolute top-0 right-0 h-48 w-48 opacity-40"
+                    style={{
+                        backgroundImage:
+                            "radial-gradient(circle, rgba(201,148,58,0.18) 1px, transparent 1px)",
+                        backgroundSize: "20px 20px",
+                        maskImage:
+                            "radial-gradient(circle at top right, black, transparent 70%)",
+                        WebkitMaskImage:
+                            "radial-gradient(circle at top right, black, transparent 70%)",
+                    }}
+                    aria-hidden="true"
+                />
+
+                {/* Header */}
+                <div className="relative flex h-16 flex-shrink-0 items-center justify-between border-b border-rim px-7">
                     <Link
                         href={p("/")}
-                        className="font-sans text-sm tracking-[0.15em] text-cream uppercase"
+                        className="flex items-baseline"
                         onClick={onClose}
                     >
-                        {t("navbar.name")}
+                        <span className="font-display text-base font-semibold tracking-tight text-cream">
+                            {t("navbar.name")}
+                        </span>
+                        <span className="font-display text-base font-semibold text-accent">
+                            .
+                        </span>
                     </Link>
                     <button
                         onClick={onClose}
-                        className="text-muted transition-colors duration-200 hover:text-cream"
+                        className="flex h-9 w-9 items-center justify-center border border-rim text-muted transition-colors duration-200 hover:border-accent/50 hover:text-accent"
                         aria-label="Close menu"
                     >
-                        <svg
-                            width="18"
-                            height="18"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                        >
-                            <line x1="18" y1="6" x2="6" y2="18" />
-                            <line x1="6" y1="6" x2="18" y2="18" />
-                        </svg>
+                        <X width={16} height={16} aria-hidden="true" />
                     </button>
                 </div>
 
+                {/* Eyebrow label */}
+                <div className="relative flex items-center gap-3 px-7 pt-7 pb-3">
+                    <span className="eyebrow">Navigate</span>
+                    <span className="h-px flex-1 bg-rim" aria-hidden="true" />
+                </div>
+
                 {/* Nav links */}
-                <nav className="flex flex-1 flex-col gap-1 overflow-y-auto px-8 py-6">
+                <nav className="relative flex flex-1 flex-col overflow-y-auto px-7">
                     {/* Home — expandable */}
-                    <div>
+                    <div className="border-b border-rim/60">
                         <button
-                            className="flex w-full items-center justify-between py-3 text-sm tracking-wide text-muted transition-colors duration-200 hover:text-cream"
-                            onClick={() => setIsHomeMenuOpen((prev) => !prev)}
+                            className={`group flex w-full items-baseline justify-between py-4 transition-colors duration-200 ${
+                                isHomeActive
+                                    ? "text-cream"
+                                    : "text-muted-readable hover:text-cream"
+                            }`}
+                            onClick={() =>
+                                setIsHomeMenuOpen((prev) => !prev)
+                            }
+                            aria-expanded={isHomeMenuOpen}
                         >
-                            {t("nav.home")}
-                            <svg
-                                className={`h-3.5 w-3.5 transition-transform duration-200 ${isHomeMenuOpen ? "rotate-180" : ""}`}
-                                fill="none"
-                                stroke="currentColor"
-                                viewBox="0 0 24 24"
-                            >
-                                <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth={2}
-                                    d="M19 9l-7 7-7-7"
-                                />
-                            </svg>
+                            <div className="flex items-baseline gap-4">
+                                <span
+                                    className={`font-mono text-[11px] tracking-[0.2em] tabular-nums ${
+                                        isHomeActive
+                                            ? "text-accent"
+                                            : "text-muted/70"
+                                    }`}
+                                    aria-hidden="true"
+                                >
+                                    01
+                                </span>
+                                <span className="font-display text-2xl font-semibold tracking-tight">
+                                    {t("nav.home")}
+                                </span>
+                            </div>
+                            <ChevronDown
+                                width={16}
+                                height={16}
+                                aria-hidden="true"
+                                className={`shrink-0 text-muted/60 transition-transform duration-200 ${
+                                    isHomeMenuOpen ? "rotate-180" : ""
+                                }`}
+                            />
                         </button>
                         {isHomeMenuOpen && (
-                            <div className="flex flex-col gap-1 pb-2 pl-4">
-                                <Link
-                                    href={p("/#experience")}
-                                    className="block py-2 text-sm tracking-wide text-muted transition-colors duration-150 hover:text-accent"
-                                    onClick={onClose}
-                                >
-                                    {t("nav.experience")}
-                                </Link>
-                                <Link
-                                    href={p("/#certifications")}
-                                    className="block py-2 text-sm tracking-wide text-muted transition-colors duration-150 hover:text-accent"
-                                    onClick={onClose}
-                                >
-                                    {t("nav.certifications")}
-                                </Link>
-                                <Link
-                                    href={p("/#projects")}
-                                    className="block py-2 text-sm tracking-wide text-muted transition-colors duration-150 hover:text-accent"
-                                    onClick={onClose}
-                                >
-                                    {t("nav.projects")}
-                                </Link>
-                                <Link
-                                    href={p("/#volunteering")}
-                                    className="block py-2 text-sm tracking-wide text-muted transition-colors duration-150 hover:text-accent"
-                                    onClick={onClose}
-                                >
-                                    {t("nav.volunteering")}
-                                </Link>
+                            <div className="flex flex-col pb-3 pl-10">
+                                {[
+                                    {
+                                        href: p("/#experience"),
+                                        label: t("nav.experience"),
+                                        idx: "i",
+                                    },
+                                    {
+                                        href: p("/#certifications"),
+                                        label: t("nav.certifications"),
+                                        idx: "ii",
+                                    },
+                                    {
+                                        href: p("/#projects"),
+                                        label: t("nav.projects"),
+                                        idx: "iii",
+                                    },
+                                    {
+                                        href: p("/#volunteering"),
+                                        label: t("nav.volunteering"),
+                                        idx: "iv",
+                                    },
+                                ].map((item) => (
+                                    <Link
+                                        key={item.href}
+                                        href={item.href}
+                                        className="flex items-baseline gap-3 py-2 text-sm tracking-wide text-muted transition-colors duration-150 hover:text-accent"
+                                        onClick={onClose}
+                                    >
+                                        <span
+                                            className="font-mono text-[10px] tracking-[0.2em] text-muted/60"
+                                            aria-hidden="true"
+                                        >
+                                            {item.idx}
+                                        </span>
+                                        <span>{item.label}</span>
+                                    </Link>
+                                ))}
                             </div>
                         )}
                     </div>
-                    <Link
+                    <MobileNavRow
                         href={p("/blog")}
-                        className="block py-3 text-sm tracking-wide text-muted transition-colors duration-200 hover:text-cream"
+                        label={t("nav.blog")}
+                        index="02"
+                        active={isBlogActive}
                         onClick={onClose}
-                    >
-                        {t("nav.blog")}
-                    </Link>
-                    <Link
+                    />
+                    <MobileNavRow
                         href={p("/gallery")}
-                        className="block py-3 text-sm tracking-wide text-muted transition-colors duration-200 hover:text-cream"
+                        label={t("nav.gallery")}
+                        index="03"
+                        active={isGalleryActive}
                         onClick={onClose}
-                    >
-                        {t("nav.gallery")}
-                    </Link>
-                    <Link
+                    />
+                    <MobileNavRow
                         href={p("/learn")}
-                        className="block py-3 text-sm tracking-wide text-muted transition-colors duration-200 hover:text-cream"
+                        label={t("nav.learn")}
+                        index="04"
+                        active={isLearnActive}
                         onClick={onClose}
-                    >
-                        {t("nav.learn")}
-                    </Link>
-                    <Link
+                    />
+                    <MobileNavRow
                         href={p("/docs")}
-                        className="block py-3 text-sm tracking-wide text-muted transition-colors duration-200 hover:text-cream"
+                        label={t("nav.docs")}
+                        index="05"
+                        active={isDocsActive}
                         onClick={onClose}
-                    >
-                        {t("nav.docs")}
-                    </Link>
+                    />
                 </nav>
 
                 {/* Bottom actions */}
-                <div className="flex flex-shrink-0 items-stretch gap-2 border-t border-rim px-8 py-6">
+                <div className="relative flex flex-shrink-0 items-stretch gap-2 border-t border-rim px-7 py-5">
                     <Link
                         href={p("/contact")}
-                        className="flex-1 border border-accent/60 px-4 py-2.5 text-center font-sans text-sm tracking-wide text-accent transition-colors duration-200 hover:border-accent hover:bg-accent hover:text-canvas"
+                        className="group flex flex-1 items-center justify-center gap-2 border border-accent/60 px-4 py-3 font-sans text-sm tracking-wide text-accent transition-all duration-200 hover:border-accent hover:bg-accent hover:text-canvas"
                         onClick={onClose}
                     >
-                        {t("nav.contact")}
+                        <span>{t("nav.contact")}</span>
+                        <ArrowUpRight
+                            width={14}
+                            height={14}
+                            aria-hidden="true"
+                            className="transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                        />
                     </Link>
                     <button
                         type="button"

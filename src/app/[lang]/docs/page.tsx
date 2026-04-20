@@ -67,7 +67,7 @@ export default async function DocsPage() {
                     <p className="mb-2 font-sans text-xs font-semibold tracking-widest text-accent uppercase">
                         {t("nav.docs")}
                     </p>
-                    <h1 className="text-text font-serif text-4xl font-semibold">
+                    <h1 className="font-serif text-4xl font-semibold text-text">
                         {t("docs.all_projects_title")}
                     </h1>
                     <p className="mt-3 max-w-lg text-muted">
@@ -95,7 +95,7 @@ export default async function DocsPage() {
                                 {/* Decorative large ordinal */}
                                 <span
                                     className={[
-                                        "text-cream/[0.03] pointer-events-none absolute font-serif leading-none select-none",
+                                        "pointer-events-none absolute font-serif leading-none text-cream/[0.03] select-none",
                                         isHero
                                             ? "-right-4 -bottom-6 text-[140px]"
                                             : "-right-3 -bottom-4 text-[90px]",
@@ -122,7 +122,7 @@ export default async function DocsPage() {
                                 </p>
                                 <h2
                                     className={[
-                                        "text-text font-serif font-semibold transition-colors duration-200 group-hover:text-accent",
+                                        "font-serif font-semibold text-text transition-colors duration-200 group-hover:text-accent",
                                         isHero
                                             ? "mb-3 text-2xl md:text-3xl"
                                             : "mb-2 text-lg",
@@ -169,10 +169,10 @@ export default async function DocsPage() {
                                     {pad(featured.length + i + 1)}
                                 </span>
                                 <div className="min-w-0 flex-1">
-                                    <p className="text-text truncate font-serif text-sm font-semibold transition-colors duration-200 group-hover:text-accent">
+                                    <p className="truncate font-serif text-sm font-semibold text-text transition-colors duration-200 group-hover:text-accent">
                                         {project.title}
                                     </p>
-                                    <p className="font-sans text-xs text-muted/70">
+                                    <p className="font-sans text-xs text-muted">
                                         {t("docs.pages_count", {
                                             count: project.pageCount,
                                         })}

@@ -148,7 +148,7 @@ const CertificationCard: React.FC<{
                     <p className="mt-1.5 font-sans text-[10px] font-semibold tracking-[0.18em] text-accent/70 uppercase">
                         {issuer.name}
                         {cert.date && (
-                            <span className="ml-2 font-normal tracking-normal text-muted/60 normal-case">
+                            <span className="ml-2 font-normal tracking-normal text-muted-readable normal-case">
                                 · {issuedLabel} {cert.date}
                             </span>
                         )}
@@ -160,7 +160,7 @@ const CertificationCard: React.FC<{
                 {cert.skills.map((skill, i) => (
                     <span
                         key={i}
-                        className="border border-rim px-2 py-0.5 font-sans text-xs text-muted/70 transition-colors duration-200 group-hover:border-accent/30"
+                        className="border border-rim px-2 py-0.5 font-sans text-xs text-muted transition-colors duration-200 group-hover:border-accent/30"
                     >
                         {skill}
                     </span>

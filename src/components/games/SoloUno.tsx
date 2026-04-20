@@ -88,7 +88,7 @@ function applyPlay(
     card: UnoCard,
     hand: UnoCard[],
     deck: UnoCard[],
-    discard: UnoCard[]
+    discard: UnoCard[],
 ): GameState {
     const newDiscard = [...discard, card];
     let d = deck;
@@ -115,28 +115,18 @@ function applyPlay(
 
 // ── Card component ──────────────────────────────────────────────────────────
 
-function CardFace({
-    card,
-    large = false,
-}: {
-    card: UnoCard;
-    large?: boolean;
-}) {
+function CardFace({ card, large = false }: { card: UnoCard; large?: boolean }) {
     const bg = CARD_BG[card.color];
     const text = CARD_TEXT[card.color];
     const oval = CARD_OVAL[card.color];
 
     return (
         <div
-            className={`
-                relative overflow-hidden rounded-xl border border-white/25
-                ${bg} ${text} select-none
-                ${large ? "h-[8.5rem] w-[6rem]" : "h-[6rem] w-[4.25rem]"}
-            `}
+            className={`relative overflow-hidden rounded-xl border border-white/25 ${bg} ${text} select-none ${large ? "h-[8.5rem] w-[6rem]" : "h-[6rem] w-[4.25rem]"} `}
         >
             {/* Top-left corner value */}
             <span
-                className={`absolute top-2 left-2 font-bold leading-none ${large ? "text-sm" : "text-[10px]"}`}
+                className={`absolute top-2 left-2 leading-none font-bold ${large ? "text-sm" : "text-[10px]"}`}
             >
                 {card.value}
             </span>
@@ -148,7 +138,7 @@ function CardFace({
                     style={{ transform: "rotate(-25deg)" }}
                 >
                     <span
-                        className={`font-bold leading-none ${large ? "text-3xl" : "text-xl"}`}
+                        className={`leading-none font-bold ${large ? "text-3xl" : "text-xl"}`}
                         style={{ transform: "rotate(25deg)" }}
                     >
                         {card.value}
@@ -158,7 +148,7 @@ function CardFace({
 
             {/* Bottom-right corner value (180°) */}
             <span
-                className={`absolute right-2 bottom-2 font-bold leading-none ${large ? "text-sm" : "text-[10px]"}`}
+                className={`absolute right-2 bottom-2 leading-none font-bold ${large ? "text-sm" : "text-[10px]"}`}
                 style={{ transform: "rotate(180deg)" }}
             >
                 {card.value}
@@ -178,11 +168,9 @@ export default function SoloUno() {
     const playableIds = useMemo(
         () =>
             new Set(
-                game.hand
-                    .filter((c) => canPlay(c, topCard))
-                    .map((c) => c.id)
+                game.hand.filter((c) => canPlay(c, topCard)).map((c) => c.id),
             ),
-        [game.hand, topCard]
+        [game.hand, topCard],
     );
 
     const playCard = useCallback(
@@ -191,7 +179,7 @@ export default function SoloUno() {
             const hand = game.hand.filter((c) => c.id !== card.id);
             setGame(applyPlay(card, hand, game.deck, game.discard));
         },
-        [game, playableIds]
+        [game, playableIds],
     );
 
     const draw = useCallback(() => {
@@ -222,8 +210,7 @@ export default function SoloUno() {
 
     const reset = useCallback(() => setGame(initGame()), []);
 
-    const isUno =
-        game.hand.length === 1 && game.status === "playing";
+    const isUno = game.hand.length === 1 && game.status === "playing";
 
     return (
         <div className="max-w-lg">
@@ -231,7 +218,7 @@ export default function SoloUno() {
             <div className="mb-6 flex items-end gap-5">
                 {/* Discard pile */}
                 <div className="flex flex-col items-center gap-1.5">
-                    <span className="font-sans text-[10px] uppercase tracking-widest text-muted/50">
+                    <span className="font-sans text-[10px] tracking-widest text-muted-readable uppercase">
                         Discard
                     </span>
                     <CardFace card={topCard} large />
@@ -239,13 +226,13 @@ export default function SoloUno() {
 
                 {/* Draw pile */}
                 <div className="flex flex-col items-center gap-1.5">
-                    <span className="font-sans text-[10px] uppercase tracking-widest text-muted/50">
+                    <span className="font-sans text-[10px] tracking-widest text-muted-readable uppercase">
                         Deck ({game.deck.length})
                     </span>
                     <button
                         onClick={draw}
                         disabled={game.status !== "playing"}
-                        className="flex h-[8.5rem] w-[6rem] items-center justify-center rounded-xl border border-dashed border-rim bg-surface font-sans text-xs font-semibold uppercase tracking-widest text-muted/50 transition-colors hover:border-accent/50 hover:text-accent disabled:cursor-not-allowed disabled:opacity-40"
+                        className="flex h-[8.5rem] w-[6rem] items-center justify-center rounded-xl border border-dashed border-rim bg-surface font-sans text-xs font-semibold tracking-widest text-muted-readable uppercase transition-colors hover:border-accent/50 hover:text-accent disabled:cursor-not-allowed disabled:opacity-40"
                     >
                         {t("draw")}
                     </button>
@@ -268,12 +255,12 @@ export default function SoloUno() {
             </div>
 
             {/* Hand label */}
-            <p className="mb-3 font-sans text-[10px] uppercase tracking-widest text-muted/50">
+            <p className="mb-3 font-sans text-[10px] tracking-widest text-muted-readable uppercase">
                 Your hand ({game.hand.length})
             </p>
 
             {/* Hand — overlapping fan */}
-            <div className="flex overflow-x-auto pb-3 -space-x-3">
+            <div className="flex -space-x-3 overflow-x-auto pb-3">
                 {game.hand.map((card, idx) => {
                     const playable =
                         playableIds.has(card.id) && game.status === "playing";
@@ -283,14 +270,11 @@ export default function SoloUno() {
                             onClick={() => playCard(card)}
                             disabled={!playable}
                             style={{ zIndex: idx }}
-                            className={`
-                                shrink-0 transition-all duration-200
-                                ${
-                                    playable
-                                        ? "cursor-pointer hover:z-50 hover:-translate-y-3 ring-2 ring-accent ring-offset-2 ring-offset-[#1A1814] rounded-xl"
-                                        : "cursor-default opacity-55"
-                                }
-                            `}
+                            className={`shrink-0 transition-all duration-200 ${
+                                playable
+                                    ? "cursor-pointer rounded-xl ring-2 ring-accent ring-offset-2 ring-offset-[#1A1814] hover:z-50 hover:-translate-y-3"
+                                    : "cursor-default opacity-55"
+                            } `}
                         >
                             <CardFace card={card} />
                         </button>
@@ -298,7 +282,7 @@ export default function SoloUno() {
                 })}
 
                 {game.hand.length === 0 && game.status === "playing" && (
-                    <span className="font-sans text-sm italic text-muted/50">
+                    <span className="font-sans text-sm text-muted-readable italic">
                         Empty
                     </span>
                 )}

@@ -81,7 +81,10 @@
         "email_label": "发送邮件",
         "email_cta": "hello@sagelga.com",
         "socials_heading": "其他平台",
-        "response_note": "我通常在工作日 48 小时内回复。"
+        "response_note": "我通常在工作日 48 小时内回复。",
+        "location": "泰国曼谷",
+        "timezone": "GMT+7",
+        "elsewhere_eyebrow": "其他"
     },
     "nav": {
         "home": "主页",

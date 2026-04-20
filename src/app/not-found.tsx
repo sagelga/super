@@ -10,7 +10,7 @@ export default async function NotFound() {
     return (
         <div className="container mx-auto px-8 py-20 lg:px-16">
             {/* Section marker */}
-            <p className="enter enter-fade mb-8 select-none font-serif text-[11px] uppercase tracking-[0.28em] text-muted/50">
+            <p className="enter enter-fade mb-8 font-serif text-[11px] tracking-[0.28em] text-muted-readable uppercase select-none">
                 § Error
             </p>
 
@@ -18,7 +18,7 @@ export default async function NotFound() {
             <div className="enter enter-d1 overflow-hidden">
                 <p
                     aria-hidden="true"
-                    className="select-none font-serif leading-[0.88] tracking-[-0.02em] text-accent"
+                    className="font-serif leading-[0.88] tracking-[-0.02em] text-accent select-none"
                     style={{ fontSize: "clamp(6rem, 20vw, 11rem)" }}
                 >
                     404
@@ -28,7 +28,7 @@ export default async function NotFound() {
             {/* Animated rule with title embedded */}
             <div className="mt-4 mb-10 flex items-center gap-4">
                 <div className="grow-rule h-px flex-1 bg-rim" />
-                <span className="enter enter-d2 shrink-0 font-sans text-[10px] uppercase tracking-[0.32em] text-muted/45">
+                <span className="enter enter-d2 shrink-0 font-sans text-[10px] tracking-[0.32em] text-muted-readable uppercase">
                     {t("not_found.title")}
                 </span>
                 <div className="h-px w-10 bg-accent/20" />
@@ -55,7 +55,7 @@ export default async function NotFound() {
             <div className="enter enter-d5 mt-20">
                 <div className="mb-8 flex items-center gap-3">
                     <div className="h-px w-5 bg-accent/30" />
-                    <p className="font-sans text-[10px] font-semibold uppercase tracking-[0.28em] text-muted/50">
+                    <p className="font-sans text-[10px] font-semibold tracking-[0.28em] text-muted-readable uppercase">
                         {t("games.eyebrow")}
                     </p>
                     <div className="h-px flex-1 bg-rim" />

@@ -50,7 +50,7 @@
 .cookie-category-description {
   margin: 0;
   font-size: 0.875rem;
-  color: var(--color-muted, #9A9485);
+  color: var(--color-muted-readable, #BDB5A6);
   line-height: 1.5;
 }
 
@@ -105,7 +105,7 @@
 .cookie-learn-more {
   margin: 0;
   font-size: 0.875rem;
-  color: var(--color-muted, #9A9485);
+  color: var(--color-muted-readable, #BDB5A6);
 }
 
 .cookie-learn-more-link {

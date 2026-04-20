@@ -8,13 +8,44 @@ import "./LanguageSection.style.css";
 interface LanguageOption {
     code: string;
     label: string;
-    flag: string;
+    icon: React.ReactNode;
 }
 
+const FlagEN = () => (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 40" width="28" height="20">
+        <rect fill="#012169" width="60" height="40" />
+        <path stroke="#fff" strokeWidth="8" d="M0,0 L60,40 M60,0 L0,40" />
+        <path stroke="#C8102E" strokeWidth="5" d="M0,0 L60,40 M60,0 L0,40" />
+        <rect fill="#fff" x="24" width="12" height="40" />
+        <rect fill="#fff" y="14" width="60" height="12" />
+        <rect fill="#C8102E" x="26" width="8" height="40" />
+        <rect fill="#C8102E" y="16" width="60" height="8" />
+    </svg>
+);
+
+const FlagTH = () => (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600" width="28" height="20">
+        <rect fill="#A51931" width="900" height="600" />
+        <rect fill="#F4F5F8" y="100" width="900" height="400" />
+        <rect fill="#2D2A4A" y="200" width="900" height="200" />
+    </svg>
+);
+
+const FlagZH = () => (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600" width="28" height="20">
+        <rect fill="#DE2910" width="900" height="600" />
+        <polygon fill="#FFDE00" points="150,75 180,165 270,165 200,215 225,305 150,255 75,305 100,215 30,165 120,165" />
+        <polygon fill="#FFDE00" points="300,30 315,75 360,60 330,95 365,120 318,115 315,162 290,122 245,130 272,95 250,60 290,78" transform="rotate(25, 315, 90)" />
+        <polygon fill="#FFDE00" points="360,120 375,165 420,150 390,185 425,210 378,205 375,252 350,212 305,220 332,185 310,150 350,168" transform="rotate(5, 375, 165)" />
+        <polygon fill="#FFDE00" points="360,210 375,255 420,240 390,275 425,300 378,295 375,342 350,302 305,310 332,275 310,240 350,258" transform="rotate(-5, 375, 255)" />
+        <polygon fill="#FFDE00" points="300,285 315,330 360,315 330,350 365,375 318,370 315,417 290,377 245,385 272,350 250,315 290,333" transform="rotate(-25, 315, 330)" />
+    </svg>
+);
+
 const languageOptions: LanguageOption[] = [
-    { code: "en", label: "English", flag: "\uD83C\uDDEC\uD83C\uDDE7" },
-    { code: "th", label: "ไทย", flag: "\uD83C\uDDF9\uD83C\uDDED" },
-    { code: "zh", label: "中文", flag: "\uD83C\uDDE8\uD83C\uDDF3" },
+    { code: "en", label: "English", icon: <FlagEN /> },
+    { code: "th", label: "ไทย", icon: <FlagTH /> },
+    { code: "zh", label: "中文", icon: <FlagZH /> },
 ];
 
 const LanguageSection: React.FC = () => {
@@ -37,7 +68,7 @@ const LanguageSection: React.FC = () => {
                     className={`language-option ${currentLang === option.code ? "active" : ""}`}
                     onClick={() => handleSelect(option.code)}
                 >
-                    <span className="language-flag">{option.flag}</span>
+                    <span className="language-option-icon">{option.icon}</span>
                     <span className="language-label">{option.label}</span>
                     {currentLang === option.code && (
                         <svg

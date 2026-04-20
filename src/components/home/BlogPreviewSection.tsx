@@ -81,7 +81,7 @@ const BlogPreviewSection: React.FC<BlogPreviewSectionProps> = ({ posts }) => {
                                     {featured.tags.map((tag) => (
                                         <span
                                             key={tag}
-                                            className="border border-rim px-2 py-0.5 font-sans text-xs text-muted/60"
+                                            className="border border-rim px-2 py-0.5 font-sans text-xs text-muted-readable"
                                         >
                                             {tag}
                                         </span>
@@ -131,7 +131,7 @@ const BlogPreviewSection: React.FC<BlogPreviewSectionProps> = ({ posts }) => {
                                 </h3>
                             </div>
                             {post.tags && post.tags.length > 0 && (
-                                <p className="mt-3 font-sans text-xs text-muted/50">
+                                <p className="mt-3 font-sans text-xs text-muted-readable">
                                     {post.tags.slice(0, 2).join(" · ")}
                                 </p>
                             )}

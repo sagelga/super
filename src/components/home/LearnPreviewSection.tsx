@@ -51,14 +51,14 @@ const LearnPreviewSection: React.FC<LearnPreviewSectionProps> = ({
                     <div className="flex items-start gap-6">
                         {TOPIC_ICONS[featured.slug] && (
                             <i
-                                className={`${TOPIC_ICONS[featured.slug]} mt-1 text-5xl text-muted/60 transition-colors duration-200 group-hover:text-accent`}
+                                className={`${TOPIC_ICONS[featured.slug]} mt-1 text-5xl text-muted-readable transition-colors duration-200 group-hover:text-accent`}
                             />
                         )}
                         <div>
                             <h3 className="font-serif text-3xl text-cream transition-colors duration-200 group-hover:text-accent">
                                 {featured.title}
                             </h3>
-                            <p className="mt-2 font-sans text-sm text-muted/60">
+                            <p className="mt-2 font-sans text-sm text-muted-readable">
                                 {t("learn.pages_count", {
                                     count: featured.pageCount,
                                 })}
@@ -92,7 +92,7 @@ const LearnPreviewSection: React.FC<LearnPreviewSectionProps> = ({
                                 {topic.title}
                             </h3>
                         </div>
-                        <p className="mt-4 font-sans text-xs text-muted/50">
+                        <p className="mt-4 font-sans text-xs text-muted-readable">
                             {t("learn.pages_count", { count: topic.pageCount })}
                         </p>
                     </Link>

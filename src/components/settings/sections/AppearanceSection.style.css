@@ -71,7 +71,7 @@
 
 .theme-option-description {
   font-size: 0.875rem;
-  color: var(--color-muted, #9A9485);
+  color: var(--color-muted-readable, #BDB5A6);
 }
 
 .theme-option-check {

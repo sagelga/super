@@ -28,7 +28,7 @@ function createDeck(): Card[] {
             symbol,
             flipped: false,
             matched: false,
-        }))
+        })),
     );
 }
 
@@ -54,7 +54,7 @@ export default function MemoryMatch() {
             if (locked || card.flipped || card.matched) return;
 
             const withFlipped = cards.map((c) =>
-                c.id === card.id ? { ...c, flipped: true } : c
+                c.id === card.id ? { ...c, flipped: true } : c,
             );
 
             if (selected.length === 0) {
@@ -71,8 +71,8 @@ export default function MemoryMatch() {
                         withFlipped.map((c) =>
                             c.id === firstId || c.id === card.id
                                 ? { ...c, matched: true }
-                                : c
-                        )
+                                : c,
+                        ),
                     );
                 } else {
                     setCards(withFlipped);
@@ -82,15 +82,15 @@ export default function MemoryMatch() {
                             prev.map((c) =>
                                 c.id === firstId || c.id === card.id
                                     ? { ...c, flipped: false }
-                                    : c
-                            )
+                                    : c,
+                            ),
                         );
                         setLocked(false);
                     }, 850);
                 }
             }
         },
-        [cards, selected, locked]
+        [cards, selected, locked],
     );
 
     return (
@@ -102,7 +102,7 @@ export default function MemoryMatch() {
                 </span>
                 <button
                     onClick={reset}
-                    className="font-sans text-xs tracking-wide text-muted/60 transition-colors hover:text-accent"
+                    className="font-sans text-xs tracking-wide text-muted-readable transition-colors hover:text-accent"
                 >
                     {t("play_again")}
                 </button>
@@ -117,13 +117,7 @@ export default function MemoryMatch() {
                     >
                         <button
                             onClick={() => handleClick(card)}
-                            className={`
-                                relative h-full w-full
-                                [transform-style:preserve-3d]
-                                transition-[transform] duration-[420ms]
-                                [transition-timing-function:cubic-bezier(0.25,1,0.5,1)]
-                                ${card.flipped || card.matched ? "[transform:rotateY(180deg)]" : ""}
-                            `}
+                            className={`relative h-full w-full transition-[transform] duration-[420ms] [transition-timing-function:cubic-bezier(0.25,1,0.5,1)] [transform-style:preserve-3d] ${card.flipped || card.matched ? "[transform:rotateY(180deg)]" : ""} `}
                             aria-label={
                                 card.flipped || card.matched
                                     ? card.symbol
@@ -131,22 +125,18 @@ export default function MemoryMatch() {
                             }
                         >
                             {/* Back face */}
-                            <div className="absolute inset-0 [backface-visibility:hidden] flex items-center justify-center rounded-sm border border-rim bg-surface">
-                                <span className="select-none font-serif text-base text-rim">
+                            <div className="absolute inset-0 flex items-center justify-center rounded-sm border border-rim bg-surface [backface-visibility:hidden]">
+                                <span className="font-serif text-base text-rim select-none">
                                     ◦
                                 </span>
                             </div>
 
                             {/* Front face */}
                             <div
-                                className={`
-                                    absolute inset-0 [backface-visibility:hidden] [transform:rotateY(180deg)]
-                                    flex items-center justify-center rounded-sm border
-                                    ${card.matched ? "border-accent bg-accent/10" : "border-cream/15 bg-surface"}
-                                `}
+                                className={`absolute inset-0 flex [transform:rotateY(180deg)] items-center justify-center rounded-sm border [backface-visibility:hidden] ${card.matched ? "border-accent bg-accent/10" : "border-cream/15 bg-surface"} `}
                             >
                                 <span
-                                    className={`select-none font-serif text-2xl ${card.matched ? "text-accent" : "text-cream"}`}
+                                    className={`font-serif text-2xl select-none ${card.matched ? "text-accent" : "text-cream"}`}
                                 >
                                     {card.symbol}
                                 </span>
