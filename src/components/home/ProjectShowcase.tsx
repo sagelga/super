@@ -30,7 +30,7 @@ interface ProjectShowcaseProps {
     docProjects?: DocProject[];
 }
 
-// Positions for scattered decorative icons in the card background
+// Scattered decorative devicons inside each compact card background
 const ICON_POSITIONS = [
     "absolute right-[-12px] top-[-12px] text-[140px] opacity-[0.06]",
     "absolute left-4 bottom-[140px] text-[48px] opacity-[0.12]",
@@ -39,8 +39,20 @@ const ICON_POSITIONS = [
     "absolute right-4 top-[80px] text-[28px] opacity-[0.09]",
 ];
 
+// Larger mural positions for the hero card (extends further to the left)
+const HERO_ICON_POSITIONS = [
+    "absolute left-[-24px] top-[-24px] text-[220px] opacity-[0.08]",
+    "absolute left-[140px] top-[40px] text-[96px] opacity-[0.12]",
+    "absolute left-[40px] bottom-[20px] text-[72px] opacity-[0.10]",
+    "absolute left-[260px] bottom-[60px] text-[60px] opacity-[0.09]",
+    "absolute left-[200px] top-[160px] text-[48px] opacity-[0.10]",
+];
+
 const CARD_CLASSES =
-    "group flex-none w-[240px] h-[380px] relative overflow-hidden bg-canvas border border-rim transition-all duration-300 hover:border-accent/60 hover:shadow-[0_4px_32px_-8px_rgba(201,148,58,0.12)] cursor-pointer text-left";
+    "group relative flex flex-col overflow-hidden bg-canvas border border-rim min-h-[240px] transition-all duration-300 hover:border-accent/60 hover:shadow-[0_4px_32px_-8px_rgba(201,148,58,0.12)] hover:-translate-y-0.5 cursor-pointer text-left";
+
+const HERO_CLASSES =
+    "group relative flex flex-col lg:flex-row overflow-hidden bg-canvas border border-rim min-h-[320px] transition-all duration-300 hover:border-accent/60 hover:shadow-[0_8px_40px_-8px_rgba(201,148,58,0.18)] cursor-pointer text-left";
 
 const SCROLL_AMOUNT = 600;
 
@@ -49,16 +61,122 @@ const SCROLL_BTN =
 
 // ── Sub-components ────────────────────────────────────────────────────────────
 
-interface ProjectCardProps {
+interface ProjectHeroCardProps {
     project: Project;
     onSelect: (project: Project) => void;
-    statusLabel: string;
+    visitLabel: string;
+    detailsLabel: string;
 }
 
-function ProjectCard({ project, onSelect, statusLabel }: ProjectCardProps) {
+function ProjectHeroCard({
+    project,
+    onSelect,
+    visitLabel,
+    detailsLabel,
+}: ProjectHeroCardProps) {
     const icons = (project.stack ?? [])
         .map(getIconClass)
         .filter(Boolean) as string[];
+    const stopCard = (e: React.MouseEvent) => e.stopPropagation();
+
+    return (
+        <div
+            role="button"
+            tabIndex={0}
+            onClick={() => onSelect(project)}
+            onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    onSelect(project);
+                }
+            }}
+            className={HERO_CLASSES}
+            aria-label={`${project.title} — ${detailsLabel}`}
+        >
+            {/* Mural — fills the left pane on desktop, sits behind content on mobile */}
+            <div className="pointer-events-none absolute inset-0 lg:relative lg:h-auto lg:w-[42%] lg:flex-none lg:border-r lg:border-rim/60">
+                {icons.slice(0, HERO_ICON_POSITIONS.length).map((ic, i) => (
+                    <i
+                        key={i}
+                        className={`${ic} ${HERO_ICON_POSITIONS[i]} colored select-none`}
+                    />
+                ))}
+                <div className="absolute inset-0 bg-gradient-to-t from-canvas via-canvas/70 via-60% to-transparent lg:bg-gradient-to-r lg:via-40%" />
+            </div>
+
+            {/* Content */}
+            <div className="relative flex flex-1 flex-col justify-between gap-6 p-8 lg:p-10">
+                <div className="flex justify-end">
+                    <span className="font-sans text-[10px] tracking-[0.2em] text-muted/60 uppercase">
+                        Featured
+                    </span>
+                </div>
+
+                <div>
+                    <h3 className="mb-4 font-serif text-3xl leading-tight text-cream transition-colors duration-200 group-hover:text-accent lg:text-4xl">
+                        {project.title}
+                    </h3>
+                    <p className="max-w-xl font-sans text-sm leading-relaxed text-muted lg:text-base">
+                        {project.description}
+                    </p>
+                </div>
+
+                {project.stack && project.stack.length > 0 && (
+                    <div className="flex flex-wrap gap-1.5">
+                        {project.stack.slice(0, 6).map((tech) => (
+                            <span
+                                key={tech}
+                                className="border border-rim px-2 py-1 font-sans text-[11px] leading-none text-muted/80"
+                            >
+                                {tech}
+                            </span>
+                        ))}
+                    </div>
+                )}
+
+                <div className="flex flex-wrap items-center gap-3 pt-1">
+                    {project.demoLink && (
+                        <a
+                            href={project.demoLink}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            onClick={stopCard}
+                            className="group/cta inline-flex items-center gap-2 bg-accent px-5 py-2.5 font-sans text-sm font-medium text-canvas transition-colors duration-200 hover:bg-accent/90"
+                        >
+                            {visitLabel}
+                            <span className="transition-transform duration-200 group-hover/cta:translate-x-0.5 group-hover/cta:-translate-y-0.5">
+                                ↗
+                            </span>
+                        </a>
+                    )}
+                    <button
+                        type="button"
+                        onClick={(e) => {
+                            e.stopPropagation();
+                            onSelect(project);
+                        }}
+                        className="inline-flex items-center gap-2 border border-rim px-5 py-2.5 font-sans text-sm text-muted transition-colors duration-200 hover:border-accent/50 hover:text-cream"
+                    >
+                        {detailsLabel}
+                        <span className="text-xs">→</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    );
+}
+
+interface ProjectCardProps {
+    project: Project;
+    onSelect: (project: Project) => void;
+    visitLabel: string;
+}
+
+function ProjectCard({ project, onSelect, visitLabel }: ProjectCardProps) {
+    const icons = (project.stack ?? [])
+        .map(getIconClass)
+        .filter(Boolean) as string[];
+    const stopCard = (e: React.MouseEvent) => e.stopPropagation();
 
     return (
         <div
@@ -80,30 +198,50 @@ function ProjectCard({ project, onSelect, statusLabel }: ProjectCardProps) {
                 />
             ))}
 
-            <div className="from-canvas via-canvas/85 pointer-events-none absolute inset-0 bg-gradient-to-t via-50% to-transparent" />
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-canvas via-canvas/85 via-50% to-transparent" />
 
-            <div className="absolute right-0 bottom-0 left-0 p-5">
-                <p className="mb-2 font-sans text-[10px] tracking-widest text-accent/60 uppercase">
-                    {statusLabel}
-                </p>
-                <h3 className="text-cream mb-2 font-serif text-lg leading-snug transition-colors duration-200 group-hover:text-accent">
-                    {project.title}
-                </h3>
-                <p className="mb-3 line-clamp-2 font-sans text-xs leading-relaxed text-muted">
-                    {project.description}
-                </p>
-                {project.stack && project.stack.length > 0 && (
-                    <div className="flex flex-wrap gap-1">
-                        {project.stack.slice(0, 3).map((tech) => (
-                            <span
-                                key={tech}
-                                className="border border-rim px-1.5 py-[3px] font-sans text-[10px] leading-none text-muted/70"
+            <div className="relative flex flex-1 flex-col p-5">
+                <div className="mt-auto">
+                    <h3 className="mb-2 font-serif text-lg leading-snug text-cream transition-colors duration-200 group-hover:text-accent">
+                        {project.title}
+                    </h3>
+                    <p className="mb-3 line-clamp-2 font-sans text-xs leading-relaxed text-muted">
+                        {project.description}
+                    </p>
+                    {project.stack && project.stack.length > 0 && (
+                        <div className="mb-3 flex flex-wrap gap-1">
+                            {project.stack.slice(0, 3).map((tech) => (
+                                <span
+                                    key={tech}
+                                    className="border border-rim px-1.5 py-[3px] font-sans text-[10px] leading-none text-muted/70"
+                                >
+                                    {tech}
+                                </span>
+                            ))}
+                        </div>
+                    )}
+
+                    <div className="flex items-center justify-between pt-1">
+                        {project.demoLink ? (
+                            <a
+                                href={project.demoLink}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                onClick={stopCard}
+                                className="group/cta inline-flex items-center gap-1 font-sans text-xs text-accent transition-colors duration-200 hover:text-accent/80"
                             >
-                                {tech}
+                                {visitLabel}
+                                <span className="transition-transform duration-200 group-hover/cta:translate-x-0.5 group-hover/cta:-translate-y-0.5">
+                                    ↗
+                                </span>
+                            </a>
+                        ) : (
+                            <span className="font-sans text-xs text-muted/50">
+                                →
                             </span>
-                        ))}
+                        )}
                     </div>
-                )}
+                </div>
             </div>
         </div>
     );
@@ -119,19 +257,19 @@ function DocCard({ project, href, pagesLabel }: DocCardProps) {
     return (
         <Link
             href={href}
-            className="group bg-canvas relative h-[280px] w-[240px] flex-none overflow-hidden border border-rim transition-all duration-300 hover:border-accent/60 hover:shadow-[0_4px_32px_-8px_rgba(201,148,58,0.12)]"
+            className="group relative h-[280px] w-[240px] flex-none overflow-hidden border border-rim bg-canvas transition-all duration-300 hover:border-accent/60 hover:shadow-[0_4px_32px_-8px_rgba(201,148,58,0.12)]"
         >
             <span className="pointer-events-none absolute top-[-16px] right-[-8px] font-serif text-[160px] leading-none text-muted/[0.04] select-none">
                 →
             </span>
 
-            <div className="from-canvas via-canvas/80 pointer-events-none absolute inset-0 bg-gradient-to-t via-50% to-transparent" />
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-canvas via-canvas/80 via-50% to-transparent" />
 
             <div className="absolute right-0 bottom-0 left-0 p-5">
                 <p className="mb-2 font-sans text-xs text-accent/50">
                     {pagesLabel}
                 </p>
-                <h3 className="text-cream mb-2 font-serif text-lg leading-snug transition-colors duration-200 group-hover:text-accent">
+                <h3 className="mb-2 font-serif text-lg leading-snug text-cream transition-colors duration-200 group-hover:text-accent">
                     {project.title}
                 </h3>
                 {project.description && (
@@ -159,27 +297,26 @@ const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({
         null,
     );
 
-    const { ref: projectsRef, isVisible: projectsVisible } =
+    const { ref: gridRef, isVisible: gridVisible } =
         useScrollReveal<HTMLDivElement>();
     const { ref: docsRef, isVisible: docsVisible } =
         useScrollReveal<HTMLDivElement>();
 
-    const { showLeft: pLeft, showRight: pRight } = useScrollShadow(projectsRef);
     const { showLeft: dLeft, showRight: dRight } = useScrollShadow(docsRef);
 
-    const makeScroller = useCallback(
-        (ref: React.RefObject<HTMLElement | null>) =>
-            (dir: "left" | "right") => {
-                ref.current?.scrollBy({
-                    left: dir === "left" ? -SCROLL_AMOUNT : SCROLL_AMOUNT,
-                    behavior: "smooth",
-                });
-            },
-        [],
+    const scrollDocs = useCallback(
+        (dir: "left" | "right") => {
+            docsRef.current?.scrollBy({
+                left: dir === "left" ? -SCROLL_AMOUNT : SCROLL_AMOUNT,
+                behavior: "smooth",
+            });
+        },
+        [docsRef],
     );
 
-    const scrollProjects = makeScroller(projectsRef);
-    const scrollDocs = makeScroller(docsRef);
+    const [hero, ...rest] = projects;
+    const visitLabel = t("project_link_visit");
+    const detailsLabel = t("project_link_details");
 
     return (
         <>
@@ -191,61 +328,38 @@ const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({
                 })}
                 spacing="generous"
             >
-                {/* Projects horizontal scroller */}
-                <div className="relative">
-                    <div
-                        ref={projectsRef}
-                        className={`reveal relative left-1/2 w-screen -translate-x-1/2 overflow-x-auto [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden ${projectsVisible ? "is-revealed" : ""}`}
-                    >
-                        <div className="flex gap-3 px-4 pb-2 lg:px-6">
-                            {projects.map((project, index) => {
-                                const hasDemo = Boolean(project.demoLink);
-                                const hasGithub = Boolean(project.githubLink);
-                                const statusLabel = hasDemo
-                                    ? t("project_status_live")
-                                    : hasGithub
-                                      ? t("project_status_open_source")
-                                      : t("project_status_private");
-
-                                return (
-                                    <ProjectCard
-                                        key={index}
-                                        project={project}
-                                        onSelect={setSelectedProject}
-                                        statusLabel={statusLabel}
-                                    />
-                                );
-                            })}
+                <div
+                    ref={gridRef}
+                    className={`reveal ${gridVisible ? "is-revealed" : ""}`}
+                >
+                    {hero && (
+                        <div className="mb-6">
+                            <ProjectHeroCard
+                                project={hero}
+                                onSelect={setSelectedProject}
+                                visitLabel={visitLabel}
+                                detailsLabel={detailsLabel}
+                            />
                         </div>
-                    </div>
-                    {/* Right-edge fade — signals more content to the right */}
-                    <div className="pointer-events-none absolute top-0 right-0 bottom-2 z-10 w-20 bg-gradient-to-l from-surface to-transparent" />
+                    )}
+
+                    {rest.length > 0 && (
+                        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                            {rest.map((project, index) => (
+                                <ProjectCard
+                                    key={index}
+                                    project={project}
+                                    onSelect={setSelectedProject}
+                                    visitLabel={visitLabel}
+                                />
+                            ))}
+                        </div>
+                    )}
                 </div>
 
-                {/* Projects scroll buttons */}
-                <div className="mt-3 flex justify-end gap-1.5">
-                    <button
-                        onClick={() => scrollProjects("left")}
-                        disabled={!pLeft}
-                        aria-label="Scroll projects left"
-                        className={SCROLL_BTN}
-                    >
-                        ←
-                    </button>
-                    <button
-                        onClick={() => scrollProjects("right")}
-                        disabled={!pRight}
-                        aria-label="Scroll projects right"
-                        className={SCROLL_BTN}
-                    >
-                        →
-                    </button>
-                </div>
-
-                {/* Documentation sub-section */}
+                {/* Documentation sub-section (unchanged — horizontal scroller) */}
                 {docProjects.length > 0 && (
                     <div className="mt-14 border-t border-rim/60 pt-10">
-                        {/* Sub-section heading — can't nest <Section> inside <Section>, so we replicate its default heading markup here */}
                         <div className="mb-14">
                             <p className="mb-3 font-sans text-sm font-bold tracking-[0.2em] text-accent uppercase">
                                 {tCommon("docs.sidebar_title")}
@@ -253,7 +367,6 @@ const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({
                             <div className="h-px w-12 bg-accent opacity-60" />
                         </div>
 
-                        {/* Docs horizontal scroller */}
                         <div className="relative">
                             <div
                                 ref={docsRef}
@@ -273,11 +386,9 @@ const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({
                                     ))}
                                 </div>
                             </div>
-                            {/* Right-edge fade */}
                             <div className="pointer-events-none absolute top-0 right-0 bottom-2 z-10 w-20 bg-gradient-to-l from-surface to-transparent" />
                         </div>
 
-                        {/* "See all docs" row with scroll buttons */}
                         <div className="mt-4 flex items-center justify-between">
                             <div className="flex gap-1.5">
                                 <button
@@ -318,7 +429,6 @@ const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({
                 )}
             </Section>
 
-            {/* Project detail modal */}
             {selectedProject && (
                 <ProjectModal
                     project={selectedProject}
