@@ -53,7 +53,7 @@ const CookieConsentBanner: React.FC = () => {
                     }
             ).requestIdleCallback(show);
         } else {
-            idleId = window.setTimeout(show, 2000) as unknown as number;
+            idleId = setTimeout(show, 2000) as unknown as number;
         }
 
         interactionEvents.forEach((e) =>

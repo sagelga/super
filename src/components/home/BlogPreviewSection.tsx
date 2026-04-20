@@ -21,15 +21,7 @@ const BlogPreviewSection: React.FC<BlogPreviewSectionProps> = ({ posts }) => {
     const [featured, ...rest] = posts;
 
     return (
-        <Section spacing="generous">
-            {/* Eyebrow */}
-            <div className="mb-8">
-                <p className="font-sans text-xs tracking-[0.25em] text-accent uppercase">
-                    {t("blog.eyebrow")}
-                </p>
-                <div className="mt-3 h-px w-12 bg-accent opacity-60" />
-            </div>
-
+        <Section spacing="generous" title={t("blog.eyebrow")}>
             {/* Bento grid */}
             <div
                 ref={ref}
@@ -39,7 +31,7 @@ const BlogPreviewSection: React.FC<BlogPreviewSectionProps> = ({ posts }) => {
                 {featured && (
                     <Link
                         href={`${langPrefix}/blog/${featured.slug}`}
-                        className="group bg-canvas flex min-h-[280px] flex-col overflow-hidden border border-rim transition-colors duration-200 hover:border-accent/50 md:col-span-2 md:row-span-2"
+                        className="group flex min-h-[280px] flex-col overflow-hidden border border-rim bg-canvas transition-colors duration-200 hover:border-accent/50 md:col-span-2 md:row-span-2"
                     >
                         {featured.image &&
                             (featured.image.startsWith("http") ||
@@ -75,7 +67,7 @@ const BlogPreviewSection: React.FC<BlogPreviewSectionProps> = ({ posts }) => {
                                         </>
                                     )}
                                 </div>
-                                <h3 className="text-cream font-serif text-2xl leading-snug transition-colors duration-200 group-hover:text-accent md:text-3xl">
+                                <h3 className="font-serif text-2xl leading-snug text-cream transition-colors duration-200 group-hover:text-accent md:text-3xl">
                                     {featured.title}
                                 </h3>
                                 {featured.description && (
@@ -105,7 +97,7 @@ const BlogPreviewSection: React.FC<BlogPreviewSectionProps> = ({ posts }) => {
                     <Link
                         key={post.slug}
                         href={`${langPrefix}/blog/${post.slug}`}
-                        className="group bg-canvas flex min-h-[136px] flex-col overflow-hidden border border-rim transition-colors duration-200 hover:border-accent/50"
+                        className="group flex min-h-[136px] flex-col overflow-hidden border border-rim bg-canvas transition-colors duration-200 hover:border-accent/50"
                     >
                         {post.image &&
                             (post.image.startsWith("http") ||
@@ -134,7 +126,7 @@ const BlogPreviewSection: React.FC<BlogPreviewSectionProps> = ({ posts }) => {
                                         )}
                                     </p>
                                 )}
-                                <h3 className="text-cream font-serif text-base leading-snug transition-colors duration-200 group-hover:text-accent">
+                                <h3 className="font-serif text-base leading-snug text-cream transition-colors duration-200 group-hover:text-accent">
                                     {post.title}
                                 </h3>
                             </div>
@@ -151,13 +143,13 @@ const BlogPreviewSection: React.FC<BlogPreviewSectionProps> = ({ posts }) => {
             {/* CTA banner */}
             <Link
                 href={`${langPrefix}/blog`}
-                className="group bg-canvas mt-3 flex items-center justify-between border border-rim px-8 py-6 transition-all duration-300 hover:border-accent"
+                className="group mt-3 flex items-center justify-between border border-rim bg-canvas px-8 py-6 transition-all duration-300 hover:border-accent"
             >
                 <div>
                     <p className="font-sans text-xs tracking-[0.25em] text-muted uppercase">
                         {t("blog.posts_count", { count: posts.length })}
                     </p>
-                    <p className="text-cream mt-1 font-serif text-2xl transition-colors duration-200 group-hover:text-accent">
+                    <p className="mt-1 font-serif text-2xl text-cream transition-colors duration-200 group-hover:text-accent">
                         {t("nav.blog")}
                     </p>
                 </div>

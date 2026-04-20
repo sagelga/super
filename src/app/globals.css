@@ -87,6 +87,12 @@ html[lang="zh"] body {
   to   { transform: scaleX(1); }
 }
 
+@keyframes orbit-cw  { to { transform: rotate(360deg); } }
+@keyframes orbit-ccw { to { transform: rotate(-360deg); } }
+
+.orbit-cw  { animation: orbit-cw 80s linear infinite; }
+.orbit-ccw { animation: orbit-ccw 55s linear infinite; }
+
 /* === Page transition === */
 .page-enter {
   animation: fade-in 0.25s var(--ease-out-quart) backwards;
@@ -160,6 +166,12 @@ html[lang="zh"] body {
   .grow-rule {
     animation: none !important;
     opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .orbit-cw,
+  .orbit-ccw {
+    animation: none !important;
     transform: none !important;
   }
 

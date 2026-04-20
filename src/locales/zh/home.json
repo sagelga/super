@@ -6,7 +6,8 @@
         "greeting": "こんにちは, สวัสดี, 你好。",
         "tagline": "开发者，教师，喜欢动手的人。做自己信得过的工具，教自己学过的东西，总为人留一点余地。",
         "primary_cta": "查看作品",
-        "secondary_cta": "关于我"
+        "secondary_cta": "关于我",
+        "scroll_hint": "向下滚动"
     },
     "about": {
         "title": "关于我",

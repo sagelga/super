@@ -2,6 +2,8 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { Settings } from "lucide-react";
+import { useSettings } from "./settings/SettingsProvider";
 
 interface NavbarMobileMenuProps {
     isOpen: boolean;
@@ -17,6 +19,7 @@ export default function NavbarMobileMenu({
     t,
 }: NavbarMobileMenuProps) {
     const [isHomeMenuOpen, setIsHomeMenuOpen] = useState(false);
+    const { openSettings } = useSettings();
 
     useEffect(() => {
         document.body.style.overflow = isOpen ? "hidden" : "";
@@ -29,27 +32,27 @@ export default function NavbarMobileMenu({
         <>
             {isOpen && (
                 <div
-                    className="bg-canvas/95 fixed inset-0 z-40 lg:hidden"
+                    className="fixed inset-0 z-40 bg-canvas/95 lg:hidden"
                     onClick={onClose}
                 />
             )}
 
             <div
-                className={`bg-canvas fixed top-0 right-0 bottom-0 z-50 flex w-72 flex-col border-l border-rim transition-transform duration-300 ease-in-out lg:hidden ${
+                className={`fixed top-0 right-0 bottom-0 z-50 flex w-72 flex-col border-l border-rim bg-canvas transition-transform duration-300 ease-in-out lg:hidden ${
                     isOpen ? "translate-x-0" : "translate-x-full"
                 }`}
             >
                 <div className="flex h-16 flex-shrink-0 items-center justify-between border-b border-rim px-8">
                     <Link
                         href={p("/")}
-                        className="text-cream font-sans text-sm tracking-[0.15em] uppercase"
+                        className="font-sans text-sm tracking-[0.15em] text-cream uppercase"
                         onClick={onClose}
                     >
                         {t("navbar.name")}
                     </Link>
                     <button
                         onClick={onClose}
-                        className="hover:text-cream text-muted transition-colors duration-200"
+                        className="text-muted transition-colors duration-200 hover:text-cream"
                         aria-label="Close menu"
                     >
                         <svg
@@ -73,7 +76,7 @@ export default function NavbarMobileMenu({
                     {/* Home — expandable */}
                     <div>
                         <button
-                            className="hover:text-cream flex w-full items-center justify-between py-3 text-sm tracking-wide text-muted transition-colors duration-200"
+                            className="flex w-full items-center justify-between py-3 text-sm tracking-wide text-muted transition-colors duration-200 hover:text-cream"
                             onClick={() => setIsHomeMenuOpen((prev) => !prev)}
                         >
                             {t("nav.home")}
@@ -126,28 +129,28 @@ export default function NavbarMobileMenu({
                     </div>
                     <Link
                         href={p("/blog")}
-                        className="hover:text-cream block py-3 text-sm tracking-wide text-muted transition-colors duration-200"
+                        className="block py-3 text-sm tracking-wide text-muted transition-colors duration-200 hover:text-cream"
                         onClick={onClose}
                     >
                         {t("nav.blog")}
                     </Link>
                     <Link
                         href={p("/gallery")}
-                        className="hover:text-cream block py-3 text-sm tracking-wide text-muted transition-colors duration-200"
+                        className="block py-3 text-sm tracking-wide text-muted transition-colors duration-200 hover:text-cream"
                         onClick={onClose}
                     >
                         {t("nav.gallery")}
                     </Link>
                     <Link
                         href={p("/learn")}
-                        className="hover:text-cream block py-3 text-sm tracking-wide text-muted transition-colors duration-200"
+                        className="block py-3 text-sm tracking-wide text-muted transition-colors duration-200 hover:text-cream"
                         onClick={onClose}
                     >
                         {t("nav.learn")}
                     </Link>
                     <Link
                         href={p("/docs")}
-                        className="hover:text-cream block py-3 text-sm tracking-wide text-muted transition-colors duration-200"
+                        className="block py-3 text-sm tracking-wide text-muted transition-colors duration-200 hover:text-cream"
                         onClick={onClose}
                     >
                         {t("nav.docs")}
@@ -155,14 +158,25 @@ export default function NavbarMobileMenu({
                 </nav>
 
                 {/* Bottom actions */}
-                <div className="flex-shrink-0 border-t border-rim px-8 py-6">
+                <div className="flex flex-shrink-0 items-stretch gap-2 border-t border-rim px-8 py-6">
                     <Link
                         href={p("/contact")}
-                        className="block border border-accent/60 px-4 py-2.5 text-center font-sans text-sm tracking-wide text-accent transition-colors duration-200 hover:border-accent hover:bg-accent hover:text-canvas"
+                        className="flex-1 border border-accent/60 px-4 py-2.5 text-center font-sans text-sm tracking-wide text-accent transition-colors duration-200 hover:border-accent hover:bg-accent hover:text-canvas"
                         onClick={onClose}
                     >
                         {t("nav.contact")}
                     </Link>
+                    <button
+                        type="button"
+                        onClick={() => {
+                            onClose();
+                            openSettings();
+                        }}
+                        aria-label="Open settings"
+                        className="flex aspect-square items-center justify-center border border-rim px-3 text-muted transition-colors duration-200 hover:border-accent/60 hover:text-accent"
+                    >
+                        <Settings width={16} height={16} aria-hidden="true" />
+                    </button>
                 </div>
             </div>
         </>

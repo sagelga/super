@@ -25,27 +25,30 @@ const Section: React.FC<SectionProps> = ({
         >
             <div className="container mx-auto px-8 lg:px-16">
                 {title && headingVariant === "default" && (
-                    <div className="mb-14">
-                        <div className="mb-3 flex items-baseline gap-4">
-                            <p className="font-sans text-sm font-bold tracking-[0.2em] text-accent uppercase">
-                                {title}
+                    <header className="mb-14">
+                        <h2 className="font-display text-3xl leading-[1.1] tracking-tight text-text md:text-4xl lg:text-5xl">
+                            {title}
+                        </h2>
+                        {subtitle && (
+                            <p className="mt-4 font-sans text-xs font-semibold tracking-[0.2em] text-accent/80 uppercase">
+                                {subtitle}
                             </p>
-                            {subtitle && (
-                                <span className="font-sans text-xs text-muted">
-                                    {subtitle}
-                                </span>
-                            )}
-                        </div>
-                        <div className="h-px w-12 bg-accent opacity-60" />
-                    </div>
+                        )}
+                        <div className="mt-6 h-px w-16 bg-accent opacity-70" />
+                    </header>
                 )}
                 {title && headingVariant === "minimal" && (
-                    <div className="mb-10">
-                        <p className="font-sans text-xs font-bold tracking-[0.2em] text-muted/70 uppercase">
+                    <header className="mb-10">
+                        <h2 className="font-display text-2xl leading-tight text-text md:text-3xl">
                             {title}
-                        </p>
-                        <div className="mt-3 h-px w-6 bg-rim" />
-                    </div>
+                        </h2>
+                        {subtitle && (
+                            <p className="mt-2 font-sans text-xs font-semibold tracking-[0.18em] text-muted uppercase">
+                                {subtitle}
+                            </p>
+                        )}
+                        <div className="mt-5 h-px w-10 bg-accent/60" />
+                    </header>
                 )}
                 {children}
             </div>

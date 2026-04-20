@@ -37,15 +37,7 @@ const LearnPreviewSection: React.FC<LearnPreviewSectionProps> = ({
     if (!featured) return null;
 
     return (
-        <Section spacing="generous">
-            {/* Eyebrow */}
-            <div className="mb-8">
-                <p className="font-sans text-xs tracking-[0.25em] text-accent uppercase">
-                    {t("learn.eyebrow")}
-                </p>
-                <div className="mt-3 h-px w-12 bg-accent opacity-60" />
-            </div>
-
+        <Section spacing="generous" title={t("learn.eyebrow")}>
             {/* Bento grid */}
             <div
                 ref={ref}
@@ -54,7 +46,7 @@ const LearnPreviewSection: React.FC<LearnPreviewSectionProps> = ({
                 {/* Featured topic — full width */}
                 <Link
                     href={`${langPrefix}/learn/${featured.slug}`}
-                    className="group bg-canvas flex min-h-[200px] flex-col justify-between border border-rim p-8 transition-colors duration-200 hover:border-accent/50 md:col-span-3"
+                    className="group flex min-h-[200px] flex-col justify-between border border-rim bg-canvas p-8 transition-colors duration-200 hover:border-accent/50 md:col-span-3"
                 >
                     <div className="flex items-start gap-6">
                         {TOPIC_ICONS[featured.slug] && (
@@ -63,7 +55,7 @@ const LearnPreviewSection: React.FC<LearnPreviewSectionProps> = ({
                             />
                         )}
                         <div>
-                            <h3 className="text-cream font-serif text-3xl transition-colors duration-200 group-hover:text-accent">
+                            <h3 className="font-serif text-3xl text-cream transition-colors duration-200 group-hover:text-accent">
                                 {featured.title}
                             </h3>
                             <p className="mt-2 font-sans text-sm text-muted/60">
@@ -88,7 +80,7 @@ const LearnPreviewSection: React.FC<LearnPreviewSectionProps> = ({
                     <Link
                         key={topic.slug}
                         href={`${langPrefix}/learn/${topic.slug}`}
-                        className="group bg-canvas flex min-h-[160px] flex-col justify-between border border-rim p-6 transition-colors duration-200 hover:border-accent/50"
+                        className="group flex min-h-[160px] flex-col justify-between border border-rim bg-canvas p-6 transition-colors duration-200 hover:border-accent/50"
                     >
                         <div>
                             {TOPIC_ICONS[topic.slug] && (
@@ -96,7 +88,7 @@ const LearnPreviewSection: React.FC<LearnPreviewSectionProps> = ({
                                     className={`${TOPIC_ICONS[topic.slug]} mb-4 text-3xl text-muted/40 transition-colors duration-200 group-hover:text-accent`}
                                 />
                             )}
-                            <h3 className="text-cream font-serif text-xl transition-colors duration-200 group-hover:text-accent">
+                            <h3 className="font-serif text-xl text-cream transition-colors duration-200 group-hover:text-accent">
                                 {topic.title}
                             </h3>
                         </div>
@@ -110,7 +102,7 @@ const LearnPreviewSection: React.FC<LearnPreviewSectionProps> = ({
             {/* CTA banner */}
             <Link
                 href={`${langPrefix}/learn`}
-                className="group bg-canvas mt-3 flex items-center justify-between border border-rim px-8 py-6 transition-all duration-300 hover:border-accent"
+                className="group mt-3 flex items-center justify-between border border-rim bg-canvas px-8 py-6 transition-all duration-300 hover:border-accent"
             >
                 <div>
                     <p className="font-sans text-xs tracking-[0.25em] text-muted uppercase">
@@ -118,7 +110,7 @@ const LearnPreviewSection: React.FC<LearnPreviewSectionProps> = ({
                             count: topics.reduce((s, t) => s + t.pageCount, 0),
                         })}
                     </p>
-                    <p className="text-cream mt-1 font-serif text-2xl transition-colors duration-200 group-hover:text-accent">
+                    <p className="mt-1 font-serif text-2xl text-cream transition-colors duration-200 group-hover:text-accent">
                         {t("learn.title")}
                     </p>
                 </div>

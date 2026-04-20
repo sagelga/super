@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useLocale, useTranslations } from "next-intl";
 import { usePathname } from "next/navigation";
-import { Languages, X, Menu } from "lucide-react";
+import { Settings, X, Menu } from "lucide-react";
 import NavbarMobileMenu from "./NavbarMobileMenu";
 import NavbarReadingProgress from "./NavbarReadingProgress";
 import SettingsHint from "./SettingsHint";
@@ -59,12 +59,12 @@ function Navbar() {
     const showProgress = isBlogPost || isDocsPage;
 
     return (
-        <nav className="bg-canvas fixed top-0 z-50 w-full border-b border-rim transition-all duration-300">
+        <nav className="fixed top-0 z-50 w-full border-b border-rim bg-canvas transition-all duration-300">
             <div className="container mx-auto flex h-16 items-center justify-between px-8 lg:px-16">
                 {/* Logo */}
                 <Link
                     href={p("/")}
-                    className="text-cream hover:text-brand font-sans text-sm tracking-[0.15em] uppercase transition-colors duration-200"
+                    className="font-sans text-sm tracking-[0.15em] text-cream uppercase transition-colors duration-200 hover:text-brand"
                 >
                     {t("navbar.name")}
                 </Link>
@@ -87,10 +87,11 @@ function Navbar() {
                             href={p("/")}
                             aria-haspopup="true"
                             aria-expanded={isHomeMenuOpen}
-                            className={`text-sm tracking-wide transition-colors duration-200 ${isHomeActive
-                                ? "text-cream border-b border-accent"
-                                : "hover:text-cream text-muted"
-                                }`}
+                            className={`text-sm tracking-wide transition-colors duration-200 ${
+                                isHomeActive
+                                    ? "border-b border-accent text-cream"
+                                    : "text-muted hover:text-cream"
+                            }`}
                         >
                             {t("nav.home")}
                         </Link>
@@ -98,25 +99,25 @@ function Navbar() {
                             <div className="absolute top-full left-1/2 mt-2 min-w-[180px] -translate-x-1/2 border border-rim bg-surface py-2 shadow-xl">
                                 <Link
                                     href={p("/#experience")}
-                                    className="hover:bg-canvas block px-5 py-2 text-sm tracking-wide text-muted transition-colors duration-150 hover:text-accent"
+                                    className="block px-5 py-2 text-sm tracking-wide text-muted transition-colors duration-150 hover:bg-canvas hover:text-accent"
                                 >
                                     {t("nav.experience")}
                                 </Link>
                                 <Link
                                     href={p("/#certifications")}
-                                    className="hover:bg-canvas block px-5 py-2 text-sm tracking-wide text-muted transition-colors duration-150 hover:text-accent"
+                                    className="block px-5 py-2 text-sm tracking-wide text-muted transition-colors duration-150 hover:bg-canvas hover:text-accent"
                                 >
                                     {t("nav.certifications")}
                                 </Link>
                                 <Link
                                     href={p("/#projects")}
-                                    className="hover:bg-canvas block px-5 py-2 text-sm tracking-wide text-muted transition-colors duration-150 hover:text-accent"
+                                    className="block px-5 py-2 text-sm tracking-wide text-muted transition-colors duration-150 hover:bg-canvas hover:text-accent"
                                 >
                                     {t("nav.projects")}
                                 </Link>
                                 <Link
                                     href={p("/#volunteering")}
-                                    className="hover:bg-canvas block px-5 py-2 text-sm tracking-wide text-muted transition-colors duration-150 hover:text-accent"
+                                    className="block px-5 py-2 text-sm tracking-wide text-muted transition-colors duration-150 hover:bg-canvas hover:text-accent"
                                 >
                                     {t("nav.volunteering")}
                                 </Link>
@@ -127,10 +128,11 @@ function Navbar() {
                         <NavSparkle />
                         <Link
                             href={p("/blog")}
-                            className={`text-sm tracking-wide transition-colors duration-200 ${isBlogActive
-                                ? "text-cream border-b border-accent"
-                                : "hover:text-cream text-muted"
-                                }`}
+                            className={`text-sm tracking-wide transition-colors duration-200 ${
+                                isBlogActive
+                                    ? "border-b border-accent text-cream"
+                                    : "text-muted hover:text-cream"
+                            }`}
                         >
                             {t("nav.blog")}
                         </Link>
@@ -139,10 +141,11 @@ function Navbar() {
                         <NavSparkle />
                         <Link
                             href={p("/gallery")}
-                            className={`text-sm tracking-wide transition-colors duration-200 ${isGalleryActive
-                                ? "text-cream border-b border-accent"
-                                : "hover:text-cream text-muted"
-                                }`}
+                            className={`text-sm tracking-wide transition-colors duration-200 ${
+                                isGalleryActive
+                                    ? "border-b border-accent text-cream"
+                                    : "text-muted hover:text-cream"
+                            }`}
                         >
                             {t("nav.gallery")}
                         </Link>
@@ -151,10 +154,11 @@ function Navbar() {
                         <NavSparkle />
                         <Link
                             href={p("/learn")}
-                            className={`text-sm tracking-wide transition-colors duration-200 ${isLearnActive
-                                ? "text-cream border-b border-accent"
-                                : "hover:text-cream text-muted"
-                                }`}
+                            className={`text-sm tracking-wide transition-colors duration-200 ${
+                                isLearnActive
+                                    ? "border-b border-accent text-cream"
+                                    : "text-muted hover:text-cream"
+                            }`}
                         >
                             {t("nav.learn")}
                         </Link>
@@ -163,25 +167,14 @@ function Navbar() {
                         <NavSparkle />
                         <Link
                             href={p("/docs")}
-                            className={`text-sm tracking-wide transition-colors duration-200 ${isDocsActive
-                                ? "text-cream border-b border-accent"
-                                : "hover:text-cream text-muted"
-                                }`}
+                            className={`text-sm tracking-wide transition-colors duration-200 ${
+                                isDocsActive
+                                    ? "border-b border-accent text-cream"
+                                    : "text-muted hover:text-cream"
+                            }`}
                         >
                             {t("nav.docs")}
                         </Link>
-                    </div>
-
-                    <div className="relative ml-2">
-                        <button
-                            onClick={() => openSettings("language")}
-                            aria-label="Open settings"
-                            className={`hover:text-cream flex h-8 w-8 items-center justify-center text-muted transition-colors duration-200 ${globePulsing ? "navbar-globe-pulsing" : ""}`}
-                        >
-                            <Languages width={16} height={16} />
-                        </button>
-
-                        <SettingsHint />
                     </div>
 
                     <Link
@@ -190,11 +183,27 @@ function Navbar() {
                     >
                         {t("nav.contact")}
                     </Link>
+
+                    <div className="relative ml-2">
+                        <button
+                            onClick={() => openSettings()}
+                            aria-label="Open settings"
+                            className={`flex h-8 w-8 items-center justify-center text-muted transition-colors duration-200 hover:text-cream ${globePulsing ? "navbar-globe-pulsing" : ""}`}
+                        >
+                            <Settings
+                                width={16}
+                                height={16}
+                                aria-hidden="true"
+                            />
+                        </button>
+
+                        <SettingsHint />
+                    </div>
                 </div>
 
                 {/* Hamburger button — mobile only */}
                 <button
-                    className="hover:text-cream flex h-10 w-10 items-center justify-center text-muted transition-colors duration-200 lg:hidden"
+                    className="flex h-10 w-10 items-center justify-center text-muted transition-colors duration-200 hover:text-cream lg:hidden"
                     aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
                     aria-expanded={isMobileMenuOpen}
                     onClick={() => setIsMobileMenuOpen((prev) => !prev)}

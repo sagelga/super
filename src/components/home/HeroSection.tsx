@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
+import HeroScrollIndicator from "./HeroScrollIndicator";
 
 const HeroSection: React.FC = () => {
     const t = useTranslations("home");
@@ -17,13 +18,20 @@ const HeroSection: React.FC = () => {
                     backgroundSize: "32px 32px",
                 }}
             />
-            {/* Concentric rings */}
-            <div className="pointer-events-none absolute top-1/2 right-16 hidden h-[32rem] w-[32rem] -translate-y-1/2 rounded-full border border-accent/10 lg:block" />
+            {/* Outer ring — brand-blue dot orbits clockwise */}
+            <div className="pointer-events-none absolute top-1/2 right-16 hidden h-[32rem] w-[32rem] -translate-y-1/2 lg:block">
+                <div className="orbit-cw relative h-full w-full rounded-full border border-accent/10">
+                    <span className="absolute top-0 left-1/2 h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-full bg-brand/80 shadow-[0_0_14px_rgba(59,74,140,0.6)]" />
+                </div>
+            </div>
+            {/* Middle ring — static */}
             <div className="pointer-events-none absolute top-1/2 right-32 hidden h-80 w-80 -translate-y-1/2 rounded-full border border-accent/15 lg:block" />
-            <div className="pointer-events-none absolute top-1/2 right-48 hidden h-48 w-48 -translate-y-1/2 rounded-full border border-brand/25 lg:block" />
-            {/* Accent orbit dot */}
-            <div className="pointer-events-none absolute top-[calc(50%-16rem)] right-16 hidden h-3 w-3 rounded-full bg-brand/80 shadow-[0_0_14px_rgba(59,74,140,0.6)] lg:block" />
-            <div className="pointer-events-none absolute top-[calc(50%+10rem)] right-[19.5rem] hidden h-2.5 w-2.5 rounded-full bg-accent shadow-[0_0_12px_rgba(201,148,58,0.6)] lg:block" />
+            {/* Inner ring — amber dot orbits counter-clockwise */}
+            <div className="pointer-events-none absolute top-1/2 right-48 hidden h-48 w-48 -translate-y-1/2 lg:block">
+                <div className="orbit-ccw relative h-full w-full rounded-full border border-brand/25">
+                    <span className="absolute top-0 left-1/2 h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent shadow-[0_0_12px_rgba(201,148,58,0.6)]" />
+                </div>
+            </div>
 
             <div className="container mx-auto px-8 pt-24 pb-20 lg:px-16">
                 <div className="max-w-5xl">
@@ -59,7 +67,7 @@ const HeroSection: React.FC = () => {
                     <div className="enter enter-d5 flex flex-wrap items-center gap-2">
                         <Link
                             href="#projects"
-                            className="group hover:bg-brand-700 inline-flex items-center gap-3 rounded-sm bg-brand px-6 py-3 text-sm font-medium tracking-wide text-cream transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+                            className="group hover:bg-brand-700 inline-flex items-center gap-3 rounded-sm bg-brand px-6 py-3 text-sm font-medium tracking-wide text-white transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
                         >
                             {t("hero.primary_cta")}
                             <svg
@@ -78,7 +86,7 @@ const HeroSection: React.FC = () => {
                         </Link>
                         <Link
                             href="#about"
-                            className="inline-flex items-center gap-3 rounded-sm px-6 py-3 text-sm font-medium tracking-wide text-cream transition-colors duration-200 hover:text-accent"
+                            className="inline-flex items-center gap-3 rounded-sm border border-cream/30 px-6 py-3 text-sm font-medium tracking-wide text-cream transition-colors duration-200 hover:border-accent hover:text-accent"
                         >
                             {t("hero.secondary_cta")}
                         </Link>
@@ -87,12 +95,7 @@ const HeroSection: React.FC = () => {
             </div>
 
             {/* Scroll indicator */}
-            <div className="enter-fade enter-d6 absolute bottom-10 left-8 flex items-center gap-3 lg:left-16">
-                <div className="h-14 w-px bg-gradient-to-b from-muted/60 to-transparent" />
-                <span className="text-xs tracking-[0.3em] text-muted uppercase [writing-mode:vertical-rl]">
-                    Scroll
-                </span>
-            </div>
+            <HeroScrollIndicator />
         </section>
     );
 };

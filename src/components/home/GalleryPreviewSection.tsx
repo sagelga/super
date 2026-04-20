@@ -34,15 +34,11 @@ const GalleryPreviewSection: React.FC<GalleryPreviewSectionProps> = ({
     const { ref, isVisible } = useScrollReveal<HTMLDivElement>();
 
     return (
-        <Section variant="canvas" spacing="generous">
-            {/* Eyebrow */}
-            <div className="mb-8">
-                <p className="font-sans text-xs tracking-[0.25em] text-accent uppercase">
-                    {t("gallery.eyebrow")}
-                </p>
-                <div className="mt-3 h-px w-12 bg-accent opacity-60" />
-            </div>
-
+        <Section
+            variant="canvas"
+            spacing="generous"
+            title={t("gallery.eyebrow")}
+        >
             {/* Bento grid — 4 cols, 3 implicit rows with fixed heights */}
             <div
                 ref={ref}
@@ -61,8 +57,8 @@ const GalleryPreviewSection: React.FC<GalleryPreviewSectionProps> = ({
                             sizes="(max-width: 768px) 50vw, 25vw"
                             className="object-cover transition-transform duration-500 group-hover:scale-105"
                         />
-                        <div className="from-canvas/80 via-canvas/80 absolute inset-0 flex flex-col justify-end bg-gradient-to-t to-transparent p-4 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                            <p className="text-cream truncate font-sans text-sm font-medium">
+                        <div className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-canvas/80 via-canvas/80 to-transparent p-4 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                            <p className="truncate font-sans text-sm font-medium text-cream">
                                 {item.title}
                             </p>
                             <p className="font-sans text-xs tracking-widest text-accent uppercase">
@@ -82,7 +78,7 @@ const GalleryPreviewSection: React.FC<GalleryPreviewSectionProps> = ({
                     <p className="font-sans text-xs tracking-[0.25em] text-muted uppercase">
                         {t("gallery.items_count", { count: 15 })}
                     </p>
-                    <p className="text-cream mt-1 font-serif text-2xl transition-colors duration-200 group-hover:text-accent">
+                    <p className="mt-1 font-serif text-2xl text-cream transition-colors duration-200 group-hover:text-accent">
                         {t("gallery.title")}
                     </p>
                 </div>
