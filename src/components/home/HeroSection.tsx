@@ -5,8 +5,6 @@ import { useTranslations } from "next-intl";
 const HeroSection: React.FC = () => {
     const t = useTranslations("home");
     const nameParts = t("hero.name").split(" ");
-    const firstName = nameParts[0];
-    const lastName = nameParts.slice(1).join(" ");
 
     return (
         <section className="relative flex min-h-screen items-center overflow-hidden bg-canvas">
@@ -48,7 +46,7 @@ const HeroSection: React.FC = () => {
                     </h1>
 
                     {/* Role — serif italic, muted-readable for AA contrast */}
-                    <p className="enter enter-d3 font-serif mb-4 text-xl italic text-muted-readable lg:text-2xl">
+                    <p className="enter enter-d3 mb-4 font-serif text-xl text-muted-readable italic lg:text-2xl">
                         {t("hero.title")}
                     </p>
 
@@ -61,7 +59,7 @@ const HeroSection: React.FC = () => {
                     <div className="enter enter-d5 flex flex-wrap items-center gap-2">
                         <Link
                             href="#projects"
-                            className="group inline-flex items-center gap-3 rounded-sm bg-brand px-6 py-3 text-sm font-medium tracking-wide text-cream transition-colors duration-200 hover:bg-brand-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+                            className="group hover:bg-brand-700 inline-flex items-center gap-3 rounded-sm bg-brand px-6 py-3 text-sm font-medium tracking-wide text-cream transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
                         >
                             {t("hero.primary_cta")}
                             <svg

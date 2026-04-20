@@ -25,7 +25,7 @@ function SettingsHint() {
             clearTimeout(showTimer);
             clearTimeout(hideTimer);
         };
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    }, []);
 
     if (!showHint) return null;
 
@@ -36,12 +36,12 @@ function SettingsHint() {
             <div className="navbar-hint-caret" />
             <button
                 onClick={dismissHint}
-                className="hover:text-cream absolute top-2 right-2 text-muted transition-colors duration-150"
+                className="absolute top-2 right-2 text-muted transition-colors duration-150 hover:text-cream"
                 aria-label="Dismiss"
             >
                 <X width={12} height={12} />
             </button>
-            <p className="text-cream mb-1 text-xs font-medium tracking-wide">
+            <p className="mb-1 text-xs font-medium tracking-wide text-cream">
                 {t("language.label")}
             </p>
             <p className="text-xs leading-relaxed text-muted">

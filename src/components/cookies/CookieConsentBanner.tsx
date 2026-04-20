@@ -22,32 +22,63 @@ const CookieConsentBanner: React.FC = () => {
             setIsVisible(true);
         };
 
-        const interactionEvents = ["scroll", "pointerdown", "keydown", "touchstart"] as const;
+        const interactionEvents = [
+            "scroll",
+            "pointerdown",
+            "keydown",
+            "touchstart",
+        ] as const;
 
         const onInteraction = () => {
-            interactionEvents.forEach((e) => window.removeEventListener(e, onInteraction));
+            interactionEvents.forEach((e) =>
+                window.removeEventListener(e, onInteraction),
+            );
             if (idleId !== undefined) {
-                (window as Window & typeof globalThis & { cancelIdleCallback?: (id: number) => void }).cancelIdleCallback?.(idleId);
+                (
+                    window as Window &
+                        typeof globalThis & {
+                            cancelIdleCallback?: (id: number) => void;
+                        }
+                ).cancelIdleCallback?.(idleId);
             }
             show();
         };
 
         let idleId: number | undefined;
         if ("requestIdleCallback" in window) {
-            idleId = (window as Window & typeof globalThis & { requestIdleCallback: (cb: () => void) => number }).requestIdleCallback(show);
+            idleId = (
+                window as Window &
+                    typeof globalThis & {
+                        requestIdleCallback: (cb: () => void) => number;
+                    }
+            ).requestIdleCallback(show);
         } else {
             idleId = window.setTimeout(show, 2000) as unknown as number;
         }
 
-        interactionEvents.forEach((e) => window.addEventListener(e, onInteraction, { once: true, passive: true }));
+        interactionEvents.forEach((e) =>
+            window.addEventListener(e, onInteraction, {
+                once: true,
+                passive: true,
+            }),
+        );
 
         return () => {
-            interactionEvents.forEach((e) => window.removeEventListener(e, onInteraction));
+            interactionEvents.forEach((e) =>
+                window.removeEventListener(e, onInteraction),
+            );
             if (idleId !== undefined) {
                 if ("cancelIdleCallback" in window) {
-                    (window as Window & typeof globalThis & { cancelIdleCallback: (id: number) => void }).cancelIdleCallback(idleId);
+                    (
+                        window as Window &
+                            typeof globalThis & {
+                                cancelIdleCallback: (id: number) => void;
+                            }
+                    ).cancelIdleCallback(idleId);
                 } else {
-                    clearTimeout(idleId as unknown as ReturnType<typeof setTimeout>);
+                    clearTimeout(
+                        idleId as unknown as ReturnType<typeof setTimeout>,
+                    );
                 }
             }
         };
@@ -72,12 +103,6 @@ const CookieConsentBanner: React.FC = () => {
             consentTimestamp: Date.now(),
             consentVersion: null,
         });
-        setIsVisible(false);
-    };
-
-    // Dismissing the banner without a choice — do NOT persist consent.
-    // The banner will reappear on the next visit.
-    const handleDismiss = () => {
         setIsVisible(false);
     };
 
@@ -110,7 +135,7 @@ const CookieConsentBanner: React.FC = () => {
                         </Link>
                         <span className="text-muted">|</span>
                         <button
-                            onClick={() => setShowSettings(true)}
+                            onClick={handleOpenSettings}
                             className="text-accent underline hover:text-cream"
                         >
                             {t("buttons.settings")}
@@ -133,16 +158,6 @@ const CookieConsentBanner: React.FC = () => {
                     </div>
                 </div>
             </BottomSheet>
-
-            {showSettings && (
-                <Suspense fallback={null}>
-                    <CookieSettingsModal
-                        isOpen={showSettings}
-                        onClose={() => setShowSettings(false)}
-                        onSave={handleSavePreferences}
-                    />
-                </Suspense>
-            )}
         </>
     );
 };

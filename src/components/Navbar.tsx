@@ -88,8 +88,8 @@ function Navbar() {
                             aria-haspopup="true"
                             aria-expanded={isHomeMenuOpen}
                             className={`text-sm tracking-wide transition-colors duration-200 ${isHomeActive
-                                    ? "text-cream border-b border-accent"
-                                    : "hover:text-cream text-muted"
+                                ? "text-cream border-b border-accent"
+                                : "hover:text-cream text-muted"
                                 }`}
                         >
                             {t("nav.home")}
@@ -128,8 +128,8 @@ function Navbar() {
                         <Link
                             href={p("/blog")}
                             className={`text-sm tracking-wide transition-colors duration-200 ${isBlogActive
-                                    ? "text-cream border-b border-accent"
-                                    : "hover:text-cream text-muted"
+                                ? "text-cream border-b border-accent"
+                                : "hover:text-cream text-muted"
                                 }`}
                         >
                             {t("nav.blog")}
@@ -140,8 +140,8 @@ function Navbar() {
                         <Link
                             href={p("/gallery")}
                             className={`text-sm tracking-wide transition-colors duration-200 ${isGalleryActive
-                                    ? "text-cream border-b border-accent"
-                                    : "hover:text-cream text-muted"
+                                ? "text-cream border-b border-accent"
+                                : "hover:text-cream text-muted"
                                 }`}
                         >
                             {t("nav.gallery")}
@@ -152,8 +152,8 @@ function Navbar() {
                         <Link
                             href={p("/learn")}
                             className={`text-sm tracking-wide transition-colors duration-200 ${isLearnActive
-                                    ? "text-cream border-b border-accent"
-                                    : "hover:text-cream text-muted"
+                                ? "text-cream border-b border-accent"
+                                : "hover:text-cream text-muted"
                                 }`}
                         >
                             {t("nav.learn")}
@@ -164,8 +164,8 @@ function Navbar() {
                         <Link
                             href={p("/docs")}
                             className={`text-sm tracking-wide transition-colors duration-200 ${isDocsActive
-                                    ? "text-cream border-b border-accent"
-                                    : "hover:text-cream text-muted"
+                                ? "text-cream border-b border-accent"
+                                : "hover:text-cream text-muted"
                                 }`}
                         >
                             {t("nav.docs")}
@@ -215,13 +215,6 @@ function Navbar() {
             />
 
             <NavbarReadingProgress showProgress={showProgress} />
-
-            <LanguageSwitcherModal
-                isOpen={showLanguageSwitcher}
-                currentLang={lang}
-                onClose={() => setShowLanguageSwitcher(false)}
-                onLanguageSelect={handleLanguageSelect}
-            />
         </nav>
     );
 }
