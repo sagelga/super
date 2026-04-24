@@ -1,5 +1,4 @@
 @import "tailwindcss";
-@import "../styles/prose.css";
 
 @theme {
   --color-background: #1A1814;
@@ -36,7 +35,7 @@ html:not(.dark) {
   --color-background: #F5F0E8;
   --color-surface: #EDE8DA;
   --color-text: #1A1814;
-  --color-muted: #6B6458;
+  --color-muted: #5E574C;
   --color-border: #D4CDB8;
   --color-canvas: #F5F0E8;
   --color-rim: #D4CDB8;

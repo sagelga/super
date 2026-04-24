@@ -47,57 +47,59 @@ const ExperienceSection: React.FC<ExperienceSectionProps> = ({
                             className={`absolute top-1.5 left-0 h-3.5 w-3.5 rounded-full border-2 transition-colors duration-300 ${
                                 expanded === index
                                     ? "border-accent bg-accent"
-                                    : "bg-canvas border-muted"
+                                    : "border-muted bg-canvas"
                             }`}
                         />
 
-                        {/* Header — clickable to expand */}
-                        <button
-                            className="group mb-2 w-full text-left"
-                            onClick={() =>
-                                setExpanded((prev) =>
-                                    prev === index ? null : index,
-                                )
-                            }
-                        >
-                            <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between">
-                                <h3
-                                    className={`font-sans text-lg transition-colors duration-200 ${
-                                        expanded === index
-                                            ? "text-text"
-                                            : "group-hover:text-text text-muted"
-                                    }`}
-                                >
-                                    {exp.title}
-                                </h3>
-                                <div className="flex flex-shrink-0 items-center gap-3">
-                                    <span className="font-sans text-xs text-muted">
-                                        {exp.duration}
-                                    </span>
-                                    {/* Chevron indicator */}
-                                    <svg
-                                        className={`h-3.5 w-3.5 shrink-0 text-muted transition-transform duration-300 ${
+                        {/* Header — clickable to expand (WAI-ARIA accordion: h3 wraps button) */}
+                        <h3 className="mb-2">
+                            <button
+                                className="group w-full text-left"
+                                onClick={() =>
+                                    setExpanded((prev) =>
+                                        prev === index ? null : index,
+                                    )
+                                }
+                            >
+                                <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between">
+                                    <span
+                                        className={`font-sans text-lg transition-colors duration-200 ${
                                             expanded === index
-                                                ? "rotate-180"
-                                                : ""
+                                                ? "text-text"
+                                                : "text-muted group-hover:text-text"
                                         }`}
-                                        fill="none"
-                                        stroke="currentColor"
-                                        viewBox="0 0 24 24"
                                     >
-                                        <path
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                            strokeWidth={2}
-                                            d="M19 9l-7 7-7-7"
-                                        />
-                                    </svg>
+                                        {exp.title}
+                                    </span>
+                                    <div className="flex flex-shrink-0 items-center gap-3">
+                                        <span className="font-sans text-xs text-muted">
+                                            {exp.duration}
+                                        </span>
+                                        {/* Chevron indicator */}
+                                        <svg
+                                            className={`h-3.5 w-3.5 shrink-0 text-muted transition-transform duration-300 ${
+                                                expanded === index
+                                                    ? "rotate-180"
+                                                    : ""
+                                            }`}
+                                            fill="none"
+                                            stroke="currentColor"
+                                            viewBox="0 0 24 24"
+                                        >
+                                            <path
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                                strokeWidth={2}
+                                                d="M19 9l-7 7-7-7"
+                                            />
+                                        </svg>
+                                    </div>
                                 </div>
-                            </div>
-                            <p className="mt-0.5 text-sm text-accent">
-                                {exp.company}
-                            </p>
-                        </button>
+                                <span className="mt-0.5 block text-sm text-accent">
+                                    {exp.company}
+                                </span>
+                            </button>
+                        </h3>
 
                         {/* Smooth accordion — CSS grid height animation */}
                         <div

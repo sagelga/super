@@ -67,7 +67,7 @@ const HeroSection: React.FC = () => {
                     <div className="enter enter-d5 flex flex-wrap items-center gap-2">
                         <Link
                             href="#projects"
-                            className="group hover:bg-brand-700 inline-flex items-center gap-3 rounded-sm bg-brand px-6 py-3 text-sm font-medium tracking-wide text-white transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+                            className="group inline-flex items-center gap-3 rounded-sm bg-accent px-6 py-3 text-sm font-medium tracking-wide text-background transition-colors duration-200 hover:bg-accent/85 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
                         >
                             {t("hero.primary_cta")}
                             <svg

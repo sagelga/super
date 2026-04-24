@@ -63,9 +63,9 @@ export default async function Home() {
 
     const blogPosts = (await getBlogPosts()).slice(0, 3);
     const learnTopics = await getLearnTopics();
-    const docProjects = (await getDocProjects())
-        .sort((a, b) => b.pageCount - a.pageCount)
-        .slice(0, 4);
+    const docProjects = (await getDocProjects()).sort(
+        (a, b) => b.pageCount - a.pageCount,
+    );
     const galleryItems = GALLERY_ITEMS.slice(0, 6);
 
     return (

@@ -12,7 +12,6 @@ import "./globals.css";
 
 // Import the main layout component
 import Layout from "../components/Layout";
-import DeviconsLoader from "../components/DeviconsLoader";
 import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getMessages, getTranslations } from "next-intl/server";
 
@@ -21,7 +20,7 @@ const sans = IBM_Plex_Sans_Thai({
     variable: "--font-sans",
     weight: ["400", "500", "600", "700"],
     subsets: ["thai", "latin"],
-    display: "swap",
+    display: "optional",
 });
 
 // Configure the monospace font
@@ -29,7 +28,7 @@ const mono = IBM_Plex_Mono({
     variable: "--font-mono",
     weight: ["400", "600"],
     subsets: ["latin"],
-    display: "swap",
+    display: "optional",
 });
 
 // Configure the serif font for display
@@ -37,7 +36,7 @@ const serif = IBM_Plex_Serif({
     variable: "--font-serif",
     weight: ["400", "600", "700"],
     subsets: ["latin"],
-    display: "swap",
+    display: "optional",
 });
 
 // Thai display serif font — elegant traditional Thai serif for headings
@@ -45,7 +44,7 @@ const serifThai = Trirong({
     variable: "--font-serif-thai",
     weight: ["400", "500", "600", "700"],
     subsets: ["thai", "latin"],
-    display: "swap",
+    display: "optional",
 });
 
 // Chinese serif font — IBM Plex has no CJK coverage at all
@@ -53,7 +52,7 @@ const serifZh = Noto_Serif_SC({
     variable: "--font-serif-zh",
     weight: ["400", "700"],
     subsets: ["latin"],
-    display: "swap",
+    display: "optional",
 });
 
 // Define the metadata for the website
@@ -211,7 +210,14 @@ export default async function RootLayout({
                         __html: `(function(){try{var s=localStorage.getItem('theme-preference');var prefersDark=window.matchMedia('(prefers-color-scheme: dark)').matches;var dark=s==='dark'||(s!=='light'&&prefersDark)||!s;document.documentElement.classList.toggle('dark',dark);}catch(e){}})();`,
                     }}
                 />
-                <link rel="dns-prefetch" href="https://cdn.jsdelivr.net" />
+                <link
+                    rel="preload"
+                    href="/fonts/devicon.woff"
+                    as="font"
+                    type="font/woff"
+                    crossOrigin="anonymous"
+                />
+                <link rel="stylesheet" href="/devicons-subset.css" />
                 <link rel="dns-prefetch" href="https://res.cloudinary.com" />
                 <link rel="dns-prefetch" href="https://images.unsplash.com" />
                 <link rel="icon" href="/favicon.ico" sizes="any" />
@@ -256,7 +262,6 @@ export default async function RootLayout({
             >
                 <NextIntlClientProvider messages={messages}>
                     <Layout>{children}</Layout>
-                    <DeviconsLoader />
                 </NextIntlClientProvider>
             </body>
         </html>

@@ -326,7 +326,10 @@ function DocCard({ project, href }: DocCardProps) {
             </span>
 
             {/* Decorative arrow */}
-            <span className="pointer-events-none absolute top-4 right-4 font-sans text-xs text-muted/40 transition-colors duration-200 group-hover:text-accent/60">
+            <span
+                aria-hidden="true"
+                className="pointer-events-none absolute top-4 right-4 font-sans text-xs text-muted/40 transition-colors duration-200 group-hover:text-accent/60"
+            >
                 ↗
             </span>
 

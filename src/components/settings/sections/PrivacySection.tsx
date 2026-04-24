@@ -27,17 +27,14 @@ const PrivacySection: React.FC<PrivacySectionProps> = ({ onSaved }) => {
 
     const handleToggle = (key: keyof typeof preferences) => {
         if (key === "functional") return;
-        setPreferences((prev) => ({ ...prev, [key]: !prev[key] }));
-    };
-
-    const handleSave = () => {
+        const next = { ...preferences, [key]: !preferences[key] };
+        setPreferences(next);
         setCookiePreferences({
-            ...preferences,
+            ...next,
             consentGiven: true,
             consentTimestamp: Date.now(),
             consentVersion: null,
         });
-        onSaved?.();
     };
 
     return (
@@ -102,12 +99,6 @@ const PrivacySection: React.FC<PrivacySectionProps> = ({ onSaved }) => {
                         {t("links.privacy_policy")}
                     </Link>
                 </p>
-            </div>
-
-            <div className="cookie-settings-actions">
-                <button onClick={handleSave} className="cookie-save-btn">
-                    {t("buttons.save_preferences")}
-                </button>
             </div>
         </>
     );

@@ -42,7 +42,9 @@ export default function ErrorView({
                     >
                         {t("error.try_again")}
                     </button>
-                    <span className="text-muted/30">·</span>
+                    <span aria-hidden="true" className="text-muted/30">
+                        ·
+                    </span>
                     <Link
                         href="/"
                         className="group inline-flex items-center gap-2 font-sans text-sm text-muted transition-colors duration-150 hover:text-text"

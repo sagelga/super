@@ -38,10 +38,8 @@ function NavItem({ href, label, index, active }: NavItemProps) {
             </span>
             <span>{label}</span>
             <span
-                className={`navbar-rule pointer-events-none absolute -bottom-0.5 left-0 right-0 h-px bg-accent transition-transform duration-300 ease-out ${
-                    active
-                        ? "scale-x-100"
-                        : "scale-x-0 group-hover:scale-x-100"
+                className={`navbar-rule pointer-events-none absolute right-0 -bottom-0.5 left-0 h-px bg-accent transition-transform duration-300 ease-out ${
+                    active ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
                 }`}
                 aria-hidden="true"
             />
@@ -122,7 +120,9 @@ function Navbar() {
                             onMouseLeave={() => setIsHomeMenuOpen(false)}
                             onFocus={() => setIsHomeMenuOpen(true)}
                             onBlur={(e) => {
-                                if (!e.currentTarget.contains(e.relatedTarget)) {
+                                if (
+                                    !e.currentTarget.contains(e.relatedTarget)
+                                ) {
                                     setIsHomeMenuOpen(false);
                                 }
                             }}
@@ -191,10 +191,7 @@ function Navbar() {
                     </div>
 
                     {/* Vertical rule — hand-drawn separator */}
-                    <span
-                        className="h-5 w-px bg-rim"
-                        aria-hidden="true"
-                    />
+                    <span className="h-5 w-px bg-rim" aria-hidden="true" />
 
                     <div className="flex items-center gap-3">
                         <Link
@@ -206,7 +203,7 @@ function Navbar() {
                                 width={14}
                                 height={14}
                                 aria-hidden="true"
-                                className="transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                                className="transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
                             />
                         </Link>
 

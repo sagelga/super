@@ -33,14 +33,14 @@ function MobileNavRow({
         <Link
             href={href}
             className={`group flex items-baseline justify-between border-b border-rim/60 py-4 transition-colors duration-200 ${
-                active ? "text-cream" : "text-muted-readable hover:text-cream"
+                active ? "text-cream" : "text-cream/80 hover:text-cream"
             }`}
             onClick={onClick}
         >
             <div className="flex items-baseline gap-4">
                 <span
-                    className={`font-mono text-[11px] tracking-[0.2em] tabular-nums ${
-                        active ? "text-accent" : "text-muted/70"
+                    className={`font-mono text-xs tracking-[0.2em] tabular-nums ${
+                        active ? "text-accent" : "text-muted"
                     }`}
                     aria-hidden="true"
                 >
@@ -58,7 +58,7 @@ function MobileNavRow({
                     active
                         ? "text-accent"
                         : "text-muted/50 group-hover:text-accent"
-                } group-hover:-translate-y-0.5 group-hover:translate-x-0.5`}
+                } group-hover:translate-x-0.5 group-hover:-translate-y-0.5`}
             />
         </Link>
     );
@@ -98,7 +98,7 @@ export default function NavbarMobileMenu({
             )}
 
             <div
-                className={`fixed top-0 right-0 bottom-0 z-50 flex w-[88%] max-w-sm flex-col border-l border-rim bg-canvas transition-transform duration-300 ease-out lg:hidden ${
+                className={`fixed top-0 right-0 z-50 flex h-dvh w-[88%] max-w-sm flex-col border-l border-rim bg-canvas transition-transform duration-300 ease-out lg:hidden ${
                     isOpen ? "translate-x-0" : "translate-x-full"
                 }`}
             >
@@ -154,11 +154,9 @@ export default function NavbarMobileMenu({
                             className={`group flex w-full items-baseline justify-between py-4 transition-colors duration-200 ${
                                 isHomeActive
                                     ? "text-cream"
-                                    : "text-muted-readable hover:text-cream"
+                                    : "text-cream/80 hover:text-cream"
                             }`}
-                            onClick={() =>
-                                setIsHomeMenuOpen((prev) => !prev)
-                            }
+                            onClick={() => setIsHomeMenuOpen((prev) => !prev)}
                             aria-expanded={isHomeMenuOpen}
                         >
                             <div className="flex items-baseline gap-4">
@@ -269,7 +267,7 @@ export default function NavbarMobileMenu({
                             width={14}
                             height={14}
                             aria-hidden="true"
-                            className="transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                            className="transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
                         />
                     </Link>
                     <button

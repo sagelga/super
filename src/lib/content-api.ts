@@ -50,6 +50,36 @@ interface SuperbrainTagsResponse {
     tags: string[];
 }
 
+interface SuperbrainLearnTopic {
+    slug: string;
+    title: string;
+    description?: string;
+    pageCount: number;
+}
+
+interface SuperbrainLearnPage {
+    slug: string;
+    title: string;
+    excerpt?: string;
+    html?: string;
+}
+
+interface SuperbrainLearnTopicDetail {
+    slug: string;
+    title: string;
+    description?: string;
+    pages: SuperbrainLearnPage[];
+}
+
+interface SuperbrainLearnTopicsResponse {
+    topics: SuperbrainLearnTopic[];
+    total: number;
+}
+
+interface SuperbrainLearnTopicSingleResponse {
+    topic: SuperbrainLearnTopicDetail;
+}
+
 // ─── Fetcher abstraction ──────────────────────────────────────────────────────
 
 export type SuperbrainEnv = {
@@ -239,6 +269,52 @@ export async function getAuthorsApi(
         return result;
     } catch (err) {
         console.error("[content-api] getAuthorsApi failed:", err);
+        return null;
+    }
+}
+
+/**
+ * Fetch all learn topics from Superbrain.
+ * Returns null on any error so the caller falls back to D1 / filesystem.
+ */
+export async function getLearnTopicsApi(
+    env: SuperbrainEnv,
+): Promise<{ slug: string; title: string; pageCount: number }[] | null> {
+    try {
+        const response = await superbrainFetch("/api/learn", env);
+        if (!response || !response.ok) return null;
+
+        const data = (await response.json()) as SuperbrainLearnTopicsResponse;
+        return data.topics;
+    } catch (err) {
+        console.error("[content-api] getLearnTopicsApi failed:", err);
+        return null;
+    }
+}
+
+/**
+ * Fetch a single learn topic with all its pages from Superbrain.
+ * Returns null on any error so the caller falls back to D1 / filesystem.
+ */
+export async function getLearnTopicApi(
+    slug: string,
+    env: SuperbrainEnv,
+): Promise<{
+    slug: string;
+    title: string;
+    description?: string;
+    pages: { slug: string; title: string; excerpt?: string; html?: string }[];
+} | null> {
+    try {
+        const response = await superbrainFetch(`/api/learn/${encodeURIComponent(slug)}`, env);
+        if (!response) return null;
+        if (response.status === 404) return null;
+        if (!response.ok) return null;
+
+        const data = (await response.json()) as SuperbrainLearnTopicSingleResponse;
+        return data.topic;
+    } catch (err) {
+        console.error("[content-api] getLearnTopicApi failed:", err);
         return null;
     }
 }

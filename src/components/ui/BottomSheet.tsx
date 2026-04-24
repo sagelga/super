@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useLayoutEffect, useRef } from "react";
 import "./BottomSheet.style.css";
 
 interface BottomSheetProps {
@@ -16,6 +16,9 @@ const BottomSheet: React.FC<BottomSheetProps> = ({
     title,
     children,
 }) => {
+    const bodyRef = useRef<HTMLDivElement>(null);
+    const innerRef = useRef<HTMLDivElement>(null);
+
     useEffect(() => {
         if (isOpen) {
             document.body.style.overflow = "hidden";
@@ -25,6 +28,27 @@ const BottomSheet: React.FC<BottomSheetProps> = ({
         return () => {
             document.body.style.overflow = "";
         };
+    }, [isOpen]);
+
+    useLayoutEffect(() => {
+        const inner = innerRef.current;
+        const outer = bodyRef.current;
+        if (!inner || !outer) return;
+
+        // Snap to initial height without animating on open
+        outer.style.transition = "none";
+        outer.style.height = `${inner.offsetHeight}px`;
+        void outer.offsetHeight; // force reflow
+        outer.style.transition = "";
+
+        const observer = new ResizeObserver(() => {
+            if (outer && inner) {
+                outer.style.height = `${inner.offsetHeight}px`;
+            }
+        });
+
+        observer.observe(inner);
+        return () => observer.disconnect();
     }, [isOpen]);
 
     const handleOverlayClick = (e: React.MouseEvent) => {
@@ -68,7 +92,11 @@ const BottomSheet: React.FC<BottomSheetProps> = ({
                         </svg>
                     </button>
                 </div>
-                <div className="bottom-sheet-body">{children}</div>
+                <div className="bottom-sheet-body" ref={bodyRef}>
+                    <div className="bottom-sheet-body-inner" ref={innerRef}>
+                        {children}
+                    </div>
+                </div>
             </div>
         </div>
     );

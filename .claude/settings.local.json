@@ -186,7 +186,21 @@
       "Bash(git merge:*)",
       "Bash(xargs kill *)",
       "Bash(npm info:*)",
-      "Bash(curl -s \"http://localhost:3000/_next/static/chunks/%5Broot-of-the-server%5D__dcb6f003._.css?t=$\\(date +%s%N\\)\")"
+      "Bash(curl -s \"http://localhost:3000/_next/static/chunks/%5Broot-of-the-server%5D__dcb6f003._.css?t=$\\(date +%s%N\\)\")",
+      "Bash(ps -p 73567,96318 -o pid,command)",
+      "Bash(kill 96318)",
+      "Bash(lsof -ti:3000)",
+      "mcp__0e75563b-4d4e-4e36-ad2e-fb81e6b53108__notion-fetch",
+      "mcp__0e75563b-4d4e-4e36-ad2e-fb81e6b53108__notion-search",
+      "mcp__0e75563b-4d4e-4e36-ad2e-fb81e6b53108__notion-update-page",
+      "mcp__claude_ai_Notion__notion-fetch",
+      "mcp__claude_ai_Notion__notion-search",
+      "mcp__claude_ai_Notion__notion-update-page",
+      "Bash(xargs cat *)",
+      "Bash(curl -s -o /Users/kumamon/Developer/super/public/fonts/devicon.woff \"https://cdn.jsdelivr.net/gh/devicons/devicon@latest/fonts/devicon.woff\")",
+      "Bash(curl -s -o /Users/kumamon/Developer/super/public/fonts/devicon.ttf \"https://cdn.jsdelivr.net/gh/devicons/devicon@latest/fonts/devicon.ttf\")",
+      "Bash(curl -sI \"https://cdn.jsdelivr.net/gh/devicons/devicon@latest/fonts/devicon.woff\")",
+      "Bash(curl -s \"https://cdn.jsdelivr.net/gh/devicons/devicon@2.17.0/devicon.min.css\")"
     ]
   },
   "hooks": {

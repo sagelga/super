@@ -72,11 +72,23 @@
   border-radius: 4px;
 }
 
+@keyframes panel-enter {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .settings-panel {
   outline: none;
   flex: 1;
   min-width: 0;
   overflow-y: auto;
+  animation: panel-enter 0.2s ease-out;
 }
 
 @media (max-width: 480px) {

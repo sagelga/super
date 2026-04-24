@@ -62,7 +62,11 @@ CREATE TABLE IF NOT EXISTS doc_projects (
 );
 
 CREATE TABLE IF NOT EXISTS learn_topics (
-    slug       TEXT PRIMARY KEY,
-    title      TEXT NOT NULL,
-    page_count INTEGER NOT NULL DEFAULT 0
+    slug              TEXT PRIMARY KEY,
+    title             TEXT NOT NULL,
+    description       TEXT NOT NULL DEFAULT '',
+    page_count        INTEGER NOT NULL DEFAULT 0,
+    notion_page_id    TEXT,
+    last_edited_time  TEXT,
+    synced_at         TEXT
 );

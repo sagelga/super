@@ -11,6 +11,7 @@ const TOPIC_ICONS: Record<string, string> = {
     git: "devicon-git-plain",
     sql: "devicon-mysql-plain",
     spss: "devicon-r-plain",
+    "data-structures": "devicon-c-plain",
 };
 
 interface LearnTopic {
@@ -32,92 +33,80 @@ const LearnPreviewSection: React.FC<LearnPreviewSectionProps> = ({
     const { ref, isVisible } = useScrollReveal<HTMLDivElement>();
 
     const sorted = [...topics].sort((a, b) => b.pageCount - a.pageCount);
-    const [featured, ...rest] = sorted;
+    if (sorted.length === 0) return null;
 
-    if (!featured) return null;
+    const totalPages = sorted.reduce((sum, topic) => sum + topic.pageCount, 0);
 
     return (
         <Section spacing="generous" title={t("learn.eyebrow")}>
-            {/* Bento grid */}
             <div
                 ref={ref}
-                className={`reveal-stagger grid grid-cols-1 gap-3 md:grid-cols-3 ${isVisible ? "is-revealed" : ""}`}
+                className={`reveal-stagger ${isVisible ? "is-revealed" : ""}`}
             >
-                {/* Featured topic — full width */}
-                <Link
-                    href={`${langPrefix}/learn/${featured.slug}`}
-                    className="group flex min-h-[200px] flex-col justify-between border border-rim bg-canvas p-8 transition-colors duration-200 hover:border-accent/50 md:col-span-3"
-                >
-                    <div className="flex items-start gap-6">
-                        {TOPIC_ICONS[featured.slug] && (
-                            <i
-                                className={`${TOPIC_ICONS[featured.slug]} mt-1 text-5xl text-muted-readable transition-colors duration-200 group-hover:text-accent`}
-                            />
-                        )}
-                        <div>
-                            <h3 className="font-serif text-3xl text-cream transition-colors duration-200 group-hover:text-accent">
-                                {featured.title}
-                            </h3>
-                            <p className="mt-2 font-sans text-sm text-muted-readable">
-                                {t("learn.pages_count", {
-                                    count: featured.pageCount,
-                                })}
-                            </p>
-                        </div>
-                    </div>
-                    <div className="mt-6 flex items-center gap-3 self-end text-muted/40 transition-all duration-300 group-hover:text-accent">
-                        <span className="font-sans text-xs tracking-widest uppercase">
-                            {t("learn.title")}
-                        </span>
-                        <span className="transition-transform duration-300 group-hover:translate-x-1">
-                            →
-                        </span>
-                    </div>
-                </Link>
-
-                {/* Remaining topics — vertical cards */}
-                {rest.map((topic) => (
-                    <Link
-                        key={topic.slug}
-                        href={`${langPrefix}/learn/${topic.slug}`}
-                        className="group flex min-h-[160px] flex-col justify-between border border-rim bg-canvas p-6 transition-colors duration-200 hover:border-accent/50"
-                    >
-                        <div>
-                            {TOPIC_ICONS[topic.slug] && (
-                                <i
-                                    className={`${TOPIC_ICONS[topic.slug]} mb-4 text-3xl text-muted/40 transition-colors duration-200 group-hover:text-accent`}
+                <ol className="border-t border-rim/60">
+                    {sorted.map((topic, index) => (
+                        <li key={topic.slug} className="border-b border-rim/60">
+                            <Link
+                                href={`${langPrefix}/learn/${topic.slug}`}
+                                className="group relative grid grid-cols-[auto_1fr_auto] items-center gap-6 py-7 md:gap-10 md:py-9"
+                            >
+                                <span
+                                    aria-hidden
+                                    className="absolute inset-y-0 left-0 w-0 bg-accent/[0.06] transition-all duration-500 ease-out group-hover:w-full"
                                 />
-                            )}
-                            <h3 className="font-serif text-xl text-cream transition-colors duration-200 group-hover:text-accent">
-                                {topic.title}
-                            </h3>
-                        </div>
-                        <p className="mt-4 font-sans text-xs text-muted-readable">
-                            {t("learn.pages_count", { count: topic.pageCount })}
-                        </p>
-                    </Link>
-                ))}
-            </div>
 
-            {/* CTA banner */}
-            <Link
-                href={`${langPrefix}/learn`}
-                className="group mt-3 flex items-center justify-between border border-rim bg-canvas px-8 py-6 transition-all duration-300 hover:border-accent"
-            >
-                <div>
-                    <p className="font-sans text-xs tracking-[0.25em] text-muted uppercase">
-                        {t("learn.pages_count", {
-                            count: topics.reduce((s, t) => s + t.pageCount, 0),
-                        })}
-                    </p>
-                    <p className="mt-1 font-serif text-2xl text-cream transition-colors duration-200 group-hover:text-accent">
+                                <span className="relative font-sans text-xs tracking-[0.3em] text-accent/70 tabular-nums">
+                                    {String(index + 1).padStart(2, "0")}
+                                </span>
+
+                                <div className="relative flex items-baseline gap-4">
+                                    <h3 className="font-serif text-2xl leading-none text-cream transition-colors duration-200 group-hover:text-accent md:text-3xl lg:text-4xl">
+                                        {topic.title}
+                                    </h3>
+                                    <span className="hidden flex-1 translate-y-[-0.3em] border-b border-dotted border-rim transition-colors duration-300 group-hover:border-accent/50 md:block" />
+                                    <span className="hidden font-sans text-xs tracking-[0.18em] text-muted-readable uppercase md:inline">
+                                        {t("learn.pages_count", {
+                                            count: topic.pageCount,
+                                        })}
+                                    </span>
+                                </div>
+
+                                <div className="relative flex items-center gap-4">
+                                    {TOPIC_ICONS[topic.slug] && (
+                                        <i
+                                            aria-hidden="true"
+                                            className={`${TOPIC_ICONS[topic.slug]} text-2xl text-muted/60 transition-colors duration-200 group-hover:text-accent md:text-3xl`}
+                                        />
+                                    )}
+                                    <span aria-hidden="true" className="font-sans text-base text-muted/40 transition-all duration-300 group-hover:translate-x-1 group-hover:text-accent">
+                                        →
+                                    </span>
+                                </div>
+
+                                <span className="relative col-start-2 -mt-5 font-sans text-xs tracking-[0.18em] text-muted-readable uppercase md:hidden">
+                                    {t("learn.pages_count", {
+                                        count: topic.pageCount,
+                                    })}
+                                </span>
+                            </Link>
+                        </li>
+                    ))}
+                </ol>
+
+                <Link
+                    href={`${langPrefix}/learn`}
+                    className="group mt-10 inline-flex items-center gap-3 font-sans text-xs tracking-[0.25em] text-muted-readable uppercase transition-colors duration-200 hover:text-accent"
+                >
+                    <span className="h-px w-8 bg-accent/60 transition-all duration-300 group-hover:w-12 group-hover:bg-accent" />
+                    <span>
+                        {t("learn.pages_count", { count: totalPages })} ·{" "}
                         {t("learn.title")}
-                    </p>
-                </div>
-                <span className="text-2xl text-muted/40 transition-all duration-300 group-hover:translate-x-1.5 group-hover:text-accent">
-                    →
-                </span>
-            </Link>
+                    </span>
+                    <span className="transition-transform duration-300 group-hover:translate-x-1">
+                        →
+                    </span>
+                </Link>
+            </div>
         </Section>
     );
 };

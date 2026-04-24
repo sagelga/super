@@ -51,18 +51,44 @@ export interface ContentItem {
     source: string;
 }
 
-// Helper to get D1 database from Cloudflare context.
-// Returns null during Next.js build — avoids SQLite lock contention from parallel
-// generateStaticParams workers hitting the local wrangler D1 emulator.
-async function getContentDb(): Promise<D1Database | null> {
+// Module-level promise cache: ensures only ONE getCloudflareContext() call runs
+// per Node.js module instance, preventing concurrent SQLite opens from hammering
+// the local wrangler D1 emulator and causing SQLITE_BUSY_RECOVERY crashes.
+let _cfContextPromise: Promise<{
+    CONTENT_DB?: D1Database;
+    SUPERBRAIN?: unknown;
+    SUPERBRAIN_URL?: string;
+} | null> | null = null;
+
+async function getCfEnv(): Promise<{
+    CONTENT_DB?: D1Database;
+    SUPERBRAIN?: unknown;
+    SUPERBRAIN_URL?: string;
+} | null> {
     if (process.env.NEXT_PHASE === "phase-production-build") return null;
-    try {
-        const { getCloudflareContext } = await import("@opennextjs/cloudflare");
-        const ctx = await getCloudflareContext({ async: true });
-        return (ctx.env as { CONTENT_DB?: D1Database }).CONTENT_DB ?? null;
-    } catch {
-        return null;
+    if (!_cfContextPromise) {
+        _cfContextPromise = (async () => {
+            try {
+                const { getCloudflareContext } =
+                    await import("@opennextjs/cloudflare");
+                const ctx = await getCloudflareContext({ async: true });
+                return ctx.env as {
+                    CONTENT_DB?: D1Database;
+                    SUPERBRAIN?: unknown;
+                    SUPERBRAIN_URL?: string;
+                };
+            } catch {
+                return null;
+            }
+        })();
     }
+    return _cfContextPromise;
+}
+
+// Helper to get D1 database from Cloudflare context.
+async function getContentDb(): Promise<D1Database | null> {
+    const env = await getCfEnv();
+    return env?.CONTENT_DB ?? null;
 }
 
 // Helper to get the Superbrain API env (service binding or URL var).
@@ -70,19 +96,13 @@ async function getContentDb(): Promise<D1Database | null> {
 async function getSuperbrainEnv(): Promise<
     import("./content-api").SuperbrainEnv | null
 > {
-    if (process.env.NEXT_PHASE === "phase-production-build") return null;
-    try {
-        const { getCloudflareContext } = await import("@opennextjs/cloudflare");
-        const ctx = await getCloudflareContext({ async: true });
-        const env = ctx.env as import("./content-api").SuperbrainEnv;
-        if (!env.SUPERBRAIN && !env.SUPERBRAIN_URL) return null;
-        return {
-            SUPERBRAIN: env.SUPERBRAIN,
-            SUPERBRAIN_URL: env.SUPERBRAIN_URL,
-        };
-    } catch {
-        return null;
-    }
+    const env = await getCfEnv();
+    if (!env?.SUPERBRAIN && !env?.SUPERBRAIN_URL) return null;
+    return {
+        SUPERBRAIN:
+            env.SUPERBRAIN as import("./content-api").SuperbrainEnv["SUPERBRAIN"],
+        SUPERBRAIN_URL: env.SUPERBRAIN_URL,
+    };
 }
 
 // Recursively find all .md and .mdx files under a directory, return relative paths
@@ -318,16 +338,23 @@ function getAuthorsFs(): Record<string, AuthorInfo> {
     return result;
 }
 
-// Public async APIs — priority: Superbrain API → D1 → filesystem
+// Public async APIs — priority: D1 → Superbrain API → filesystem
 //
-// Superbrain is tried first for blog-related functions because it is the live
-// source of truth (Notion → KV). Docs/learn have no Superbrain equivalent so
-// they go straight to D1 → filesystem.
+// D1 is the primary store: the supereye-v2 worker mirrors Notion into
+// CONTENT_DB on its 15-min cron. Superbrain's KV-backed API remains a warm
+// fallback if D1 is empty or unreachable. Filesystem is the last resort for
+// local dev / disaster recovery.
 
 export async function getAllSlugs(
     section: "blog" | "docs" | "learn",
 ): Promise<string[][]> {
-    // Superbrain only covers blog posts; delegate docs/learn to D1/fs.
+    const db = await getContentDb();
+    if (db) {
+        const { getAllSlugsD1 } = await import("./content-d1");
+        const slugs = await getAllSlugsD1(db, section);
+        if (slugs.length > 0) return slugs;
+    }
+    // Superbrain only covers blog posts; docs/learn go to filesystem directly.
     if (section === "blog") {
         const superbrainEnv = await getSuperbrainEnv();
         if (superbrainEnv) {
@@ -336,12 +363,6 @@ export async function getAllSlugs(
             if (posts && posts.length > 0) return posts.map((p) => [p.slug]);
         }
     }
-    const db = await getContentDb();
-    if (db) {
-        const { getAllSlugsD1 } = await import("./content-d1");
-        const slugs = await getAllSlugsD1(db, section);
-        if (slugs.length > 0) return slugs;
-    }
     return getAllSlugsFs(section);
 }
 
@@ -349,7 +370,12 @@ export async function getContentBySlug(
     section: string,
     slugSegments: string[],
 ): Promise<ContentItem | null> {
-    // Try Superbrain for blog posts by slug.
+    const db = await getContentDb();
+    if (db) {
+        const { getContentBySlugD1 } = await import("./content-d1");
+        const item = await getContentBySlugD1(db, section, slugSegments);
+        if (item) return item;
+    }
     if (section === "blog") {
         const superbrainEnv = await getSuperbrainEnv();
         if (superbrainEnv) {
@@ -361,26 +387,52 @@ export async function getContentBySlug(
             if (item) return item;
         }
     }
-    const db = await getContentDb();
-    if (db) {
-        const { getContentBySlugD1 } = await import("./content-d1");
-        return getContentBySlugD1(db, section, slugSegments);
+    if (section === "learn") {
+        const superbrainEnv = await getSuperbrainEnv();
+        if (superbrainEnv) {
+            const { getLearnTopicApi } = await import("./content-api");
+            const topicSlug = slugSegments[0];
+            const topic = await getLearnTopicApi(topicSlug, superbrainEnv);
+            if (topic) {
+                if (slugSegments.length === 1) {
+                    const firstPage = topic.pages[0];
+                    return {
+                        frontmatter: {
+                            title: topic.title,
+                            description: topic.description ?? "",
+                        },
+                        source: firstPage?.html ?? topic.description ?? "",
+                    };
+                }
+                const pageSlug = slugSegments.slice(1).join("/");
+                const page = topic.pages.find((p) => p.slug === pageSlug);
+                if (page) {
+                    return {
+                        frontmatter: {
+                            title: page.title,
+                            description: page.excerpt ?? "",
+                        },
+                        source: page.html ?? page.excerpt ?? "",
+                    };
+                }
+            }
+        }
     }
     return getContentBySlugFs(section, slugSegments);
 }
 
 export async function getBlogPosts(): Promise<BlogPost[]> {
-    const superbrainEnv = await getSuperbrainEnv();
-    if (superbrainEnv) {
-        const { getBlogPostsApi } = await import("./content-api");
-        const posts = await getBlogPostsApi(superbrainEnv);
-        if (posts && posts.length > 0) return posts;
-    }
     const db = await getContentDb();
     if (db) {
         const { getBlogPostsD1 } = await import("./content-d1");
         const posts = await getBlogPostsD1(db);
         if (posts.length > 0) return posts;
+    }
+    const superbrainEnv = await getSuperbrainEnv();
+    if (superbrainEnv) {
+        const { getBlogPostsApi } = await import("./content-api");
+        const posts = await getBlogPostsApi(superbrainEnv);
+        if (posts && posts.length > 0) return posts;
     }
     return getBlogPostsFs();
 }
@@ -409,11 +461,11 @@ export async function getLearnTopics(): Promise<
         pageCount: number;
     }[]
 > {
-    const db = await getContentDb();
-    if (db) {
-        const { getLearnTopicsD1 } = await import("./content-d1");
-        const topics = await getLearnTopicsD1(db);
-        if (topics.length > 0) return topics;
+    const superbrainEnv = await getSuperbrainEnv();
+    if (superbrainEnv) {
+        const { getLearnTopicsApi } = await import("./content-api");
+        const topics = await getLearnTopicsApi(superbrainEnv);
+        if (topics && topics.length > 0) return topics;
     }
     return getLearnTopicsFs();
 }
@@ -422,31 +474,33 @@ export async function getAdjacentBlogPosts(slug: string): Promise<{
     prev: { slug: string; title: string } | null;
     next: { slug: string; title: string } | null;
 }> {
+    const db = await getContentDb();
+    if (db) {
+        const { getAdjacentBlogPostsD1 } = await import("./content-d1");
+        const adjacent = await getAdjacentBlogPostsD1(db, slug);
+        if (adjacent.prev || adjacent.next) return adjacent;
+    }
     const superbrainEnv = await getSuperbrainEnv();
     if (superbrainEnv) {
         const { getAdjacentBlogPostsApi } = await import("./content-api");
         const adjacent = await getAdjacentBlogPostsApi(slug, superbrainEnv);
         if (adjacent) return adjacent;
     }
-    const db = await getContentDb();
-    if (db) {
-        const { getAdjacentBlogPostsD1 } = await import("./content-d1");
-        return getAdjacentBlogPostsD1(db, slug);
-    }
     return getAdjacentBlogPostsFs(slug);
 }
 
 export async function getAuthors(): Promise<Record<string, AuthorInfo>> {
+    const db = await getContentDb();
+    if (db) {
+        const { getAuthorsD1 } = await import("./content-d1");
+        const authors = await getAuthorsD1(db);
+        if (Object.keys(authors).length > 0) return authors;
+    }
     const superbrainEnv = await getSuperbrainEnv();
     if (superbrainEnv) {
         const { getAuthorsApi } = await import("./content-api");
         const authors = await getAuthorsApi(superbrainEnv);
         if (authors) return authors;
-    }
-    const db = await getContentDb();
-    if (db) {
-        const { getAuthorsD1 } = await import("./content-d1");
-        return getAuthorsD1(db);
     }
     return getAuthorsFs();
 }

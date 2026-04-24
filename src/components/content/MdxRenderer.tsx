@@ -1,4 +1,5 @@
 import { unified } from "unified";
+import "@/styles/prose.css";
 import remarkParse from "remark-parse";
 import remarkGfm from "remark-gfm";
 import remarkRehype from "remark-rehype";

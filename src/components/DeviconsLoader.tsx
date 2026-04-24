@@ -6,8 +6,7 @@ export default function DeviconsLoader() {
     useEffect(() => {
         const link = document.createElement("link");
         link.rel = "stylesheet";
-        link.href =
-            "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css";
+        link.href = "/devicons-subset.css";
         document.head.appendChild(link);
     }, []);
     return null;

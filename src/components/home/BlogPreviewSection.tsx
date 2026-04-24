@@ -153,7 +153,7 @@ const BlogPreviewSection: React.FC<BlogPreviewSectionProps> = ({ posts }) => {
                         {t("nav.blog")}
                     </p>
                 </div>
-                <span className="text-2xl text-muted/40 transition-all duration-300 group-hover:translate-x-1.5 group-hover:text-accent">
+                <span aria-hidden="true" className="text-2xl text-muted/40 transition-all duration-300 group-hover:translate-x-1.5 group-hover:text-accent">
                     →
                 </span>
             </Link>

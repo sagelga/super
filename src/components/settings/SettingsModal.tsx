@@ -68,7 +68,12 @@ const TAB_ICONS: Record<SettingsTab, React.ReactNode> = {
             strokeLinecap="round"
             strokeLinejoin="round"
         >
-            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+            <path d="M12 2a10 10 0 1 0 10 10 4 4 0 0 1-5-5 4 4 0 0 1-5-5" />
+            <path d="M8.5 8.5v.01" />
+            <path d="M16 15.5v.01" />
+            <path d="M12 12v.01" />
+            <path d="M11 17v.01" />
+            <path d="M7 14v.01" />
         </svg>
     ),
 };
@@ -139,6 +144,7 @@ const SettingsModal: React.FC<SettingsModalProps> = ({
                 </div>
 
                 <div
+                    key={activeTab}
                     role="tabpanel"
                     id={`settings-panel-${activeTab}`}
                     aria-labelledby={`settings-tab-${activeTab}`}

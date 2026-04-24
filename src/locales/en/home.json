@@ -35,29 +35,82 @@
     "languages_section_title": "Languages",
     "skills": {
         "core": [
-            "JavaScript", "TypeScript", "Python", "React", "Next.js",
-            "Salesforce CRM (SFDC)", "Salesforce Apex", "MySQL", "PostgreSQL", "Data Analysis"
+            "JavaScript",
+            "TypeScript",
+            "Python",
+            "React",
+            "Next.js",
+            "Salesforce CRM (SFDC)",
+            "Salesforce Apex",
+            "MySQL",
+            "PostgreSQL",
+            "Data Analysis"
         ],
         "proficient": [
-            "Node.js", "Vue", "HTML", "CSS", "MongoDB",
-            "Salesforce SOQL", "Salesforce Marketing Cloud (SFMC)",
-            "Amazon Web Services (AWS)", "Git", "Docker", "GitHub",
-            "Cloudflare Worker", "API Integration", "SEO",
-            "IBM SPSS Statistics", "Statistical Modeling", "Regression Analysis",
-            "Oracle SQL", "Microsoft T-SQL", "Oracle PL/SQL",
-            "Figma", "Notion"
+            "Node.js",
+            "Vue",
+            "HTML",
+            "CSS",
+            "MongoDB",
+            "Salesforce SOQL",
+            "Salesforce Marketing Cloud (SFMC)",
+            "Amazon Web Services (AWS)",
+            "Git",
+            "Docker",
+            "GitHub",
+            "Cloudflare Worker",
+            "API Integration",
+            "SEO",
+            "IBM SPSS Statistics",
+            "Statistical Modeling",
+            "Regression Analysis",
+            "Oracle SQL",
+            "Microsoft T-SQL",
+            "Oracle PL/SQL",
+            "Figma",
+            "Notion"
         ],
         "familiar": [
-            "Express.js", "MongoDB", "Java", "C (Programming Language)", "Game Development",
-            "Google Analytics", "Google Apps Script", "Google Forms", "Google AI Studio",
-            "Google Search Console", "Bing Webmaster Tools", "Meta Business Suite",
-            "Postman", "Jira", "DataGrip", "Visual Studio Code", "Jupyter Notebook",
-            "Netlify", "Docusaurus", "Cloudinary", "Cloudflare Pages", "Cloudflare D2", "Algolia",
-            "WordPress", "Parse Platform", "Digital Ocean Spaces", "Webhook",
-            "Canva", "Ahrefs", "Hotjar", "Microsoft Office",
-            "ChatGPT", "DALL·E", "Perplexity",
-            "Content Creation", "Content Monetization", "Workflow Automation",
-            "Oracle ERP", "Data Quality", "Data Normalization"
+            "Express.js",
+            "MongoDB",
+            "Java",
+            "C (Programming Language)",
+            "Game Development",
+            "Google Analytics",
+            "Google Apps Script",
+            "Google Forms",
+            "Google AI Studio",
+            "Google Search Console",
+            "Bing Webmaster Tools",
+            "Meta Business Suite",
+            "Postman",
+            "Jira",
+            "DataGrip",
+            "Visual Studio Code",
+            "Jupyter Notebook",
+            "Netlify",
+            "Docusaurus",
+            "Cloudinary",
+            "Cloudflare Pages",
+            "Cloudflare D2",
+            "Algolia",
+            "WordPress",
+            "Parse Platform",
+            "Digital Ocean Spaces",
+            "Webhook",
+            "Canva",
+            "Ahrefs",
+            "Hotjar",
+            "Microsoft Office",
+            "ChatGPT",
+            "DALL·E",
+            "Perplexity",
+            "Content Creation",
+            "Content Monetization",
+            "Workflow Automation",
+            "Oracle ERP",
+            "Data Quality",
+            "Data Normalization"
         ]
     },
     "projects": [
@@ -66,14 +119,24 @@
             "description": "Personal portfolio website built with Next.js and Cloudflare Pages, integrating with Superbrain API. Orchestrated development using Gemini 2.5 Flash/Pro models for code generation and task execution.",
             "githubLink": "https://github.com/sagelga/super",
             "demoLink": "https://sagelga.com",
-            "stack": ["Next.js", "React", "TypeScript", "Cloudflare Pages"]
+            "stack": [
+                "Next.js",
+                "React",
+                "TypeScript",
+                "Cloudflare Pages"
+            ]
         },
         {
             "title": "Superbrain",
             "description": "API for blog content, retrieving Notion changes and storing them in Cloudflare D2 for fast retrieval. Fully runs on Cloudflare Workers; orchestrated development using Gemini models.",
             "githubLink": "https://github.com/sagelga/superbrain",
             "demoLink": "",
-            "stack": ["Cloudflare Worker", "Notion API", "Cloudflare D2", "TypeScript"]
+            "stack": [
+                "Cloudflare Worker",
+                "Notion API",
+                "Cloudflare D2",
+                "TypeScript"
+            ]
         },
         {
             "title": "Todoist Notion Sync",
@@ -81,84 +144,135 @@
             "githubLink": "https://github.com/sagelga/todoist-tagging",
             "demoLink": "",
             "imageUrl": "/images/placeholder-project.png",
-            "stack": ["Cloudflare Worker", "Webhook", "Notion API", "Todoist API"]
+            "stack": [
+                "Cloudflare Worker",
+                "Webhook",
+                "Notion API",
+                "Todoist API"
+            ]
         },
         {
             "title": "Learn with sagelga",
             "description": "Rebuilt learn.sagelga.com with Docusaurus, React, and TypeScript, enhancing search and speed to empower Python and SQL learners.",
             "githubLink": "https://github.com/sagelga/learn-with-sagelga",
             "demoLink": "https://learn.sagelga.com",
-            "stack": ["Docusaurus", "React", "TypeScript"]
+            "stack": [
+                "Docusaurus",
+                "React",
+                "TypeScript"
+            ]
         },
         {
             "title": "Byteside.one",
             "description": "Founded ByteSide.one, a tech, gadget, and gaming news publication, achieving 2.79 million Google Search impressions and 200k+ monthly Facebook impressions by Jan 2023.",
             "githubLink": "",
             "demoLink": "https://byteside.one/",
-            "stack": ["Next.js", "React", "TypeScript", "SEO"]
+            "stack": [
+                "Next.js",
+                "React",
+                "TypeScript",
+                "SEO"
+            ]
         },
         {
             "title": "The Sunny Side Publication",
             "description": "Pioneered 'The Sunny Side' publication on Medium, a precursor to ByteSide.one, showcasing early content creation and publishing expertise.",
             "githubLink": "",
             "demoLink": "https://medium.com/the-sunny-side",
-            "stack": ["Medium", "Publishing", "Content Creation"]
+            "stack": [
+                "Medium",
+                "Publishing",
+                "Content Creation"
+            ]
         },
         {
             "title": "Approval Workflow on Google Apps Script",
             "description": "Developed an automated approval workflow for IMST using Google Apps Script, streamlining IT, Requisition, and Procurement processes with automated email triggers and Google Forms integration.",
             "githubLink": "https://github.com/sagelga/approval-workflow",
             "demoLink": "https://docs.sagelga.com/approval-workflow/",
-            "stack": ["Google Apps Script", "Google Forms", "Workflow Automation"]
+            "stack": [
+                "Google Apps Script",
+                "Google Forms",
+                "Workflow Automation"
+            ]
         },
         {
             "title": "Essilor Asia Supplier Deduplication Report",
             "description": "Developed Oracle SQL and PL/SQL scripts for Essilor Asia and Europe, generating supplier deduplication reports to enhance data quality in production Oracle ERP, including similarity scoring and normalization.",
             "githubLink": "",
             "demoLink": "",
-            "stack": ["Oracle SQL", "Oracle PL/SQL", "Oracle ERP"]
+            "stack": [
+                "Oracle SQL",
+                "Oracle PL/SQL",
+                "Oracle ERP"
+            ]
         },
         {
             "title": "Data Analytics on Body Fat",
             "description": "Conducted multi-regression analysis on body fat and body part size relationships using IBM SPSS Statistics to create statistical models.",
             "githubLink": "https://github.com/sagelga/bodyfat-regression",
             "demoLink": "",
-            "stack": ["IBM SPSS Statistics", "Regression Analysis", "Statistical Modeling"]
+            "stack": [
+                "IBM SPSS Statistics",
+                "Regression Analysis",
+                "Statistical Modeling"
+            ]
         },
         {
             "title": "Lecture sharing System (Oh Sheet!)",
             "description": "Developed 'Oh Sheet!', a lecture sharing system using Vue, Parse, NodeJS, ExpressJS, and Digital Ocean Spaces, designed for easy sharing and discovery of educational content.",
             "githubLink": "https://github.com/sagelga/oh-sheet",
             "demoLink": "https://docs.sagelga.com/oh-sheet/",
-            "stack": ["Vue", "Parse Platform", "Node.js", "Express.js", "Digital Ocean Spaces"]
+            "stack": [
+                "Vue",
+                "Parse Platform",
+                "Node.js",
+                "Express.js",
+                "Digital Ocean Spaces"
+            ]
         },
         {
             "title": "Online Space Reservation System",
             "description": "Designed and implemented an online space reservation system with PostgreSQL, Scala, GraphQL, and NodeJS, managing user requirements and approvals for building administrators.",
             "githubLink": "https://github.com/itforge-eros/panda-website",
             "demoLink": "https://docs.sagelga.com/project-panda/",
-            "stack": ["PostgreSQL", "Scala", "GraphQL", "Node.js"]
+            "stack": [
+                "PostgreSQL",
+                "Scala",
+                "GraphQL",
+                "Node.js"
+            ]
         },
         {
             "title": "Thai restaurant analysis",
             "description": "Analyzed the prevalence of Thai restaurants in the United States, investigating underlying causes and trends.",
             "githubLink": "https://github.com/sagelga/data-journal",
             "demoLink": "",
-            "stack": ["Python", "Data Analysis"]
+            "stack": [
+                "Python",
+                "Data Analysis"
+            ]
         },
         {
             "title": "Trash Melody",
             "description": "Developed 'Trash Melody', a fast-paced OSU!-inspired Java game, combining entertainment with education on trash categorization.",
             "githubLink": "https://github.com/sagelga/trashmelody",
             "demoLink": "https://docs.sagelga.com/trash-melody/",
-            "stack": ["Java", "Game Development"]
+            "stack": [
+                "Java",
+                "Game Development"
+            ]
         },
         {
             "title": "Point of Sales (POS) System",
             "description": "Engineered a comprehensive Point-of-Sale (POS) system in C, featuring analytics, stock/profit management, sales forecasting (Linear Regression), customer loyalty, and barcode scanner support, with data stored in CSV format.",
             "githubLink": "https://github.com/sagelga/ComPro_Project",
             "demoLink": "https://docs.sagelga.com/compro-project/",
-            "stack": ["C (Programming Language)", "CSV", "POS Systems"]
+            "stack": [
+                "C (Programming Language)",
+                "CSV",
+                "POS Systems"
+            ]
         }
     ],
     "experiences": [

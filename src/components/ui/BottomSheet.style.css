@@ -92,10 +92,14 @@
 }
 
 .bottom-sheet-body {
+  overflow: hidden;
+  transition: height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.bottom-sheet-body-inner {
   padding: 0.75rem;
   overflow-y: auto;
-  flex: 1;
-  min-height: 0;
+  max-height: calc(80dvh - 120px);
 }
 
 @media (max-width: 480px) {
@@ -107,7 +111,8 @@
     padding: 1rem 1.25rem;
   }
 
-  .bottom-sheet-body {
+  .bottom-sheet-body-inner {
     padding: 0.5rem;
+    max-height: calc(80dvh - 100px);
   }
 }

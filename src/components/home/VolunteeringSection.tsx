@@ -44,7 +44,7 @@ const VolunteeringSection: React.FC<VolunteeringSectionProps> = ({
                         {/* Year */}
                         {item.year && (
                             <div className="pt-1 text-right">
-                                <span className="font-display -translate-x-[10px] pt-1 text-5xl leading-none font-bold text-muted/20 select-none sm:text-6xl">
+                                <span aria-hidden="true" className="font-display -translate-x-[10px] pt-1 text-5xl leading-none font-bold text-muted/20 select-none sm:text-6xl">
                                     {item.year}
                                 </span>
                             </div>

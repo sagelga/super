@@ -191,6 +191,13 @@
   --z-tooltip:        70;
 }
 
+/* === Light mode overrides === */
+html:not(.dark),
+.light {
+  --color-muted: #5E574C;
+  --color-muted-readable: #7A7268;
+}
+
 /* === Container Widths / Layout === */
 :root {
   --container-sm:    640px;

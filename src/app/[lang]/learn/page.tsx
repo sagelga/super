@@ -12,6 +12,7 @@ const TOPIC_ICONS: Record<string, string> = {
     git: "devicon-git-plain",
     sql: "devicon-mysql-plain",
     spss: "devicon-r-plain",
+    "data-structures": "devicon-c-plain",
 };
 
 export async function generateMetadata({
