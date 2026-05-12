@@ -14,7 +14,7 @@ const config: Config = {
         '^@/(.*)$': '<rootDir>/src/$1',
     },
     transform: {
-        '^.+\\.tsx?$': ['ts-jest', { tsconfig: { module: 'commonjs' } }],
+        '^.+\\.tsx?$': ['ts-jest', { tsconfig: 'tsconfig.test.json' }],
     },
     collectCoverageFrom: [
         'src/utils/**/*.ts',

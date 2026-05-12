@@ -51,9 +51,8 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({
         return () => mediaQuery.removeEventListener("change", handler);
     }, []);
 
-    useEffect(() => {
-        setMounted(true);
-    }, []);
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    useEffect(() => { setMounted(true); }, []);
 
     // Resolve the actual theme based on theme setting and system preference
     const resolvedTheme = theme === "system" ? systemPreference : theme;
