@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { getCookiePreferences, setCookiePreferences } from "@/utils/cookies";
@@ -12,18 +12,10 @@ interface PrivacySectionProps {
 
 const PrivacySection: React.FC<PrivacySectionProps> = ({ onSaved }) => {
     const t = useTranslations("cookies");
-    const [preferences, setPreferences] = useState({
-        functional: true,
-        analytics: false,
+    const [preferences, setPreferences] = useState(() => {
+        const prefs = getCookiePreferences();
+        return { functional: prefs.functional, analytics: prefs.analytics };
     });
-
-    useEffect(() => {
-        const currentPreferences = getCookiePreferences();
-        setPreferences({
-            functional: currentPreferences.functional,
-            analytics: currentPreferences.analytics,
-        });
-    }, []);
 
     const handleToggle = (key: keyof typeof preferences) => {
         if (key === "functional") return;

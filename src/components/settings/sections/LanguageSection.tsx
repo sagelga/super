@@ -56,8 +56,10 @@ const LanguageSection: React.FC = () => {
         const localeFree = pathname.startsWith(`/${currentLang}`)
             ? pathname.slice(`/${currentLang}`.length) || "/"
             : pathname;
-        window.location.href =
-            newLang === "th" ? localeFree : `/${newLang}${localeFree}`;
+        const newPath = newLang === "th" ? localeFree : `/${newLang}${localeFree}`;
+        // Full reload ensures all locale content refreshes correctly
+        // eslint-disable-next-line react-hooks/immutability
+        window.location.href = newPath;
     };
 
     return (
