@@ -145,7 +145,11 @@ export async function getBlogPostsApi(
         const data = (await response.json()) as SuperbrainPostsResponse;
         return data.posts
             .map(superbrainPostToBlogPost)
-            .filter((p) => Boolean(p.title));
+            .filter((p) => Boolean(p.title))
+            .sort(
+                (a, b) =>
+                    new Date(b.date).getTime() - new Date(a.date).getTime(),
+            );
     } catch (err) {
         console.error("[content-api] getBlogPostsApi failed:", err);
         return null;
