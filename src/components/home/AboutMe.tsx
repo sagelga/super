@@ -1,13 +1,10 @@
-"use client";
-
 import React from "react";
-import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
 import Section from "../common/Section";
-import { useScrollReveal } from "@/hooks/useScrollReveal";
+import RevealOnScroll from "../common/RevealOnScroll";
 
-const AboutMe: React.FC = () => {
-    const t = useTranslations("home");
-    const { ref, isVisible } = useScrollReveal<HTMLDivElement>();
+const AboutMe: React.FC = async () => {
+    const t = await getTranslations("home");
 
     return (
         <Section
@@ -16,10 +13,7 @@ const AboutMe: React.FC = () => {
             headingVariant="minimal"
             spacing="generous"
         >
-            <div
-                ref={ref}
-                className={`reveal grid grid-cols-1 gap-12 lg:grid-cols-3 lg:gap-16 ${isVisible ? "is-revealed" : ""}`}
-            >
+            <RevealOnScroll className="grid grid-cols-1 gap-12 lg:grid-cols-3 lg:gap-16">
                 {/* Introduction — spans 2 columns */}
                 <div className="lg:col-span-2">
                     <p className="font-display text-text border-l-2 border-accent pl-6 text-xl leading-relaxed">
@@ -40,7 +34,7 @@ const AboutMe: React.FC = () => {
                     </p>
                     <p className="text-sm text-muted">{t("about.grade")}</p>
                 </div>
-            </div>
+            </RevealOnScroll>
         </Section>
     );
 };

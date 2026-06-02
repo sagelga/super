@@ -1,11 +1,9 @@
-"use client";
-
 import React from "react";
 import Link from "next/link";
-import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
 import Section from "../common/Section";
 import BulletPoint from "../common/BulletPoint";
-import { useScrollReveal } from "@/hooks/useScrollReveal";
+import RevealOnScroll from "../common/RevealOnScroll";
 
 interface VolunteeringItem {
     title: string;
@@ -14,15 +12,9 @@ interface VolunteeringItem {
     link?: { text: string; href: string };
 }
 
-interface VolunteeringSectionProps {
-    volunteering: VolunteeringItem[];
-}
-
-const VolunteeringSection: React.FC<VolunteeringSectionProps> = ({
-    volunteering,
-}) => {
-    const t = useTranslations("home");
-    const { ref, isVisible } = useScrollReveal<HTMLDivElement>();
+const VolunteeringSection: React.FC = async () => {
+    const t = await getTranslations("home");
+    const volunteering = t.raw("volunteering") as VolunteeringItem[];
 
     return (
         <Section
@@ -32,10 +24,7 @@ const VolunteeringSection: React.FC<VolunteeringSectionProps> = ({
             variant="canvas"
             spacing="generous"
         >
-            <div
-                ref={ref}
-                className={`reveal-stagger max-w-4xl space-y-12 ${isVisible ? "is-revealed" : ""}`}
-            >
+            <RevealOnScroll stagger className="max-w-4xl space-y-12">
                 {volunteering.map((item, index) => (
                     <div
                         key={index}
@@ -80,7 +69,7 @@ const VolunteeringSection: React.FC<VolunteeringSectionProps> = ({
                         </div>
                     </div>
                 ))}
-            </div>
+            </RevealOnScroll>
         </Section>
     );
 };

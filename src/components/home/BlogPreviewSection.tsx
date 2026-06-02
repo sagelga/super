@@ -5,7 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useTranslations, useLocale } from "next-intl";
 import Section from "../common/Section";
-import { useScrollReveal } from "@/hooks/useScrollReveal";
+import RevealOnScroll from "../common/RevealOnScroll";
 import type { BlogPost } from "@/lib/content";
 
 interface BlogPreviewSectionProps {
@@ -16,16 +16,15 @@ const BlogPreviewSection: React.FC<BlogPreviewSectionProps> = ({ posts }) => {
     const t = useTranslations("common");
     const lang = useLocale();
     const langPrefix = lang === "th" ? "" : `/${lang}`;
-    const { ref, isVisible } = useScrollReveal<HTMLDivElement>();
 
     const [featured, ...rest] = posts;
 
     return (
         <Section spacing="generous" title={t("blog.eyebrow")}>
             {/* Bento grid */}
-            <div
-                ref={ref}
-                className={`reveal-stagger grid grid-cols-1 gap-3 md:grid-cols-3 ${isVisible ? "is-revealed" : ""}`}
+            <RevealOnScroll
+                stagger
+                className="grid grid-cols-1 gap-3 md:grid-cols-3"
             >
                 {/* Featured post — spans 2 cols + 2 rows */}
                 {featured && (
@@ -138,7 +137,7 @@ const BlogPreviewSection: React.FC<BlogPreviewSectionProps> = ({ posts }) => {
                         </div>
                     </Link>
                 ))}
-            </div>
+            </RevealOnScroll>
 
             {/* CTA banner */}
             <Link

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import HeroSection from "../../components/home/HeroSection";
@@ -11,7 +11,7 @@ import VolunteeringSection from "../../components/home/VolunteeringSection";
 import BlogPreviewSection from "../../components/home/BlogPreviewSection";
 import GalleryPreviewSection from "../../components/home/GalleryPreviewSection";
 import LearnPreviewSection from "../../components/home/LearnPreviewSection";
-import { getHomePageData } from "../../data/homePageData";
+import SectionSkeleton from "../../components/common/SectionSkeleton";
 import { getBlogPosts } from "../../lib/content";
 import { getLearnTopics } from "../../lib/content";
 import { getDocProjects } from "../../lib/content";
@@ -56,30 +56,53 @@ export async function generateMetadata({
     };
 }
 
-export default async function Home() {
-    const t = await getTranslations("home");
-    const { skills, projects, experiences, certifications, volunteering } =
-        getHomePageData(t);
+async function BlogPreviewSkeleton() {
+    const posts = (await getBlogPosts()).slice(0, 3);
+    return <BlogPreviewSection posts={posts} />;
+}
 
-    const blogPosts = (await getBlogPosts()).slice(0, 3);
-    const learnTopics = await getLearnTopics();
+async function LearnPreviewSkeleton() {
+    const topics = await getLearnTopics();
+    return <LearnPreviewSection topics={topics} />;
+}
+
+async function ProjectShowcaseSkeleton() {
+    const t = await getTranslations("home");
+    const projects = t.raw("projects") as Array<{
+        title: string;
+        description: string;
+        stack?: string[];
+        githubLink?: string;
+        demoLink?: string;
+        docsSlug?: string;
+    }>;
     const docProjects = (await getDocProjects()).sort(
         (a, b) => b.pageCount - a.pageCount,
     );
+    return <ProjectShowcase projects={projects} docProjects={docProjects} />;
+}
+
+export default async function Home() {
     const galleryItems = GALLERY_ITEMS.slice(0, 6);
 
     return (
         <main>
             <HeroSection />
             <AboutMe />
-            <SkillsList skills={skills} />
-            <ProjectShowcase projects={projects} docProjects={docProjects} />
-            <ExperienceSection experiences={experiences} />
-            <CertificationsSection certifications={certifications} />
-            <VolunteeringSection volunteering={volunteering} />
-            <BlogPreviewSection posts={blogPosts} />
+            <SkillsList />
+            <Suspense fallback={<SectionSkeleton variant="generous" />}>
+                <ProjectShowcaseSkeleton />
+            </Suspense>
+            <ExperienceSection />
+            <CertificationsSection />
+            <VolunteeringSection />
+            <Suspense fallback={<SectionSkeleton variant="generous" />}>
+                <BlogPreviewSkeleton />
+            </Suspense>
             <GalleryPreviewSection items={galleryItems} />
-            <LearnPreviewSection topics={learnTopics} />
+            <Suspense fallback={<SectionSkeleton variant="generous" />}>
+                <LearnPreviewSkeleton />
+            </Suspense>
         </main>
     );
 }

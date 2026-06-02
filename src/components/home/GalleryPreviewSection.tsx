@@ -5,7 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useTranslations, useLocale } from "next-intl";
 import Section from "../common/Section";
-import { useScrollReveal } from "@/hooks/useScrollReveal";
+import RevealOnScroll from "../common/RevealOnScroll";
 import { imageUrl, type GalleryItem } from "@/data/galleryItems";
 
 interface GalleryPreviewSectionProps {
@@ -31,7 +31,6 @@ const GalleryPreviewSection: React.FC<GalleryPreviewSectionProps> = ({
     const t = useTranslations("common");
     const lang = useLocale();
     const langPrefix = lang === "th" ? "" : `/${lang}`;
-    const { ref, isVisible } = useScrollReveal<HTMLDivElement>();
 
     return (
         <Section
@@ -40,9 +39,9 @@ const GalleryPreviewSection: React.FC<GalleryPreviewSectionProps> = ({
             title={t("gallery.eyebrow")}
         >
             {/* Bento grid — 4 cols, 3 implicit rows with fixed heights */}
-            <div
-                ref={ref}
-                className={`reveal-stagger grid grid-cols-2 grid-rows-[180px_180px] gap-2 md:grid-cols-4 md:grid-rows-[220px_220px_180px] ${isVisible ? "is-revealed" : ""}`}
+            <RevealOnScroll
+                stagger
+                className="grid grid-cols-2 grid-rows-[180px_180px] gap-2 md:grid-cols-4 md:grid-rows-[220px_220px_180px]"
             >
                 {items.slice(0, 6).map((item, i) => (
                     <Link
@@ -67,7 +66,7 @@ const GalleryPreviewSection: React.FC<GalleryPreviewSectionProps> = ({
                         </div>
                     </Link>
                 ))}
-            </div>
+            </RevealOnScroll>
 
             {/* CTA banner */}
             <Link
