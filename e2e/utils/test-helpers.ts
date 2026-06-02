@@ -95,3 +95,41 @@ export async function acceptCookiesIfVisible(page: Page): Promise<void> {
     await page.waitForTimeout(500);
   }
 }
+
+/**
+ * Pre-set cookie consent in localStorage BEFORE the page loads. This prevents
+ * the cookie consent bottom-sheet (which uses an overlay) from blocking clicks
+ * on other interactive elements like the settings button.
+ *
+ * Must be called BEFORE page.goto() so the addInitScript runs at navigation.
+ *
+ * Note: The app invalidates stored preferences if `consentVersion` doesn't
+ * match the current CONSENT_VERSION constant. If the version string in
+ * src/types/index.ts is bumped, update the value below.
+ */
+const CONSENT_VERSION = "2026-04-19";
+
+export async function dismissCookieBannerBeforeLoad(page: Page): Promise<void> {
+  await page.addInitScript(
+    ({ version }) => {
+      // Only set defaults if the user hasn't already made a choice.
+      // This lets tests toggle a preference and verify persistence
+      // across page.reload() without our defaults clobbering the
+      // persisted state.
+      try {
+        if (localStorage.getItem("cookie_consent")) return;
+        const prefs = {
+          functional: true,
+          analytics: false,
+          consentGiven: true,
+          consentTimestamp: Date.now(),
+          consentVersion: version,
+        };
+        localStorage.setItem("cookie_consent", JSON.stringify(prefs));
+      } catch {
+        // localStorage may not be available; ignore
+      }
+    },
+    { version: CONSENT_VERSION }
+  );
+}
