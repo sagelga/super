@@ -11,31 +11,37 @@ export default getRequestConfig(async ({ requestLocale }) => {
     const locale = (await requestLocale) ?? defaultLocale;
     if (!locales.includes(locale)) notFound();
 
-    const common = (await import(`./locales/${locale}/common.json`)).default;
-    const home = (await import(`./locales/${locale}/home.json`)).default;
-    const docs = (await import(`./locales/${locale}/docs.json`)).default;
-    const learn = (await import(`./locales/${locale}/learn.json`)).default;
-    const metadata = (await import(`./locales/${locale}/metadata.json`))
-        .default;
-    const privacyPolicy = (
-        await import(`./locales/${locale}/privacy-policy.json`)
-    ).default;
-    const termsOfService = (
-        await import(`./locales/${locale}/terms-of-service.json`)
-    ).default;
-    const cookies = (await import(`./locales/${locale}/cookies.json`)).default;
+    const [
+        common,
+        home,
+        docs,
+        learn,
+        metadata,
+        privacyPolicy,
+        termsOfService,
+        cookies,
+    ] = await Promise.all([
+        import(`./locales/${locale}/common.json`),
+        import(`./locales/${locale}/home.json`),
+        import(`./locales/${locale}/docs.json`),
+        import(`./locales/${locale}/learn.json`),
+        import(`./locales/${locale}/metadata.json`),
+        import(`./locales/${locale}/privacy-policy.json`),
+        import(`./locales/${locale}/terms-of-service.json`),
+        import(`./locales/${locale}/cookies.json`),
+    ]);
 
     return {
         locale,
         messages: {
-            common,
-            home,
-            docs,
-            learn,
-            metadata,
-            "privacy-policy": privacyPolicy,
-            "terms-of-service": termsOfService,
-            cookies,
+            common: common.default,
+            home: home.default,
+            docs: docs.default,
+            learn: learn.default,
+            metadata: metadata.default,
+            "privacy-policy": privacyPolicy.default,
+            "terms-of-service": termsOfService.default,
+            cookies: cookies.default,
         } as AbstractIntlMessages,
     };
 });
