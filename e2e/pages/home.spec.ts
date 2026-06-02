@@ -127,7 +127,7 @@ test.describe("mobile home layout", () => {
         const nav = page.locator("nav").first();
         await expect(nav).toBeVisible();
 
-        const hamburger = nav.locator("button[aria-expanded]");
+        const hamburger = nav.locator("button[aria-expanded][aria-label]");
         await expect(hamburger).toBeVisible();
     });
 
@@ -139,7 +139,7 @@ test.describe("mobile home layout", () => {
         await acceptCookiesIfVisible(page);
 
         const nav = page.locator("nav").first();
-        const hamburger = nav.locator("button[aria-expanded]");
+        const hamburger = nav.locator("button[aria-expanded][aria-label]");
 
         if (await hamburger.isVisible({ timeout: 3000 }).catch(() => false)) {
             await hamburger.click();

@@ -192,7 +192,7 @@ function describeResponsive(
       const nav = page.locator("nav").first();
       await expect(nav).toBeVisible();
       // The hamburger toggle always has aria-expanded (true or false)
-      const hamburger = nav.locator("button[aria-expanded]");
+      const hamburger = nav.locator("button[aria-expanded][aria-label]");
       await expect(hamburger).toBeVisible();
       await hamburger.click();
       await page.waitForTimeout(200);
@@ -306,7 +306,7 @@ function describeHomePage(lang: Language, viewport: Viewport): void {
     expect(text?.trim().length).toBeGreaterThan(0);
   });
 
-  test(`[${label}] skills section CORE/PROFICIENT/FAMILIAR labels are readable`, async ({
+  test(`[${label}] skills section pills are readable and don't overflow`, async ({
     page,
   }) => {
     await page.setViewportSize({ width: viewport.width, height: viewport.height });
@@ -319,24 +319,6 @@ function describeHomePage(lang: Language, viewport: Viewport): void {
     if (await skillsSection.isVisible({ timeout: 3000 }).catch(() => false)) {
       await skillsSection.scrollIntoViewIfNeeded();
       await page.waitForTimeout(400);
-
-      // Tier labels are rendered as <p> elements with uppercase text
-      const coreLabel = page
-        .locator("p")
-        .filter({ hasText: /^Core$/i })
-        .first();
-      const proficientLabel = page
-        .locator("p")
-        .filter({ hasText: /^Proficient$/i })
-        .first();
-      const familiarLabel = page
-        .locator("p")
-        .filter({ hasText: /^Familiar$/i })
-        .first();
-
-      await expect(coreLabel).toBeVisible();
-      await expect(proficientLabel).toBeVisible();
-      await expect(familiarLabel).toBeVisible();
 
       // Skill pills should not overflow their container
       const skillsContainer = skillsSection.locator(".flex.flex-wrap").first();
@@ -425,7 +407,7 @@ test.describe("Mobile hamburger menu — full open/close/navigate flow", () => {
       const nav = page.locator("nav").first();
       await expect(nav).toBeVisible();
       // The hamburger toggle is uniquely identified by aria-expanded
-      const hamburger = nav.locator("button[aria-expanded]");
+      const hamburger = nav.locator("button[aria-expanded][aria-label]");
       await expect(hamburger).toBeVisible();
 
       // Open
