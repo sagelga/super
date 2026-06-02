@@ -2,7 +2,12 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { Settings, X, ArrowUpRight, ChevronDown } from "lucide-react";
+import {
+    SettingsIcon,
+    CloseIcon,
+    ArrowUpRightIcon,
+    ChevronDownIcon,
+} from "./icons";
 import { useSettings } from "./settings/SettingsProvider";
 
 interface NavbarMobileMenuProps {
@@ -50,7 +55,7 @@ function MobileNavRow({
                     {label}
                 </span>
             </div>
-            <ArrowUpRight
+            <ArrowUpRightIcon
                 width={16}
                 height={16}
                 aria-hidden="true"
@@ -136,7 +141,7 @@ export default function NavbarMobileMenu({
                         className="flex h-9 w-9 items-center justify-center border border-rim text-muted transition-colors duration-200 hover:border-accent/50 hover:text-accent"
                         aria-label="Close menu"
                     >
-                        <X width={16} height={16} aria-hidden="true" />
+                        <CloseIcon width={16} height={16} aria-hidden="true" />
                     </button>
                 </div>
 
@@ -174,7 +179,7 @@ export default function NavbarMobileMenu({
                                     {t("nav.home")}
                                 </span>
                             </div>
-                            <ChevronDown
+                            <ChevronDownIcon
                                 width={16}
                                 height={16}
                                 aria-hidden="true"
@@ -263,7 +268,7 @@ export default function NavbarMobileMenu({
                         onClick={onClose}
                     >
                         <span>{t("nav.contact")}</span>
-                        <ArrowUpRight
+                        <ArrowUpRightIcon
                             width={14}
                             height={14}
                             aria-hidden="true"
@@ -279,7 +284,7 @@ export default function NavbarMobileMenu({
                         aria-label="Open settings"
                         className="flex aspect-square items-center justify-center border border-rim px-3 text-muted transition-colors duration-200 hover:border-accent/60 hover:text-accent"
                     >
-                        <Settings width={16} height={16} aria-hidden="true" />
+                        <SettingsIcon width={16} height={16} aria-hidden="true" />
                     </button>
                 </div>
             </div>

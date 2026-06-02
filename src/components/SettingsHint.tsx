@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useTranslations } from "next-intl";
-import { X } from "lucide-react";
+import { CloseIcon } from "./icons";
 
 function SettingsHint() {
     const t = useTranslations("common");
@@ -39,7 +39,7 @@ function SettingsHint() {
                 className="absolute top-2 right-2 text-muted transition-colors duration-150 hover:text-cream"
                 aria-label="Dismiss"
             >
-                <X width={12} height={12} />
+                <CloseIcon width={12} height={12} />
             </button>
             <p className="mb-1 text-xs font-medium tracking-wide text-cream">
                 {t("language.label")}

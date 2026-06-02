@@ -4,7 +4,12 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useLocale, useTranslations } from "next-intl";
 import { usePathname } from "next/navigation";
-import { Settings, X, Menu, ArrowUpRight } from "lucide-react";
+import {
+    SettingsIcon,
+    CloseIcon,
+    MenuIcon,
+    ArrowUpRightIcon,
+} from "./icons";
 import NavbarMobileMenu from "./NavbarMobileMenu";
 import NavbarReadingProgress from "./NavbarReadingProgress";
 import SettingsHint from "./SettingsHint";
@@ -199,7 +204,7 @@ function Navbar() {
                             className="group inline-flex items-center gap-2 border border-accent/50 px-4 py-1.5 font-sans text-sm tracking-wide text-accent transition-all duration-200 hover:border-accent hover:bg-accent hover:text-canvas"
                         >
                             <span>{t("nav.contact")}</span>
-                            <ArrowUpRight
+                            <ArrowUpRightIcon
                                 width={14}
                                 height={14}
                                 aria-hidden="true"
@@ -213,7 +218,7 @@ function Navbar() {
                                 aria-label="Open settings"
                                 className={`flex h-9 w-9 items-center justify-center border border-rim text-muted transition-colors duration-200 hover:border-accent/50 hover:text-accent ${globePulsing ? "navbar-globe-pulsing" : ""}`}
                             >
-                                <Settings
+                                <SettingsIcon
                                     width={15}
                                     height={15}
                                     aria-hidden="true"
@@ -233,9 +238,9 @@ function Navbar() {
                     onClick={() => setIsMobileMenuOpen((prev) => !prev)}
                 >
                     {isMobileMenuOpen ? (
-                        <X width={20} height={20} />
+                        <CloseIcon width={20} height={20} />
                     ) : (
-                        <Menu width={20} height={20} />
+                        <MenuIcon width={20} height={20} />
                     )}
                 </button>
             </div>
