@@ -4,9 +4,10 @@ import React, { useState, useCallback, useRef } from "react";
 import Link from "next/link";
 import { useTranslations, useLocale } from "next-intl";
 import Section from "../common/Section";
-import { useScrollReveal } from "@/hooks/useScrollReveal";
+import RevealOnScroll from "../common/RevealOnScroll";
 import { getIconClass } from "@/utils/iconMapping";
 import ProjectModal from "./ProjectModal";
+import "@/styles/devicons.css";
 
 interface Project {
     title: string;
@@ -396,9 +397,6 @@ const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({
         [currentPage, totalPages, goToPage],
     );
 
-    const { ref: gridRef, isVisible: gridVisible } =
-        useScrollReveal<HTMLDivElement>();
-
     const marqueeOffset = -(DOC_CARD_W + DOC_CARD_GAP) * docProjects.length;
     const loopedDocs = [...docProjects, ...docProjects];
     const marqueeDuration = Math.max(20, docProjects.length * 5);
@@ -416,10 +414,7 @@ const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({
                 })}
                 spacing="generous"
             >
-                <div
-                    ref={gridRef}
-                    className={`reveal ${gridVisible ? "is-revealed" : ""}`}
-                >
+                <RevealOnScroll>
                     {hero && (
                         <div className="mb-6">
                             <ProjectHeroCard
@@ -526,7 +521,7 @@ const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({
                             )}
                         </div>
                     )}
-                </div>
+                </RevealOnScroll>
 
                 {/* Documentation sub-section — auto-scroll marquee */}
                 {docProjects.length > 0 && (

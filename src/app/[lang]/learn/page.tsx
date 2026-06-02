@@ -4,6 +4,7 @@ import { getTranslations } from "next-intl/server";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { BASE_URL } from "@/lib/config";
+import "@/styles/devicons.css";
 
 const LOCALES = ["en", "th", "zh"] as const;
 

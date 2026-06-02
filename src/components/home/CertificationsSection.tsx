@@ -1,16 +1,15 @@
-"use client";
-
 import React from "react";
 import Link from "next/link";
-import { useTranslations } from "next-intl";
-import {
-    Award,
-    BookOpen,
-    GraduationCap,
-    Snowflake as SnowflakeIcon,
-} from "lucide-react";
+import { getTranslations } from "next-intl/server";
 import Section from "../common/Section";
-import { useScrollReveal } from "@/hooks/useScrollReveal";
+import RevealOnScroll from "../common/RevealOnScroll";
+import {
+    AwardIcon,
+    BookOpenIcon,
+    GraduationCapIcon,
+    SnowflakeIcon,
+} from "../icons";
+import "@/styles/devicons.css";
 
 interface CertificationItem {
     title: string;
@@ -18,10 +17,6 @@ interface CertificationItem {
     date?: string;
     url?: string;
     skills: string[];
-}
-
-interface CertificationsSectionProps {
-    certifications: CertificationItem[];
 }
 
 type IssuerIcon =
@@ -77,16 +72,16 @@ const inferIssuer = (cert: CertificationItem): Issuer => {
     )
         return {
             name: "Udemy",
-            icon: { kind: "lucide", Component: GraduationCap },
+            icon: { kind: "lucide", Component: GraduationCapIcon },
         };
     if (t.includes("prompt engineering") || t.includes("generative ai"))
         return {
             name: "Coursera",
-            icon: { kind: "lucide", Component: BookOpen },
+            icon: { kind: "lucide", Component: BookOpenIcon },
         };
     return {
         name: cert.issuer ?? "Certification",
-        icon: { kind: "lucide", Component: Award },
+        icon: { kind: "lucide", Component: AwardIcon },
     };
 };
 
@@ -170,11 +165,9 @@ const CertificationCard: React.FC<{
     );
 };
 
-const CertificationsSection: React.FC<CertificationsSectionProps> = ({
-    certifications,
-}) => {
-    const t = useTranslations("home");
-    const { ref, isVisible } = useScrollReveal<HTMLDivElement>();
+const CertificationsSection: React.FC = async () => {
+    const t = await getTranslations("home");
+    const certifications = t.raw("certifications") as CertificationItem[];
 
     return (
         <Section
@@ -184,9 +177,9 @@ const CertificationsSection: React.FC<CertificationsSectionProps> = ({
             headingVariant="minimal"
             spacing="compact"
         >
-            <div
-                ref={ref}
-                className={`reveal-stagger grid grid-cols-1 gap-px overflow-hidden rounded-xl bg-rim md:grid-cols-2 lg:grid-cols-3 ${isVisible ? "is-revealed" : ""}`}
+            <RevealOnScroll
+                stagger
+                className="grid grid-cols-1 gap-px overflow-hidden rounded-xl bg-rim md:grid-cols-2 lg:grid-cols-3"
             >
                 {certifications.map((cert, index) => (
                     <CertificationCard
@@ -195,7 +188,7 @@ const CertificationsSection: React.FC<CertificationsSectionProps> = ({
                         issuedLabel={t("issued_label")}
                     />
                 ))}
-            </div>
+            </RevealOnScroll>
         </Section>
     );
 };

@@ -42,7 +42,7 @@ const serif = IBM_Plex_Serif({
 // Thai display serif font — elegant traditional Thai serif for headings
 const serifThai = Trirong({
     variable: "--font-serif-thai",
-    weight: ["400", "500", "600", "700"],
+    weight: ["400", "600", "700"],
     subsets: ["thai", "latin"],
     display: "optional",
 });
@@ -210,14 +210,6 @@ export default async function RootLayout({
                         __html: `(function(){try{var s=localStorage.getItem('theme-preference');var prefersDark=window.matchMedia('(prefers-color-scheme: dark)').matches;var dark=s==='dark'||(s!=='light'&&prefersDark)||!s;document.documentElement.classList.toggle('dark',dark);}catch(e){}})();`,
                     }}
                 />
-                <link
-                    rel="preload"
-                    href="/fonts/devicon.woff"
-                    as="font"
-                    type="font/woff"
-                    crossOrigin="anonymous"
-                />
-                <link rel="stylesheet" href="/devicons-subset.css" />
                 <link rel="dns-prefetch" href="https://res.cloudinary.com" />
                 <link rel="dns-prefetch" href="https://images.unsplash.com" />
                 <link rel="icon" href="/favicon.ico" sizes="any" />

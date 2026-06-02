@@ -1,10 +1,9 @@
-"use client";
-
 import React from "react";
 import Link from "next/link";
-import { useTranslations, useLocale } from "next-intl";
+import { getLocale, getTranslations } from "next-intl/server";
 import Section from "../common/Section";
-import { useScrollReveal } from "@/hooks/useScrollReveal";
+import RevealOnScroll from "../common/RevealOnScroll";
+import "@/styles/devicons.css";
 
 const TOPIC_ICONS: Record<string, string> = {
     python: "devicon-python-plain",
@@ -24,13 +23,12 @@ interface LearnPreviewSectionProps {
     topics: LearnTopic[];
 }
 
-const LearnPreviewSection: React.FC<LearnPreviewSectionProps> = ({
+const LearnPreviewSection: React.FC<LearnPreviewSectionProps> = async ({
     topics,
 }) => {
-    const t = useTranslations("common");
-    const lang = useLocale();
+    const t = await getTranslations("common");
+    const lang = await getLocale();
     const langPrefix = lang === "th" ? "" : `/${lang}`;
-    const { ref, isVisible } = useScrollReveal<HTMLDivElement>();
 
     const sorted = [...topics].sort((a, b) => b.pageCount - a.pageCount);
     if (sorted.length === 0) return null;
@@ -39,10 +37,7 @@ const LearnPreviewSection: React.FC<LearnPreviewSectionProps> = ({
 
     return (
         <Section spacing="generous" title={t("learn.eyebrow")}>
-            <div
-                ref={ref}
-                className={`reveal-stagger ${isVisible ? "is-revealed" : ""}`}
-            >
+            <RevealOnScroll stagger>
                 <ol className="border-t border-rim/60">
                     {sorted.map((topic, index) => (
                         <li key={topic.slug} className="border-b border-rim/60">
@@ -106,7 +101,7 @@ const LearnPreviewSection: React.FC<LearnPreviewSectionProps> = ({
                         →
                     </span>
                 </Link>
-            </div>
+            </RevealOnScroll>
         </Section>
     );
 };
