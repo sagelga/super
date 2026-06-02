@@ -4,6 +4,7 @@ import React from "react";
 import Link from "next/link";
 import { useLocale, useTranslations } from "next-intl";
 import Breadcrumb from "./Breadcrumb";
+import FooterBottom from "./FooterBottom";
 import { useSettings } from "./settings/SettingsProvider";
 import "./Footer.style.css";
 
@@ -145,12 +146,11 @@ const Footer: React.FC = () => {
                         </div>
                     </div>
                     <hr className="footer-divider" />
-                    <div className="footer-bottom">
-                        <span>
-                            © 2021–{new Date().getFullYear()} Kunanon
-                            Srisuntiroj
-                        </span>
-                        <div className="flex items-center gap-6">
+                    <FooterBottom
+                        onLanguageClick={() => openSettings("language")}
+                        onCookieClick={() => openSettings("privacy")}
+                        onThemeClick={() => openSettings("appearance")}
+                        extra={
                             <a
                                 href="https://webring.wonderful.software#hewkawar.xyz"
                                 title="วงแหวนเว็บ"
@@ -166,28 +166,8 @@ const Footer: React.FC = () => {
                                     src="https://webring.wonderful.software/webring.white.svg"
                                 />
                             </a>
-                            <button
-                                onClick={() => openSettings()}
-                                className="footer-toggle-btn"
-                            >
-                                <svg
-                                    width="14"
-                                    height="14"
-                                    viewBox="0 0 24 24"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    strokeWidth="2.2"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    aria-hidden="true"
-                                >
-                                    <circle cx="12" cy="12" r="3" />
-                                    <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z" />
-                                </svg>
-                                <span>{t("settings.title")}</span>
-                            </button>
-                        </div>
-                    </div>
+                        }
+                    />
                 </div>
             </footer>
         </div>

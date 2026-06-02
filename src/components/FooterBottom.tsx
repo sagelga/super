@@ -7,12 +7,14 @@ interface FooterBottomProps {
     onLanguageClick: () => void;
     onCookieClick: () => void;
     onThemeClick: () => void;
+    extra?: React.ReactNode;
 }
 
 export default function FooterBottom({
     onLanguageClick,
     onCookieClick,
     onThemeClick,
+    extra,
 }: FooterBottomProps) {
     const t = useTranslations("common");
 
@@ -79,6 +81,7 @@ export default function FooterBottom({
                     </svg>
                     <span>{t("theme.title")}</span>
                 </button>
+                {extra}
             </div>
         </div>
     );
