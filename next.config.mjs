@@ -9,7 +9,7 @@ const withBundleAnalyzer = bundleAnalyzer({
 
 const nextConfig = {
   experimental: {
-    optimizePackageImports: ['@cloudflare/next-on-pages', 'next-intl', 'next-mdx-remote'],
+    optimizePackageImports: ['@cloudflare/next-on-pages', 'next-intl', 'next-mdx-remote', 'lucide-react'],
   },
   images: {
     remotePatterns: [
