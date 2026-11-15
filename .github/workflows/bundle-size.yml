@@ -10,10 +10,16 @@ on:
       - "package-lock.json"
       - "next.config.mjs"
       - "tailwind.config.mjs"
+  push:
+    # The push run stores the baseline bundle that PRs are compared against.
+    branches:
+      - main
+  workflow_dispatch:
 
 permissions:
   contents: read
   pull-requests: write
+  actions: read
 
 jobs:
   bundle-size:
@@ -34,11 +40,14 @@ jobs:
         run: npm run build
         env:
           NEXT_TELEMETRY_DISABLED: 1
+          # Next.js 16 (Turbopack) only writes .next/diagnostics/route-bundle-stats.json
+          # when this flag is set. The analyzer below reads that file.
+          TURBOPACK_STATS: 1
 
       - name: Analyze bundle size
-        uses: transferwise/actions-next-bundle-analyzer@v2
+        uses: michalsanger/nextjs-turbopack-bundle-size@v1
         with:
-          workflow-id: bundle-size.yml
-          base-branch: main
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          stats-path: .next/diagnostics/route-bundle-stats.json
+          minimum-change-threshold: 256
+          budget-percent-increase-red: 20
