@@ -1,8 +1,32 @@
 import { test, expect } from "@playwright/test";
+import { Page, Locator } from "@playwright/test";
 import {
     waitForPageLoad,
     dismissCookieBannerBeforeLoad,
 } from "../utils/test-helpers";
+
+/**
+ * The BackToTop reveal depends on a scroll listener registered in useEffect.
+ * Hydration timing is not observable, so keep scrolling until the listener
+ * has run and the button becomes interactive.
+ */
+async function scrollUntilBackToTopVisible(
+    page: Page,
+    button: Locator,
+): Promise<void> {
+    await expect
+        .poll(
+            async () => {
+                await page.evaluate(() => window.scrollTo(0, 0));
+                await page.evaluate(() =>
+                    window.scrollTo(0, document.body.scrollHeight)
+                );
+                return button.getAttribute("class");
+            },
+            { timeout: 10_000 },
+        )
+        .toContain("opacity-100");
+}
 
 test.describe("Blog Post Detail Page", () => {
     test.beforeEach(async ({ page }) => {
@@ -64,12 +88,15 @@ test.describe("Blog Post Detail Page", () => {
         const initialClass = await backToTop.getAttribute("class");
         expect(initialClass ?? "").toContain("opacity-0");
 
-        // Scroll past 400px to make it visible
-        await page.evaluate(() => window.scrollTo(0, 600));
-        await page.waitForTimeout(300);
+        // The component reveals itself past 400px of scroll, so a short post
+        // can never show it.
+        const maxScroll = await page.evaluate(
+            () => document.documentElement.scrollHeight - window.innerHeight
+        );
+        test.skip(maxScroll <= 400, "Post is too short to reveal BackToTop");
 
-        const visibleClass = await backToTop.getAttribute("class");
-        expect(visibleClass ?? "").toContain("opacity-100");
+        // Scroll to the bottom to make it visible.
+        await scrollUntilBackToTopVisible(page, backToTop);
     });
 
     test("clicking BackToTop scrolls back to top", async ({ page }) => {
@@ -83,14 +110,20 @@ test.describe("Blog Post Detail Page", () => {
         await page.goto(href!);
         await waitForPageLoad(page);
 
-        // Scroll down
-        await page.evaluate(() => window.scrollTo(0, 800));
-        await page.waitForTimeout(300);
-
-        const scrollBefore = await page.evaluate(() => window.scrollY);
-        expect(scrollBefore).toBeGreaterThan(0);
+        // The button only appears past 400px of scroll.
+        const maxScroll = await page.evaluate(
+            () => document.documentElement.scrollHeight - window.innerHeight
+        );
+        test.skip(maxScroll <= 400, "Post is too short to reveal BackToTop");
 
         const backToTop = page.getByRole("button", { name: "Back to top" });
+        // The button only accepts pointer events once the scroll listener has
+        // run, so wait for that state rather than a fixed delay.
+        await scrollUntilBackToTopVisible(page, backToTop);
+
+        const scrollBefore = await page.evaluate(() => window.scrollY);
+        expect(scrollBefore).toBeGreaterThan(400);
+
         await backToTop.click();
 
         // Wait for smooth scroll to complete
@@ -111,13 +144,17 @@ test.describe("Blog Post Detail Page", () => {
         await waitForPageLoad(page);
 
         // Walk through posts to find one with a TOC (≥2 headings).
-        const links = page.locator('article a[href*="/blog/"]');
-        const linkCount = await links.count();
+        // Collect hrefs first: the listing's article links disappear once we
+        // navigate to a post.
+        const hrefs = (
+            await page
+                .locator('article a[href*="/blog/"]')
+                .evaluateAll((els) => els.map((el) => el.getAttribute("href")))
+        ).filter((href): href is string => Boolean(href));
         let foundToc = false;
 
-        for (let i = 0; i < linkCount && !foundToc; i++) {
-            const href = await links.nth(i).getAttribute("href");
-            if (!href) continue;
+        for (const href of hrefs) {
+            if (foundToc) break;
 
             await page.goto(href);
             await waitForPageLoad(page);

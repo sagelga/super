@@ -3,9 +3,13 @@ import { waitForPageLoad, acceptCookiesIfVisible } from '../utils/test-helpers';
 
 test.describe('Cookie Consent', () => {
   test.beforeEach(async ({ page }) => {
-    // Clear cookies before each test to ensure consent banner appears
+    // Return to a real first-visit state: the global storageState seeds
+    // consent, so drop it from this context instead of every navigation
+    // (an init script would wipe the choice the test is about to make).
     await page.context().clearCookies();
     await page.goto('/en');
+    await page.evaluate(() => window.localStorage.removeItem('cookie_consent'));
+    await page.reload();
     await waitForPageLoad(page);
   });
 
@@ -55,22 +59,19 @@ test.describe('Cookie Consent', () => {
   });
 
   test('should persist cookie consent across page navigation', async ({ page }) => {
-    // Accept cookies
     const acceptButton = page.getByRole('button', { name: /accept|agree|consent/i }).first();
-    
-    if (await acceptButton.isVisible({ timeout: 3000 }).catch(() => false)) {
-      await acceptButton.click();
-      await page.waitForTimeout(1000);
-      
-      // Navigate to another page
-      await page.goto('/en/blog');
-      await waitForPageLoad(page);
-      
-      // Cookie banner should not reappear
-      const cookieButton = page.getByRole('button', { name: /accept|agree|consent/i }).first();
-      const hasConsentButton = await cookieButton.isVisible({ timeout: 2000 }).catch(() => false);
-      
-      expect(hasConsentButton).toBeFalsy();
-    }
+    await expect(acceptButton).toBeVisible();
+    await acceptButton.click();
+    await expect(acceptButton).toBeHidden();
+
+    // Navigate to another page
+    await page.goto('/en/blog');
+    await waitForPageLoad(page);
+
+    // The stored choice must survive navigation, and the sheet must not return.
+    const stored = await page.evaluate(() => localStorage.getItem('cookie_consent'));
+    expect(stored).toBeTruthy();
+    expect(JSON.parse(stored!).consentGiven).toBe(true);
+    await expect(page.locator('.bottom-sheet-overlay')).toHaveCount(0);
   });
 });
