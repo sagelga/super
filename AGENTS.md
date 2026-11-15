@@ -58,3 +58,4 @@ lint → typecheck → unit-tests → build → e2e-tests
 - [2026-11-15] [fix] Replaced the broken bundle-size analyzer with a Turbopack-compatible action and added a main-branch baseline — files: .github/workflows/bundle-size.yml
 - [2026-11-15] [fix] Bumped next to 16.4.6 and @simplewebauthn/server to 13.3.3, audited production deps only — files: .github/workflows/security.yml, package.json, package-lock.json
 - [2026-11-15] [chore] Committed the Next 16 generated tsconfig defaults — files: tsconfig.json
+- [2026-11-15] [fix] Scoped the reading-progress spec to a dedicated class, made the width test wait for scroll, and made the cookie banner check auto-retry — files: src/components/NavbarReadingProgress.tsx, e2e/components/reading-progress.spec.ts, e2e/components/cookie-consent.spec.ts
