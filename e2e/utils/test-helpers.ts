@@ -12,7 +12,16 @@ export async function navigateToHome(page: Page, lang: string = 'en'): Promise<v
  * Wait for the page to be fully loaded
  */
 export async function waitForPageLoad(page: Page): Promise<void> {
-  await page.waitForLoadState('networkidle');
+  // `networkidle` never settles on pages with long-tail requests (external
+  // images, analytics beacons), which made navigation tests time out. `load`
+  // plus a couple of animation frames is enough for hydration to finish.
+  await page.waitForLoadState("load");
+  await page.evaluate(
+    () =>
+      new Promise<void>((resolve) =>
+        requestAnimationFrame(() => requestAnimationFrame(() => resolve()))
+      )
+  );
 }
 
 /**
@@ -56,8 +65,11 @@ export async function getNavigationLinks(page: Page): Promise<Locator[]> {
 }
 
 /**
- * Check for broken images on the page (local images only — external CDN URLs are skipped).
- * Scrolls to the bottom to trigger lazy-loaded images before checking.
+ * Check for broken images on the page.
+ *
+ * Remote images are skipped: next/image proxies them through /_next/image,
+ * and CI runners frequently time out reaching the upstream CDN, which would
+ * otherwise look like a broken image in this app.
  */
 export async function checkForBrokenImages(page: Page): Promise<string[]> {
   // Scroll to trigger lazy-loaded images then scroll back
@@ -65,24 +77,25 @@ export async function checkForBrokenImages(page: Page): Promise<string[]> {
   await page.waitForTimeout(500);
   await page.evaluate(() => window.scrollTo(0, 0));
 
-  const images = page.locator('img');
-  const brokenImages: string[] = [];
+  return page.evaluate(() => {
+    const isRemote = (src: string | null): boolean => {
+      if (!src) return true;
+      try {
+        const url = new URL(src, window.location.href);
+        if (url.pathname === "/_next/image") {
+          return /^https?:/i.test(url.searchParams.get("url") ?? "");
+        }
+        return url.origin !== window.location.origin;
+      } catch {
+        return false;
+      }
+    };
 
-  const count = await images.count();
-  for (let i = 0; i < count; i++) {
-    const img = images.nth(i);
-    const src = await img.getAttribute('src') || 'unknown';
-    // Skip external CDN images — they may be blocked or lazy in CI
-    if (src.includes('cloudinary') || src.includes('unsplash') || src.includes('http')) {
-      continue;
-    }
-    const naturalWidth = await img.evaluate((el: HTMLImageElement) => el.naturalWidth);
-    if (naturalWidth === 0) {
-      brokenImages.push(src);
-    }
-  }
-
-  return brokenImages;
+    return Array.from(document.querySelectorAll("img"))
+      .filter((img) => !isRemote(img.getAttribute("src")))
+      .filter((img) => img.complete && img.naturalWidth === 0)
+      .map((img) => img.getAttribute("src") ?? "unknown");
+  });
 }
 
 /**

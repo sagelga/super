@@ -71,11 +71,14 @@ const SCREENSHOT_DIR = path.resolve(
  */
 async function setCookieConsentAccepted(page: Page): Promise<void> {
   await page.addInitScript(() => {
+    // Must match CONSENT_VERSION in src/types/index.ts, otherwise the app
+    // discards the stored value and shows the blocking consent bottom sheet.
     const prefs = {
       functional: true,
       analytics: false,
       consentGiven: true,
       consentTimestamp: Date.now(),
+      consentVersion: "2026-04-19",
     };
     try {
       localStorage.setItem("cookie_consent", JSON.stringify(prefs));
@@ -86,11 +89,15 @@ async function setCookieConsentAccepted(page: Page): Promise<void> {
 }
 
 async function waitForPageReady(page: Page): Promise<void> {
-  await page.waitForLoadState("domcontentloaded");
-  // Settle network without hard timeout
-  await page
-    .waitForLoadState("networkidle", { timeout: 8000 })
-    .catch(() => {});
+  // `networkidle` never settles while remote images are in flight, which cost
+  // up to 8s per test. `load` plus two frames is enough for hydration.
+  await page.waitForLoadState("load");
+  await page.evaluate(
+    () =>
+      new Promise<void>((resolve) =>
+        requestAnimationFrame(() => requestAnimationFrame(() => resolve()))
+      )
+  );
 }
 
 
@@ -113,6 +120,23 @@ async function hasHorizontalOverflow(page: Page): Promise<boolean> {
   return page.evaluate(() => {
     return document.documentElement.scrollWidth > window.innerWidth;
   });
+}
+
+/**
+ * Remote images are served through /_next/image and depend on an external CDN
+ * that CI runners often cannot reach in time, so they are not checked here.
+ */
+function isRemoteImageSrc(src: string): boolean {
+  if (!src || src === "unknown") return true;
+  try {
+    const url = new URL(src, "http://localhost");
+    if (url.pathname === "/_next/image") {
+      return /^https?:/i.test(url.searchParams.get("url") ?? "");
+    }
+    return url.origin !== "http://localhost";
+  } catch {
+    return false;
+  }
 }
 
 /** Check that images have loaded (naturalWidth > 0). Returns list of broken src values. */
@@ -267,13 +291,8 @@ function describeResponsive(
     await page.waitForTimeout(500);
 
     const broken = await getBrokenImageSrcs(page);
-    // External CDN images (cloudinary, unsplash) may 404 in test env — filter those
-    const localBroken = broken.filter(
-      (src) =>
-        !src.includes("cloudinary") &&
-        !src.includes("unsplash") &&
-        src !== "unknown"
-    );
+    // External CDN images may 404 or time out in CI — only check local assets.
+    const localBroken = broken.filter((src) => !isRemoteImageSrc(src));
     expect(
       localBroken,
       `Broken images on ${url}: ${localBroken.join(", ")}`

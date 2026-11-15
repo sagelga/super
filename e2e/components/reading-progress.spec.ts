@@ -12,16 +12,16 @@ test.describe("Navbar reading progress bar", () => {
         await dismissCookieBannerBeforeLoad(page);
         await page.goto("/en");
         await waitForPageLoad(page);
-        const bar = page.locator("[aria-hidden='true'].h-px.bg-accent");
-        await expect(bar).not.toBeAttached();
+        const bar = page.locator(".navbar-progress");
+        await expect(bar).toHaveCount(0);
     });
 
     test("should NOT appear on blog listing", async ({ page }) => {
         await dismissCookieBannerBeforeLoad(page);
         await page.goto("/en/blog");
         await waitForPageLoad(page);
-        const bar = page.locator("[aria-hidden='true'].h-px.bg-accent");
-        await expect(bar).not.toBeAttached();
+        const bar = page.locator(".navbar-progress");
+        await expect(bar).toHaveCount(0);
     });
 
     test("should appear on a blog post page", async ({ page }) => {
@@ -38,8 +38,8 @@ test.describe("Navbar reading progress bar", () => {
         await postLink.click();
         await page.waitForURL(/\/blog\/.+/);
         await waitForPageLoad(page);
-        const bar = page.locator("[aria-hidden='true'].h-px.bg-accent");
-        await expect(bar).toBeAttached();
+        const bar = page.locator(".navbar-progress");
+        await expect(bar).toHaveCount(1);
     });
 
     test("progress bar width increases when scrolling down", async ({ page }) => {
@@ -56,33 +56,42 @@ test.describe("Navbar reading progress bar", () => {
         await page.waitForURL(/\/blog\/.+/);
         await waitForPageLoad(page);
 
-        const bar = page.locator("[aria-hidden='true'].h-px.bg-accent");
-        await expect(bar).toBeAttached();
+        const bar = page.locator(".navbar-progress");
+        await expect(bar).toHaveCount(1);
 
-        // Get initial width
-        const initialWidth = await bar.evaluate((el) =>
-            getComputedStyle(el).width
+        // Nothing to measure if the post fits in one viewport.
+        const scrollable = await page.evaluate(
+            () =>
+                document.documentElement.scrollHeight - window.innerHeight
         );
+        if (scrollable <= 0) {
+            test.skip(true, "Blog post is not scrollable");
+            return;
+        }
 
-        // Scroll down halfway
+        const widthOf = async () =>
+            parseFloat(
+                await bar.evaluate((el) => getComputedStyle(el).width)
+            );
+        const initialWidth = await widthOf();
+
+        // Scroll down halfway and wait for the scroll handler to run.
         await page.evaluate(() =>
             window.scrollTo(0, document.body.scrollHeight / 2)
         );
-        await page.waitForTimeout(300);
+        await expect
+            .poll(() => page.evaluate(() => window.scrollY))
+            .toBeGreaterThan(0);
 
-        const scrolledWidth = await bar.evaluate((el) =>
-            getComputedStyle(el).width
-        );
+        // Width after scrolling should be greater (or at least different).
+        const scrolledWidth = await widthOf();
+        expect(scrolledWidth).toBeGreaterThanOrEqual(initialWidth);
 
-        // Width after scrolling should be greater (or at least different)
-        const initPx = parseFloat(initialWidth);
-        const scrollPx = parseFloat(scrolledWidth);
-        expect(scrollPx).toBeGreaterThanOrEqual(initPx);
-
-        // Should be between 1% and 100%
+        // Should be between 1% and 100% of the viewport.
         const viewportW = await page.evaluate(() => window.innerWidth);
-        const percent = (scrollPx / viewportW) * 100;
-        expect(percent).toBeGreaterThan(0);
-        expect(percent).toBeLessThan(100);
+        await expect
+            .poll(async () => ((await widthOf()) / viewportW) * 100)
+            .toBeGreaterThan(0);
+        expect((scrolledWidth / viewportW) * 100).toBeLessThan(100);
     });
 });

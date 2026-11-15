@@ -87,6 +87,9 @@ export async function generateMetadata(): Promise<Metadata> {
         creator: "Kunanon Srisuntiroj",
         publisher: "Kunanon Srisuntiroj",
         metadataBase: new URL(BASE_URL),
+        other: {
+            "google-adsense-account": "ca-pub-1167638056995928",
+        },
         alternates: {
             canonical: currentUrl,
             languages: Object.fromEntries(

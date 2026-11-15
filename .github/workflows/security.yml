@@ -23,7 +23,15 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Run npm audit
+      - name: Run npm audit (production dependencies)
+        # Only runtime dependencies are bundled into the deployed Worker.
+        # Build/test tooling lives in devDependencies and would otherwise fail
+        # this gate on advisories that never reach production.
+        run: npm audit --omit=dev --audit-level=high
+
+      - name: Report dev dependency advisories
+        # Visibility only: dev-only findings must not block merges.
+        continue-on-error: true
         run: npm audit --audit-level=high
 
   secret-scan:

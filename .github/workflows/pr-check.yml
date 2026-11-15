@@ -100,7 +100,9 @@ jobs:
 
   e2e-tests:
     name: E2E Tests
-    runs-on: ubuntu-latest
+    # Playwright does not ship browsers for ubuntu-26.04 yet, and ubuntu-latest
+    # now resolves to 26.04. Pin to 24.04 so `playwright install` keeps working.
+    runs-on: ubuntu-24.04
     steps:
       - name: Checkout
         uses: actions/checkout@v6

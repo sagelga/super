@@ -1,18 +1,15 @@
 import { test, expect } from '@playwright/test';
-import { waitForPageLoad, acceptCookiesIfVisible } from '../utils/test-helpers';
+import { waitForPageLoad, acceptCookiesIfVisible, dismissCookieBannerBeforeLoad } from '../utils/test-helpers';
 
 test.describe('Navigation Component', () => {
   test.beforeEach(async ({ page }) => {
+    // Pre-set cookie consent so the bottom sheet never mounts and cannot
+    // intercept pointer events on navbar items.
+    await dismissCookieBannerBeforeLoad(page);
     await page.goto('/en');
     await waitForPageLoad(page);
     // Accept cookies if visible, with force to bypass any overlays
     await acceptCookiesIfVisible(page);
-    // Dismiss any overlays that might block navigation
-    await page.evaluate(() => {
-      document.querySelectorAll('[class*="overlay"], [class*="modal"], [class*="banner"]').forEach(el => {
-        (el as HTMLElement).style.display = 'none';
-      });
-    });
   });
 
   test('should have a visible navigation bar', async ({ page }) => {

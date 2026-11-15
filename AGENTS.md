@@ -51,3 +51,12 @@ lint → typecheck → unit-tests → build → e2e-tests
 
 - Design context, brand palette, and PR conventions: `CLAUDE.md`
 - Cloudflare config: `wrangler.jsonc`, `open-next.config.ts`
+
+## Change Log
+
+- [2026-11-15] [fix] Unblocked E2E CI on ubuntu-24.04, replaced the networkidle wait helper, pre-seeded cookie consent in the navigation spec, ignored build output in test discovery — files: .github/workflows/pr-check.yml, playwright.config.ts, e2e/utils/test-helpers.ts, e2e/components/navigation.spec.ts
+- [2026-11-15] [fix] Replaced the broken bundle-size analyzer with a Turbopack-compatible action and added a main-branch baseline — files: .github/workflows/bundle-size.yml
+- [2026-11-15] [fix] Bumped next to 16.4.6 and @simplewebauthn/server to 13.3.3, audited production deps only — files: .github/workflows/security.yml, package.json, package-lock.json
+- [2026-11-15] [chore] Committed the Next 16 generated tsconfig defaults — files: tsconfig.json
+- [2026-11-15] [fix] Scoped the reading-progress spec to a dedicated class, made the width test wait for scroll, and made the cookie banner check auto-retry — files: src/components/NavbarReadingProgress.tsx, e2e/components/reading-progress.spec.ts, e2e/components/cookie-consent.spec.ts
+- [2026-11-15] [fix] Seeded consent via Playwright storageState, removed networkidle waits, skipped remote images in broken-image checks, and made scroll/TOC tests hydration-safe — files: playwright.config.ts, e2e/utils/test-helpers.ts, e2e/components/cookie-consent.spec.ts, e2e/pages/blog-post.spec.ts, src/__tests__/responsive.test.ts
