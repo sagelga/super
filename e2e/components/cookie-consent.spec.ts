@@ -12,14 +12,13 @@ test.describe('Cookie Consent', () => {
   test('should display cookie consent banner on first visit', async ({ page }) => {
     // Look for cookie consent banner or button
     const consentButton = page.getByRole('button', { name: /accept|agree|consent|cookies/i }).first();
-    
+
     // Check if any cookie-related element is visible
     const cookieElement = page.locator('[class*="cookie"], [id*="cookie"]').first();
-    const hasCookieBanner = await cookieElement.isVisible({ timeout: 3000 }).catch(() => false);
-    const hasConsentButton = await consentButton.isVisible({ timeout: 3000 }).catch(() => false);
-    
-    // One of them should be visible
-    expect(hasCookieBanner || hasConsentButton).toBeTruthy();
+
+    // The banner mounts after hydration, so use an auto-retrying assertion.
+    // `isVisible()` takes a one-shot snapshot and flakes on slow runners.
+    await expect(cookieElement.or(consentButton).first()).toBeVisible();
   });
 
   test('should be able to accept cookies', async ({ page }) => {
