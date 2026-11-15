@@ -12,7 +12,16 @@ export async function navigateToHome(page: Page, lang: string = 'en'): Promise<v
  * Wait for the page to be fully loaded
  */
 export async function waitForPageLoad(page: Page): Promise<void> {
-  await page.waitForLoadState('networkidle');
+  // `networkidle` never settles on pages with long-tail requests (external
+  // images, analytics beacons), which made navigation tests time out. `load`
+  // plus a couple of animation frames is enough for hydration to finish.
+  await page.waitForLoadState("load");
+  await page.evaluate(
+    () =>
+      new Promise<void>((resolve) =>
+        requestAnimationFrame(() => requestAnimationFrame(() => resolve()))
+      )
+  );
 }
 
 /**
